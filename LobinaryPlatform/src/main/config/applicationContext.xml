@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
+	
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx.xsd ">
+
+		<!-- 定义扫描bean的位置 default-autowire="byName" default-lazy-init="false" -->
+
+		<context:annotation-config />
+		<context:component-scan base-package="com.lobinary.platform" annotation-config="true" />
+		<aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
+		<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<property name="locations">
+				<list>
+					<value>classpath:system.properties</value>
+				</list>
+			</property>
+		</bean>
+		<import resource="dbconfig.xml" />
+		<import resource="hibernate.xml" />
+		<!-- <import resource="applicationContext-security.xml" /> <bean id="managerAction" class="com.boce.cms.action.ManagerAction" /> -->
+		<!-- 关于spring security异常 国际化的引入 <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"> <property name="basename" 
+			value="messages_zh_CN.properties" /> </bean> -->
+			
+			
+		<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+	    <!-- 设置上传文件的最大尺寸为1MB -->  
+	    <property name="maxUploadSize">  
+	        <value>1048576</value>  
+	    </property>  
+</bean>
+			
+			
+	</beans>	
