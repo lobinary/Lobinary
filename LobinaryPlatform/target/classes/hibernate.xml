@@ -28,7 +28,8 @@
 		<property name="annotatedClasses">
 			<list>
 				<!-- <value>com.boce.cms.model.Manager</value> -->
-				<value>com.lobinary.platform.model.Message</value>
+				<value>com.lobinary.platform.model.ReceiverMessage</value>
+				<value>com.lobinary.platform.model.UploadFileInfo</value>
 			</list>
 		</property>
 	</bean>

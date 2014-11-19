@@ -13,8 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.lobinary.platform.dao.MessageDAO;
-import com.lobinary.platform.model.Message;
 import com.lobinary.platform.model.PageParameter;
+import com.lobinary.platform.model.ReceiverMessage;
+import com.lobinary.platform.model.UploadFileInfo;
 import com.lobinary.platform.util.DateUtil;
 import com.lobinary.platform.util.PropertiesUtil;
 
@@ -34,7 +35,7 @@ public class ReceiverService extends BaseService {
 	 * 删除message对象
 	 */
 	@Transactional(readOnly = false)
-	public boolean delete(Message m) {
+	public boolean delete(ReceiverMessage m) {
 		messageDAO.delete(m);
 		messageDAO.deleteMessageByID(m.getId());
 		return true;
@@ -56,7 +57,7 @@ public class ReceiverService extends BaseService {
 	 * @return
 	 */
 	@Transactional(readOnly = false)
-	public boolean addMessage(Message message) {
+	public boolean addMessage(ReceiverMessage message) {
 		return messageDAO.add(message);
 	}
 
@@ -66,8 +67,9 @@ public class ReceiverService extends BaseService {
 	 * @param file
 	 * @return
 	 */
-	public boolean addFile(MultipartFile file) {
+	public boolean addFile(UploadFileInfo uploadFileInfo,MultipartFile file) {
 		try {
+			System.out.println("##########" + file);
 			// 获得文件名：
 			String filename = file.getOriginalFilename();
 			// 获得输入流：
@@ -102,9 +104,9 @@ public class ReceiverService extends BaseService {
 	 * 
 	 * @return
 	 */
-	public List<Message> listMessage(Message message, PageParameter pp) {
-		List<Message> messageList = messageDAO.queryList(message, Message.class, true, pp.getStartRow(), pp.getPageSize());
-		pp.setCountRows(messageDAO.getCount(message, Message.class, true));
+	public List<ReceiverMessage> listMessage(ReceiverMessage message, PageParameter pp) {
+		List<ReceiverMessage> messageList = messageDAO.queryList(message, ReceiverMessage.class, true, pp.getStartRow(), pp.getPageSize());
+		pp.setCountRows(messageDAO.getCount(message, ReceiverMessage.class, true));
 		return messageList;
 	}
 

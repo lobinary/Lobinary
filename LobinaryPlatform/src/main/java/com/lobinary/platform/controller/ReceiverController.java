@@ -2,7 +2,10 @@ package com.lobinary.platform.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -18,10 +21,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
-import com.lobinary.platform.model.Message;
 import com.lobinary.platform.model.PageParameter;
+import com.lobinary.platform.model.ReceiverMessage;
+import com.lobinary.platform.model.UploadFileInfo;
 import com.lobinary.platform.service.ReceiverService;
+import com.lobinary.platform.util.ReflectsUtil;
 import com.lobinary.platform.util.WebUtil;
 
 @Controller("messageController")
@@ -55,7 +61,7 @@ public class ReceiverController {
 	 * @return
 	 */
 	@RequestMapping(value = "/message/send_message.anonymous")
-	public String sendMessage(@ModelAttribute("message") Message message, HttpServletRequest request, HttpServletResponse response) {
+	public String sendMessage(@ModelAttribute("message") ReceiverMessage message, HttpServletRequest request, HttpServletResponse response) {
 		message.setSendDate(new Date(System.currentTimeMillis()));
 		logger.info("Receiver系统收到新消息，消息内容为：" + message.getMessageInfo());
 		boolean addSuccess = receiverService.addMessage(message);
@@ -78,14 +84,14 @@ public class ReceiverController {
 	 */
 	@RequestMapping(value = "/message/message_list.anonymous")
 	public String message_list(@ModelAttribute("message") PageParameter pageParameter,HttpServletRequest request, HttpServletResponse response, Model model) {
-		List<Message> messageList = receiverService.listMessage(null,pageParameter);
+		List<ReceiverMessage> messageList = receiverService.listMessage(null,pageParameter);
 		model.addAttribute("messageList",messageList);
 		model.addAttribute("pageParameter",pageParameter);
 		return "receiver/message_list";
 	}
 
 	/**
-	 * 添加文本信息
+	 * 上传文件
 	 * 
 	 * @param sendMessage
 	 * @param request
@@ -94,12 +100,15 @@ public class ReceiverController {
 	 * @return
 	 */
 	@RequestMapping(value = "/file/sendFile.anonymous")
-	public String sendFile(HttpServletRequest request, HttpServletResponse response) {
+	public String sendFile(@ModelAttribute("uploadFileInfo")UploadFileInfo uploadFileInfo,HttpServletRequest request, HttpServletResponse response) {
+		System.out.println(ReflectsUtil.object2String(uploadFileInfo));
 		// 转型为MultipartHttpRequest：   
-        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;   
+		CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+		commonsMultipartResolver.setDefaultEncoding("utf-8");
+		MultipartHttpServletRequest multipartRequest = commonsMultipartResolver.resolveMultipart(request);
         // 获得文件：    
         MultipartFile file = multipartRequest.getFile("file");   
-		boolean addSuccess = receiverService.addFile(file);
+		boolean addSuccess = receiverService.addFile(uploadFileInfo,file);
 		String returnStr = "文件发送成功！";
 		if (!addSuccess) {
 			returnStr = "对不起，您所发送的文件发送失败，请您校验您的数据或联系管理员！";

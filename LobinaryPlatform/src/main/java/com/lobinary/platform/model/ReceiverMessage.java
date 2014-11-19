@@ -9,8 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="MESSAGE_INFO")
-public class Message implements Serializable{
+@Table(name="RECEIVER_MESSAGE_INFO")
+public class ReceiverMessage implements Serializable{
 
 	
 	/**

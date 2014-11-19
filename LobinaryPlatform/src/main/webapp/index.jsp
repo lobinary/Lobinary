@@ -28,5 +28,8 @@
 	<div align="center">
 		<a href="views/test/receiver_controller.jsp"> ReceiverController测试页</a>
 	</div>
+	<div align="center">
+		<a href="control/platform/receiver/message/message_list.anonymous"> ReceiverController信息展示页面</a>
+	</div>
 </body>
 </html>
