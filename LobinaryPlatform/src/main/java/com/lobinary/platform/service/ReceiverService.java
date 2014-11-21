@@ -16,8 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.lobinary.platform.dao.MessageDAO;
 import com.lobinary.platform.dao.UploadFileInfoDAO;
 import com.lobinary.platform.model.PageParameter;
-import com.lobinary.platform.model.ReceiverMessage;
-import com.lobinary.platform.model.UploadFileInfo;
+import com.lobinary.platform.model.db.ReceiverMessage;
+import com.lobinary.platform.model.db.UploadFileInfo;
 import com.lobinary.platform.util.DateUtil;
 import com.lobinary.platform.util.PropertiesUtil;
 

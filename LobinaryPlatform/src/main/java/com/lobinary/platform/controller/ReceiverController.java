@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.lobinary.platform.model.PageParameter;
-import com.lobinary.platform.model.ReceiverMessage;
-import com.lobinary.platform.model.UploadFileInfo;
+import com.lobinary.platform.model.db.ReceiverMessage;
+import com.lobinary.platform.model.db.UploadFileInfo;
 import com.lobinary.platform.service.ReceiverService;
 import com.lobinary.platform.util.ReflectsUtil;
 import com.lobinary.platform.util.WebUtil;

@@ -42,7 +42,7 @@ public class DateUtil {
 	 */
 	public static String getNowFormatedTime(){
 		calendar.setTime(new Date(System.currentTimeMillis()));
-		return "" + calendar.get(Calendar.YEAR) + "-" + (calendar.get(Calendar.MONDAY)+1) + "-"  + calendar.get(Calendar.DAY_OF_MONTH) + "_"  + calendar.get(Calendar.HOUR_OF_DAY) + "-"  + calendar.get(Calendar.MINUTE) + "-"  + calendar.get(Calendar.SATURDAY);
+		return "" + calendar.get(Calendar.YEAR) + "-" + (calendar.get(Calendar.MONDAY)+1) + "-"  + calendar.get(Calendar.DAY_OF_MONTH) + "_"  + calendar.get(Calendar.HOUR_OF_DAY) + "-"  + calendar.get(Calendar.MINUTE) + "-"  + calendar.get(Calendar.SECOND);
 	}
 	
 	/**
@@ -51,7 +51,7 @@ public class DateUtil {
 	 */
 	public static String getNowTime(){
 		calendar.setTime(new Date(System.currentTimeMillis()));
-		return "" + calendar.get(Calendar.YEAR) + (calendar.get(Calendar.MONDAY)+1) + calendar.get(Calendar.DAY_OF_MONTH) + calendar.get(Calendar.HOUR_OF_DAY) + calendar.get(Calendar.MINUTE) + calendar.get(Calendar.SATURDAY);
+		return "" + calendar.get(Calendar.YEAR) + (calendar.get(Calendar.MONDAY)+1) + calendar.get(Calendar.DAY_OF_MONTH) + calendar.get(Calendar.HOUR_OF_DAY) + calendar.get(Calendar.MINUTE) + calendar.get(Calendar.SECOND);
 	}
 	
 	public static void main(String[] args) {

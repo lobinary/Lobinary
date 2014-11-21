@@ -1,4 +1,4 @@
-package com.lobinary.platform.model;
+package com.lobinary.platform.model.db;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -8,20 +8,31 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * 
+ * 接受信息实体类
+ * 
+ * @author lvbin 
+ * @since 2014年11月21日 下午3:20:23
+ * @version V1.0.0 Description : Create this file
+ * 
+ *         
+ *
+ */
 @Entity
-@Table(name="RECEIVER_UPLOAD_FILE_INFO")
-public class UploadFileInfo implements Serializable{
+@Table(name="RECEIVER_MESSAGE_INFO")
+public class ReceiverMessage implements Serializable{
 
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -3309298344570369971L;
+	private static final long serialVersionUID = -870675983052908611L;
 	
 	/**
 	 * ID
 	 */
-	private int id;
+	private long id;
 	/**
 	 * 发送方
 	 */
@@ -31,13 +42,13 @@ public class UploadFileInfo implements Serializable{
 	 */
 	private String receiver;
 	/**
-	 * 文件种类
+	 * 消息种类
 	 */
-	private String fileType;
+	private int messageType;
 	/**
-	 * 文件位置
+	 * 信息内容
 	 */
-	private String fileLocation;
+	private String messageInfo;
 	/**
 	 * 发送时间
 	 */
@@ -47,11 +58,11 @@ public class UploadFileInfo implements Serializable{
 
 	@Id
 	@GeneratedValue
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -71,12 +82,12 @@ public class UploadFileInfo implements Serializable{
 		this.receiver = receiver;
 	}
 
-	public String getFileLocation() {
-		return fileLocation;
+	public String getMessageInfo() {
+		return messageInfo;
 	}
 
-	public void setFileLocation(String fileLocation) {
-		this.fileLocation = fileLocation;
+	public void setMessageInfo(String messageInfo) {
+		this.messageInfo = messageInfo;
 	}
 
 	public Date getSendDate() {
@@ -87,12 +98,12 @@ public class UploadFileInfo implements Serializable{
 		this.sendDate = sendDate;
 	}
 
-	public String getFileType() {
-		return fileType;
+	public int getMessageType() {
+		return messageType;
 	}
 
-	public void setFileType(String fileType) {
-		this.fileType = fileType;
+	public void setMessageType(int messageType) {
+		this.messageType = messageType;
 	}
 
 }
