@@ -103,7 +103,7 @@
 					</tr>
 					<tr align="center">
 						<td width="100">文件:</td>
-						<td align="center"><input type="file" name="file"></td>
+						<td align="center"><input type="file"  name="sendFile" ></td>
 					</tr>
 					<tr align="center">
 						<td width="100">发送时间:</td>

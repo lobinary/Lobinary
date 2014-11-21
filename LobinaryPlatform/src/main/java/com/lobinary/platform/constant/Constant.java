@@ -10,5 +10,5 @@ public final class Constant {
 	 * message信息内容格式-对象格式
 	 */
 	public static final int MESSAGE_TYPE_OBJECT = 100002;
-
+	
 }

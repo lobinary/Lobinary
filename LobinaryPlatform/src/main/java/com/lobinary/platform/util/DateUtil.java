@@ -19,12 +19,30 @@ public class DateUtil {
 	private static Calendar calendar = Calendar.getInstance();
 	
 	/**
+	 * 返回YYYY-MM-DD格式日期
+	 * @return
+	 */
+	public static String getNowFormatedDate(){
+		calendar.setTime(new Date(System.currentTimeMillis()));
+		return "" + calendar.get(Calendar.YEAR) + "-" + (calendar.get(Calendar.MONDAY)+1) + "-"  + calendar.get(Calendar.DAY_OF_MONTH);
+	}
+	
+	/**
 	 * 返回YYYYMMDD格式日期
 	 * @return
 	 */
 	public static String getNowDate(){
 		calendar.setTime(new Date(System.currentTimeMillis()));
 		return "" + calendar.get(Calendar.YEAR) + (calendar.get(Calendar.MONDAY)+1) + calendar.get(Calendar.DAY_OF_MONTH);
+	}
+	
+	/**
+	 * 返回YYYY-MM-DD_hh24:mm:ss格式日期
+	 * @return
+	 */
+	public static String getNowFormatedTime(){
+		calendar.setTime(new Date(System.currentTimeMillis()));
+		return "" + calendar.get(Calendar.YEAR) + "-" + (calendar.get(Calendar.MONDAY)+1) + "-"  + calendar.get(Calendar.DAY_OF_MONTH) + "_"  + calendar.get(Calendar.HOUR_OF_DAY) + "-"  + calendar.get(Calendar.MINUTE) + "-"  + calendar.get(Calendar.SATURDAY);
 	}
 	
 	/**

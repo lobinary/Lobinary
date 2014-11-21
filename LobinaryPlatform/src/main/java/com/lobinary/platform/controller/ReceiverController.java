@@ -2,10 +2,7 @@ package com.lobinary.platform.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map.Entry;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -19,9 +16,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.lobinary.platform.model.PageParameter;
 import com.lobinary.platform.model.ReceiverMessage;
@@ -100,15 +96,11 @@ public class ReceiverController {
 	 * @return
 	 */
 	@RequestMapping(value = "/file/sendFile.anonymous")
-	public String sendFile(@ModelAttribute("uploadFileInfo")UploadFileInfo uploadFileInfo,HttpServletRequest request, HttpServletResponse response) {
+	public String sendFile(@RequestParam(value="sendFile",required=false)MultipartFile sendFile,@ModelAttribute("uploadFileInfo")UploadFileInfo uploadFileInfo,HttpServletRequest request, HttpServletResponse response) {
 		System.out.println(ReflectsUtil.object2String(uploadFileInfo));
-		// 转型为MultipartHttpRequest：   
-		CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
-		commonsMultipartResolver.setDefaultEncoding("utf-8");
-		MultipartHttpServletRequest multipartRequest = commonsMultipartResolver.resolveMultipart(request);
-        // 获得文件：    
-        MultipartFile file = multipartRequest.getFile("file");   
-		boolean addSuccess = receiverService.addFile(uploadFileInfo,file);
+		System.out.println(sendFile);
+		System.out.println(ReflectsUtil.object2String(sendFile));
+		boolean addSuccess = receiverService.addFile(uploadFileInfo,sendFile);
 		String returnStr = "文件发送成功！";
 		if (!addSuccess) {
 			returnStr = "对不起，您所发送的文件发送失败，请您校验您的数据或联系管理员！";

@@ -12,9 +12,18 @@
       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
     
     <context:component-scan base-package="com.lobinary.platform.controller" />
-	<mvc:annotation-driven />    
+   
+	<mvc:annotation-driven />
+	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+		    <property name="maxUploadSize">  
+		        <value>100048576</value>  
+		    </property>  
+	</bean>
+	
 </beans>

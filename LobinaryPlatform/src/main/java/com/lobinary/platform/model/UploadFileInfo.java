@@ -33,7 +33,7 @@ public class UploadFileInfo implements Serializable{
 	/**
 	 * 文件种类
 	 */
-	private int fileType;
+	private String fileType;
 	/**
 	 * 文件位置
 	 */
@@ -71,14 +71,6 @@ public class UploadFileInfo implements Serializable{
 		this.receiver = receiver;
 	}
 
-	public int getFileType() {
-		return fileType;
-	}
-
-	public void setFileType(int fileType) {
-		this.fileType = fileType;
-	}
-
 	public String getFileLocation() {
 		return fileLocation;
 	}
@@ -93,6 +85,14 @@ public class UploadFileInfo implements Serializable{
 
 	public void setSendDate(Date sendDate) {
 		this.sendDate = sendDate;
+	}
+
+	public String getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
 	}
 
 }

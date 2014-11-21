@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.lobinary.platform.dao.MessageDAO;
+import com.lobinary.platform.dao.UploadFileInfoDAO;
 import com.lobinary.platform.model.PageParameter;
 import com.lobinary.platform.model.ReceiverMessage;
 import com.lobinary.platform.model.UploadFileInfo;
@@ -30,6 +32,7 @@ import com.lobinary.platform.util.PropertiesUtil;
 public class ReceiverService extends BaseService {
 
 	private MessageDAO messageDAO;
+	private UploadFileInfoDAO uploadFileInfoDAO;
 
 	/**
 	 * 删除message对象
@@ -39,15 +42,6 @@ public class ReceiverService extends BaseService {
 		messageDAO.delete(m);
 		messageDAO.deleteMessageByID(m.getId());
 		return true;
-	}
-
-	public MessageDAO getMessageDAO() {
-		return messageDAO;
-	}
-
-	@Resource(name = "messageDAO")
-	public void setMessageDAO(MessageDAO messageDAO) {
-		this.messageDAO = messageDAO;
 	}
 
 	/**
@@ -67,20 +61,21 @@ public class ReceiverService extends BaseService {
 	 * @param file
 	 * @return
 	 */
+	@Transactional(readOnly=false)
 	public boolean addFile(UploadFileInfo uploadFileInfo,MultipartFile file) {
 		try {
-			System.out.println("##########" + file);
 			// 获得文件名：
 			String filename = file.getOriginalFilename();
 			// 获得输入流：
 			InputStream inputStream = file.getInputStream();
 			String localFilePathStr = PropertiesUtil.getValue("receiver_sendFile_filepath");
-			File localfile = new File(localFilePathStr + DateUtil.getNowTime() + filename);
+			File localfile = new File(localFilePathStr + DateUtil.getNowFormatedTime() + "-" + filename);
 			File localFilePath = new File(localFilePathStr);
 			if (!localFilePath.exists()) {
 				localFilePath.mkdirs();
 			}
 			localfile.createNewFile();
+			logger.info("上传的文件已经接收成功，接收地址为：" + localfile.getAbsolutePath());
 			FileOutputStream fs = new FileOutputStream(localfile);
 			byte[] buffer = new byte[1024 * 1024];
 			int byteread = 0;
@@ -90,7 +85,15 @@ public class ReceiverService extends BaseService {
 			}
 			fs.close();
 			inputStream.close();
-
+			String[] fileTypeArray = filename.split("\\.");
+			String fileType = "n/a";
+			if(fileTypeArray.length>0){
+				fileType = fileTypeArray[fileTypeArray.length-1];
+			}
+			uploadFileInfo.setFileType(fileType);
+			uploadFileInfo.setSendDate(new Date(System.currentTimeMillis()));
+			uploadFileInfo.setFileLocation(localfile.getAbsolutePath());
+			uploadFileInfoDAO.add(uploadFileInfo);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
@@ -108,6 +111,25 @@ public class ReceiverService extends BaseService {
 		List<ReceiverMessage> messageList = messageDAO.queryList(message, ReceiverMessage.class, true, pp.getStartRow(), pp.getPageSize());
 		pp.setCountRows(messageDAO.getCount(message, ReceiverMessage.class, true));
 		return messageList;
+	}
+
+	public UploadFileInfoDAO getUploadFileInfoDAO() {
+		return uploadFileInfoDAO;
+	}
+
+	@Resource(name = "uploadFileInfoDAO")
+	public void setUploadFileInfoDAO(UploadFileInfoDAO uploadFileInfoDAO) {
+		this.uploadFileInfoDAO = uploadFileInfoDAO;
+	}
+	
+
+	public MessageDAO getMessageDAO() {
+		return messageDAO;
+	}
+
+	@Resource(name = "messageDAO")
+	public void setMessageDAO(MessageDAO messageDAO) {
+		this.messageDAO = messageDAO;
 	}
 
 }
