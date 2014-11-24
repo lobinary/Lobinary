@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<!-- 注册定时执行实体 -->
+	<!-- 因为已经用注解生成此bean，在此不再生成此bean操作 <bean id="scanBatchTable" class="com.unicompayment.issue.core.jobs.IssueBatchScanService"></bean> -->
+	
+	
+	<!-- ============================= 创建对账任务 开始 ========================== -->
+	<bean id="messageScannerJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 定时任务类 -->
+		<property name="targetObject" ref="messageScanner" />
+		<!-- 定时任务执行方法 -->
+		<property name="targetMethod">
+			<value>scanMessage</value>
+		</property>
+		<!-- 同一任务在前一次执行未完成而Trigger时间又到时是否并发开始新的执行, 默认为true. -->
+		<property name="concurrent" value="false" />
+	</bean>
+	
+	<!-- 定义定时器 -->
+	<bean id="messageScannerTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="messageScannerJob" />
+		<property name="cronExpression" value="${schedule.scanMessage.cronExpression}" />
+	</bean>
+	<!-- ============================= 创建对账任务 结束========================== -->
+
+		<!-- 注册定时器 -->
+	<bean id="schedulerFactoryBean" lazy-init="true" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref local="messageScannerTrigger"/>
+			</list>
+		</property>
+	</bean> 
+	
+</beans>	

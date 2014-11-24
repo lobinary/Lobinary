@@ -25,7 +25,7 @@ public class BaseDAO {
 	
 	Logger logger = LogUtil.getLog(getClass());
 
-	private HibernateTemplate hibernateTemplate;
+	public HibernateTemplate hibernateTemplate;
 
 	public HibernateTemplate getHibernateTemplate() {
 		return hibernateTemplate;
@@ -35,7 +35,7 @@ public class BaseDAO {
 	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
 		this.hibernateTemplate = hibernateTemplate;
 	}
-
+	
 	/**
 	 * 添加实体
 	 * 

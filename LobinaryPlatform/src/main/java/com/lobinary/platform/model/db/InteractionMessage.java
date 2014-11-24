@@ -60,9 +60,9 @@ public class InteractionMessage implements Serializable{
 	private Date receiveDate;
 	
 	/**
-	 * 状态   0未发送  1已发送 -1发送失败
+	 * 发送状态   0未发送  1已发送 -1发送失败
 	 */
-	private int status;
+	private int sendStatus;
 	
 	@Id
 	@GeneratedValue
@@ -122,12 +122,12 @@ public class InteractionMessage implements Serializable{
 		this.receiveDate = receiveDate;
 	}
 
-	public int getStatus() {
-		return status;
+	public int getSendStatus() {
+		return sendStatus;
 	}
 
-	public void setStatus(int status) {
-		this.status = status;
+	public void setSendStatus(int sendStatus) {
+		this.sendStatus = sendStatus;
 	}
 
 }

@@ -32,7 +32,7 @@ public class ReceiverController {
 
 	Logger logger = Logger.getLogger(ReceiverController.class);
 
-	@Resource(name = "messageService")
+	@Resource(name = "receiverService")
 	private ReceiverService receiverService;
 
 	/**

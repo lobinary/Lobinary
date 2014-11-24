@@ -102,6 +102,7 @@ public class LogUtil {
 				logInfo.append(ste.toString() + "\n");
 			}
 			logInfo.append("=============================Exception结束=============================\n");
+			logger.error(logInfo.toString());
 			exceptionOutStreamWriter.write(logInfo.toString());
 			exceptionOutStreamWriter.flush();
 			return true;

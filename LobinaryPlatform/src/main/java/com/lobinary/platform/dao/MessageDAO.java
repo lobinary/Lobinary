@@ -1,10 +1,8 @@
 package com.lobinary.platform.dao;
 
-import org.springframework.stereotype.Component;
+import java.util.List;
 
-import com.lobinary.platform.model.DatabaseParameter;
-import com.lobinary.platform.model.db.ReceiverMessage;
-import com.lobinary.platform.util.LogUtil;
+import org.springframework.stereotype.Component;
 
 
 /**
@@ -17,13 +15,11 @@ import com.lobinary.platform.util.LogUtil;
  */
 @Component("messageDAO")
 public class MessageDAO extends BaseDAO {
-
-	public void deleteMessageByID(long id) {
-		try {
-			delete(ReceiverMessage.class, new DatabaseParameter("id", id));
-		} catch (Exception e) {
-			LogUtil.logException(e);
-		}
+	
+	public List<Long> getSendMessgeIdListBySendStatus(int sendStatus){
+		@SuppressWarnings("unchecked")
+		List<Long> list = (List<Long>) hibernateTemplate.find("select message.receiverId from InteractionMessage message where message.sendStatus=?", sendStatus);
+		return list;
 	}
-
+	
 }

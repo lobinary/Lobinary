@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.lobinary.platform.dao.MessageDAO;
+import com.lobinary.platform.dao.ReceiverMessageDAO;
 import com.lobinary.platform.dao.UploadFileInfoDAO;
 import com.lobinary.platform.model.PageParameter;
 import com.lobinary.platform.model.db.ReceiverMessage;
@@ -28,10 +28,10 @@ import com.lobinary.platform.util.PropertiesUtil;
  * @since 2014年10月11日13:50:253
  * @version v2.0
  */
-@Service("messageService")
+@Service("receiverService")
 public class ReceiverService extends BaseService {
 
-	private MessageDAO messageDAO;
+	private ReceiverMessageDAO receiverMessageDAO;
 	private UploadFileInfoDAO uploadFileInfoDAO;
 
 	/**
@@ -39,8 +39,8 @@ public class ReceiverService extends BaseService {
 	 */
 	@Transactional(readOnly = false)
 	public boolean delete(ReceiverMessage m) {
-		messageDAO.delete(m);
-		messageDAO.deleteMessageByID(m.getId());
+		receiverMessageDAO.delete(m);
+		receiverMessageDAO.deleteMessageByID(m.getId());
 		return true;
 	}
 
@@ -52,7 +52,7 @@ public class ReceiverService extends BaseService {
 	 */
 	@Transactional(readOnly = false)
 	public boolean addMessage(ReceiverMessage message) {
-		return messageDAO.add(message);
+		return receiverMessageDAO.add(message);
 	}
 
 	/**
@@ -108,8 +108,8 @@ public class ReceiverService extends BaseService {
 	 * @return
 	 */
 	public List<ReceiverMessage> listMessage(ReceiverMessage message, PageParameter pp) {
-		List<ReceiverMessage> messageList = messageDAO.queryList(message, ReceiverMessage.class, true, pp.getStartRow(), pp.getPageSize());
-		pp.setCountRows(messageDAO.getCount(message, ReceiverMessage.class, true));
+		List<ReceiverMessage> messageList = receiverMessageDAO.queryList(message, ReceiverMessage.class, true, pp.getStartRow(), pp.getPageSize());
+		pp.setCountRows(receiverMessageDAO.getCount(message, ReceiverMessage.class, true));
 		return messageList;
 	}
 
@@ -121,15 +121,14 @@ public class ReceiverService extends BaseService {
 	public void setUploadFileInfoDAO(UploadFileInfoDAO uploadFileInfoDAO) {
 		this.uploadFileInfoDAO = uploadFileInfoDAO;
 	}
+
+	public ReceiverMessageDAO getReceiverMessageDAO() {
+		return receiverMessageDAO;
+	}
+
+	@Resource(name="receiverMessageDAO")
+	public void setReceiverMessageDAO(ReceiverMessageDAO receiverMessageDAO) {
+		this.receiverMessageDAO = receiverMessageDAO;
+	}
 	
-
-	public MessageDAO getMessageDAO() {
-		return messageDAO;
-	}
-
-	@Resource(name = "messageDAO")
-	public void setMessageDAO(MessageDAO messageDAO) {
-		this.messageDAO = messageDAO;
-	}
-
 }
