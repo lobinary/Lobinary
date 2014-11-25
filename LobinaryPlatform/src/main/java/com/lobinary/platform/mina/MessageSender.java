@@ -1,4 +1,4 @@
-package com.lobinary.platform.tcp;
+package com.lobinary.platform.mina;
 
 import com.lobinary.platform.model.TCPParameter;
 import com.lobinary.platform.model.db.InteractionMessage;
@@ -21,6 +21,7 @@ public class MessageSender {
 	 * @return
 	 */
 	public boolean sendMessage(TCPParameter tcpPrarm,InteractionMessage message){
+		
 		return false;
 	}
 

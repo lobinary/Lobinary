@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.lobinary.platform.dao.MessageDAO;
+import com.lobinary.platform.model.db.InteractionMessage;
 
 /**
  * 
@@ -33,6 +34,10 @@ public class MessageService {
 			resultSet.add(id);
 		}
 		return resultSet;
+	}
+	
+	public boolean add(InteractionMessage interactionMessage){
+		return messageDAO.add(interactionMessage);
 	}
 
 	public MessageDAO getMessageDAO() {
