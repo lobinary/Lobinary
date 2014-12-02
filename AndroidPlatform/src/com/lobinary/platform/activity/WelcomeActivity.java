@@ -45,7 +45,7 @@ public class WelcomeActivity extends Activity {
         
         //透明度动画
         AlphaAnimation animation = new AlphaAnimation(0.1f,0.9f);
-        animation.setDuration(4000);//动画间隔时间
+        animation.setDuration(1000);//动画间隔时间
 		contentView.setAnimation(animation );
 		
 		animation.setAnimationListener(new AnimationListener() {
@@ -67,8 +67,9 @@ public class WelcomeActivity extends Activity {
 			@Override
 			public void onAnimationEnd(Animation animation) {
 				Intent mainIntent = new Intent();
-				mainIntent.setClass(WelcomeActivity.this, MainActivity.class);
+				mainIntent.setClass(WelcomeActivity.this, ChatListActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(mainIntent);
+				WelcomeActivity.this.finish();
 				//Toast.makeText(WelcomeActivity.this, "程序加载完成", Toast.LENGTH_SHORT).show();
 			}
 		});
