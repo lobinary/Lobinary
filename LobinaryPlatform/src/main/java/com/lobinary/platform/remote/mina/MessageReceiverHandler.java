@@ -1,4 +1,4 @@
-package com.lobinary.platform.mina;
+package com.lobinary.platform.remote.mina;
 
 import org.apache.mina.core.service.IoHandler;
 import org.apache.mina.core.session.IdleStatus;

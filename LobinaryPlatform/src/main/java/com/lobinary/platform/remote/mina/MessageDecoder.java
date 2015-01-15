@@ -1,4 +1,4 @@
-package com.lobinary.platform.mina;
+package com.lobinary.platform.remote.mina;
 
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;

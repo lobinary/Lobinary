@@ -1,4 +1,4 @@
-package com.lobinary.platform.controller;
+package com.lobinary.platform.remote.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,7 +8,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +31,7 @@ import com.lobinary.platform.util.WebUtil;
 @RequestMapping(value = "/platform/receiver")
 public class ReceiverController {
 
-	Logger logger = Logger.getLogger(ReceiverController.class);
+	Logger logger = LoggerFactory.getLogger(ReceiverController.class);
 
 	@Resource(name = "receiverService")
 	private ReceiverService receiverService;

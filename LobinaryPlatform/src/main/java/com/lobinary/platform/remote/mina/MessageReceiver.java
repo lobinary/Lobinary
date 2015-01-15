@@ -1,4 +1,4 @@
-package com.lobinary.platform.mina;
+package com.lobinary.platform.remote.mina;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

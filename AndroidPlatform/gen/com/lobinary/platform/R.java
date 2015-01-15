@@ -1532,14 +1532,15 @@ containing a value of this type.
         public static final int phone=0x7f020067;
         public static final int photo=0x7f020068;
         public static final int search=0x7f020069;
-        public static final int settings=0x7f02006a;
-        public static final int sound=0x7f02006b;
-        public static final int trash=0x7f02006c;
-        public static final int user=0x7f02006d;
-        public static final int video=0x7f02006e;
-        public static final int wechat_icon=0x7f02006f;
-        public static final int welcom_page=0x7f020070;
-        public static final int world=0x7f020071;
+        public static final int set_logo=0x7f02006a;
+        public static final int settings=0x7f02006b;
+        public static final int sound=0x7f02006c;
+        public static final int trash=0x7f02006d;
+        public static final int user=0x7f02006e;
+        public static final int video=0x7f02006f;
+        public static final int wechat_icon=0x7f020070;
+        public static final int welcom_page=0x7f020071;
+        public static final int world=0x7f020072;
     }
     public static final class id {
         public static final int action_bar=0x7f05001c;
@@ -1556,20 +1557,20 @@ containing a value of this type.
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
-        public static final int chat_bottom_add=0x7f05004a;
-        public static final int chat_bottom_edittext=0x7f05004b;
-        public static final int chat_bottom_linear=0x7f050048;
-        public static final int chat_bottom_look=0x7f050049;
-        public static final int chat_bottom_sendbutton=0x7f05004c;
-        public static final int chat_contact_button=0x7f050047;
-        public static final int chat_contact_name=0x7f050046;
-        public static final int chat_list=0x7f05004d;
-        public static final int chat_msg_button=0x7f050045;
-        public static final int chat_title=0x7f050044;
+        public static final int chat_bottom_add=0x7f05004b;
+        public static final int chat_bottom_edittext=0x7f05004c;
+        public static final int chat_bottom_linear=0x7f050049;
+        public static final int chat_bottom_look=0x7f05004a;
+        public static final int chat_bottom_sendbutton=0x7f05004d;
+        public static final int chat_contact_button=0x7f050048;
+        public static final int chat_contact_name=0x7f050047;
+        public static final int chat_list=0x7f05004e;
+        public static final int chat_msg_button=0x7f050046;
+        public static final int chat_title=0x7f050045;
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
         public static final int default_activity_button=0x7f050028;
-        public static final int delete=0x7f050052;
+        public static final int delete=0x7f050053;
         public static final int dialog=0x7f05000e;
         public static final int disableHome=0x7f050008;
         public static final int dropdown=0x7f05000f;
@@ -1577,8 +1578,8 @@ containing a value of this type.
         public static final int end=0x7f050013;
         public static final int expand_activities_button=0x7f050026;
         public static final int expanded_menu=0x7f05002c;
-        public static final int fullscreen_content=0x7f050043;
-        public static final int holder=0x7f050051;
+        public static final int fullscreen_content=0x7f050044;
+        public static final int holder=0x7f050052;
         public static final int home=0x7f050014;
         public static final int homeAsUp=0x7f050005;
         public static final int icon=0x7f05002a;
@@ -1591,9 +1592,10 @@ containing a value of this type.
         public static final int list=0x7f05003c;
         public static final int listMode=0x7f050001;
         public static final int list_item=0x7f050029;
+        public static final int mainActivity=0x7f050043;
         public static final int main_bottom=0x7f05003d;
         public static final int middle=0x7f050012;
-        public static final int msg=0x7f05004e;
+        public static final int msg=0x7f05004f;
         public static final int never=0x7f050009;
         public static final int none=0x7f050010;
         public static final int normal=0x7f050000;
@@ -1618,12 +1620,12 @@ containing a value of this type.
         public static final int submit_area=0x7f050039;
         public static final int tabMode=0x7f050002;
         public static final int tabpager=0x7f050042;
-        public static final int time=0x7f05004f;
+        public static final int time=0x7f050050;
         public static final int title=0x7f05002b;
         public static final int top_action_bar=0x7f050020;
         public static final int up=0x7f050021;
         public static final int useLogo=0x7f050003;
-        public static final int view_content=0x7f050050;
+        public static final int view_content=0x7f050051;
         public static final int withText=0x7f05000c;
     }
     public static final class integer {
@@ -1677,11 +1679,12 @@ containing a value of this type.
         public static final int abc_search_view=0x7f030016;
         public static final int abc_simple_decor=0x7f030017;
         public static final int activity_chatlist_main=0x7f030018;
-        public static final int activity_welcome=0x7f030019;
-        public static final int chat_main=0x7f03001a;
-        public static final int list_item=0x7f03001b;
-        public static final int slide_view_merge=0x7f03001c;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001d;
+        public static final int activity_main=0x7f030019;
+        public static final int activity_welcome=0x7f03001a;
+        public static final int chat_main=0x7f03001b;
+        public static final int list_item=0x7f03001c;
+        public static final int slide_view_merge=0x7f03001d;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001e;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
