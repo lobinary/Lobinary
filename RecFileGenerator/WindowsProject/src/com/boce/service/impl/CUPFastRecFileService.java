@@ -26,7 +26,6 @@ public class CUPFastRecFileService implements IRecFileService {
 		try {
 			BufferedWriter br = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile,false)));
 			StringBuffer sb = new StringBuffer();
-			sb.append("30088107736315130200000000000000" + RecFileUtil.frontFillString("0", ""+payTotalNum, 4) + "0000000000000000000000" + RecFileUtil.frontFillString("0", ""+payTotalAmount, 10) + "0900000000000000" + RecFileUtil.frontFillString("0", ""+refundTotalNum, 4) + "0000000000000000000000" + RecFileUtil.frontFillString("0", ""+refundTotalAmount, 10) + "0970000000000000000000000000000000000000000000000000" + "\n");
 			for(RecFileModel rfm: list){
 				if(rfm.isValid()){
 					if(rfm.getType().equals("pay")){
@@ -40,6 +39,7 @@ public class CUPFastRecFileService implements IRecFileService {
 					}
 				}
 			}
+			br.append("30088107736315130200000000000000" + RecFileUtil.frontFillString("0", ""+payTotalNum, 4) + "0000000000000000000000" + RecFileUtil.frontFillString("0", ""+payTotalAmount, 10) + "0900000000000000" + RecFileUtil.frontFillString("0", ""+refundTotalNum, 4) + "0000000000000000000000" + RecFileUtil.frontFillString("0", ""+refundTotalAmount, 10) + "0970000000000000000000000000000000000000000000000000" + "\n");
 			RecFileUtil.outLog("10000000000009010200000000000000" + RecFileUtil.frontFillString("0", ""+payTotalNum, 4) + "0000000000000000000000" + RecFileUtil.frontFillString("0", ""+payTotalAmount, 10) + "0900000000000000" + RecFileUtil.frontFillString("0", ""+refundTotalNum, 4) + "0000000000000000000000" + RecFileUtil.frontFillString("0", ""+refundTotalAmount, 10) + "\n" + sb.toString());
 			br.append(sb);
 			br.flush();

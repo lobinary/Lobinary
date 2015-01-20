@@ -279,11 +279,11 @@ public class RecFileWindow extends JFrame {
 		// topPanel.add(dataNumLabelComboBox);
 		topPanel.add(isYuanLabel);
 		topPanel.add(isYuanComboBox);
-		topPanel.add(generateFileButton);
-		topPanel.add(resetButton);
 		topPanel.add(outFolderTextFiled);
 		topPanel.add(outFolderButton);
 		topPanel.add(openOutFolderButton);
+		topPanel.add(resetButton);
+		topPanel.add(generateFileButton);
 		bottomPanel.add(logScrollPanel, BorderLayout.CENTER);
 		middlePanel.add(payOrderNoLabelInfo1);
 		middlePanel.add(allIsValid);
