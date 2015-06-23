@@ -1,0 +1,29 @@
+<SoEv>
+	<Message id="2015050614364439">
+		<Error id="Error">
+			<version>1.0.1</version>
+			<instId>GDB</instId>
+			<certId>0001</certId>
+			<errorCode>PP021005</errorCode>
+			<errorMessage>交易日期格式错误</errorMessage>
+		</Error>
+		<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+			<ds:SignedInfo>
+				<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></ds:CanonicalizationMethod>
+				<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"></ds:SignatureMethod>
+				<ds:Reference URI="#Error">
+					<ds:Transforms>
+						<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform>
+					</ds:Transforms>
+					<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
+					<ds:DigestValue>lD6d/TnnDG+KE2qU0nejaPcs3ag=</ds:DigestValue>
+				</ds:Reference>
+			</ds:SignedInfo>
+			<ds:SignatureValue>
+				FKUYtp1MlzQcU2OvtveUAeXVJ4Nj7c6nay7/ehbfjTYE6qeQO7rQ2Xat2UnyTtzr7Uvi+UbLkPYN
+				RphOwnnu5u2uNWGUM7wxN3il3drCTwomCsnCLQFbwLhpKGjwFHgGOf5QsVgVNIyQLStb2zYzyoG7
+				aFPRk66GCkVABeyAo/U=
+			</ds:SignatureValue>
+		</ds:Signature>
+	</Message>
+</SoEv>

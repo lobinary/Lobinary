@@ -109,11 +109,11 @@ public class RecFileWindow extends JFrame {
 	
 	// 选择生成对账文件的种类（中信B2C还是银联快捷之类的选项）
 	private JLabel generateTypeLabel = new JLabel("生成格式");;
-	private JComboBox<String> generateTypeComboBox = new JComboBox<String>();
+	private JComboBox generateTypeComboBox = new JComboBox();
 
 	// 判断金额是元还是分
 	private JLabel isYuanLabel = new JLabel("金额单位：");
-	private JComboBox<String> isYuanComboBox = new JComboBox<String>();
+	private JComboBox isYuanComboBox = new JComboBox();
 
 	// // 几条数据 0~7
 	// private JLabel dataNumLabel = new JLabel("数据条数：");
@@ -243,17 +243,17 @@ public class RecFileWindow extends JFrame {
 
 	public void configWindows() {
 		mainFrame.setIconImage(icon);
-		mainFrame.setTitle("对账文件自动生成器   ——————————技术部：吕斌——电话：18612966769——QQ：919515134————如有问题，请您联系我！");
+		mainFrame.setTitle("对账文件自动生成器 V2.1  ——————————技术部：吕斌——电话：18612966769——QQ：919515134————如有问题，请您联系我！");
 		mainFrame.setBounds(200, 100, 1000, 600);
 		mainFrame.setLayout(new BorderLayout()); // 设置布局管理器为3行3列的GridLayout,组件间水平与垂直间距为2
 		middlePanel.setLayout(new GridLayout(12, 5));
 		outFolderTextFiled.setEditable(false);// 日志框不可更改
 		// 输出对账文件路径选择器为只选文件
 		outFileFolderChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		generateTypeComboBox.setModel(new DefaultComboBoxModel<String>(RecFileUtil.getGenerateTypeArray()));
+		generateTypeComboBox.setModel(new DefaultComboBoxModel(RecFileUtil.getGenerateTypeArray()));
 		// dataNumLabelComboBox.setModel(new
 		// DefaultComboBoxModel<String>(RecFileConfig.getDataNumArray()));
-		isYuanComboBox.setModel(new DefaultComboBoxModel<String>(RecFileUtil.getAmountUnitArray()));
+		isYuanComboBox.setModel(new DefaultComboBoxModel(RecFileUtil.getAmountUnitArray()));
 		bottomPanel.setLayout(new BorderLayout());
 		logScrollPanel.setViewportView(logTextArea);
 		logMenu.add(clearLogMenu);
