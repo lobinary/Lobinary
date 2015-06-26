@@ -1,5 +1,5 @@
 /*
- * @(#)Start.java     V1.0.0      @上午9:35:26
+ * @(#)CatchDataFromUrl.java     V1.0.0      @上午9:40:55
  *
  * Project: Test
  *
@@ -23,22 +23,27 @@
 package com.boce.cav;
 
 import java.net.SocketTimeoutException;
+import java.util.HashMap;
+
+import com.unicompayment.fap.common.utils.http.HttpUtil;
 
 /**
  * <pre>
- * 开始程序
+ * 
  * </pre>
  * @author 吕斌：lvb3@chinaunicom.cn
- * @since 2015年6月23日 上午9:35:26
- * @version V1.0.0 描述 : 创建文件Start
+ * @since 2015年6月23日 上午9:40:55
+ * @version V1.0.0 描述 : 创建文件CatchDataFromUrl
  * 
  *         
  * 
  */
-public class Start {
+public class CavService{
 	
-	public static void main(String[] args) throws SocketTimeoutException {
-		CavService.service();
+	public static void service() throws SocketTimeoutException{
+		HashMap<String, String> paramMap = new HashMap<String,String>();
+		String returnStr = HttpUtil.sendPostRequest("http://www.baidu.com", paramMap, "UTF-8", "UTF-8");
+		System.out.println(returnStr);
 	}
 
 }
