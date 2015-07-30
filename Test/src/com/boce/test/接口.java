@@ -35,6 +35,14 @@ package com.boce.test;
  */
 public interface 接口 {
 
+	/**
+	 * 
+	 * <pre>
+	 * 抽象类方法
+	 * </pre>
+	 *
+	 * @return
+	 */
 	public String out();
 	
 }

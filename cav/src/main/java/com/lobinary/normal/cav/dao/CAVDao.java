@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import com.lobinary.normal.cav.dto.CAVDto;
 
@@ -69,10 +70,29 @@ public class CAVDao {
 		conn.close();
 		return conn;
 	}
-	
+
 	public boolean insert(CAVDto cav) {
 		return db.InsertSql(cav);
 //		return true;
+	}
+
+	public List<CAVDto> queryUnCatchImgCav(int size) {
+		return db.SelectSql("select * from cav where imagelocalpath = '' limit " + size);
+//		return true;
+	}
+	
+	public boolean updateLocalImgPath(long id,String imgPath) {
+		return db.UpdateSql("update cav set imagelocalpath = '" + imgPath + "' where id = " + id);
+//		return true;
+	}
+	
+	public static void main(String[] args) {
+		CAVDao cavDao = new CAVDao();
+		System.out.println(cavDao.updateLocalImgPath(348, "hahah"));
+//		List<CAVDto> list = cavDao.queryUnCatchImgCav(20);
+//		for(CAVDto cav : list){
+//			System.out.println(cav.getId());
+//		}
 	}
 
 }

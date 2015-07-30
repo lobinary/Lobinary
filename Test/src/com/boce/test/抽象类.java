@@ -35,4 +35,14 @@ package com.boce.test;
  */
 abstract class 抽象类 implements 接口{
 
+	/* (non-Javadoc)
+	 * @see com.boce.test.接口#out()
+	 */
+	@Override
+	public String out() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }

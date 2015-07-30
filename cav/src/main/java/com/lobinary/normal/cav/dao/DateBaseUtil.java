@@ -6,19 +6,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.lobinary.normal.cav.dto.CAVDto;
 
 public class DateBaseUtil {
 	String drivename = "com.mysql.jdbc.Driver";
-	String url = "jdbc:mysql://127.0.0.1:3306/lobinary";
+	String url = "jdbc:mysql://111.197.157.61:3306/lobinary";
 	String user = "root";
 	String password = "123qwe";
 	String insql;
 	String upsql;
 	String delsql;
 	String sql = "select * from cav";
-	String name;
 	Connection conn = null;
 	ResultSet rs = null;
 	
@@ -97,10 +98,11 @@ public class DateBaseUtil {
 	
 	public static void main(String[] args) {
 		DateBaseUtil db = new DateBaseUtil();
-		CAVDto cav = new CAVDto();
-		cav.setName("测试名称");
-		cav.setImagelocalpath("暂无");
-		System.out.println(db.InsertSql(cav));
+//		CAVDto cav = new CAVDto();
+//		cav.setName("测试名称");
+//		cav.setImagelocalpath("暂无");
+//		System.out.println(db.InsertSql(cav));
+		db.SelectSql("select * from cav limit 2");
 	}
 
 	// 插入、删除、更新的方法是一样的，不一样的是数据库参数
@@ -143,27 +145,60 @@ public class DateBaseUtil {
 	}
 
 	// 与其他操作相比较，查询语句在查询后需要一个查询结果集（ResultSet）来保存查询结果
-	public void SelectSql(String sql) {
+	public List<CAVDto> SelectSql(String sql) {
+		List<CAVDto> cavList = new ArrayList<CAVDto>();
 		try {
+			ConnectMysql();
 			Statement statement = conn.createStatement();
 			rs = statement.executeQuery(sql);
 			while (rs.next()) {
-				name = rs.getString("username");
-				System.out.println(rs.getString("userid") + name + rs.getString("email"));
+				long id = rs.getInt("id");
+				String name = rs.getString("name");
+				String number = rs.getString("number");
+				String date = rs.getString("date");
+				String time = rs.getString("time");
+				String director = rs.getString("director");
+				String makers = rs.getString("makers");
+				String publisher = rs.getString("publisher");
+				String series = rs.getString("series");
+				String type = rs.getString("type");
+				String actor = rs.getString("actor");
+				String detailurl = rs.getString("detailurl");
+				String imageurl = rs.getString("imageurl");
+				String imagelocalpath = rs.getString("imagelocalpath");
+				CAVDto cav = new CAVDto();
+				cav.setId(id);
+				cav.setName(name);
+				cav.setNumber(number);
+				cav.setDate(date);
+				cav.setTime(time);
+				cav.setDirector(director);
+				cav.setMakers(makers);
+				cav.setPublisher(publisher);
+				cav.setSeries(series);
+				cav.setType(type);
+				cav.setActor(actor);
+				cav.setDetailurl(detailurl);
+				cav.setImageurl(imageurl);
+				cav.setImagelocalpath(imagelocalpath);
+				cavList.add(cav);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return cavList;
 
 	}
 
 	public boolean UpdateSql(String upsql) {
 		try {
+			ConnectMysql();
 			PreparedStatement ps = conn.prepareStatement(upsql);
 			int result = ps.executeUpdate();// 返回行数或者0
 			if (result > 0)
 				return true;
 		} catch (SQLException ex) {
+			ex.printStackTrace();
 //			Logger.getLogger(ConnectDatabase.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		return false;

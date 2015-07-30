@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" >
+
+    <item
+        android:id="@+id/menu_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="settings"/>
+    <item
+        android:id="@+id/action_refresh"
+        android:icon="@drawable/music"
+        android:orderInCategory="101"
+        android:showAsAction="ifRoom|withText"
+        android:title="refresh"/>
+    <item
+        android:id="@+id/action_about"
+        android:icon="@drawable/phone"
+        android:orderInCategory="101"
+        android:showAsAction="ifRoom"
+        android:title="about"/>
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/key"
+        android:orderInCategory="103"
+        android:showAsAction="ifRoom"
+        android:title="search"/>
+    <item
+        android:id="@+id/action_edit"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:orderInCategory="105"
+        android:showAsAction="ifRoom"
+        android:title="edit"/>
+    <item
+        android:id="@+id/action_help"
+        android:showAsAction="always"
+        android:title="help"/>
+    <item
+        android:id="@+id/action_email"
+        android:icon="@android:drawable/ic_dialog_email"
+        android:orderInCategory="106"
+        android:showAsAction="ifRoom"
+        android:title="email"/>
+
+</menu>

@@ -7,6 +7,13 @@
     android:background="#eee"
     android:orientation="vertical" >
 
+    <fragment  
+        android:id="@+id/main_title_fragment"  
+        android:name="com.lobinary.android.platform.ui.fragment.MainTitleFragment"  
+        android:layout_width="fill_parent"  
+        android:layout_height="45dp" />  
+  
+    
     <RelativeLayout
         android:id="@+id/main_bottom"
         android:layout_width="match_parent"
@@ -104,7 +111,7 @@
                     android:layout_height="wrap_content"
                     android:text="功能"
                     android:textColor="#fff"
-                    android:textSize="12sp" />
+                    android:textSize="11sp" />
             </LinearLayout>
 
             <LinearLayout
