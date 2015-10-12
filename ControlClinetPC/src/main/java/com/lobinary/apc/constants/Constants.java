@@ -16,5 +16,12 @@ public class Constants {
 	 * PC端版本号
 	 */
 	public static final String PC_CLIENT_VERSION = "1.0.0";
+	
+	/**
+	 * 窗口标题名称
+	 */
+	public static final String WINDOWS_TITLE_NAME = "安卓PC互控系统-PC客户端";
+	
+	
 
 }
