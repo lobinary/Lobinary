@@ -24,4 +24,16 @@ public class ControlServiceBaseImpl implements ControlServiceInterface {
 		return false;
 	}
 
+	@Override
+	public boolean startApplication(String applicationCode) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean shutdownComputer(long countDownTime) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

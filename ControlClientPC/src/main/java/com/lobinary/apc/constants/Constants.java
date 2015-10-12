@@ -22,6 +22,11 @@ public class Constants {
 	 */
 	public static final String WINDOWS_TITLE_NAME = "安卓PC互控系统-PC客户端";
 	
+	/**
+	 * 应用程序编码-音乐
+	 */
+	public static final String APPLICATION_CODE_MUSIC = "MUSIC";
+	
 	
 
 }
