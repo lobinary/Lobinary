@@ -6,13 +6,11 @@
     android:layout_gravity="center"
     android:background="#eee"
     android:orientation="vertical" >
-
     <fragment  
         android:id="@+id/main_title_fragment"  
         android:name="com.lobinary.android.platform.ui.fragment.MainTitleFragment"  
         android:layout_width="fill_parent"  
         android:layout_height="45dp" />  
-  
     
     <RelativeLayout
         android:id="@+id/main_bottom"
@@ -57,14 +55,18 @@
                     android:layout_height="30dp"
                     android:layout_margin="5dp"
                     android:clickable="true"
-                    android:src="@drawable/bubble" />
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:src="@drawable/phone" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="2dp"
                     android:text="主页"
                     android:textColor="#FFFFFF"
                     android:textSize="11sp" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -140,7 +142,7 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <!-- viewpager类，用来切换页面 -->
+    <!-- viewpager类，用来切换页面 
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -156,6 +158,6 @@
             android:layout_gravity="center"
             android:layout_margin="0dp" >
         </android.support.v4.view.ViewPager>
-    </LinearLayout>
+    </LinearLayout>-->
 
 </RelativeLayout>
