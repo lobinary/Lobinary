@@ -22,6 +22,8 @@
  */
 package com.lobinary.test.svn;
 
+import org.tmatesoft.svn.core.SVNException;
+
 /**
  * <pre>
  * 
@@ -35,8 +37,32 @@ package com.lobinary.test.svn;
  */
 public class SVNKitTest {
 	
-	public static void main(String[] args) {
-		System.out.println("hello");
+	public static void main(String[] args) throws SVNException {
+//		System.out.println("hello svn ");
+//		SVNRepositoryFactoryImpl.setup();
+//		//https://123.125.97.77/svn/fundability/历史文档
+//		
+////		SVNURL url = SVNURL.parseURIDecoded("svn://host/path_to_repository_root/inner_path" );
+////		SVNRepository repository = SVNRepositoryFactory.create( url, null );
+//		
+//		DAVRepositoryFactory.setup();
+//		SVNURL url = SVNURL.parseURIDecoded("https://123.125.97.77/svn/fundability/历史文档");
+//		
+//		//授权管理
+//		
+//		
+//		SVNPasswordAuthentication p = new SVNPasswordAuthentication("lvbin", "lvb1310",true);
+//		
+//		SVNPasswordAuthentication svnAuth = SVNPasswordAuthentication.newInstance("lvbin", "lvb1310".toCharArray(),true, url, true);
+//		PasswordAuthentication passwordAuthentication = new PasswordAuthentication("lvbin", "lvb1310".toCharArray());
+//		
+//			
+//		SVNRepository repository = DAVRepositoryFactory.create(url,null);
+//		repository.setAuthenticationManager(passwordAuthentication);
+//		
+//		
+//		long revision = repository.getLatestRevision();
+//		System.out.println(revision);
 	}
 
 }

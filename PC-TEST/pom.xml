@@ -8,6 +8,20 @@
   <description>PC测试</description>
   
   <dependencies>
+  
+  	<!-- 工具类产品 -->
+  	
+  		<!-- svnkit svn工具类-->
+  		<dependency>
+			<groupId>org.tmatesoft.svnkit</groupId>
+			<artifactId>svnkit</artifactId>
+			<version>1.8.10</version>
+		</dependency>
+		<!-- svnkit svn工具类-->
+		
+		
+		
+	<!-- 工具类产品 -->	  		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>

@@ -12,6 +12,9 @@ package com.lobinary.apc.constants;
  */
 public class Constants {
 	
-	
+	/**
+	 * PC端版本号
+	 */
+	public static final String PC_CLIENT_VERSION = "1.0.0";
 
 }

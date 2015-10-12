@@ -4,19 +4,21 @@ import com.lobinary.apc.constants.CodeDescConstants;
 
 /**
  * 
-* 项目名称：FAPCommon  
-* 类名称：FapSysException   
-* 类描述：系统异常类
-* 创建人：范世晔   
-* 创建时间：2014-12-11 下午4:23:43      
-* @version    
-*
+ * <pre>
+ * 异常类
+ * </pre>
+ * @author 吕斌：lvb3@chinaunicom.cn
+ * @since 2015年10月12日 下午1:02:52
+ * @version V1.0.0 描述 : 创建文件APCSysException
+ * 
+ *         
+ *
  */
 public class APCSysException extends RuntimeException {
 
 	private static final long serialVersionUID = 4469004050656405136L;
-	private String errCode = "";
-	private String errMessage = "";
+	private String errCode;
+	private String errMessage;
 
 	public APCSysException(String _errCode, String _errMessage) {
 		this.errCode = _errCode;

@@ -22,8 +22,16 @@ import com.lobinary.apc.exception.APCSysException;
 
 
 /**
- * @author gmc
- * 文件操作了
+ * 
+ * <pre>
+ * 文件工具类
+ * </pre>
+ * @author 吕斌：lvb3@chinaunicom.cn
+ * @since 2015年10月12日 下午1:04:29
+ * @version V1.0.0 描述 : 创建文件FileUtil
+ * 
+ *         
+ *
  */
 public class FileUtil {
 
@@ -267,15 +275,15 @@ public class FileUtil {
 				}
 				bufferedReader.close();
 			} else {
-				logger.error( "找不到指定的批量文件！");
-				throw new APCSysException("800903", "找不到指定的文件");
+				logger.error( "未发现文件:"+file.getAbsolutePath());
+				throw new APCSysException(CodeDescConstants.FILE_READ_UNFOUNT);
 			}
 		}catch (IOException e){
-			logger.error( "找不到指定的批量文件！"+ e.getMessage());
-			throw new APCSysException("800903", "找不到指定的文件!"+ e.getMessage());
+			logger.error( "读取文件异常",e);
+			throw new APCSysException(CodeDescConstants.FILE_READ_UNFOUNT);
 		}catch (Exception e) {
-			logger.error( "读取文件内容出现未知错误！"+ e.getMessage());
-			throw new APCSysException("800904", "读取文件内容出现未知错误！，错误原因：" + e.getMessage());
+			logger.error( "读取文件内容出现未知错误",e);
+			throw new APCSysException(CodeDescConstants.FILE_READ_EXCEPTION);
 		}
 		return resultList;
 	}
@@ -298,8 +306,8 @@ public class FileUtil {
 				}
 				read.close();
 			} else {
-				logger.error( "找不到指定的批量文件！");
-				throw new APCSysException("800903", "找不到指定的文件");
+				logger.error( "未发现文件:"+file.getAbsolutePath());
+				throw new APCSysException(CodeDescConstants.FILE_READ_UNFOUNT);
 			}
 		}catch (IOException e){
 			logger.error( "找不到指定的批量文件！"+ e.getMessage());
