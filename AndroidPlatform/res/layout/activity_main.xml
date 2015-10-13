@@ -6,12 +6,13 @@
     android:layout_gravity="center"
     android:background="#eee"
     android:orientation="vertical" >
-    <fragment  
-        android:id="@+id/main_title_fragment"  
-        android:name="com.lobinary.android.platform.ui.fragment.MainTitleFragment"  
-        android:layout_width="fill_parent"  
-        android:layout_height="45dp" />  
-    
+
+    <fragment
+        android:id="@+id/main_title_fragment"
+        android:name="com.lobinary.android.platform.ui.fragment.MainTitleFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp" />
+
     <RelativeLayout
         android:id="@+id/main_bottom"
         android:layout_width="match_parent"
@@ -28,10 +29,7 @@
             android:scaleType="fitCenter"  
             android:layout_gravity="bottom"               
             android:layout_alignParentBottom="true"  
-            android:src="@drawable/cloud" />
-            //动画所用图片，绿色的
-        -->
-
+            android:src="@drawable/cloud" />        -->
 
         <!-- //底部菜单的父布局 -->
 
@@ -66,7 +64,6 @@
                     android:text="主页"
                     android:textColor="#FFFFFF"
                     android:textSize="11sp" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -142,8 +139,8 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <!-- viewpager类，用来切换页面 
-
+    <!--
+    viewpager类，用来切换页面 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -158,6 +155,7 @@
             android:layout_gravity="center"
             android:layout_margin="0dp" >
         </android.support.v4.view.ViewPager>
-    </LinearLayout>-->
+    </LinearLayout>
+    -->
 
 </RelativeLayout>
