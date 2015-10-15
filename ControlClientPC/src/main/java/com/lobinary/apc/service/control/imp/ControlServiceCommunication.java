@@ -1,16 +1,18 @@
 /*
- * @(#)ControlServiceCommunication.java     V1.0.0      @ÉÏÎç12:12:32
+ * @(#)ControlServiceCommunication.java     V1.0.0      @ï¿½ï¿½ï¿½ï¿½12:12:32
  *
- * ÏîÄ¿Ãû³Æ: ControlClientPC
+ * ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½: ControlClientPC
  *
- * ¸ü¸Ä ÐÅÏ¢:
- *    ×÷Õß        				   ÈÕÆÚ        			ÃèÊö
+ * ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ï¢:
+ *    ï¿½ï¿½ï¿½ï¿½        				   ï¿½ï¿½ï¿½ï¿½        			ï¿½ï¿½ï¿½ï¿½
  *    ============  	================  =======================================
- *    lobinary       	  2015Äê10ÔÂ13ÈÕ    	´´½¨ÎÄ¼þ
+ *    lobinary       	  2015ï¿½ï¿½10ï¿½ï¿½13ï¿½ï¿½    	ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
  *
  */
 package com.lobinary.apc.service.control.imp;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -19,9 +21,9 @@ import java.net.Socket;
  * <pre>
  * 
  * </pre>
- * @author ÂÀ±ó£ºlvb3@chinaunicom.cn
- * @since 2015Äê10ÔÂ13ÈÕ ÉÏÎç12:12:32
- * @version V1.0.0 ÃèÊö : ´´½¨ÎÄ¼þControlServiceCommunication
+ * @author ï¿½ï¿½ï¿½ï¿½lvb3@chinaunicom.cn
+ * @since 2015ï¿½ï¿½10ï¿½ï¿½13ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½12:12:32
+ * @version V1.0.0 ï¿½ï¿½ï¿½ï¿½ : ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ControlServiceCommunication
  * 
  *         
  * 
@@ -33,31 +35,59 @@ public class ControlServiceCommunication {
 	int temp;
 	ServerSocket serverSocket;
 	Socket socket[];
+	private DataOutputStream sendstr = null;
 	
 	public ControlServiceCommunication(){
 		try {
 			serverSocket = new ServerSocket(6666);
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println("Î´ÄÜ½¨Á¢socketÁ¬½Ó");
+			System.out.println("can't create serversocket");
 		}
 		
 		socket = new Socket[max];
-		
 		try {
-			while((socket[i]=serverSocket.accept())!=null){
-				temp = i;
-				i++;
-				//¿ªÊ¼Ò»¸öÏß³Ì
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.out.println("Î´ÄÜÁ¬½Óµ½ÆäËû¿Í»§¶Ë");
+			socket[i]=serverSocket.accept();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+			System.out.println("can't accept client's socket");
+		}
+		
+		while(socket[i]!=null){
+			temp = i;
+			i++;
+			CommuThread ct = new CommuThread();
+			Thread commu = new Thread(ct);
+			commu.start();
 		}
 	}
 	
 	
-	public void run(){
-		
+	public void send(String str){
+		try {
+			sendstr.writeUTF(str);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
+	
+	
+	class CommuThread implements Runnable{
+		private DataInputStream inp = null;
+		private DataOutputStream oup = null;
+		
+		@Override
+		public void run(){
+			String in;
+			try {
+				in = inp.readUTF();
+				oup.writeUTF(in);
+				send(in);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	
 }
