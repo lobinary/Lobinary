@@ -17,30 +17,22 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-/**
- * <pre>
- * 
- * </pre>
- * @author ����lvb3@chinaunicom.cn
- * @since 2015��10��13�� ����12:12:32
- * @version V1.0.0 ���� : �����ļ�ControlServiceCommunication
- * 
- *         
- * 
- */
+import com.lobinary.apc.util.common.file.LogUtil;
+
 public class ControlServiceCommunication {
 	
-	//int max = 10;
-	//int i = 0;
+
 	int temp;
 	ServerSocket serverSocket;
-	//Socket socket[];
-	private DataOutputStream sendstr = null;
+	DataOutputStream dos = null;
+	DataInputStream dis = null;
+	public DataOutputStream sendstr = null;
 	
 	public static void main(String[] args) {
 		new ControlServiceCommunication();
 	}
 	
+	@SuppressWarnings("null")
 	public ControlServiceCommunication(){
 		try {
 			serverSocket = new ServerSocket(6666);
@@ -53,53 +45,29 @@ public class ControlServiceCommunication {
 		Socket s = new Socket();
 		try {
 			s=serverSocket.accept();
+			dos = new DataOutputStream(s.getOutputStream());
+			dis = new DataInputStream(s.getInputStream());
 			System.out.println("客户端已连接");
 		} catch (IOException e1) {
 			e1.printStackTrace();
 			System.out.println("can't accept client's socket");
 		}
-		
-		while(s!=null){
-			/*temp = i;
-			i++;
-			CommuThread ct = new CommuThread();
-			Thread commu = new Thread(ct);
-			commu.start();*/
-			DataOutputStream inp = null;
+			
+			//发送消息
 			String out = "hey boy";
 			try {
-				inp.writeUTF(out);
-				send(out);
+				dos.writeUTF(out);
+				dos.flush();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
-	}
-	
-	
-	public void send(String str){
-		try {
-			sendstr.writeUTF(str);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	
-	/*class CommuThread implements Runnable{
-		private DataOutputStream oup = null;
-		
-		@Override
-		public void run(){
-			String out = "hey boy";
+			
+			//接收消息
 			try {
-				oup.writeUTF(out);
-				send(out);
+				String str = dis.readUTF();
+				LogUtil.out2Window("str");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
-	}*/
-
-	
+	}
 }

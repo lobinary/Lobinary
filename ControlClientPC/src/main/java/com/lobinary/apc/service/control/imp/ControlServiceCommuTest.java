@@ -39,6 +39,8 @@ public class ControlServiceCommuTest extends Frame{
 	
 	Socket servertome = null;
 	DataInputStream in = null;
+	DataOutputStream dos = null;
+	DataInputStream dis = null;
 	JTextArea ta = null;
 	
 	public static void main(String[] args){
@@ -64,14 +66,13 @@ public class ControlServiceCommuTest extends Frame{
 	}
 	
 	private void connect(){
-		Socket s;
-		InputStream show;
 		
 		try {
 			servertome = new Socket("127.0.0.1",6666);
-			show = servertome.getInputStream();
-			System.out.println(show);
-			ta.setText(show.toString());
+			dos = new DataOutputStream(servertome.getOutputStream());
+			dis = new DataInputStream(servertome.getInputStream());
+			String str = dis.readUTF();
+			ta.setText(str);
 			
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
@@ -82,25 +83,4 @@ public class ControlServiceCommuTest extends Frame{
 	}
 }
 
-
-/*class Client implements Runnable{
-	private Socket s;
-	private InputStream show;
-	
-	public Client(Socket s){
-		this.s = s;
-		try {
-			show = s.getInputStream();
-			System.out.println(show);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-	}
-
-	@Override
-	public void run() {
-		
-	}
-}*/
 
