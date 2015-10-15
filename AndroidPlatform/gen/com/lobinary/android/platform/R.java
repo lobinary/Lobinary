@@ -428,6 +428,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         /**  暗灰蓝色 
          */
         public static final int steelblue=0x7f040076;
+        public static final int tab_selector_tv_color=0x7f040093;
         /**  亮灰色 
          */
         public static final int tan=0x7f04003e;
@@ -488,40 +489,42 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int world=0x7f02001b;
     }
     public static final class id {
-        public static final int action_about=0x7f08001d;
-        public static final int action_edit=0x7f08001f;
-        public static final int action_email=0x7f080021;
-        public static final int action_help=0x7f080020;
-        public static final int action_refresh=0x7f08001c;
-        public static final int action_search=0x7f08001e;
-        public static final int chat_bottom_add=0x7f08000e;
-        public static final int chat_bottom_edittext=0x7f08000f;
-        public static final int chat_bottom_linear=0x7f08000c;
-        public static final int chat_bottom_look=0x7f08000d;
-        public static final int chat_bottom_sendbutton=0x7f080010;
-        public static final int chat_contact_button=0x7f08000b;
-        public static final int chat_contact_name=0x7f08000a;
-        public static final int chat_list=0x7f080011;
-        public static final int chat_msg_button=0x7f080009;
-        public static final int chat_title=0x7f080008;
-        public static final int delete=0x7f08001a;
-        public static final int fullscreen_content=0x7f080007;
-        public static final int holder=0x7f080019;
-        public static final int icon=0x7f080012;
+        public static final int action_about=0x7f08001f;
+        public static final int action_edit=0x7f080021;
+        public static final int action_email=0x7f080023;
+        public static final int action_help=0x7f080022;
+        public static final int action_refresh=0x7f08001e;
+        public static final int action_search=0x7f080020;
+        public static final int chat_bottom_add=0x7f080010;
+        public static final int chat_bottom_edittext=0x7f080011;
+        public static final int chat_bottom_linear=0x7f08000e;
+        public static final int chat_bottom_look=0x7f08000f;
+        public static final int chat_bottom_sendbutton=0x7f080012;
+        public static final int chat_contact_button=0x7f08000d;
+        public static final int chat_contact_name=0x7f08000c;
+        public static final int chat_list=0x7f080013;
+        public static final int chat_msg_button=0x7f08000b;
+        public static final int chat_title=0x7f08000a;
+        public static final int delete=0x7f08001c;
+        public static final int fullscreen_content=0x7f080009;
+        public static final int holder=0x7f08001b;
+        public static final int icon=0x7f080014;
         public static final int img_address=0x7f080004;
         public static final int img_friends=0x7f080005;
         public static final int img_mail=0x7f080003;
         public static final int img_settings=0x7f080006;
+        public static final int listViewCompat=0x7f080018;
         public static final int mainActivity=0x7f080000;
         public static final int main_bottom=0x7f080002;
-        public static final int main_content_index=0x7f080016;
-        public static final int main_head_title_logo=0x7f080017;
+        public static final int main_head_title_logo=0x7f080019;
         public static final int main_title_fragment=0x7f080001;
-        public static final int menu_settings=0x7f08001b;
-        public static final int msg=0x7f080014;
-        public static final int time=0x7f080015;
-        public static final int title=0x7f080013;
-        public static final int view_content=0x7f080018;
+        public static final int menu_settings=0x7f08001d;
+        public static final int msg=0x7f080016;
+        public static final int testIntoListViewButton=0x7f080008;
+        public static final int testIntoSlideViewButton=0x7f080007;
+        public static final int time=0x7f080017;
+        public static final int title=0x7f080015;
+        public static final int view_content=0x7f08001a;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

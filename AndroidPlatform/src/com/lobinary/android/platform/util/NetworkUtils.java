@@ -52,4 +52,29 @@ public class NetworkUtils {
 		alertDialogBuilder.setCancelable(false);
 		alertDialogBuilder.create().show();
 	}
+	
+
+	/**
+	 * 设置网络,点击取消关闭系统
+	 * @param context
+	 */
+	public static void setNetworkDialogExit(final Context context) {
+		TextView message = new TextView(context);
+		message.setText("当前网络不可用，请检查网络设置！");
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context).setTitle("网络设置").setView(message)
+				.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						context.startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
+					}
+				});
+		alertDialogBuilder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				System.exit(0);
+			}
+		});
+		alertDialogBuilder.setCancelable(false);
+		alertDialogBuilder.create().show();
+	}
 }

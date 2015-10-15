@@ -293,6 +293,7 @@
     <!-- 海军色 -->
     <color name="black">#000000</color>
     <color name="black_overlay">#000000</color>
+    <color name="tab_selector_tv_color">#000000</color>
     <!-- 黑色 -->
 
 </resources>

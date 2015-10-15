@@ -39,7 +39,8 @@ public class ChatListActivity extends Activity implements OnItemClickListener, O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "正在创建主页面");
-//        setContentView(R.layout.mainActivity);
+        setContentView(R.layout.main_content_index);
+//        setContentView(R.layout.activity_main);
         initView();
 //        getFragmentManager().findFragmentById(R.id.chat_list).setHasOptionsMenu(true);
 //        savedInstanceState.setHasOptionMenu(true);
@@ -85,18 +86,18 @@ public class ChatListActivity extends Activity implements OnItemClickListener, O
     }  
 
 	private void initView() {
-        mListView = (ListViewCompat) findViewById(R.id.mainActivity);
+        mListView = (ListViewCompat) findViewById(R.id.listViewCompat);
         MessageItem item = new MessageItem();
         item.iconRes = R.drawable.default_qq_avatar;
-        item.title = "局域网服务器";
+        item.title = "局域网PC服务器";
         item.msg = "IP:127.0.0.1";
-        item.time = "7月1日11:35:05";
+        item.time = "未连接";
         mMessageItems.add(item);
         MessageItem item2 = new MessageItem();  
         item2.iconRes = R.drawable.wechat_icon;
-        item2.title = "公网服务器";
+        item2.title = "公网PC服务器";
         item2.msg = "URL:http://www.lobinary.com";
-        item2.time = "7月6日11:35:36";
+        item2.time = "已连接";
         mMessageItems.add(item2);
         mListView.setAdapter(new SlideAdapter());
         mListView.setOnItemClickListener(this);

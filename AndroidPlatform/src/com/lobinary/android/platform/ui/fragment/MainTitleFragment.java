@@ -22,7 +22,7 @@ public class MainTitleFragment extends Fragment {
 		mLeftMenu.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getActivity(), "i am an ImageButton in TitleFragment ! ", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getActivity(), "点我干啥，点我干啥，我是图标！ ", Toast.LENGTH_SHORT).show();
 			}
 		});
 		return view;

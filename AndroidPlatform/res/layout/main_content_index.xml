@@ -2,15 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+     >
 
-    <TextView
-        android:id="@+id/main_content_index"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center"
-        android:text="使用Fragment做主面板"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
+    <com.lobinary.android.platform.activity.ListViewCompat 
+        android:id="@+id/listViewCompat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        ></com.lobinary.android.platform.activity.ListViewCompat>
+    
 </LinearLayout>

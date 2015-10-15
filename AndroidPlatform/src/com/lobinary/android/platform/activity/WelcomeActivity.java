@@ -46,18 +46,13 @@ public class WelcomeActivity extends Activity {
         //透明度动画
         AlphaAnimation animation = new AlphaAnimation(0.1f,0.9f);
         animation.setDuration(1000);//动画间隔时间
-		contentView.setAnimation(animation );
+		contentView.setAnimation(animation);
 		
 		animation.setAnimationListener(new AnimationListener() {
 			
 			@Override
 			public void onAnimationStart(Animation animation) {
-				connectionStatus = NetworkUtils.networkExist(WelcomeActivity.this);
-				if(connectionStatus){
-					Toast.makeText(WelcomeActivity.this, "欢迎使用Lobinary Platform系统", Toast.LENGTH_SHORT).show();
-				}else {
-					NetworkUtils.setNetworkDialog(WelcomeActivity.this);
-				}
+				
 			}
 			
 			@Override
@@ -66,12 +61,19 @@ public class WelcomeActivity extends Activity {
 			
 			@Override
 			public void onAnimationEnd(Animation animation) {
-				Intent mainIntent = new Intent();
-//				mainIntent.setClass(WelcomeActivity.this, ChatListActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				mainIntent.setClass(WelcomeActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(mainIntent);
-				WelcomeActivity.this.finish();
-				//Toast.makeText(WelcomeActivity.this, "程序加载完成", Toast.LENGTH_SHORT).show();
+				connectionStatus = NetworkUtils.networkExist(WelcomeActivity.this);
+				if(connectionStatus){
+					Toast.makeText(WelcomeActivity.this, "欢迎使用Lobinary Platform系统", Toast.LENGTH_SHORT).show();
+					Intent mainIntent = new Intent();
+//					mainIntent.setClass(WelcomeActivity.this, ChatListActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					mainIntent.setClass(WelcomeActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(mainIntent);
+					WelcomeActivity.this.finish();
+					//Toast.makeText(WelcomeActivity.this, "程序加载完成", Toast.LENGTH_SHORT).show();
+				}else {
+					NetworkUtils.setNetworkDialogExit(WelcomeActivity.this);
+					Toast.makeText(WelcomeActivity.this, "请您连接wifi使用,谢谢!", Toast.LENGTH_SHORT).show();
+				}
 			}
 		});
 
