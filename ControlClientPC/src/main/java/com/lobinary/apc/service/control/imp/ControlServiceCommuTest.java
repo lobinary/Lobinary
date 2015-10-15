@@ -1,0 +1,106 @@
+/*
+ * @(#)ControlServiceCommuTest.java     V1.0.0      @下午11:07:16
+ *
+ * 项目名称: ControlClientPC
+ *
+ * 更改 信息:
+ *    作者        				   日期        			描述
+ *    ============  	================  =======================================
+ *    lobinary       	  2015年10月15日    	创建文件
+ *
+ */
+package com.lobinary.apc.service.control.imp;
+
+import java.awt.BorderLayout;
+import java.awt.Frame;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+import javax.swing.JTextArea;
+
+/**
+ * <pre>
+ * 
+ * </pre>
+ * @author 西小邪：ljrxxx@aliyun.com
+ * @since 2015年10月15日 下午11:07:16
+ * @version V1.0.0 描述 : 创建文件ControlServiceCommuTest
+ * 
+ *         
+ * 
+ */
+public class ControlServiceCommuTest extends Frame{
+	
+	Socket servertome = null;
+	DataInputStream in = null;
+	JTextArea ta = null;
+	
+	public static void main(String[] args){
+		ControlServiceCommuTest window = new ControlServiceCommuTest();
+		window.launchFrame();
+	}
+	
+	public void launchFrame(){
+		this.setSize(400, 400);
+		ta = new JTextArea();
+		add(ta,BorderLayout.NORTH);
+		
+		this.addWindowListener(new WindowAdapter(){
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
+		
+		this.setVisible(true);
+		
+		connect();
+	}
+	
+	private void connect(){
+		Socket s;
+		InputStream show;
+		
+		try {
+			servertome = new Socket("127.0.0.1",6666);
+			show = servertome.getInputStream();
+			System.out.println(show);
+			ta.setText(show.toString());
+			
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+}
+
+
+/*class Client implements Runnable{
+	private Socket s;
+	private InputStream show;
+	
+	public Client(Socket s){
+		this.s = s;
+		try {
+			show = s.getInputStream();
+			System.out.println(show);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void run() {
+		
+	}
+}*/
+

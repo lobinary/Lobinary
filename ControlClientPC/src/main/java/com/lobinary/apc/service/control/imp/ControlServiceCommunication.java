@@ -30,35 +30,49 @@ import java.net.Socket;
  */
 public class ControlServiceCommunication {
 	
-	int max = 10;
-	int i = 0;
+	//int max = 10;
+	//int i = 0;
 	int temp;
 	ServerSocket serverSocket;
-	Socket socket[];
+	//Socket socket[];
 	private DataOutputStream sendstr = null;
+	
+	public static void main(String[] args) {
+		new ControlServiceCommunication();
+	}
 	
 	public ControlServiceCommunication(){
 		try {
 			serverSocket = new ServerSocket(6666);
+			System.out.println("服务器socket已建立");
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("can't create serversocket");
 		}
 		
-		socket = new Socket[max];
+		Socket s = new Socket();
 		try {
-			socket[i]=serverSocket.accept();
+			s=serverSocket.accept();
+			System.out.println("客户端已连接");
 		} catch (IOException e1) {
 			e1.printStackTrace();
 			System.out.println("can't accept client's socket");
 		}
 		
-		while(socket[i]!=null){
-			temp = i;
+		while(s!=null){
+			/*temp = i;
 			i++;
 			CommuThread ct = new CommuThread();
 			Thread commu = new Thread(ct);
-			commu.start();
+			commu.start();*/
+			DataOutputStream inp = null;
+			String out = "hey boy";
+			try {
+				inp.writeUTF(out);
+				send(out);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -72,22 +86,20 @@ public class ControlServiceCommunication {
 	}
 	
 	
-	class CommuThread implements Runnable{
-		private DataInputStream inp = null;
+	/*class CommuThread implements Runnable{
 		private DataOutputStream oup = null;
 		
 		@Override
 		public void run(){
-			String in;
+			String out = "hey boy";
 			try {
-				in = inp.readUTF();
-				oup.writeUTF(in);
-				send(in);
+				oup.writeUTF(out);
+				send(out);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-	}
+	}*/
 
 	
 }

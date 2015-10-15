@@ -37,6 +37,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
 
+import com.lobinary.apc.service.control.imp.ControlServiceCommunication;
 import com.lobinary.apc.util.common.file.LogUtil;
 
 /**
@@ -171,13 +172,14 @@ public class ControlClientPCWindows {
 		statusPanel.add(panel_3);
 		panel_3.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JToggleButton 输出日志测试按钮 = new JToggleButton("输出日志测试按钮");
-		输出日志测试按钮.addActionListener(new ActionListener() {
+		JToggleButton commutest = new JToggleButton("输出日志测试按钮");
+		commutest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LogUtil.out2Window("香一个！");
+				//ControlServiceCommunication sendmsg = new ControlServiceCommunication();
 			}
 		});
-		panel_3.add(输出日志测试按钮);
+		panel_3.add(commutest);
 		
 		JPanel panel_4 = new JPanel();
 		statusPanel.add(panel_4);
