@@ -13,6 +13,8 @@ package com.lobinary.apc.util.common.file;
 
 import org.apache.log4j.Logger;
 
+import com.lobinary.apc.windows.ControlClientPCWindows;
+
 /**
  * <pre>
  * 通过log4j appender 拦截日志到日志tab中
@@ -25,6 +27,20 @@ import org.apache.log4j.Logger;
  * 
  */
 public class LogUtil {
+	
+	
+	/**
+	 * 
+	 * <pre>
+	 * 输出日志到日志面板
+	 * </pre>
+	 *
+	 * @param logContent
+	 */
+	public static void out2Window(String logContent){
+		String oldText = ControlClientPCWindows.logTextArea.getText();
+		ControlClientPCWindows.logTextArea.setText(oldText+"\n"+logContent);
+	}
 
 	/**
 	 * <pre>

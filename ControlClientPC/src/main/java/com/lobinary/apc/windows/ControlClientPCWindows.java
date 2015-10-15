@@ -37,6 +37,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
 
+import com.lobinary.apc.util.common.file.LogUtil;
+
 /**
  * <pre>
  * 互控系统-PC端窗口
@@ -52,6 +54,7 @@ public class ControlClientPCWindows {
 
 	private JFrame frame;
 	private Image logo;
+	public static JTextArea logTextArea = new JTextArea();
 
 	/**
 	 * Launch the application.
@@ -168,8 +171,13 @@ public class ControlClientPCWindows {
 		statusPanel.add(panel_3);
 		panel_3.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JToggleButton tglbtnNewToggleButton_2 = new JToggleButton("New toggle button");
-		panel_3.add(tglbtnNewToggleButton_2);
+		JToggleButton 输出日志测试按钮 = new JToggleButton("输出日志测试按钮");
+		输出日志测试按钮.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LogUtil.out2Window("香一个！");
+			}
+		});
+		panel_3.add(输出日志测试按钮);
 		
 		JPanel panel_4 = new JPanel();
 		statusPanel.add(panel_4);
@@ -219,9 +227,9 @@ public class ControlClientPCWindows {
 		tabbedPane.addTab("日志面板", null, tabLogPanel, null);
 		tabLogPanel.setLayout(new BorderLayout(0, 0));
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setLineWrap(true);
-		tabLogPanel.add(textArea);
+		logTextArea.setEditable(false);
+		logTextArea.setLineWrap(true);
+		tabLogPanel.add(logTextArea);
 		
 		
 	}
