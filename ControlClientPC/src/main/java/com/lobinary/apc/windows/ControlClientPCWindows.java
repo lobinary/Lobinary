@@ -11,24 +11,30 @@
  */
 package com.lobinary.apc.windows;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.EventQueue;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
+import javax.swing.JPopupMenu;
 import javax.swing.JTabbedPane;
-import java.awt.Color;
-import java.awt.FlowLayout;
 import javax.swing.JTextArea;
-import java.awt.GridLayout;
-import javax.swing.JButton;
 import javax.swing.JToggleButton;
 
 /**
@@ -45,6 +51,7 @@ import javax.swing.JToggleButton;
 public class ControlClientPCWindows {
 
 	private JFrame frame;
+	private Image logo;
 
 	/**
 	 * Launch the application.
@@ -76,6 +83,20 @@ public class ControlClientPCWindows {
 		frame = new JFrame();
 		frame.setBounds(400, 200, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+//		javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("pic/apc-logo.png"));
+		
+//		Toolkit kit =Toolkit.getDefaultToolkit();
+//		Image image=kit.createImage(getClass().getResource("pic/apc-logo.png"));
+//		frame.setIconImage(image);
+		try {
+			logo = ImageIO.read(this.getClass().getResource("/pic/apc-logo.png"));
+			frame.setIconImage(logo);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 		
 		frame.setTitle("安卓PC互控系统-PC客户端");
 		
@@ -98,6 +119,14 @@ public class ControlClientPCWindows {
 		menuBar.add(helpMenu);
 		
 		JMenuItem aboutAPCMenuItem = new JMenuItem("关于安卓PC互控系统");
+		aboutAPCMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ImageIcon ii = new ImageIcon(this.getClass().getResource("/pic/apc-logo-200.png"));
+				String space = "                                    ";
+				JOptionPane.showMessageDialog(frame, "欢迎使用安卓PC互控系统 V1.0版本\n"
+						+ "安卓PC互控系统旨在帮助用户\n通过手机和电脑实现相互控制的功能\n功能将更加可定制化、人性化！\n "+space+"---by 刘婧然 吕斌","关于安卓PC互控系统",JOptionPane.OK_OPTION,ii);
+			}
+		});
 		helpMenu.add(aboutAPCMenuItem);
 		
 		JPanel panel = new JPanel();
