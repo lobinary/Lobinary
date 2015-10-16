@@ -25,9 +25,20 @@ public class MainActivity extends Activity {
         testIntoListViewButtonView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Log.e(Constants.LOG.LOG_TAG, "点击测试按钮testIntoListViewButton");
 				Intent mainIntent = new Intent();
 				mainIntent.setClass(MainActivity.this, ChatListActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(mainIntent);
+//				MainActivity.this.finish();
+			}
+		});
+        
+
+        Button testIntoSlideViewButtonView = (Button) findViewById(R.id.testIntoSlideViewButton);
+        testIntoSlideViewButtonView.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent mainIntent = new Intent();
+				mainIntent.setClass(MainActivity.this, TestMessageActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(mainIntent);
 //				MainActivity.this.finish();
 			}

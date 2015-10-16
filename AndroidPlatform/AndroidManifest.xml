@@ -10,6 +10,8 @@
         android:targetSdkVersion="21" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -32,6 +34,10 @@
              ></activity>
         <activity
             android:name="com.lobinary.android.platform.activity.ChatListActivity"
+            android:theme="@android:style/Theme.Light" 
+             ></activity>
+        <activity
+            android:name="com.lobinary.android.platform.activity.TestMessageActivity"
             android:theme="@android:style/Theme.Light" 
              ></activity>
     </application>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">L平台(测试版)</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="main_first">主页</string>
+    <string name="main_second">通讯录</string>
+    <string name="main_third">功能</string>
+    <string name="main_fourth">设置</string>
+    <string name="main_third_desc">主页底部工具栏第三个功能模块</string>
+    <string name="main_title_name">安卓PC互控系统</string>
+    
+    
+
+</resources>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_gravity="center"
+    android:background="#eee"
+    android:columnCount="1"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/messageTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="8dp"
+        android:text="消息列表"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColorLink="@color/black" />
+
+    <EditText
+        android:id="@+id/testMessageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/testSendMessageButton"
+        android:ems="10"
+        android:inputType="text" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/testSendMessageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="发送信息" />
+
+    <EditText
+        android:id="@+id/testMessageList"
+        android:layout_width="match_parent"
+        android:layout_height="376dp"
+        android:layout_above="@+id/testMessageText"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/messageTitle"
+        android:ems="10"
+        android:gravity="top"
+        android:inputType="none" />
+
+    <Button
+        android:id="@+id/connectServerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/testMessageList"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="45dp"
+        android:layout_toRightOf="@+id/messageTitle"
+        android:text="连接服务器" />
+
+</RelativeLayout>
