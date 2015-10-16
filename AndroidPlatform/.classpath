@@ -7,5 +7,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/appcompat_v7"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="lib" path="libs/gson-2.3.1.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/APCCommon"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
