@@ -3,11 +3,12 @@
     android:id="@+id/main_bottom"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-	android:background="#00AAFF">
+    android:background="@color/main_bottom_bg"  >
 
     <!-- //底部菜单的父布局 -->
 
     <LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -29,20 +30,20 @@
                 android:layout_margin="5dp"
                 android:clickable="true"
                 android:contentDescription="@string/homeBtnDesc"
-                android:paddingLeft="25dp"
-                android:paddingRight="25dp"
-                android:src="@drawable/phone" />
+                android:src="@drawable/home" />
 
             <TextView
+                android:id="@+id/homeBtnText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="2dp"
                 android:text="主页"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/orangered"
                 android:textSize="11sp" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/contactBtnBg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -50,22 +51,24 @@
             android:orientation="vertical" >
 
             <ImageView
-                android:id="@+id/img_address"
+                android:id="@+id/contactBtnView"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_margin="5dp"
                 android:clickable="true"
-                android:src="@drawable/user" />
+                android:src="@drawable/contact" />
 
             <TextView
+                android:id="@+id/contactBtnText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="通讯录"
-                android:textColor="#fff"
+                android:textColor="@color/grey"
                 android:textSize="11sp" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/functionBtnBg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -73,23 +76,25 @@
             android:orientation="vertical" >
 
             <ImageView
-                android:id="@+id/img_friends"
+                android:id="@+id/featuresBtnView"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_margin="5dp"
                 android:clickable="true"
                 android:scaleType="fitCenter"
-                android:src="@drawable/params" />
+                android:src="@drawable/features" />
 
             <TextView
+                android:id="@+id/functionBtnText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="功能"
-                android:textColor="#fff"
+                android:textColor="@color/grey"
                 android:textSize="11sp" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/settingBtnBg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -97,21 +102,29 @@
             android:orientation="vertical" >
 
             <ImageView
-                android:id="@+id/img_settings"
+                android:id="@+id/settingBtnView"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_margin="5dp"
                 android:clickable="true"
                 android:scaleType="fitCenter"
-                android:src="@drawable/settings" />
+                android:src="@drawable/setting" />
 
             <TextView
+                android:id="@+id/settingBtnText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="设置"
-                android:textColor="#fff"
+                android:textColor="@color/grey"
                 android:textSize="11sp" />
         </LinearLayout>
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/linearLayout1"
+        android:background="@color/grey" />
 
 </RelativeLayout>

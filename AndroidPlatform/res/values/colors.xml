@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="mainColor">#00AAFF</color>
+    <!-- 主页背景颜色 -->
+    <color name="main_bg">#EEEEEE</color>
+    <color name="main_title_bg">#DDDDDD</color>
+    <color name="main_bottom_bg">#DDDDDD</color>
+    
     <color name="white">#FFFFFF</color>
     <!-- 白色 -->
     <color name="ivory">#FFFFF0</color>
@@ -294,6 +300,7 @@
     <color name="black">#000000</color>
     <color name="black_overlay">#000000</color>
     <color name="tab_selector_tv_color">#000000</color>
+    
     <!-- 黑色 -->
 
 </resources>

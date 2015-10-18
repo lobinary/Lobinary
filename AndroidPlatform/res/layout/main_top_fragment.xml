@@ -2,22 +2,29 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="45dp"
-    android:background="#00AAFF" >
+    android:background="@color/main_title_bg" >
 
     <ImageButton
         android:id="@+id/main_head_title_logo"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginLeft="10dp"
-        android:background="@drawable/ic_launcher" />
+        android:background="@drawable/main_logo" />
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="center"
         android:text="@string/main_title_name"
-        android:textColor="#fff"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textColor="@color/grey"
+        android:textSize="18sp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@color/grey" />
 
 </RelativeLayout>

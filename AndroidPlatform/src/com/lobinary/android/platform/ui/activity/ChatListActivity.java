@@ -41,7 +41,7 @@ public class ChatListActivity extends Activity implements OnItemClickListener, O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "正在创建主页面");
-        setContentView(R.layout.main_content_index);
+        setContentView(R.layout.main_content_fragment);
 //        setContentView(R.layout.activity_main);
         initView();
 //        getFragmentManager().findFragmentById(R.id.chat_list).setHasOptionsMenu(true);
@@ -88,7 +88,7 @@ public class ChatListActivity extends Activity implements OnItemClickListener, O
     }  
 
 	private void initView() {
-        mListView = (ListViewCompat) findViewById(R.id.listViewCompat);
+        mListView = (ListViewCompat) findViewById(R.id.homeContent);
         MessageItem item = new MessageItem();
         item.iconRes = R.drawable.default_qq_avatar;
         item.title = "局域网PC服务器";
