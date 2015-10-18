@@ -1,4 +1,4 @@
-package com.lobinary.android.platform.activity;
+package com.lobinary.android.platform.ui.activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lobinary.android.platform.R;
-import com.lobinary.android.platform.activity.SlideView.OnSlideListener;
+import com.lobinary.android.platform.ui.activity.ListViewCompat;
+import com.lobinary.android.platform.ui.activity.SlideView;
+import com.lobinary.android.platform.ui.activity.SlideView.OnSlideListener;
 
 public class ChatListActivity extends Activity implements OnItemClickListener, OnClickListener,
         OnSlideListener {

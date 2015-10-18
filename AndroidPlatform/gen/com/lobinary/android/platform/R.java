@@ -489,71 +489,80 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int world=0x7f02001b;
     }
     public static final class id {
-        public static final int action_about=0x7f080024;
-        public static final int action_edit=0x7f080026;
-        public static final int action_email=0x7f080028;
-        public static final int action_help=0x7f080027;
-        public static final int action_refresh=0x7f080023;
-        public static final int action_search=0x7f080025;
-        public static final int chat_bottom_add=0x7f080010;
-        public static final int chat_bottom_edittext=0x7f080011;
-        public static final int chat_bottom_linear=0x7f08000e;
-        public static final int chat_bottom_look=0x7f08000f;
-        public static final int chat_bottom_sendbutton=0x7f080012;
-        public static final int chat_contact_button=0x7f08000d;
-        public static final int chat_contact_name=0x7f08000c;
-        public static final int chat_list=0x7f080013;
-        public static final int chat_msg_button=0x7f08000b;
-        public static final int chat_title=0x7f08000a;
-        public static final int connectServerButton=0x7f080021;
-        public static final int delete=0x7f08001c;
-        public static final int fullscreen_content=0x7f080009;
-        public static final int holder=0x7f08001b;
-        public static final int icon=0x7f080014;
-        public static final int img_address=0x7f080004;
-        public static final int img_friends=0x7f080005;
-        public static final int img_mail=0x7f080003;
-        public static final int img_settings=0x7f080006;
-        public static final int listViewCompat=0x7f080018;
+        public static final int action_about=0x7f080027;
+        public static final int action_edit=0x7f080029;
+        public static final int action_email=0x7f08002b;
+        public static final int action_help=0x7f08002a;
+        public static final int action_refresh=0x7f080026;
+        public static final int action_search=0x7f080028;
+        public static final int chat_bottom_add=0x7f08000b;
+        public static final int chat_bottom_edittext=0x7f08000c;
+        public static final int chat_bottom_linear=0x7f080009;
+        public static final int chat_bottom_look=0x7f08000a;
+        public static final int chat_bottom_sendbutton=0x7f08000d;
+        public static final int chat_contact_button=0x7f080008;
+        public static final int chat_contact_name=0x7f080007;
+        public static final int chat_list=0x7f08000e;
+        public static final int chat_msg_button=0x7f080006;
+        public static final int chat_title=0x7f080005;
+        public static final int connectServerButton=0x7f080024;
+        public static final int delete=0x7f08001d;
+        public static final int fullscreen_content=0x7f080004;
+        public static final int holder=0x7f08001c;
+        public static final int homeBtnBg=0x7f080014;
+        public static final int homeBtnView=0x7f080015;
+        public static final int icon=0x7f08000f;
+        public static final int img_address=0x7f080016;
+        public static final int img_friends=0x7f080017;
+        public static final int img_settings=0x7f080018;
+        public static final int listViewCompat=0x7f080019;
         public static final int mainActivity=0x7f080000;
-        public static final int main_bottom=0x7f080002;
-        public static final int main_head_title_logo=0x7f080019;
+        public static final int main_bottom=0x7f080013;
+        public static final int main_bottom_fragment=0x7f080003;
+        public static final int main_content_fragment=0x7f080002;
+        public static final int main_head_title_logo=0x7f08001a;
         public static final int main_title_fragment=0x7f080001;
-        public static final int menu_settings=0x7f080022;
-        public static final int messageTitle=0x7f08001d;
-        public static final int msg=0x7f080016;
-        public static final int testIntoListViewButton=0x7f080007;
-        public static final int testIntoSlideViewButton=0x7f080008;
-        public static final int testMessageList=0x7f080020;
-        public static final int testMessageText=0x7f08001e;
-        public static final int testSendMessageButton=0x7f08001f;
-        public static final int time=0x7f080017;
-        public static final int title=0x7f080015;
-        public static final int view_content=0x7f08001a;
+        public static final int menu_settings=0x7f080025;
+        public static final int messageTitle=0x7f080020;
+        public static final int msg=0x7f080011;
+        public static final int testIntoListViewButton=0x7f08001e;
+        public static final int testIntoSlideViewButton=0x7f08001f;
+        public static final int testMessageList=0x7f080023;
+        public static final int testMessageText=0x7f080021;
+        public static final int testSendMessageButton=0x7f080022;
+        public static final int time=0x7f080012;
+        public static final int title=0x7f080010;
+        public static final int view_content=0x7f08001b;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int activity_welcome=0x7f030001;
         public static final int chat_main=0x7f030002;
         public static final int list_item=0x7f030003;
-        public static final int main_content_index=0x7f030004;
-        public static final int main_head_title=0x7f030005;
-        public static final int slide_view_merge=0x7f030006;
-        public static final int test_message_layout=0x7f030007;
+        public static final int main_bottom_fragment=0x7f030004;
+        public static final int main_content_index=0x7f030005;
+        public static final int main_head_title=0x7f030006;
+        public static final int slide_view_merge=0x7f030007;
+        public static final int test_btn_layout=0x7f030008;
+        public static final int test_message_layout=0x7f030009;
     }
     public static final class menu {
         public static final int main_head_menu=0x7f070000;
     }
     public static final class string {
         public static final int app_name=0x7f050000;
+        public static final int contactBtnDesc=0x7f05000a;
         public static final int dummy_button=0x7f050001;
         public static final int dummy_content=0x7f050002;
+        public static final int functionBtnDesc=0x7f05000b;
+        public static final int homeBtnDesc=0x7f050009;
         public static final int main_first=0x7f050003;
         public static final int main_fourth=0x7f050006;
         public static final int main_second=0x7f050004;
         public static final int main_third=0x7f050005;
         public static final int main_third_desc=0x7f050007;
         public static final int main_title_name=0x7f050008;
+        public static final int settingBtnDesc=0x7f05000c;
     }
     public static final class style {
         /** 

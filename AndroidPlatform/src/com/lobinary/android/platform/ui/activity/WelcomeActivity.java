@@ -1,4 +1,4 @@
-package com.lobinary.android.platform.activity;
+package com.lobinary.android.platform.ui.activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +85,7 @@ public class WelcomeActivity extends Activity {
     	interactionMessages.add(new InteractionMessage());
     	interactionMessageDAO.add(interactionMessages);
     	List<InteractionMessage> list = interactionMessageDAO.query();
-    	Log.d(Constants.LOG.LOG_TAG, "获取到InteractionMessageList ，长度为：	" + list.size());
+//    	Log.d(Constants.LOG.LOG_TAG, "获取到InteractionMessageList ，长度为：	" + list.size());
     	Toast.makeText(WelcomeActivity.this, "本次为第" + list.size() + "次访问本系统！", Toast.LENGTH_SHORT).show();
     }
 

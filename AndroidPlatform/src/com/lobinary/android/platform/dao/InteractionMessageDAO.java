@@ -97,7 +97,7 @@ public class InteractionMessageDAO {
 	 * @return List<InteractionMessage>
 	 */
 	public List<InteractionMessage> query() {
-		Log.d(Constants.LOG.LOG_TAG, "数据库管理器：正在查询交互信息列表");
+//		Log.d(Constants.LOG.LOG_TAG, "数据库管理器：正在查询交互信息列表");
 		ArrayList<InteractionMessage> interactionMessages = new ArrayList<InteractionMessage>();
 		Cursor c = queryTheCursor();
 		while (c.moveToNext()) {
@@ -111,7 +111,6 @@ public class InteractionMessageDAO {
 			interactionMessage.setSendDate(new Date());
 			String receiveDateStr = c.getString(c.getColumnIndex(DBInfo.TABLE.INTERACTION_MESSAGE.COLUMN_INTERACIONT_MESSAGE_ID));
 //			Log.d(Constants.LOG.LOG_TAG, "sendDateStr：" + sendDateStr);
-			System.out.println(receiveDateStr);
 			interactionMessage.setReceiveDate(new Date());
 			interactionMessage.setSendStatus(c.getInt(c.getColumnIndex(DBInfo.TABLE.INTERACTION_MESSAGE.COLUMN_INTERACIONT_MESSAGE_ID)));
 			interactionMessages.add(interactionMessage);

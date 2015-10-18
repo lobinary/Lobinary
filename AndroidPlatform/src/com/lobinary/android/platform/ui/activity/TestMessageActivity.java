@@ -1,4 +1,4 @@
-package com.lobinary.android.platform.activity;
+package com.lobinary.android.platform.ui.activity;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

@@ -10,7 +10,10 @@
     <string name="main_fourth">设置</string>
     <string name="main_third_desc">主页底部工具栏第三个功能模块</string>
     <string name="main_title_name">安卓PC互控系统</string>
-    
+    <string name="homeBtnDesc">主页</string>
+    <string name="contactBtnDesc">通讯录</string>
+    <string name="functionBtnDesc">功能</string>
+    <string name="settingBtnDesc">设置</string>
     
 
 </resources>
