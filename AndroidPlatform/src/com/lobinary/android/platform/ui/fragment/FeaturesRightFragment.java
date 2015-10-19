@@ -22,13 +22,13 @@ import com.lobinary.android.platform.ui.activity.ListViewCompat;
 import com.lobinary.android.platform.ui.activity.SlideView;
 import com.lobinary.android.platform.ui.activity.SlideView.OnSlideListener;
 
-public class MainContentFragment extends Fragment implements OnItemClickListener, OnClickListener, OnSlideListener {
+public class FeaturesRightFragment extends Fragment implements OnItemClickListener, OnClickListener, OnSlideListener {
 
-	private static final String TAG = "MainActivity";
+	private static final String TAG = "FeaturesRightFragment";
 
 	private ListViewCompat mListView;
 
-	private List<MessageItem> mMessageItems = new ArrayList<MainContentFragment.MessageItem>();
+	private List<MessageItem> mMessageItems = new ArrayList<FeaturesRightFragment.MessageItem>();
 
 	private SlideView mLastSlideViewWithStatusOn;
 
@@ -73,13 +73,13 @@ public class MainContentFragment extends Fragment implements OnItemClickListener
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-		return inflater.inflate(R.layout.main_content_fragment, container, false);
+		return inflater.inflate(R.layout.features_right, container, false);
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		initView();
+//		initView();
 	}
 
 	private void initView() {
@@ -139,7 +139,7 @@ public class MainContentFragment extends Fragment implements OnItemClickListener
 				slideView.setContentView(itemView);
 
 				holder = new ViewHolder(slideView);
-				slideView.setOnSlideListener(MainContentFragment.this);
+				slideView.setOnSlideListener(FeaturesRightFragment.this);
 				slideView.setTag(holder);
 			} else {
 				holder = (ViewHolder) slideView.getTag();
@@ -152,7 +152,7 @@ public class MainContentFragment extends Fragment implements OnItemClickListener
 			holder.title.setText(item.title);
 			holder.msg.setText(item.msg);
 			holder.time.setText(item.time);
-			holder.deleteHolder.setOnClickListener(MainContentFragment.this);
+			holder.deleteHolder.setOnClickListener(FeaturesRightFragment.this);
 
 			return slideView;
 		}
@@ -185,7 +185,8 @@ public class MainContentFragment extends Fragment implements OnItemClickListener
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//		Log.e(TAG, "点击位置：" + position);
+		Log.e(TAG, "点击位置：" + position);
+
 	}
 
 	@Override

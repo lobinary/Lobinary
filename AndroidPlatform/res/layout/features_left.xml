@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/features_left"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/features_query_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:background="@color/orange"
+        android:textAlignment="center" >
+
+        <TextView
+            android:id="@+id/features_query_btn_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="查询"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold" />
+        
+    </RelativeLayout>
+
+    <RelativeLayout
+        	android:id="@+id/features_control_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:background="@color/features_left"
+        android:textAlignment="center" >
+
+        <TextView
+        	android:id="@+id/features_control_btn_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="控制"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+    </RelativeLayout>
+   
+    <RelativeLayout
+        android:id="@+id/features_communication_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:background="@color/features_left"
+        android:textAlignment="center" >
+
+        <TextView
+        	android:id="@+id/features_communication_btn_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="交互"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+        
+    </RelativeLayout>
+    
+    
+
+</LinearLayout>
