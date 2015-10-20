@@ -1,4 +1,4 @@
-package com.lobinary.android.platform.ui.activity;
+package com.lobinary.android.platform.ui.listview;
 
 import android.content.Context;
 import android.util.AttributeSet;

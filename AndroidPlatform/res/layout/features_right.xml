@@ -1,219 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical" >
-    
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <com.lobinary.android.platform.ui.layout.ScrollViewLinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="visible" >
+        android:orientation="vertical" >
 
-        <RelativeLayout
-            android:id="@+id/features_query_btn"
-            android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:background="@color/features_rigth_title"
-            android:textAlignment="center" >
-
-            <TextView
-                android:id="@+id/features_query_btn_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="7dp"
-                android:text="本地查询"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/features_ritht_title_text"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:background="@color/grey" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/features_control_btn"
-            android:layout_width="fill_parent"
+        <ScrollView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/features_right_menu_bg"
-            android:orientation="vertical"
-            android:textAlignment="center" >
+            android:orientation="vertical" >
 
-            <LinearLayout
-                android:id="@+id/local_folder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <ImageView
-                    android:id="@+id/localFolderBtnView"
-                    android:layout_width="80dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="10dp"
-                    android:clickable="true"
-                    android:src="@drawable/phone" />
-
-                <TextView
-                    android:id="@+id/localFolderBtnText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="15dp"
-                    android:text="连接状态"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <TextView
+            <com.lobinary.android.platform.ui.listview.PinnedSectionListView
+                android:id="@+id/pinnedSectionListView1"
                 android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginLeft="20dp"
-                android:background="@color/grey"
-                android:paddingLeft="5dp" />
+                android:layout_height="1028dp"
+                android:cacheColorHint="#00000000"
+                android:divider="@drawable/features_list_item_line"
+                android:dividerHeight="0.1dp"
+                android:fadingEdge="vertical"
+                android:listSelector="@drawable/features_list_item_selector"
+                android:scrollbars="vertical" />
+        </ScrollView>
+    </com.lobinary.android.platform.ui.layout.ScrollViewLinearLayout>
 
-            <LinearLayout
-                android:id="@+id/local_file"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <ImageView
-                    android:id="@+id/localFileBtnView"
-                    android:layout_width="80dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="10dp"
-                    android:clickable="true"
-                    android:src="@drawable/sound" />
-
-                <TextView
-                    android:id="@+id/localFileBtnText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="15dp"
-                    android:text="端口开启状态"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="visible" >
-
-        <RelativeLayout
-            android:id="@+id/features_query_btn2"
-            android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:background="@color/features_rigth_title"
-            android:textAlignment="center" >
-            
-            <TextView
-                android:id="@+id/features_query_btn_text2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="7dp"
-                android:text="服务器查询"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@color/features_ritht_title_text"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:background="@color/grey" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:background="@color/grey" />
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/features_control_btn2"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/features_right_menu_bg"
-            android:orientation="vertical"
-            android:textAlignment="center" >
-
-            <LinearLayout
-                android:id="@+id/local_folder2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <ImageView
-                    android:id="@+id/localFolderBtnView2"
-                    android:layout_width="80dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="10dp"
-                    android:clickable="true"
-                    android:src="@drawable/cloud" />
-
-                <TextView
-                    android:id="@+id/localFolderBtnText2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="15dp"
-                    android:text="可连接服务器"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginLeft="20dp"
-                android:background="@color/grey"
-                android:paddingLeft="5dp" />
-
-            <LinearLayout
-                android:id="@+id/local_file2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <ImageView
-                    android:id="@+id/localFileBtnView2"
-                    android:layout_width="80dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="10dp"
-                    android:clickable="true"
-                    android:src="@drawable/world" />
-
-                <TextView
-                    android:id="@+id/localFileBtnText2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="15dp"
-                    android:text="连接中服务器"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-            </LinearLayout>
-            
-            
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:background="@color/grey" />
-        </LinearLayout>
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

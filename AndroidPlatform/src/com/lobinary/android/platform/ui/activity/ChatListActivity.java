@@ -20,9 +20,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lobinary.android.platform.R;
-import com.lobinary.android.platform.ui.activity.ListViewCompat;
-import com.lobinary.android.platform.ui.activity.SlideView;
-import com.lobinary.android.platform.ui.activity.SlideView.OnSlideListener;
+import com.lobinary.android.platform.ui.listview.ListViewCompat;
+import com.lobinary.android.platform.ui.listview.SlideView;
+import com.lobinary.android.platform.ui.listview.SlideView.OnSlideListener;
 
 public class ChatListActivity extends Activity implements OnItemClickListener, OnClickListener,
         OnSlideListener {

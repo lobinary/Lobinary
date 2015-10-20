@@ -214,7 +214,7 @@
 
     <!-- 联系人页面 -->
 
-    <com.lobinary.android.platform.ui.activity.ListViewCompat
+    <com.lobinary.android.platform.ui.listview.ListViewCompat
         android:id="@+id/contactContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

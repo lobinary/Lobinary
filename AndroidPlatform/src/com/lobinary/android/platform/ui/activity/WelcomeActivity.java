@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.lobinary.android.platform.R;
 import com.lobinary.android.platform.constants.Constants;
 import com.lobinary.android.platform.dao.InteractionMessageDAO;
-import com.lobinary.android.platform.dto.InteractionMessage;
+import com.lobinary.android.platform.pojo.bean.InteractionMessage;
 import com.lobinary.android.platform.util.NetworkUtils;
 import com.lobinary.android.platform.util.SystemUiHider;
 

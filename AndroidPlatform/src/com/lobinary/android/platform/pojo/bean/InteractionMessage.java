@@ -1,4 +1,4 @@
-package com.lobinary.android.platform.dto;
+package com.lobinary.android.platform.pojo.bean;
 
 import java.io.Serializable;
 import java.util.Date;

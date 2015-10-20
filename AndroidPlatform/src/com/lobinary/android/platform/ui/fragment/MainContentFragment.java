@@ -3,6 +3,7 @@ package com.lobinary.android.platform.ui.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,17 +15,22 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lobinary.android.platform.R;
-import com.lobinary.android.platform.ui.activity.ListViewCompat;
-import com.lobinary.android.platform.ui.activity.SlideView;
-import com.lobinary.android.platform.ui.activity.SlideView.OnSlideListener;
+import com.lobinary.android.platform.pojo.bean.FeaturesQueryListBean;
+import com.lobinary.android.platform.ui.listview.AdapterListView;
+import com.lobinary.android.platform.ui.listview.ListViewCompat;
+import com.lobinary.android.platform.ui.listview.PinnedSectionListView;
+import com.lobinary.android.platform.ui.listview.SlideView;
+import com.lobinary.android.platform.ui.listview.SlideView.OnSlideListener;
 
 public class MainContentFragment extends Fragment implements OnItemClickListener, OnClickListener, OnSlideListener {
 
-	private static final String TAG = "MainActivity";
+	private static final String TAG = "MainContentFragment";
 
 	private ListViewCompat mListView;
 
@@ -37,6 +43,10 @@ public class MainContentFragment extends Fragment implements OnItemClickListener
 	private View contactContent;
 
 	private View featuresContent;
+
+	private PinnedSectionListView listview;
+
+	private AdapterListView adapter;
 
 	/**
 	 * 点击切换主内容
@@ -83,6 +93,9 @@ public class MainContentFragment extends Fragment implements OnItemClickListener
 	}
 
 	private void initView() {
+		
+		initialFeatures();
+		
 		homeContent = getActivity().findViewById(R.id.homeContent);
 		contactContent = getActivity().findViewById(R.id.contactContent);
 		featuresContent = getActivity().findViewById(R.id.featuresContent);
@@ -104,6 +117,66 @@ public class MainContentFragment extends Fragment implements OnItemClickListener
 		mListView.setOnItemClickListener(this);
 	}
 
+	/**
+	 * 初始化功能页面
+	 */
+	private void initialFeatures() {
+		listview=(PinnedSectionListView)getActivity().findViewById(R.id.pinnedSectionListView1);
+		listview.setAdapter(null);
+		
+		
+		adapter=new AdapterListView(getActivity(),FeaturesQueryListBean.getData());
+		listview.setAdapter(adapter);
+		listview.setOnItemClickListener(getListenerForListView());
+		
+
+		setListViewHeightBasedOnChildren(listview);
+	}
+	
+	public static void setListViewHeightBasedOnChildren(ListView listView) {
+	    if(listView == null) return;
+	    ListAdapter listAdapter = listView.getAdapter();
+	    if (listAdapter == null) {
+	        // pre-condition
+	    	Log.e(TAG, "adapter为空");
+	        return;
+	    }
+	    int totalHeight = 0;
+	    for (int i = 0; i < listAdapter.getCount(); i++) {
+	        View listItem = listAdapter.getView(i, null, listView);
+	        listItem.measure(0, 0);
+	        totalHeight += listItem.getMeasuredHeight();
+	    }
+	    ViewGroup.LayoutParams params = listView.getLayoutParams();
+	    int heightTemp = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+	    Log.e(TAG, "heightTemp设置成功："+heightTemp);
+	    params.height = heightTemp;
+	    listView.setLayoutParams(params);
+	}
+
+	/**
+	 * 功能页面增加监听程序
+	 * @return
+	 */
+	private OnItemClickListener getListenerForListView() {
+		// TODO Auto-generated method stub
+		return new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,
+					long id) {
+				// TODO Auto-generated method stub
+				if(position>0){
+					FeaturesQueryListBean bean=adapter.getItem(position);
+					if(bean.type==FeaturesQueryListBean.ITEM){
+						Toast.makeText(getActivity(), bean.text, Toast.LENGTH_SHORT).show();
+					}
+				}
+			}
+		};
+	}
+
+	
 	private class SlideAdapter extends BaseAdapter {
 
 		private LayoutInflater mInflater;
