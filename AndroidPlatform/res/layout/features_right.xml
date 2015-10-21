@@ -5,27 +5,15 @@
     android:background="@color/white"
     android:orientation="vertical" >
 
-    <com.lobinary.android.platform.ui.layout.ScrollViewLinearLayout
+    <com.lobinary.android.platform.ui.listview.PinnedSectionListView
+        android:id="@+id/pinnedSectionListView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <com.lobinary.android.platform.ui.listview.PinnedSectionListView
-                android:id="@+id/pinnedSectionListView1"
-                android:layout_width="match_parent"
-                android:layout_height="1028dp"
-                android:cacheColorHint="#00000000"
-                android:divider="@drawable/features_list_item_line"
-                android:dividerHeight="0.1dp"
-                android:fadingEdge="vertical"
-                android:listSelector="@drawable/features_list_item_selector"
-                android:scrollbars="vertical" />
-        </ScrollView>
-    </com.lobinary.android.platform.ui.layout.ScrollViewLinearLayout>
+        android:layout_height="1028dp"
+        android:cacheColorHint="#00000000"
+        android:divider="@drawable/features_list_item_line"
+        android:dividerHeight="0.1dp"
+        android:fadingEdge="vertical"
+        android:listSelector="@drawable/features_list_item_selector"
+        android:scrollbars="vertical" />
 
 </RelativeLayout>
