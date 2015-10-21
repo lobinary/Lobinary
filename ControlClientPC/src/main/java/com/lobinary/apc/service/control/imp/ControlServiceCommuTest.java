@@ -73,7 +73,6 @@ public class ControlServiceCommuTest extends Frame{
 			dis = new DataInputStream(servertome.getInputStream());
 			String str = dis.readUTF();
 			ta.setText(str);
-			
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

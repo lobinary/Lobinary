@@ -39,6 +39,9 @@ import javax.swing.JToggleButton;
 
 import com.lobinary.apc.service.control.imp.ControlServiceCommunication;
 import com.lobinary.apc.util.common.file.LogUtil;
+import javax.swing.BoxLayout;
+import javax.swing.JToolBar;
+import javax.swing.JButton;
 
 /**
  * <pre>
@@ -85,7 +88,7 @@ public class ControlClientPCWindows {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(400, 200, 800, 600);
+		frame.setBounds(400, 200, 859, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 //		javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("pic/apc-logo.png"));
@@ -135,7 +138,7 @@ public class ControlClientPCWindows {
 		
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
-		panel.setLayout(new BorderLayout(0, 0));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setToolTipText("");
@@ -193,15 +196,15 @@ public class ControlClientPCWindows {
 		statusPanel.add(panel_5);
 		panel_5.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JToggleButton tglbtnNewToggleButton_5 = new JToggleButton("New toggle button");
-		panel_5.add(tglbtnNewToggleButton_5);
+		JToggleButton btnNewButton_1 = new JToggleButton("New button");
+		panel_5.add(btnNewButton_1);
 		
 		JPanel panel_6 = new JPanel();
 		statusPanel.add(panel_6);
 		panel_6.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JToggleButton tglbtnNewToggleButton_6 = new JToggleButton("New toggle button");
-		panel_6.add(tglbtnNewToggleButton_6);
+		JToggleButton btnNewButton_2 = new JToggleButton("New button");
+		panel_6.add(btnNewButton_2);
 		
 		JPanel panel_7 = new JPanel();
 		statusPanel.add(panel_7);
@@ -214,16 +217,76 @@ public class ControlClientPCWindows {
 		statusPanel.add(panel_8);
 		panel_8.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JToggleButton tglbtnNewToggleButton_3 = new JToggleButton("New toggle button");
-		panel_8.add(tglbtnNewToggleButton_3);
+		JToggleButton btnNewButton_3 = new JToggleButton("New button");
+		panel_8.add(btnNewButton_3);
 		
 		JPanel panel_9 = new JPanel();
 		panel_9.setBackground(Color.MAGENTA);
 		statusPanel.add(panel_9);
 		panel_9.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JToggleButton tglbtnNewToggleButton_7 = new JToggleButton("New toggle button");
-		panel_9.add(tglbtnNewToggleButton_7);
+		JToggleButton btnNewButton_4 = new JToggleButton("New button");
+		panel_9.add(btnNewButton_4);
+		
+		JPanel operatePanel = new JPanel();
+		operatePanel.setBackground(Color.WHITE);
+		operatePanel.setSize(500, 500);
+		tabbedPane.addTab("操作面板", null, operatePanel, null);
+		operatePanel.setLayout(new BoxLayout(operatePanel, BoxLayout.X_AXIS));
+		
+		JPanel controlPanel = new JPanel();
+		operatePanel.add(controlPanel, BorderLayout.NORTH);
+		controlPanel.setLayout(new GridLayout(0, 3, 0, 0));
+		
+		JPanel panel_31 = new JPanel();
+		panel_31.setBackground(Color.YELLOW);
+		controlPanel.add(panel_31);
+		panel_31.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JButton sendmsgButton = new JButton("发送短信");
+		panel_31.add(sendmsgButton);
+		
+		JPanel panel_32 = new JPanel();
+		panel_32.setBackground(Color.YELLOW);
+		controlPanel.add(panel_32);
+		panel_32.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JButton playMusicButton = new JButton("播放音乐");
+		panel_32.add(playMusicButton);
+		
+		JPanel panel_33 = new JPanel();
+		panel_33.setBackground(Color.YELLOW);
+		controlPanel.add(panel_33);
+		panel_33.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JButton printScreenButton = new JButton("截取屏幕");
+		panel_33.add(printScreenButton);
+		operatePanel.add(controlPanel, BorderLayout.NORTH);
+		controlPanel.setLayout(new GridLayout(0, 3, 0, 0));
+		
+		JPanel panel_34 = new JPanel();
+		panel_34.setBackground(Color.RED);
+		controlPanel.add(panel_34);
+		panel_34.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JButton viewPhotoButton = new JButton("浏览照片");
+		panel_34.add(viewPhotoButton);
+		
+		JPanel panel_35 = new JPanel();
+		panel_35.setBackground(Color.RED);
+		controlPanel.add(panel_35);
+		panel_35.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JButton powerOffButton = new JButton("关机");
+		panel_35.add(powerOffButton);
+		
+		JPanel panel_36 = new JPanel();
+		panel_36.setBackground(Color.RED);
+		controlPanel.add(panel_36);
+		panel_36.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JButton cameraButton = new JButton("摄像头控制");
+		panel_36.add(cameraButton);
 		
 		JPanel tabLogPanel = new JPanel();
 		tabbedPane.addTab("日志面板", null, tabLogPanel, null);
@@ -232,6 +295,12 @@ public class ControlClientPCWindows {
 		logTextArea.setEditable(false);
 		logTextArea.setLineWrap(true);
 		tabLogPanel.add(logTextArea);
+		
+		
+		
+		
+		
+		JPanel controlPanel2 = new JPanel();
 		
 		
 	}
