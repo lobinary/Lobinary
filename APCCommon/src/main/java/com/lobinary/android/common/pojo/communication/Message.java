@@ -25,15 +25,24 @@ public class Message implements Serializable{
 	private MessageTitle messageTitle;
 	
 	/**
-	 * 字符串形式的消息内容
+	 * 报文类型编码 Constants.Message.MESSAGE_TYPE_*
 	 */
-	private String messageContent;
+	private String messageType;
+	
+	/**
+	 * 字符串形式消息实体
+	 */
+	private String messageString;
+	
+	/**
+	 * 对象形式消息实体
+	 */
+	private Object messageObj;
 	
 	/**
 	 * 命令对象实体
 	 */
 	private Command command;
-	
 
 	public MessageTitle getMessageTitle() {
 		return messageTitle;
@@ -43,20 +52,66 @@ public class Message implements Serializable{
 		this.messageTitle = messageTitle;
 	}
 
-	public String getMessageContent() {
-		return messageContent;
-	}
-
-	public void setMessageContent(String messageContent) {
-		this.messageContent = messageContent;
-	}
-
 	public Command getCommand() {
 		return command;
 	}
 
 	public void setCommand(Command command) {
 		this.command = command;
+	}
+
+	/**
+	 * 具体注释请点击Also see
+	 * @see com.lobinary.android.common.pojo.communication.Message#messageType
+	 * @return the messageType
+	 */
+	public String getMessageType() {
+		return messageType;
+	}
+
+	/**
+	 * 具体注释请点击Also see
+	 * @see com.lobinary.android.common.pojo.communication.Message#messageType
+	 * @param messageType the messageType to set
+	 */
+	public void setMessageType(String messageType) {
+		this.messageType = messageType;
+	}
+
+	/**
+	 * 具体注释请点击Also see
+	 * @see com.lobinary.android.common.pojo.communication.Message#messageObj
+	 * @return the messageObj
+	 */
+	public Object getMessageObj() {
+		return messageObj;
+	}
+
+	/**
+	 * 具体注释请点击Also see
+	 * @see com.lobinary.android.common.pojo.communication.Message#messageObj
+	 * @param messageObj the messageObj to set
+	 */
+	public void setMessageObj(Object messageObj) {
+		this.messageObj = messageObj;
+	}
+
+	/**
+	 * 具体注释请点击Also see
+	 * @see com.lobinary.android.common.pojo.communication.Message#messageString
+	 * @return the messageString
+	 */
+	public String getMessageString() {
+		return messageString;
+	}
+
+	/**
+	 * 具体注释请点击Also see
+	 * @see com.lobinary.android.common.pojo.communication.Message#messageString
+	 * @param messageString the messageString to set
+	 */
+	public void setMessageString(String messageString) {
+		this.messageString = messageString;
 	}
 
 }
