@@ -1,4 +1,4 @@
-package com.lobinary.android.common.service.message;
+package com.lobinary.android.common.service.control;
 
 /**
  * <pre>
@@ -22,5 +22,28 @@ public interface BaseServiceInterface {
 	 * @return
 	 */
 	public long getCurrentTime();
+	
+	/**
+	 * 
+	 * <pre>
+	 * 关机
+	 * </pre>
+	 *
+	 * @param delayTime
+	 * @return
+	 */
+	public boolean shutDown(long delayTime);
+	
+	/**
+	 * 
+	 * <pre>
+	 * 播放歌曲
+	 * </pre>
+	 *
+	 * @param player
+	 * @param musicName
+	 * @return
+	 */
+	public boolean playMusic(String player,String musicName);
 
 }

@@ -1,6 +1,7 @@
 package com.lobinary.android.common.pojo.communication;
 
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * 
@@ -28,6 +29,11 @@ public class Command implements Serializable{
 	 * 指令描述
 	 */
 	private String commandDesc;
+	
+	/**
+	 * 命令内容Map
+	 */
+	private Map<String,String> commandContentMap;
 	
 	/**
 	 * 延迟执行时间 单位 ： 毫秒
@@ -69,6 +75,14 @@ public class Command implements Serializable{
 
 	public void setGrantCode(String grantCode) {
 		this.grantCode = grantCode;
+	}
+
+	public Map<String, String> getCommandContentMap() {
+		return commandContentMap;
+	}
+
+	public void setCommandContentMap(Map<String, String> commandContentMap) {
+		this.commandContentMap = commandContentMap;
 	}
 
 }

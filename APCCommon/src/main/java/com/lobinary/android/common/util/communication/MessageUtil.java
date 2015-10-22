@@ -5,9 +5,10 @@ import java.util.Date;
 import com.lobinary.android.common.constants.CodeDescConstants;
 import com.lobinary.android.common.constants.Constants;
 import com.lobinary.android.common.exception.APCSysException;
+import com.lobinary.android.common.pojo.communication.Command;
 import com.lobinary.android.common.pojo.communication.Message;
 import com.lobinary.android.common.pojo.communication.MessageTitle;
-import com.lobinary.android.common.service.message.BaseServiceInterface;
+import com.lobinary.android.common.service.control.BaseServiceInterface;
 import com.lobinary.android.common.util.factory.CommonFactory;
 
 /**
@@ -61,7 +62,7 @@ public class MessageUtil {
 		message.setMessageType(messageType);
 		
 		if(Constants.MESSAGE.TYPE.REQ_TIME.equals(messageType)){
-
+			
 		}else if(Constants.MESSAGE.TYPE.COMMAND.equals(messageType)){
 			
 		}
@@ -175,8 +176,14 @@ public class MessageUtil {
 		if(Constants.MESSAGE.TYPE.REQ_TIME.equals(messageType)){
 			long currentTime = baseService.getCurrentTime();
 			message.setMessageObj(currentTime);
-		}else if(Constants.MESSAGE.TYPE.REJECT_CONNECT.equals(messageType)){
-
+		}else if(Constants.MESSAGE.TYPE.COMMAND.equals(messageType)){
+			Command command = message.getCommand();
+			String commandCode = command.getCommandCode();
+			if(commandCode.equals("1000")){
+				String player = command.getCommandContentMap().get("player");
+				String musicName = command.getCommandContentMap().get("musicName");
+				baseService.playMusic(player, musicName);
+			}
 		}else{
 			throw new APCSysException(CodeDescConstants.SERVICE_MESSAGE_ERROR_MESSAGE_TYPE, "报文类型("+messageType+")错误");
 		}

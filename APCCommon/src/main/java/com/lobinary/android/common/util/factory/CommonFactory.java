@@ -1,7 +1,7 @@
 package com.lobinary.android.common.util.factory;
 
 import com.lobinary.android.common.service.communication.CommunicationServiceInterface;
-import com.lobinary.android.common.service.message.BaseServiceInterface;
+import com.lobinary.android.common.service.control.BaseServiceInterface;
 import com.lobinary.android.common.util.communication.MessageTranslatorInterface;
 import com.lobinary.android.common.util.log.LogUtilInterface;
 
