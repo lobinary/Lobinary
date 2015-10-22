@@ -43,6 +43,11 @@ public class Message implements Serializable{
 	 * 命令对象实体
 	 */
 	private Command command;
+	
+	/**
+	 * 远程方法
+	 */
+	private CommandParam remoteMethod;
 
 	public MessageTitle getMessageTitle() {
 		return messageTitle;
@@ -112,6 +117,14 @@ public class Message implements Serializable{
 	 */
 	public void setMessageString(String messageString) {
 		this.messageString = messageString;
+	}
+
+	public CommandParam getRemoteMethod() {
+		return remoteMethod;
+	}
+
+	public void setRemoteMethod(CommandParam remoteMethod) {
+		this.remoteMethod = remoteMethod;
 	}
 
 }

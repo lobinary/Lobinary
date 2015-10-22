@@ -1,5 +1,7 @@
 package com.lobinary.android.common.util.communication;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Date;
 
 import com.lobinary.android.common.constants.CodeDescConstants;
@@ -170,25 +172,43 @@ public class MessageUtil {
 	 * @return respon报文
 	 */
 	public static Message parseRequestMessage(Message message){
-		
-		String messageType = message.getMessageType();
-		
-		if(Constants.MESSAGE.TYPE.REQ_TIME.equals(messageType)){
-			long currentTime = baseService.getCurrentTime();
-			message.setMessageObj(currentTime);
-		}else if(Constants.MESSAGE.TYPE.COMMAND.equals(messageType)){
-			Command command = message.getCommand();
-			String commandCode = command.getCommandCode();
-			if(commandCode.equals("1000")){
-				String player = command.getCommandContentMap().get("player");
-				String musicName = command.getCommandContentMap().get("musicName");
-				baseService.playMusic(player, musicName);
+		Message respMessage = null;
+		try {
+			String messageType = message.getMessageType();
+
+			if(Constants.MESSAGE.TYPE.REQ_TIME.equals(messageType)){
+				long currentTime = baseService.getCurrentTime();
+				message.setMessageObj(currentTime);
+			}else if(Constants.MESSAGE.TYPE.COMMAND.equals(messageType)){
+				Command command = message.getCommand();
+				String commandCode = command.getCommandCode();
+				if(commandCode.equals("远程方法")){
+					String methodName = command.getRemoteMethodName();
+					Class<?> clazz = baseService.getClass(); 
+					Method m1 = clazz.getDeclaredMethod(methodName,Command.class); 
+					respMessage = (Message) m1.invoke(baseService,command); 
+				}
+			}else{
+				throw new APCSysException(CodeDescConstants.SERVICE_MESSAGE_ERROR_MESSAGE_TYPE, "报文类型("+messageType+")错误");
 			}
-		}else{
-			throw new APCSysException(CodeDescConstants.SERVICE_MESSAGE_ERROR_MESSAGE_TYPE, "报文类型("+messageType+")错误");
+			
+			respMessage.setMessageTitle(MessageUtil.getMessageTitle());//如果执行成功,将准备装载返回报文头
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
-		message.setMessageTitle(MessageUtil.getMessageTitle());//如果执行成功,将准备装载返回报文头
 		return message;
 	}
 	

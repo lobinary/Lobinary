@@ -31,9 +31,19 @@ public class Command implements Serializable{
 	private String commandDesc;
 	
 	/**
+	 * 远程方法名称
+	 */
+	private String remoteMethodName;
+	
+	/**
 	 * 命令内容Map
 	 */
 	private Map<String,String> commandContentMap;
+	
+	/**
+	 * 参数对象
+	 */
+	private CommandParam commandParam;
 	
 	/**
 	 * 延迟执行时间 单位 ： 毫秒
@@ -83,6 +93,22 @@ public class Command implements Serializable{
 
 	public void setCommandContentMap(Map<String, String> commandContentMap) {
 		this.commandContentMap = commandContentMap;
+	}
+
+	public String getRemoteMethodName() {
+		return remoteMethodName;
+	}
+
+	public void setRemoteMethodName(String remoteMethodName) {
+		this.remoteMethodName = remoteMethodName;
+	}
+
+	public CommandParam getCommandParam() {
+		return commandParam;
+	}
+
+	public void setCommandParam(CommandParam commandParam) {
+		this.commandParam = commandParam;
 	}
 
 }

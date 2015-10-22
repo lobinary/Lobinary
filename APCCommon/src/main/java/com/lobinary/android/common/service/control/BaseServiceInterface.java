@@ -1,5 +1,7 @@
 package com.lobinary.android.common.service.control;
 
+import com.lobinary.android.common.pojo.communication.Command;
+
 /**
  * <pre>
  * 基本业务执行接口
@@ -44,6 +46,6 @@ public interface BaseServiceInterface {
 	 * @param musicName
 	 * @return
 	 */
-	public boolean playMusic(String player,String musicName);
+	public boolean playMusic(Command command);
 
 }
