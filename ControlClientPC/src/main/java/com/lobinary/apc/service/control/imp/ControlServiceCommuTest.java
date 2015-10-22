@@ -18,11 +18,15 @@ import java.awt.event.WindowEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
 import javax.swing.JTextArea;
+
+import com.lobinary.android.common.constants.Constants;
+import com.lobinary.android.common.pojo.communication.Message;
+import com.lobinary.android.common.util.communication.MessageUtil;
+import com.lobinary.apc.util.initial.InitialUtil;
 
 /**
  * <pre>
@@ -71,7 +75,9 @@ public class ControlServiceCommuTest extends Frame{
 			servertome = new Socket("127.0.0.1",6666);
 			dos = new DataOutputStream(servertome.getOutputStream());
 			dis = new DataInputStream(servertome.getInputStream());
-			dos.writeUTF("hello");
+			InitialUtil.initial();
+			Message message = MessageUtil.getNewRequestMessage(Constants.MESSAGE.TYPE.REQUEST_CONNECT);
+			dos.writeUTF(MessageUtil.message2String(message));
 			String str = dis.readUTF();
 			ta.setText(str);
 		} catch (UnknownHostException e) {

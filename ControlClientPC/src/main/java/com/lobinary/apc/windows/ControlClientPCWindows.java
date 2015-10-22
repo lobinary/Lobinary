@@ -64,7 +64,7 @@ public class ControlClientPCWindows {
 
 	private JFrame frame;
 	private Image logo;
-	public static JTextArea logTextArea = new JTextArea();
+	public static JTextArea logTextArea = new JTextArea("===========================================欢迎使用APC安卓PC互控Windows客户端===========================================");
 
 	/**
 	 * Launch the application.
@@ -301,6 +301,7 @@ public class ControlClientPCWindows {
 		JPanel tabLogPanel = new JPanel();
 		tabbedPane.addTab("日志面板", null, tabLogPanel, null);
 		tabLogPanel.setLayout(new BorderLayout(0, 0));
+		logTextArea.setBackground(new Color(230, 230, 230));
 		
 		logTextArea.setEditable(false);
 		logTextArea.setLineWrap(true);

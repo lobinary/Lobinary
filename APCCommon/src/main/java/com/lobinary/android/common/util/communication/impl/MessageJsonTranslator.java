@@ -1,5 +1,6 @@
 package com.lobinary.android.common.util.communication.impl;
 
+import com.google.gson.Gson;
 import com.lobinary.android.common.pojo.communication.Message;
 import com.lobinary.android.common.util.communication.MessageTranslatorInterface;
 
@@ -15,15 +16,16 @@ import com.lobinary.android.common.util.communication.MessageTranslatorInterface
  */
 public class MessageJsonTranslator implements MessageTranslatorInterface {
 
+	Gson gson = new Gson();
+
 	@Override
 	public String translate2String(Message message) {
-		return "hello";
+		return gson.toJson(message);
 	}
 
 	@Override
 	public Message translate2Message(String messageStr) {
-		// TODO Auto-generated method stub
-		return null;
+		return gson.fromJson(messageStr, Message.class);
 	}
 
 }

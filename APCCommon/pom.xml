@@ -1,13 +1,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.lobinary.android</groupId>
-  <artifactId>apc-common</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>APCCommon</name>
-  <description>通用包</description>
-  
-  
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.lobinary.android</groupId>
+	<artifactId>apc-common</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>APCCommon</name>
+	<description>通用包</description>
+
+
 	<dependencies>
+
+		<!-- Json工具包 -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<!-- Json工具包 -->
+
 
 		<!-- 日志相关包 -->
 		<dependency>
@@ -15,7 +24,7 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
@@ -57,16 +66,16 @@
 		<!-- xml工具包 -->
 
 	</dependencies>
-  
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

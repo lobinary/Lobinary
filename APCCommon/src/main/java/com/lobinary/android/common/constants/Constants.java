@@ -40,6 +40,12 @@ public class Constants {
 		 *
 		 */
 		public class TYPE{
+			
+
+			/**
+			 * 请求连接
+			 */
+			public final static String REQUEST_CONNECT = "REQUEST_CONNECT";
 
 			/**
 			 * 同意连接

@@ -33,7 +33,7 @@ public class WindowsLogUtil implements LogUtilInterface{
 	@Override
 	public boolean out(String log) {
 		String oldText = ControlClientPCWindows.logTextArea.getText();
-		ControlClientPCWindows.logTextArea.setText(oldText+"\n"+log);
+		ControlClientPCWindows.logTextArea.append("\n"+log);
 		return true;
 	}
 

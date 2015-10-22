@@ -61,11 +61,11 @@ public class MessageUtil {
 		message.setMessageType(messageType);
 		
 		if(Constants.MESSAGE.TYPE.REQ_TIME.equals(messageType)){
-			return message;
+
 		}else if(Constants.MESSAGE.TYPE.COMMAND.equals(messageType)){
 			
 		}
-		return null;
+		return message;
 	}
 	
 	/**

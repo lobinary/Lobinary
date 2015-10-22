@@ -98,14 +98,11 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 								DataInputStream dis = new DataInputStream(s.getInputStream());
 								String messageStr = dis.readUTF();
 								Message message = MessageUtil.string2Messag(messageStr);
-								logger.debug("Socket业务交互类:已经将请求转换为Message对象："+message);
 								DataOutputStream dos = new DataOutputStream(s.getOutputStream());
 								Message respMessage = MessageUtil.getNewResponseMessage(Constants.MESSAGE.TYPE.ACCEPT_CONNECT);
 								String respMsg = MessageUtil.message2String(respMessage);
-								logger.debug("Socket业务交互类:准备返回同意连接信息:"+respMsg);
 								dos.writeUTF(respMsg);
 								dos.flush();
-								logger.debug("Socket业务交互类:发送信息成功");
 								ConnectionBean connectionBean = new ConnectionBean();
 								CommunicationSocketThread socketThread = new CommunicationSocketThread(s, message.getMessageTitle());
 								socketThread.start();
