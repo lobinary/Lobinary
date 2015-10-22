@@ -41,7 +41,9 @@ import javax.swing.JToggleButton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lobinary.android.common.service.communication.CommunicationServiceInterface;
 import com.lobinary.android.common.service.communication.socket.CommunicationSocketThread;
+import com.lobinary.android.common.util.factory.CommonFactory;
 import com.lobinary.android.common.util.log.LogUtil;
 import com.lobinary.apc.util.initial.InitialUtil;
 
@@ -73,7 +75,10 @@ public class ControlClientPCWindows {
 				try {
 					InitialUtil.initial();
 					ControlClientPCWindows window = new ControlClientPCWindows();
+					CommunicationServiceInterface communicationService = CommonFactory.getCommunicationService();
+					communicationService.startServer();
 					window.frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

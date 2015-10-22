@@ -11,6 +11,8 @@
  */
 package com.lobinary.apc.util.initial;
 
+import com.lobinary.android.common.service.communication.socket.CommunicationSocketService;
+import com.lobinary.android.common.util.communication.impl.MessageJsonTranslator;
 import com.lobinary.android.common.util.factory.CommonFactory;
 import com.lobinary.android.common.util.log.LogUtil;
 import com.lobinary.apc.util.log.WindowsLogUtil;
@@ -31,7 +33,10 @@ public class InitialUtil {
 	static{
 		System.out.println("初始化工具类准备初始化相关配置");
 		CommonFactory.setLogUtil(new WindowsLogUtil());
+		CommonFactory.setCommunicationService(new CommunicationSocketService());
+		CommonFactory.setMessageTranslator(new MessageJsonTranslator());
 		LogUtil.out("初始化工具类:相关配置信息初始化完成！");
+		
 	}
 	
 	public static boolean initial(){

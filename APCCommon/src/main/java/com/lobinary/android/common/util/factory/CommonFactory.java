@@ -1,5 +1,6 @@
 package com.lobinary.android.common.util.factory;
 
+import com.lobinary.android.common.service.communication.CommunicationServiceInterface;
 import com.lobinary.android.common.service.message.BaseServiceInterface;
 import com.lobinary.android.common.util.communication.MessageTranslatorInterface;
 import com.lobinary.android.common.util.log.LogUtilInterface;
@@ -30,6 +31,11 @@ public class CommonFactory {
 	 * 基本控制业务实现类
 	 */
 	private static BaseServiceInterface baseService;
+	
+	/**
+	 * 交互业务类
+	 */
+	private static CommunicationServiceInterface communicationService;
 
 	/**
 	 * 具体注释请点击Also see
@@ -83,6 +89,24 @@ public class CommonFactory {
 	 */
 	public static void setBaseService(BaseServiceInterface baseService) {
 		CommonFactory.baseService = baseService;
+	}
+
+	/**
+	 * 具体注释请点击Also see
+	 * @see com.lobinary.android.common.util.factory.CommonFactory#communicationService
+	 * @return the communicationService
+	 */
+	public static CommunicationServiceInterface getCommunicationService() {
+		return communicationService;
+	}
+
+	/**
+	 * 具体注释请点击Also see
+	 * @see com.lobinary.android.common.util.factory.CommonFactory#communicationService
+	 * @param communicationService the communicationService to set
+	 */
+	public static void setCommunicationService(CommunicationServiceInterface communicationService) {
+		CommonFactory.communicationService = communicationService;
 	}
 
 	

@@ -71,6 +71,7 @@ public class ControlServiceCommuTest extends Frame{
 			servertome = new Socket("127.0.0.1",6666);
 			dos = new DataOutputStream(servertome.getOutputStream());
 			dis = new DataInputStream(servertome.getInputStream());
+			dos.writeUTF("hello");
 			String str = dis.readUTF();
 			ta.setText(str);
 		} catch (UnknownHostException e) {

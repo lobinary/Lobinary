@@ -56,7 +56,7 @@ public class LogAppender extends AppenderSkeleton {
 				int len = s.length;
 				for (int i = 0; i < len; i++) {
 					LogUtil.out(s[i]);
-					LogUtil.out(Layout.LINE_SEP);
+//					LogUtil.out(Layout.LINE_SEP);
 				}
 			}
 		}

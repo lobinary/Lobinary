@@ -17,8 +17,7 @@ public class MessageJsonTranslator implements MessageTranslatorInterface {
 
 	@Override
 	public String translate2String(Message message) {
-		// TODO Auto-generated method stub
-		return null;
+		return "hello";
 	}
 
 	@Override

@@ -51,6 +51,16 @@ public interface CommunicationServiceInterface {
 	/**
 	 * 
 	 * <pre>
+	 * 恢复暂停中的服务器
+	 * </pre>
+	 *
+	 * @return
+	 */
+	public boolean resumePausingServer();
+	
+	/**
+	 * 
+	 * <pre>
 	 * 移除所有已连接通信
 	 * </pre>
 	 *
@@ -72,13 +82,24 @@ public interface CommunicationServiceInterface {
 	/**
 	 * 
 	 * <pre>
+	 * 连接指定服务器
+	 * </pre>
+	 *
+	 * @param connectionBean
+	 * @return
+	 */
+	public ConnectionBean connect(ConnectionBean connectionBean);
+	
+	/**
+	 * 
+	 * <pre>
 	 * 发送报文信息
 	 * </pre>
 	 *
 	 * @param message
 	 * @return
 	 */
-	public Message sendMessage(Message message);
+	public Message sendMessage(ConnectionBean connectionBean,Message message);
 	
 	/**
 	 * 
