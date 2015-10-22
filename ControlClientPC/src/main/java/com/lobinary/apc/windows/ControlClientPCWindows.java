@@ -24,8 +24,9 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -37,11 +38,12 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
 
-import com.lobinary.apc.service.control.imp.ControlServiceCommunication;
-import com.lobinary.apc.util.common.file.LogUtil;
-import javax.swing.BoxLayout;
-import javax.swing.JToolBar;
-import javax.swing.JButton;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.lobinary.android.common.service.communication.socket.CommunicationSocketThread;
+import com.lobinary.android.common.util.log.LogUtil;
+import com.lobinary.apc.util.initial.InitialUtil;
 
 /**
  * <pre>
@@ -55,6 +57,8 @@ import javax.swing.JButton;
  * 
  */
 public class ControlClientPCWindows {
+	
+	private static Logger logger = LoggerFactory.getLogger(ControlClientPCWindows.class);
 
 	private JFrame frame;
 	private Image logo;
@@ -67,6 +71,7 @@ public class ControlClientPCWindows {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					InitialUtil.initial();
 					ControlClientPCWindows window = new ControlClientPCWindows();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -178,7 +183,7 @@ public class ControlClientPCWindows {
 		JToggleButton commutest = new JToggleButton("输出日志测试按钮");
 		commutest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LogUtil.out2Window("香一个！");
+				logger.info("香一个！");
 				//ControlServiceCommunication sendmsg = new ControlServiceCommunication();
 			}
 		});

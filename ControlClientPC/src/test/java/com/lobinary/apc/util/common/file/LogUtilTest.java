@@ -29,7 +29,7 @@ import org.junit.Test;
 public class LogUtilTest {
 
 	/**
-	 * Test method for {@link com.lobinary.apc.util.common.file.LogUtil#getLogger(java.lang.Class)}.
+	 * Test method for {@link com.lobinary.apc.util.log.WindowsLogUtil#getLogger(java.lang.Class)}.
 	 */
 	@Test
 	public void testGetLogger() {

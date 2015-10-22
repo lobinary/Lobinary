@@ -9,10 +9,9 @@
  *    lobinary       	  2015年10月12日    	创建文件
  *
  */
-package com.lobinary.apc.util.common.file;
+package com.lobinary.apc.util.log;
 
-import org.apache.log4j.Logger;
-
+import com.lobinary.android.common.util.log.LogUtilInterface;
 import com.lobinary.apc.windows.ControlClientPCWindows;
 
 /**
@@ -26,33 +25,16 @@ import com.lobinary.apc.windows.ControlClientPCWindows;
  *         
  * 
  */
-public class LogUtil {
+public class WindowsLogUtil implements LogUtilInterface{
 	
-	
-	/**
-	 * 
-	 * <pre>
-	 * 输出日志到日志面板
-	 * </pre>
-	 *
-	 * @param logContent
+	/* (non-Javadoc)
+	 * @see com.lobinary.android.common.util.log.LogUtil#out(java.lang.String)
 	 */
-	public static void out2Window(String logContent){
+	@Override
+	public boolean out(String log) {
 		String oldText = ControlClientPCWindows.logTextArea.getText();
-		ControlClientPCWindows.logTextArea.setText(oldText+"\n"+logContent);
-	}
-
-	/**
-	 * <pre>
-	 * 
-	 * </pre>
-	 *
-	 * @param class1
-	 * @return
-	 */
-	public static Logger getLogger(Class<FileUtil> class1) {
-		
-		return Logger.getLogger(FileUtil.class);
+		ControlClientPCWindows.logTextArea.setText(oldText+"\n"+log);
+		return true;
 	}
 
 }

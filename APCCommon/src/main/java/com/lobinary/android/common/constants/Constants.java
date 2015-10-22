@@ -42,6 +42,19 @@ public class Constants {
 		public class TYPE{
 
 			/**
+			 * 同意连接
+			 */
+			public final static String ACCEPT_CONNECT = "ACCEPT_CONNECT";
+			/**
+			 * 断开连接
+			 */
+			public final static String DISCONNECT = "DISCONNECT";
+			/**
+			 * 拒绝连接
+			 */
+			public final static String REJECT_CONNECT = "REJECT_CONNECT";
+
+			/**
 			 * 请求时间报文
 			 */
 			public final static String REQ_TIME = "REQ_TIME";
