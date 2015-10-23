@@ -1,7 +1,8 @@
 package com.lobinary.android.common.pojo.communication;
 
 import java.io.Serializable;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 
@@ -35,15 +36,16 @@ public class Command implements Serializable{
 	 */
 	private String remoteMethodName;
 	
-	/**
-	 * 命令内容Map
-	 */
-	private Map<String,String> commandContentMap;
 	
 	/**
 	 * 参数对象
 	 */
 	private CommandParam commandParam;
+	
+	/**
+	 * 远程方法参数
+	 */
+	private List<Object> remoteMethodParam;
 	
 	/**
 	 * 延迟执行时间 单位 ： 毫秒
@@ -87,18 +89,6 @@ public class Command implements Serializable{
 		this.grantCode = grantCode;
 	}
 
-	public Map<String, String> getCommandContentMap() {
-		return commandContentMap;
-	}
-
-	public void setCommandContentMap(Map<String, String> commandContentMap) {
-		this.commandContentMap = commandContentMap;
-	}
-
-	public String getRemoteMethodName() {
-		return remoteMethodName;
-	}
-
 	public void setRemoteMethodName(String remoteMethodName) {
 		this.remoteMethodName = remoteMethodName;
 	}
@@ -109,6 +99,48 @@ public class Command implements Serializable{
 
 	public void setCommandParam(CommandParam commandParam) {
 		this.commandParam = commandParam;
+	}
+
+	/**
+	 * 具体注释请点击Also see
+	 * @see com.lobinary.android.common.pojo.communication.Command#remoteMethodName
+	 * @return the remoteMethodName
+	 */
+	public String getRemoteMethodName() {
+		return remoteMethodName;
+	}
+
+	/**
+	 * <pre>
+	 * 向远程方法加入参数列表加入参数中
+	 * </pre>
+	 *
+	 * @param player
+	 */
+	public Command add(String param) {
+		if(remoteMethodParam==null){
+			remoteMethodParam = new ArrayList<Object>();
+		}
+		remoteMethodParam.add(param);
+		return this;
+	}
+
+	/**
+	 * 具体注释请点击Also see
+	 * @see com.lobinary.android.common.pojo.communication.Command#remoteMethodParam
+	 * @return the remoteMethodParam
+	 */
+	public List<Object> getRemoteMethodParam() {
+		return remoteMethodParam;
+	}
+
+	/**
+	 * 具体注释请点击Also see
+	 * @see com.lobinary.android.common.pojo.communication.Command#remoteMethodParam
+	 * @param remoteMethodParam the remoteMethodParam to set
+	 */
+	public void setRemoteMethodParam(List<Object> remoteMethodParam) {
+		this.remoteMethodParam = remoteMethodParam;
 	}
 
 }

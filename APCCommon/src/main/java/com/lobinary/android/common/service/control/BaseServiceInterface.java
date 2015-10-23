@@ -1,6 +1,9 @@
 package com.lobinary.android.common.service.control;
 
-import com.lobinary.android.common.pojo.communication.Command;
+import java.util.List;
+
+import com.lobinary.android.common.pojo.communication.Message;
+import com.lobinary.android.common.pojo.model.Music;
 
 /**
  * <pre>
@@ -39,6 +42,16 @@ public interface BaseServiceInterface {
 	/**
 	 * 
 	 * <pre>
+	 * 获取音乐列表
+	 * </pre>
+	 *
+	 * @return
+	 */
+	public List<Music> getMusicList(Message message);
+	
+	/**
+	 * 
+	 * <pre>
 	 * 播放歌曲
 	 * </pre>
 	 *
@@ -46,6 +59,6 @@ public interface BaseServiceInterface {
 	 * @param musicName
 	 * @return
 	 */
-	public boolean playMusic(Command command);
+	public boolean playMusic(String player,String musicId);
 
 }

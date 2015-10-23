@@ -15,6 +15,7 @@ import com.lobinary.android.common.service.communication.socket.CommunicationSoc
 import com.lobinary.android.common.util.communication.impl.MessageJsonTranslator;
 import com.lobinary.android.common.util.factory.CommonFactory;
 import com.lobinary.android.common.util.log.LogUtil;
+import com.lobinary.apc.service.control.imp.WindowsService;
 import com.lobinary.apc.util.log.WindowsLogUtil;
 
 /**
@@ -35,6 +36,7 @@ public class InitialUtil {
 		CommonFactory.setLogUtil(new WindowsLogUtil());
 		CommonFactory.setCommunicationService(new CommunicationSocketService());
 		CommonFactory.setMessageTranslator(new MessageJsonTranslator());
+		CommonFactory.setBaseService(new WindowsService());
 		LogUtil.out("初始化工具类:相关配置信息初始化完成！");
 		
 	}

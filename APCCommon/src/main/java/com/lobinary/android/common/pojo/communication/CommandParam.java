@@ -1,7 +1,7 @@
 package com.lobinary.android.common.pojo.communication;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <pre>
@@ -15,6 +15,12 @@ import java.util.List;
  * 
  */
 public class CommandParam {
+	
+
+	/**
+	 * 命令内容Map
+	 */
+	private Map<String,Object> commandContentMap = new HashMap<String,Object>();
 
 	/**
 	 * 播放器
@@ -25,5 +31,31 @@ public class CommandParam {
 	 * 音乐名称
 	 */
 	public String musicName;
+	
+	/**
+	 * 
+	 * <pre>
+	 * 添加参数
+	 * </pre>
+	 *
+	 * @param paramName
+	 * @param paramValue
+	 */
+	public void addParam(String paramName,Object paramValue){
+		commandContentMap.put(paramName, paramValue);
+	}
+	
+	/**
+	 * 
+	 * <pre>
+	 * 获取参数
+	 * </pre>
+	 *
+	 * @param paramName
+	 * @return
+	 */
+	public Object getParam(String paramName){
+		return commandContentMap.get(paramName);
+	}
 	
 }

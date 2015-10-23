@@ -27,7 +27,9 @@ import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -36,16 +38,20 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.filechooser.FileSystemView;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lobinary.android.common.service.communication.CommunicationServiceInterface;
-import com.lobinary.android.common.service.communication.socket.CommunicationSocketThread;
 import com.lobinary.android.common.util.factory.CommonFactory;
-import com.lobinary.android.common.util.log.LogUtil;
 import com.lobinary.apc.util.initial.InitialUtil;
+
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
+import javax.swing.JScrollPane;
 
 /**
  * <pre>
@@ -65,6 +71,7 @@ public class ControlClientPCWindows {
 	private JFrame frame;
 	private Image logo;
 	public static JTextArea logTextArea = new JTextArea("===========================================欢迎使用APC安卓PC互控Windows客户端===========================================");
+	public static JTextField musicFolderText;
 
 	/**
 	 * Launch the application.
@@ -206,7 +213,13 @@ public class ControlClientPCWindows {
 		statusPanel.add(panel_5);
 		panel_5.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JToggleButton btnNewButton_1 = new JToggleButton("New button");
+		JButton btnNewButton_1 = new JButton("测试(输出文件夹内歌曲列表)");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String musicFolder = musicFolderText.getText();
+//				CommonFactory.getBaseService().getMusicList(null);
+			}
+		});
 		panel_5.add(btnNewButton_1);
 		
 		JPanel panel_6 = new JPanel();
@@ -300,19 +313,68 @@ public class ControlClientPCWindows {
 		
 		JPanel tabLogPanel = new JPanel();
 		tabbedPane.addTab("日志面板", null, tabLogPanel, null);
-		tabLogPanel.setLayout(new BorderLayout(0, 0));
+		tabLogPanel.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JScrollPane scrollPane = new JScrollPane();
+		tabLogPanel.add(scrollPane);
+		
+		
+		JPanel panel_10 = new JPanel();
+		tabbedPane.addTab("设置", null, panel_10, null);
+		panel_10.setLayout(null);
+		
+		JLabel label = new JLabel("音乐文件夹");
+		label.setBounds(0, 0, 75, 15);
+		panel_10.add(label);
+		
+		musicFolderText = new JTextField();
+		musicFolderText.setBounds(76, -3, 527, 21);
+		panel_10.add(musicFolderText);
+		FileSystemView fsv = FileSystemView.getFileSystemView(); 
+		musicFolderText.setText(fsv.getHomeDirectory().toString());
+		musicFolderText.setColumns(10);
+		
+		JButton button = new JButton("打开文件夹");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String folder = musicFolderText.getText();
+//					String folder = fileDir.substring(0, fileDir.lastIndexOf('\\'));
+					java.awt.Desktop.getDesktop().open(new java.io.File(folder));
+				} catch (Exception e1) {
+					logger.error("窗口：打开文件夹发生异常",e);
+				}
+			
+			}
+		});
+		button.setBounds(729, -4, 109, 23);
+		panel_10.add(button);
+		
+		JButton btnNewButton = new JButton("选取文件夹");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser outFileFolderChooser = new JFileChooser(musicFolderText.getText());
+				outFileFolderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				int intRetVal = outFileFolderChooser.showDialog(frame, "选择");
+				if (intRetVal == JFileChooser.APPROVE_OPTION) {
+					String dirStr = outFileFolderChooser.getSelectedFile().getPath();
+					musicFolderText.setText(dirStr);
+				}
+				outFileFolderChooser.setVisible(true);
+			}
+		});
+		btnNewButton.setBounds(602, -4, 117, 23);
+		panel_10.add(btnNewButton);
+		logTextArea.setBounds(0, 0, 0, 0);
 		logTextArea.setBackground(new Color(230, 230, 230));
 		
 		logTextArea.setEditable(false);
 		logTextArea.setLineWrap(true);
-		tabLogPanel.add(logTextArea);
-		
-		
-		
-		
-		
-		JPanel controlPanel2 = new JPanel();
-		
+
+//		panel_10.add(logTextArea);
+
+		JTextArea textArea = new JTextArea();
+		scrollPane.setViewportView(logTextArea);
 		
 	}
 
@@ -333,4 +395,5 @@ public class ControlClientPCWindows {
 			}
 		});
 	}
+
 }

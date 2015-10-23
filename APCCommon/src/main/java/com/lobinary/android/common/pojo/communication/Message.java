@@ -126,5 +126,9 @@ public class Message implements Serializable{
 	public void setRemoteMethod(CommandParam remoteMethod) {
 		this.remoteMethod = remoteMethod;
 	}
+	
+	public void addParam(String paramName,Object param){
+		getCommand().getCommandParam().addParam("", "");
+	}
 
 }

@@ -33,7 +33,7 @@ import com.lobinary.android.common.util.communication.MessageUtil;
 public class CommunicationSocketService implements CommunicationServiceInterface {
 
 	private static Logger logger = LoggerFactory.getLogger(CommunicationSocketService.class);
-	private Map<String, ConnectionBean> connectionMap = new HashMap<String, ConnectionBean>();
+	private static Map<String, ConnectionBean> connectionMap = new HashMap<String, ConnectionBean>();
 
 	/**
 	 * socket端口号
@@ -95,20 +95,8 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 						} else {
 
 							try {
-								DataInputStream dis = new DataInputStream(s.getInputStream());
-								String messageStr = dis.readUTF();
-								Message message = MessageUtil.string2Messag(messageStr);
-								DataOutputStream dos = new DataOutputStream(s.getOutputStream());
-								Message respMessage = MessageUtil.getNewResponseMessage(Constants.MESSAGE.TYPE.ACCEPT_CONNECT);
-								String respMsg = MessageUtil.message2String(respMessage);
-								dos.writeUTF(respMsg);
-								dos.flush();
-								ConnectionBean connectionBean = new ConnectionBean();
-								CommunicationSocketThread socketThread = new CommunicationSocketThread(s, message.getMessageTitle());
+								CommunicationSocketThread socketThread = new CommunicationSocketThread(s);
 								socketThread.start();
-								connectionBean.setSocketThread(socketThread);
-								connectionMap.put(message.getMessageTitle().getSendClientName(), connectionBean);
-								logger.info("Socket业务交互类:与客户端(" + message.getMessageTitle().getSendClientName() + ")连接建立成功！");
 							} catch (Exception e) {
 								logger.error("Socket业务交互类:在创建与新客户端连接的过程中发生异常,异常原因如下:", e);
 							}
@@ -238,6 +226,29 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 	public List<Message> sendMessageToAll(Message message) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	/**
+	 * 具体注释请点击Also see
+	 * @see com.lobinary.android.common.service.communication.socket.CommunicationSocketService#connectionMap
+	 * @return the connectionMap
+	 */
+	public static Map<String, ConnectionBean> getConnectionMap() {
+		return connectionMap;
+	}
+	
+	public static void addConnection(String clientId,ConnectionBean connectionBean ){
+		connectionMap.put(clientId, connectionBean);
+		logger.info("Socket业务交互类:新连接(clientId:"+clientId+")被添加,当前连接总数为:"+connectionMap.size()+"个");
+	}
+
+	/**
+	 * 具体注释请点击Also see
+	 * @see com.lobinary.android.common.service.communication.socket.CommunicationSocketService#connectionMap
+	 * @param connectionMap the connectionMap to set
+	 */
+	public static void setConnectionMap(Map<String, ConnectionBean> connectionMap) {
+		CommunicationSocketService.connectionMap = connectionMap;
 	}
 
 }

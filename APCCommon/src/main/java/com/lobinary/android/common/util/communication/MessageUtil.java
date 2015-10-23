@@ -55,12 +55,15 @@ public class MessageUtil {
 	 * @return
 	 */
 	public static Message getNewRequestMessage(String messageType){
+		if(messageType==null){
+			messageType = Constants.MESSAGE.TYPE.COMMAND;
+		}
 		Message message = new Message();
 		
 		MessageTitle messageTitle = getMessageTitle();
 		
 		message.setMessageTitle(messageTitle);
-		
+			
 		message.setMessageType(messageType);
 		
 		if(Constants.MESSAGE.TYPE.REQ_TIME.equals(messageType)){
@@ -105,9 +108,9 @@ public class MessageUtil {
 	 */
 	public static MessageTitle getMessageTitle() {
 		MessageTitle messageTitle = new MessageTitle();
-		messageTitle.setSendClientId("");
-		messageTitle.setSendClientIp("");
-		messageTitle.setSendClientName("");
+		messageTitle.setSendClientId(clientId);
+		messageTitle.setSendClientIp(clientIp);
+		messageTitle.setSendClientName(clientName);
 		messageTitle.setSendTime(new Date());
 		return messageTitle;
 	}
