@@ -20,7 +20,7 @@ import com.lobinary.android.common.pojo.communication.Message;
  */
 public interface CommunicationServiceInterface {
 	
-	static Map<String, ConnectionBean> connectionMap = new HashMap<String, ConnectionBean>();
+	public static Map<String, ConnectionBean> connectionMap = new HashMap<String, ConnectionBean>();
 	
 	/**
 	 * 
@@ -114,7 +114,7 @@ public interface CommunicationServiceInterface {
 	 * @param message 不同连接返回的不同信息
 	 * @return
 	 */
-	public List<Message> sendMessageToAll(Message message);
+	public Map<ConnectionBean,Message> sendMessageToAll(Message message);
 	
 	
 	

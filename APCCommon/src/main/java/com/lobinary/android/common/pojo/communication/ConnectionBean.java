@@ -1,6 +1,6 @@
 package com.lobinary.android.common.pojo.communication;
 
-import com.lobinary.android.common.service.communication.socket.CommunicationSocketThread;
+import com.lobinary.android.common.service.communication.ConnectionThreadInterface;
 
 /**
  * <pre>
@@ -23,7 +23,7 @@ public class ConnectionBean {
 	/**
 	 * 连接监控子线程
 	 */
-	private CommunicationSocketThread socketThread;
+	private ConnectionThreadInterface connectionThread;
 
 	/**
 	 * 具体注释请点击Also see
@@ -43,32 +43,24 @@ public class ConnectionBean {
 		this.name = name;
 	}
 
-	/**
-	 * 具体注释请点击Also see
-	 * @see com.lobinary.android.common.pojo.communication.ConnectionBean#socketThread
-	 * @return the socketThread
-	 */
-	public CommunicationSocketThread getSocketThread() {
-		return socketThread;
-	}
-
-	/**
-	 * 具体注释请点击Also see
-	 * @see com.lobinary.android.common.pojo.communication.ConnectionBean#socketThread
-	 * @param socketThread the socketThread to set
-	 */
-	public void setSocketThread(CommunicationSocketThread socketThread) {
-		this.socketThread = socketThread;
-	}
 
 	/**
 	 * <pre>
-	 * 
+	 * 关闭当前连接
 	 * </pre>
 	 *
 	 */
 	public boolean shutDownConnection() {
-		return socketThread.shutDownConnection();
+		return connectionThread.shutDownConnection();
 	}
+
+	public ConnectionThreadInterface getConnectionThread() {
+		return connectionThread;
+	}
+
+	public void setConnectionThread(ConnectionThreadInterface connectionThread) {
+		this.connectionThread = connectionThread;
+	}
+
 
 }

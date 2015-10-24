@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,36 +77,41 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 					logger.info("Socket业务交互类:准备开启服务器");
 					serverSocket = new ServerSocket(PORT);
 
-					Socket s = new Socket();
 					logger.info("Socket业务交互类:Socket服务器启动成功,正在监听连接请求.");
 					isRunnStatus = true;
 					while (true) {
+						try {
+							@SuppressWarnings("resource")
+							Socket s = new Socket();
+							s = serverSocket.accept();
+							logger.info("Socket业务交互类:接收到连接请求");
+							if (isPauseStatus) {
+								try {
+									logger.info("Socket业务交互类:因服务器处于暂停状态,拒绝了一个新连接请求.");
+									DataOutputStream dos = new DataOutputStream(s.getOutputStream());
+									Message respMessage = MessageUtil.getNewResponseMessage(Constants.MESSAGE.TYPE.REJECT_CONNECT);
+									dos.writeUTF(MessageUtil.message2String(respMessage));
+									dos.flush();
+								} catch (Exception e) {
+									logger.error("Socket业务交互类:拒绝新连接请求时发生异常,异常原因如下:", e);
+								}
+								continue;
+							} else {
 
-						s = serverSocket.accept();
-						logger.info("Socket业务交互类:接收到连接请求");
-						if (isPauseStatus) {
-							try {
-								logger.info("Socket业务交互类:因服务器处于暂停状态,拒绝了一个新连接请求.");
-								DataOutputStream dos = new DataOutputStream(s.getOutputStream());
-								Message respMessage = MessageUtil.getNewResponseMessage(Constants.MESSAGE.TYPE.REJECT_CONNECT);
-								dos.writeUTF(MessageUtil.message2String(respMessage));
-								dos.flush();
-							} catch (Exception e) {
-								logger.error("Socket业务交互类:拒绝新连接请求时发生异常,异常原因如下:", e);
+								try {
+									CommunicationSocketThread socketThread = new CommunicationSocketThread(s);
+									socketThread.start();
+								} catch (Exception e) {
+									logger.error("Socket业务交互类:在创建与新客户端连接的过程中发生异常,异常原因如下:", e);
+								}
+								continue;
 							}
-							continue;
-						} else {
-
-							try {
-								CommunicationSocketThread socketThread = new CommunicationSocketThread(s);
-								socketThread.start();
-							} catch (Exception e) {
-								logger.error("Socket业务交互类:在创建与新客户端连接的过程中发生异常,异常原因如下:", e);
-							}
-							continue;
+						} catch (Exception e) {
+							logger.error("Socket业务交互类:服务器接收到新连接后,与其建立连接过程中发生异常", e);
 						}
 					}
 				} catch (Exception e) {
+
 					logger.error("Socket业务交互类:创建Socket失败,异常原因如下:", e);
 				}
 
@@ -200,38 +206,39 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 	 */
 	@Override
 	public ConnectionBean connect(ConnectionBean connectionBean) {
-		new Thread(){
+		new Thread() {
 			@Override
-			public void run() {try {
-				Socket servertome = new Socket("127.0.0.1",6666);
-				BufferedReader in = new BufferedReader(new InputStreamReader(servertome.getInputStream(), "UTF8"));
-				PrintWriter out = new PrintWriter(servertome.getOutputStream(), true);
-				Message message = MessageUtil.getNewRequestMessage(Constants.MESSAGE.TYPE.REQUEST_CONNECT);
-				message.getMessageTitle().setSendClientId("newi1d");
-				out.println(MessageUtil.message2String(message));
-				out.flush();
-				String str = in.readLine();
-				logger.info("#####与客户端连接成功,接收到客户端信息:"+str);
-				
-
-				while(true){
-					logger.info("#####等待客户端反馈消息");
-					String str2 = in.readLine();
-					logger.info("#####与客户端连接成功,接收到客户端信息2:"+str2);
-					out.println(str2);
+			public void run() {
+				try {
+					@SuppressWarnings("resource")
+					Socket servertome = new Socket("127.0.0.1", 6666);
+					BufferedReader in = new BufferedReader(new InputStreamReader(servertome.getInputStream(), "UTF8"));
+					PrintWriter out = new PrintWriter(servertome.getOutputStream(), true);
+					Message message = MessageUtil.getNewRequestMessage(Constants.MESSAGE.TYPE.REQUEST_CONNECT);
+					message.getMessageTitle().setSendClientId("" + System.currentTimeMillis());
+					out.println(MessageUtil.message2String(message));
 					out.flush();
+					String str = in.readLine();
+					logger.info("#####与客户端连接成功,接收到客户端信息:" + str);
+
+					while (true) {
+						logger.info("#####等待客户端反馈消息");
+						String str2 = in.readLine();
+						logger.info("#####与客户端连接成功,接收到客户端信息2:" + str2);
+						out.println(str2);
+						out.flush();
+					}
+
+				} catch (UnknownHostException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
-				
-			} catch (UnknownHostException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 				super.run();
 			}
-			
+
 		}.start();
-		
+
 		return connectionBean;
 	}
 
@@ -244,8 +251,7 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 	 */
 	@Override
 	public Message sendMessage(ConnectionBean connectionBean, Message message) {
-		// TODO Auto-generated method stub
-		return null;
+		return connectionBean.getConnectionThread().sendMessage(message);
 	}
 
 	/*
@@ -256,32 +262,58 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 	 * #sendMessageToAll(com.lobinary.android.common.pojo.communication.Message)
 	 */
 	@Override
-	public List<Message> sendMessageToAll(Message message) {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<ConnectionBean, Message> sendMessageToAll(final Message message) {
+		final Map<ConnectionBean, Message> returnMap = new HashMap<ConnectionBean, Message>();
+		List<Thread> threadList = new ArrayList<Thread>();
+		for (final String key : connectionMap.keySet()) {
+			Thread thread = new Thread() {
+				@Override
+				public void run() {
+					try {
+						ConnectionBean connectionBean = connectionMap.get(key);
+						Message returnMessage = connectionBean.getConnectionThread().sendMessage(message);
+						returnMap.put(connectionBean, returnMessage);
+						super.run();
+					} catch (Exception e) {
+						logger.error("Socket业务交互类:在所有连接发送消息时,向" + key + "发送信息异常", e);
+					}
+				}
+			};
+			threadList.add(thread);
+			thread.start();
+		}
+		while (true) {
+			try {
+				Thread.sleep(100);
+				for (int i = 0; i < threadList.size(); i++) {
+					if (!threadList.get(i).isAlive()) {
+						threadList.remove(i);
+						i--;//
+					}
+				}
+				if (threadList.size() == 0) {
+					break;
+				}
+			} catch (Exception e) {
+				logger.error("Socket业务交互类:循环遍历时异常", e);
+			}
+		}
+		return returnMap;
 	}
 
 	/**
 	 * 具体注释请点击Also see
+	 * 
 	 * @see com.lobinary.android.common.service.communication.socket.CommunicationSocketService#connectionMap
 	 * @return the connectionMap
 	 */
 	public static Map<String, ConnectionBean> getConnectionMap() {
 		return connectionMap;
 	}
-	
-	public static void addConnection(String clientId,ConnectionBean connectionBean ){
-		connectionMap.put(clientId, connectionBean);
-		logger.info("Socket业务交互类:新连接(clientId:"+clientId+")被添加,当前连接总数为:"+connectionMap.size()+"个");
-	}
 
-	/**
-	 * 具体注释请点击Also see
-	 * @see com.lobinary.android.common.service.communication.socket.CommunicationSocketService#connectionMap
-	 * @param connectionMap the connectionMap to set
-	 */
-	public static void setConnectionMap(Map<String, ConnectionBean> connectionMap) {
-		connectionMap = connectionMap;
+	public static void addConnection(String clientId, ConnectionBean connectionBean) {
+		connectionMap.put(clientId, connectionBean);
+		logger.info("Socket业务交互类:新连接(clientId:" + clientId + ")被添加,当前连接总数为:" + connectionMap.size() + "个");
 	}
 
 }

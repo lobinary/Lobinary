@@ -21,7 +21,7 @@ import com.lobinary.android.common.pojo.communication.ConnectionBean;
 import com.lobinary.android.common.pojo.communication.Message;
 import com.lobinary.android.common.pojo.communication.MessageTitle;
 import com.lobinary.android.common.pojo.model.Music;
-import com.lobinary.android.common.service.control.BaseServiceInterface;
+import com.lobinary.android.common.service.communication.ConnectionThreadInterface;
 import com.lobinary.android.common.util.communication.MessageUtil;
 
 /**
@@ -36,7 +36,7 @@ import com.lobinary.android.common.util.communication.MessageUtil;
  * 
  * 
  */
-public class CommunicationSocketThread extends Thread implements BaseServiceInterface{
+public class CommunicationSocketThread extends ConnectionThreadInterface{
 	
 	private static Logger logger = LoggerFactory.getLogger(CommunicationSocketThread.class);
 
@@ -83,7 +83,7 @@ public class CommunicationSocketThread extends Thread implements BaseServiceInte
 			
 
 			ConnectionBean connectionBean = new ConnectionBean();
-			connectionBean.setSocketThread(this);
+			connectionBean.setConnectionThread(this);
 			CommunicationSocketService.addConnection(initialMessage.getMessageTitle().getSendClientId(), connectionBean);
 			
 			logger.info("Socket服务端监控客户端子线程:收到客户端数据:客户端("+messageTitle.getSendClientName()+")子线程启动成功");
@@ -146,6 +146,7 @@ public class CommunicationSocketThread extends Thread implements BaseServiceInte
 		Message returnMessage = waitDealMessage.get(messageId);
 		waitDealMessage.remove(messageId);
 		waitThread.remove(messageId);
+		logger.info("@@@@@@@@@@本次返回returnMessage:"+returnMessage+"waitDealMessage:"+waitDealMessage.size()+"条,waitThread:"+waitThread.size());
 		return returnMessage;
 	}
 	
@@ -185,11 +186,11 @@ public class CommunicationSocketThread extends Thread implements BaseServiceInte
 		waitThread.put(messageId, Thread.currentThread());
 		logger.info("******发送信息成功messageId:"+messageId);
 		try {
-			this.sleep(10000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			logger.info("线程被打断，准备获取待处理信息");
 		}
-		Message returnMessage = waitDealMessage.get(messageId);
+		Message returnMessage = getWaitDealMessage(messageId);
 		if(returnMessage.getId()==messageId){
 			logger.info("########恭喜成功接受预定返回报文#########id:"+messageId);
 		}else{
@@ -200,7 +201,7 @@ public class CommunicationSocketThread extends Thread implements BaseServiceInte
 
 	/**
 	 * <pre>
-	 * 
+	 * 获取唯一信息id,用于识别发送和返回消息
 	 * </pre>
 	 *
 	 * @return
@@ -224,7 +225,7 @@ public class CommunicationSocketThread extends Thread implements BaseServiceInte
 			out.flush();
 			closeSocket();
 		} catch (Exception e) {
-			logger.error("Socket服务端监控客户端子线程:发送信息时发送异常！",e);
+			logger.error("Socket服务端监控客户端子线程:关闭连接时发送异常！",e);
 			return false;
 		}
 		return true;
@@ -274,7 +275,7 @@ public class CommunicationSocketThread extends Thread implements BaseServiceInte
 	/**
 	 * 
 	 * <pre>
-	 * 获取远程方法基本message对象
+	 * 获取远程方法基本message对象,一般用于生成调用远程baseService的请求报文用
 	 * </pre>
 	 *
 	 * @param methodName

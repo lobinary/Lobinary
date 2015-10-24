@@ -256,10 +256,8 @@ public class ControlClientPCWindows {
 					new Thread(){
 						@Override
 						public void run() {
-							ConnectionBean connectionBean = CommonFactory.getCommunicationService().connectionMap.get("newi1d");
 							Message requestMessage = MessageUtil.getNewRequestMessage(Constants.MESSAGE.TYPE.COMMAND);
-							Message rm = connectionBean.getSocketThread().sendMessage(requestMessage);
-							super.run();
+							CommonFactory.getCommunicationService().sendMessageToAll(requestMessage);
 						}
 					}.start();
 				}
