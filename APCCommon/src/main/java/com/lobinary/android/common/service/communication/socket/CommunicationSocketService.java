@@ -1,10 +1,13 @@
 package com.lobinary.android.common.service.communication.socket;
 
-import java.io.DataInputStream;
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +36,6 @@ import com.lobinary.android.common.util.communication.MessageUtil;
 public class CommunicationSocketService implements CommunicationServiceInterface {
 
 	private static Logger logger = LoggerFactory.getLogger(CommunicationSocketService.class);
-	private static Map<String, ConnectionBean> connectionMap = new HashMap<String, ConnectionBean>();
 
 	/**
 	 * socket端口号
@@ -198,8 +200,39 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 	 */
 	@Override
 	public ConnectionBean connect(ConnectionBean connectionBean) {
-		// TODO Auto-generated method stub
-		return null;
+		new Thread(){
+			@Override
+			public void run() {try {
+				Socket servertome = new Socket("127.0.0.1",6666);
+				BufferedReader in = new BufferedReader(new InputStreamReader(servertome.getInputStream(), "UTF8"));
+				PrintWriter out = new PrintWriter(servertome.getOutputStream(), true);
+				Message message = MessageUtil.getNewRequestMessage(Constants.MESSAGE.TYPE.REQUEST_CONNECT);
+				message.getMessageTitle().setSendClientId("newi1d");
+				out.println(MessageUtil.message2String(message));
+				out.flush();
+				String str = in.readLine();
+				logger.info("#####与客户端连接成功,接收到客户端信息:"+str);
+				
+
+				while(true){
+					logger.info("#####等待客户端反馈消息");
+					String str2 = in.readLine();
+					logger.info("#####与客户端连接成功,接收到客户端信息2:"+str2);
+					out.println(str2);
+					out.flush();
+				}
+				
+			} catch (UnknownHostException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+				super.run();
+			}
+			
+		}.start();
+		
+		return connectionBean;
 	}
 
 	/*
@@ -248,7 +281,7 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 	 * @param connectionMap the connectionMap to set
 	 */
 	public static void setConnectionMap(Map<String, ConnectionBean> connectionMap) {
-		CommunicationSocketService.connectionMap = connectionMap;
+		connectionMap = connectionMap;
 	}
 
 }

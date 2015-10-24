@@ -1,5 +1,6 @@
 package com.lobinary.android.common.util.communication;
 
+import com.lobinary.android.common.exception.APCSysException;
 import com.lobinary.android.common.pojo.communication.Message;
 
 /**
@@ -27,6 +28,6 @@ public interface MessageTranslatorInterface {
 	 * @param messageStr
 	 * @return
 	 */
-	public Message translate2Message(String messageStr);
+	public Message translate2Message (String messageStr)throws APCSysException;
 
 }

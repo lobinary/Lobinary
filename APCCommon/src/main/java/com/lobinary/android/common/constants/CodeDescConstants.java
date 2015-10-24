@@ -41,8 +41,13 @@ public enum CodeDescConstants {
 	
 	//2004** 业务公共 异常码
 	SERVICE_NULL_BUSINESS("200401","无此业务"),
-	
+
+	//2014** 接受报文 异常码
 	SERVICE_MESSAGE_ERROR_MESSAGE_TYPE("201401","错误报文类型"),
+	SERVICE_MESSAGE_ERROR_MESSAGE_STRING("201402","错误报文字符串"),
+	
+	//2024** 发送报文 异常码
+	SERVICE_MESSAGE_SEND_FAIL("202401","发送报文失败"),
 	
 	//3***** 远程信息交互状态码
 	

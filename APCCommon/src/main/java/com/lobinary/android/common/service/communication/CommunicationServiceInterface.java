@@ -1,6 +1,8 @@
 package com.lobinary.android.common.service.communication;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.lobinary.android.common.pojo.communication.ConnectionBean;
 import com.lobinary.android.common.pojo.communication.Message;
@@ -17,6 +19,8 @@ import com.lobinary.android.common.pojo.communication.Message;
  * 
  */
 public interface CommunicationServiceInterface {
+	
+	static Map<String, ConnectionBean> connectionMap = new HashMap<String, ConnectionBean>();
 	
 	/**
 	 * 

@@ -1,6 +1,8 @@
 package com.lobinary.android.common.util.communication.impl;
 
 import com.google.gson.Gson;
+import com.lobinary.android.common.constants.CodeDescConstants;
+import com.lobinary.android.common.exception.APCSysException;
 import com.lobinary.android.common.pojo.communication.Message;
 import com.lobinary.android.common.util.communication.MessageTranslatorInterface;
 
@@ -25,7 +27,11 @@ public class MessageJsonTranslator implements MessageTranslatorInterface {
 
 	@Override
 	public Message translate2Message(String messageStr) {
-		return gson.fromJson(messageStr, Message.class);
+		Message message = gson.fromJson(messageStr, Message.class);
+		if(message==null){
+			throw new APCSysException(CodeDescConstants.SERVICE_MESSAGE_ERROR_MESSAGE_STRING);
+		}
+		return message;
 	}
 
 }

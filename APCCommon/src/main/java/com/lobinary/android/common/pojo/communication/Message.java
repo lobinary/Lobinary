@@ -19,10 +19,17 @@ public class Message implements Serializable{
 	 */
 	private static final long serialVersionUID = 4401385639582551338L;
 	
+	private long id;
+	
 	/**
 	 * 报文头
 	 */
 	private MessageTitle messageTitle;
+	
+	/*
+	 * 是请求报文 true 请求 false 返回
+	 */
+	public boolean isReq;
 	
 	/**
 	 * 报文类型编码 Constants.Message.MESSAGE_TYPE_*
@@ -129,6 +136,14 @@ public class Message implements Serializable{
 	
 	public void addParam(String paramName,Object param){
 		getCommand().getCommandParam().addParam("", "");
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 }

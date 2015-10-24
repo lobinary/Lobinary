@@ -1,19 +1,21 @@
 package com.lobinary.android.common.service.communication.socket;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.Socket;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lobinary.android.common.constants.CodeDescConstants;
 import com.lobinary.android.common.constants.Constants;
+import com.lobinary.android.common.exception.APCSysException;
 import com.lobinary.android.common.pojo.communication.Command;
 import com.lobinary.android.common.pojo.communication.ConnectionBean;
 import com.lobinary.android.common.pojo.communication.Message;
@@ -42,10 +44,15 @@ public class CommunicationSocketThread extends Thread implements BaseServiceInte
 	private BufferedReader in;
 	private PrintWriter out;
 	private MessageTitle messageTitle;
+	Map<Long,Thread> waitThread = new HashMap<Long,Thread>();
+	Map<Long,Message> waitDealMessage = new HashMap<Long,Message>();
+	
 	/**
 	 * 是否重新连接
 	 */
 	private boolean isReconnect = true;
+
+	private long num = 1;
 
 	public CommunicationSocketThread(Socket clientSocket) throws UnsupportedEncodingException, IOException {
 		super();
@@ -67,29 +74,36 @@ public class CommunicationSocketThread extends Thread implements BaseServiceInte
 			
 			String messageStr = in.readLine();
 			logger.info("接收到客户端请求,请求报文为："+messageStr);
-			Message message = MessageUtil.string2Messag(messageStr);
+			Message initialMessage = MessageUtil.string2Messag(messageStr);
 			Message respMessage = MessageUtil.getNewResponseMessage(Constants.MESSAGE.TYPE.ACCEPT_CONNECT);
 			String respMsg = MessageUtil.message2String(respMessage);
 			out.println(respMsg);
 			out.flush();
-			messageTitle = message.getMessageTitle();
+			messageTitle = initialMessage.getMessageTitle();
 			
 
 			ConnectionBean connectionBean = new ConnectionBean();
 			connectionBean.setSocketThread(this);
-			CommunicationSocketService.addConnection(message.getMessageTitle().getSendClientId(), connectionBean);
+			CommunicationSocketService.addConnection(initialMessage.getMessageTitle().getSendClientId(), connectionBean);
 			
 			logger.info("Socket服务端监控客户端子线程:收到客户端数据:客户端("+messageTitle.getSendClientName()+")子线程启动成功");
 			String line = in.readLine();
 			while (line != null && line.trim().length() > 0) {
 				logger.info("Socket服务端监控客户端子线程:收到客户端("+messageTitle.getSendClientName()+")数据:"+line);
-//				
-//				String respMessageStr = MessageUtil.parseReqMessageStr2RespMessageStr(line);
-//				out.println(respMessageStr);
-//				out.flush();
-//				if(MessageUtil.isDisconnectionReqMessage(line)){
-//					break;//如果是断开连接请求，在返回同意断开连接后，关闭连接
-//				}
+				Message returnMessage = MessageUtil.string2Messag(line);
+				if(MessageUtil.isDisconnectionReqMessage(line)){
+					break;//如果是断开连接请求，在返回同意断开连接后，关闭连接
+				}else if(returnMessage.isReq){
+					String respMessageStr = MessageUtil.parseReqMessageStr2RespMessageStr(line);
+					out.println(respMessageStr);
+					out.flush();
+				}else{
+					long messageId = returnMessage.getId();
+					waitDealMessage.put(messageId, returnMessage);
+					Thread t = waitThread.get(messageId);
+					logger.info("t:"+t+".messageId:"+messageId);
+					t.interrupt();
+				}
 				line = in.readLine();
 			}
 			closeSocket();
@@ -117,24 +131,42 @@ public class CommunicationSocketThread extends Thread implements BaseServiceInte
 		}
 	}
 	
+	
+	
 	/**
 	 * 
 	 * <pre>
-	 * 发送信息到客户端
+	 * 获取等待处理信息
+	 * </pre>
+	 *
+	 * @param messageId
+	 * @return
+	 */
+	public Message getWaitDealMessage(Long messageId){
+		Message returnMessage = waitDealMessage.get(messageId);
+		waitDealMessage.remove(messageId);
+		waitThread.remove(messageId);
+		return returnMessage;
+	}
+	
+	/**
+	 * 
+	 * <pre>
+	 * 发送信息到客户端,发方法的message需要配置id，来识别返回message
 	 * </pre>
 	 *
 	 * @param message
 	 * @return
 	 */
-	public Message sendMessage(String message){
+	public boolean sendMessage(String message){
 		try {
 			out.println(message);
 			out.flush();
 		} catch (Exception e) {
 			logger.error("Socket服务端监控客户端子线程:发送信息时发送异常！",e);
-			return null;
+			throw new APCSysException(CodeDescConstants.SERVICE_MESSAGE_SEND_FAIL,e);
 		}
-		return null;
+		return true;
 	}
 	
 
@@ -147,7 +179,35 @@ public class CommunicationSocketThread extends Thread implements BaseServiceInte
 	 * @return 
 	 */
 	public Message sendMessage(Message requestMessage) {
-		return this.sendMessage(MessageUtil.message2String(requestMessage));
+		long messageId = getUniqeMessageId();
+		requestMessage.setId(messageId);
+		this.sendMessage(MessageUtil.message2String(requestMessage));
+		waitThread.put(messageId, Thread.currentThread());
+		logger.info("******发送信息成功messageId:"+messageId);
+		try {
+			this.sleep(10000);
+		} catch (InterruptedException e) {
+			logger.info("线程被打断，准备获取待处理信息");
+		}
+		Message returnMessage = waitDealMessage.get(messageId);
+		if(returnMessage.getId()==messageId){
+			logger.info("########恭喜成功接受预定返回报文#########id:"+messageId);
+		}else{
+			logger.error("!!!!!!!警告：返回报文为异常报文!!!!!!!!!");
+		}
+		return returnMessage;
+	}
+
+	/**
+	 * <pre>
+	 * 
+	 * </pre>
+	 *
+	 * @return
+	 */
+	private long getUniqeMessageId() {
+		num++;
+		return System.currentTimeMillis() + num;
 	}
 
 	/**
@@ -205,8 +265,9 @@ public class CommunicationSocketThread extends Thread implements BaseServiceInte
 		Message requestMessage = getRemoteBaseMessage(Thread.currentThread().getStackTrace()[1].getMethodName());
 		Command command = requestMessage.getCommand();
 		command.add(player).add(musicId);
-		sendMessage(requestMessage);
-		return false;
+		Message message = sendMessage(requestMessage);
+		boolean result = (Boolean) message.getMessageObj();
+		return result;
 	}
 	
 

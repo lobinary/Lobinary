@@ -45,7 +45,11 @@ import javax.swing.filechooser.FileSystemView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lobinary.android.common.constants.Constants;
+import com.lobinary.android.common.pojo.communication.ConnectionBean;
+import com.lobinary.android.common.pojo.communication.Message;
 import com.lobinary.android.common.service.communication.CommunicationServiceInterface;
+import com.lobinary.android.common.util.communication.MessageUtil;
 import com.lobinary.android.common.util.factory.CommonFactory;
 import com.lobinary.apc.util.initial.InitialUtil;
 
@@ -226,7 +230,12 @@ public class ControlClientPCWindows {
 		statusPanel.add(panel_6);
 		panel_6.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JToggleButton btnNewButton_2 = new JToggleButton("New button");
+		JButton btnNewButton_2 = new JButton("测试(连接服务器)");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CommonFactory.getCommunicationService().connect(null);
+			}
+		});
 		panel_6.add(btnNewButton_2);
 		
 		JPanel panel_7 = new JPanel();
@@ -240,7 +249,22 @@ public class ControlClientPCWindows {
 		statusPanel.add(panel_8);
 		panel_8.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JToggleButton btnNewButton_3 = new JToggleButton("New button");
+		JButton btnNewButton_3 = new JButton("测试(向客户端发送请求)");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for (int i = 0; i < 200; i++) {
+					new Thread(){
+						@Override
+						public void run() {
+							ConnectionBean connectionBean = CommonFactory.getCommunicationService().connectionMap.get("newi1d");
+							Message requestMessage = MessageUtil.getNewRequestMessage(Constants.MESSAGE.TYPE.COMMAND);
+							Message rm = connectionBean.getSocketThread().sendMessage(requestMessage);
+							super.run();
+						}
+					}.start();
+				}
+			}
+		});
 		panel_8.add(btnNewButton_3);
 		
 		JPanel panel_9 = new JPanel();
