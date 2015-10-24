@@ -32,6 +32,12 @@ public class Command implements Serializable{
 	private String commandDesc;
 	
 	/**
+	 * 指令内容
+	 */
+	
+	private String commandContent;
+	
+	/**
 	 * 远程方法名称
 	 */
 	private String remoteMethodName;
@@ -84,6 +90,10 @@ public class Command implements Serializable{
 	public String getGrantCode() {
 		return grantCode;
 	}
+	
+	public String getCommandContent(){
+		return commandContent;
+	}
 
 	public void setGrantCode(String grantCode) {
 		this.grantCode = grantCode;
@@ -99,6 +109,10 @@ public class Command implements Serializable{
 
 	public void setCommandParam(CommandParam commandParam) {
 		this.commandParam = commandParam;
+	}
+	
+	public void setCommandContent(String commandContent){
+		this.commandContent = commandContent;
 	}
 
 	/**

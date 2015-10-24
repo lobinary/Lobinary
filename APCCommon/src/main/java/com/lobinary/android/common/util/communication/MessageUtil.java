@@ -55,6 +55,7 @@ public class MessageUtil {
 	 * @return
 	 */
 	public static Message getNewRequestMessage(String messageType){
+		
 		if(messageType==null){
 			messageType = Constants.MESSAGE.TYPE.COMMAND;
 		}
@@ -69,7 +70,9 @@ public class MessageUtil {
 		if(Constants.MESSAGE.TYPE.REQ_TIME.equals(messageType)){
 			
 		}else if(Constants.MESSAGE.TYPE.COMMAND.equals(messageType)){
-			
+			GetNewRequestCommandUtil command = new GetNewRequestCommandUtil();
+			command.setCommand("cmd /c start F:\\KGMusic\\Kugou");
+			message.setCommand(command);
 		}
 		return message;
 	}
