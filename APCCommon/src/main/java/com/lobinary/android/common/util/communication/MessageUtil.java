@@ -243,7 +243,30 @@ public class MessageUtil {
 		return obj;
 	}
 
-
+	/**
+	 * <pre>
+	 * 装配异常信息
+	 * </pre>
+	 *
+	 * @param respMessage
+	 * @param string
+	 * @param javaException
+	 * @param t
+	 * @return
+	 */
+	public static Message assembleExceptionMessage(Message respMessage, String errDesc, CodeDescConstants exceptionCode,APCSysException apcException, Throwable t) {
+		if(apcException==null){
+			if(exceptionCode==null){
+				apcException = new APCSysException(CodeDescConstants.PUB_SYSTEM_EXCEPTION);
+			}else{
+				apcException = new APCSysException(exceptionCode);
+			}
+		}
+		apcException.setErrDesc(errDesc);
+		apcException.setOrignalException(t);
+		respMessage.setApcException(apcException);
+		return respMessage;
+	}
 	
 
 }

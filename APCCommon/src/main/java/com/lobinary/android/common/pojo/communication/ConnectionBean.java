@@ -21,6 +21,11 @@ public class ConnectionBean {
 	public String name;
 	
 	/**
+	 * 连接ip
+	 */
+	public String ip;
+	
+	/**
 	 * 连接监控子线程
 	 */
 	private ConnectionThreadInterface connectionThread;

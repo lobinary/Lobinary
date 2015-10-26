@@ -71,42 +71,28 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 	public void run() {
 		super.run();
 		try {
-			
 			String messageStr = in.readLine();
-			logger.info("接收到客户端请求,请求报文为："+messageStr);
-			Message initialMessage = MessageUtil.string2Messag(messageStr);
-			Message respMessage = MessageUtil.getNewResponseMessage(Constants.MESSAGE.TYPE.ACCEPT_CONNECT);
-			String respMsg = MessageUtil.message2String(respMessage);
-			out.println(respMsg);
-			out.flush();
-			messageTitle = initialMessage.getMessageTitle();
-			
-
-			ConnectionBean connectionBean = new ConnectionBean();
-			connectionBean.setConnectionThread(this);
-			CommunicationSocketService.addConnection(initialMessage.getMessageTitle().getSendClientId(), connectionBean);
-			
-			logger.info("Socket服务端监控客户端子线程:收到客户端数据:客户端("+messageTitle.getSendClientName()+")子线程启动成功");
-			String line = in.readLine();
-			while (line != null && line.trim().length() > 0) {
-				logger.info("Socket服务端监控客户端子线程:收到客户端("+messageTitle.getSendClientName()+")数据:"+line);
-				Message returnMessage = MessageUtil.string2Messag(line);
-				if(MessageUtil.isDisconnectionReqMessage(line)){
-					break;//如果是断开连接请求，在返回同意断开连接后，关闭连接
-				}else if(returnMessage.isReq){
-					String respMessageStr = MessageUtil.parseReqMessageStr2RespMessageStr(line);
-					out.println(respMessageStr);
-					out.flush();
+			logger.info("Socket服务端监控客户端子线程:接收到客户端请求,请求报文为："+messageStr);
+			Message initialMessage = null;
+			Message respMessage;
+			try {
+				initialMessage = MessageUtil.string2Messag(messageStr);
+				if(Constants.MESSAGE.TYPE.REQUEST_PING.equals(initialMessage.getMessageType())){
+					respMessage = MessageUtil.getNewResponseMessage(Constants.MESSAGE.TYPE.REQUEST_PING_SUCCESS);
+					String respMsg = MessageUtil.message2String(respMessage);
+					sendLastMsg(respMsg);
+				}else if(Constants.MESSAGE.TYPE.REQUEST_CONNECT.equals(initialMessage.getMessageType())){
+					establishConnection(initialMessage);
 				}else{
-					long messageId = returnMessage.getId();
-					waitDealMessage.put(messageId, returnMessage);
-					Thread t = waitThread.get(messageId);
-					logger.info("t:"+t+".messageId:"+messageId);
-					t.interrupt();
+					respMessage = MessageUtil.getNewResponseMessage(Constants.MESSAGE.TYPE.EXCEPTION);
+					String respMsg = MessageUtil.message2String(MessageUtil.assembleExceptionMessage(respMessage, null, CodeDescConstants.SERVICE_MESSAGE_ERROR_MESSAGE_TYPE,null, null));
+					sendLastMsg(respMsg);
 				}
-				line = in.readLine();
+			} catch (APCSysException e) {
+				logger.error("Socket服务端监控客户端子线程:请求报文未知格式,予以拒绝连接");
+				respMessage = MessageUtil.getNewResponseMessage(Constants.MESSAGE.TYPE.REJECT_CONNECT);
+				respMessage.setMessageString(MessageUtil.message2String(MessageUtil.assembleExceptionMessage(respMessage,null,null,e,null)));
 			}
-			closeSocket();
 		} catch (Exception e) {
 			//XXX 断开重连服务
 			if(isReconnect){
@@ -119,15 +105,73 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 
 	/**
 	 * <pre>
+	 * 发送最后的信息，并在关闭当前连接后，关闭线程
+	 * </pre>
+	 *
+	 * @param respMsg
+	 */
+	private void sendLastMsg(String respMsg) {
+		out.println(respMsg);
+		out.flush();
+		closeConnection();
+	}
+
+	/**
+	 * <pre>
+	 * 建立连接
+	 * </pre>
+	 *
+	 * @param initialMessage
+	 * @throws IOException
+	 */
+	private void establishConnection(Message initialMessage) throws IOException {
+		Message respMessage = MessageUtil.getNewResponseMessage(Constants.MESSAGE.TYPE.ACCEPT_CONNECT);
+		String respMsg = MessageUtil.message2String(respMessage);
+		out.println(respMsg);
+		out.flush();
+		
+		messageTitle = initialMessage.getMessageTitle();
+		ConnectionBean connectionBean = new ConnectionBean();
+		connectionBean.setConnectionThread(this);
+		CommunicationSocketService.addConnection(initialMessage.getMessageTitle().getSendClientId(), connectionBean);
+		
+		logger.info("Socket服务端监控客户端子线程:收到客户端数据:客户端("+messageTitle.getSendClientName()+")子线程启动成功");
+		String line = in.readLine();
+		while (line != null && line.trim().length() > 0) {
+			logger.info("Socket服务端监控客户端子线程:收到客户端("+messageTitle.getSendClientName()+")数据:"+line);
+			Message returnMessage = MessageUtil.string2Messag(line);
+			if(MessageUtil.isDisconnectionReqMessage(line)){
+				break;//如果是断开连接请求，在返回同意断开连接后，关闭连接
+			}else if(returnMessage.isReq){
+				String respMessageStr = MessageUtil.parseReqMessageStr2RespMessageStr(line);
+				sendLastMsg(respMessageStr);
+			}else{
+				long messageId = returnMessage.getId();
+				waitDealMessage.put(messageId, returnMessage);
+				Thread t = waitThread.get(messageId);
+				logger.info("t:"+t+".messageId:"+messageId);
+				t.interrupt();
+			}
+			line = in.readLine();
+		}
+		closeConnection();
+	}
+
+	/**
+	 * <pre>
 	 * 关闭socket连接
 	 * </pre>
 	 *
 	 * @throws IOException
 	 */
-	private void closeSocket() throws IOException {
+	private void closeConnection() {
 		isReconnect = false;
 		if(!clientSocket.isClosed()){
-			clientSocket.close();
+			try {
+				clientSocket.close();
+			} catch (IOException e) {
+				logger.error("Socket服务端监控客户端子线程:关闭当前连接时发生异常,予以忽略",e);
+			}
 		}
 	}
 	
@@ -161,8 +205,7 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 	 */
 	public boolean sendMessage(String message){
 		try {
-			out.println(message);
-			out.flush();
+			sendLastMsg(message);
 		} catch (Exception e) {
 			logger.error("Socket服务端监控客户端子线程:发送信息时发送异常！",e);
 			throw new APCSysException(CodeDescConstants.SERVICE_MESSAGE_SEND_FAIL,e);
@@ -223,7 +266,7 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 			Message message = MessageUtil.getNewRequestMessage(Constants.MESSAGE.TYPE.DISCONNECT);
 			out.println(message);
 			out.flush();
-			closeSocket();
+			closeConnection();
 		} catch (Exception e) {
 			logger.error("Socket服务端监控客户端子线程:关闭连接时发送异常！",e);
 			return false;

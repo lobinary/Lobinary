@@ -13,6 +13,24 @@ package com.lobinary.android.common.constants;
  */
 public class Constants {
 	
+	public class CONNECTION{
+		
+		public class PARAM{
+			
+			/**
+			 * SOCKET端口
+			 */
+			public final static int SOCKET_PORT = 6666;
+			
+			/**
+			 * SOCKET编码
+			 */
+			public static final String SOCKET_ENCODING = "UTF-8";
+			
+		}
+		
+	}
+	
 	/**
 	 * 
 	 * <pre>
@@ -57,6 +75,20 @@ public class Constants {
 		 */
 		public class TYPE{
 			
+			/**
+			 * 异常报文
+			 */
+			public final static String EXCEPTION = "EXCEPTION";
+			
+			/**
+			 * 请求 ping  一般用于查看服务器是否开启 辅助 可连接列表使用
+			 */
+			public final static String REQUEST_PING = "REQUEST_PING";
+			
+			/**
+			 * 请求ping成功
+			 */
+			public final static String REQUEST_PING_SUCCESS = "REQUEST_PING_SUCCESS";
 
 			/**
 			 * 请求连接

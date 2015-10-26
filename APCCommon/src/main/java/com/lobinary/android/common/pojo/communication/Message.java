@@ -2,6 +2,8 @@ package com.lobinary.android.common.pojo.communication;
 
 import java.io.Serializable;
 
+import com.lobinary.android.common.exception.APCSysException;
+
 /**
  * 
  *	<pre> 
@@ -50,6 +52,11 @@ public class Message implements Serializable{
 	 * 命令对象实体
 	 */
 	private Command command;
+	
+	/**
+	 * APC系统异常
+	 */
+	private APCSysException apcException;
 	
 	/**
 	 * 远程方法
@@ -145,5 +152,25 @@ public class Message implements Serializable{
 	public void setId(long id) {
 		this.id = id;
 	}
+
+	/**
+	 * 具体注释请点击Also see
+	 * @see com.lobinary.android.common.pojo.communication.Message#apcException
+	 * @return the apcException
+	 */
+	public APCSysException getApcException() {
+		return apcException;
+	}
+
+	/**
+	 * 具体注释请点击Also see
+	 * @see com.lobinary.android.common.pojo.communication.Message#apcException
+	 * @param apcException the apcException to set
+	 */
+	public void setApcException(APCSysException apcException) {
+		this.apcException = apcException;
+	}
+
+
 
 }

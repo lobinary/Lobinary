@@ -20,6 +20,7 @@ import com.lobinary.android.common.constants.Constants;
 import com.lobinary.android.common.pojo.communication.ConnectionBean;
 import com.lobinary.android.common.pojo.communication.Message;
 import com.lobinary.android.common.service.communication.CommunicationServiceInterface;
+import com.lobinary.android.common.util.NetUtil;
 import com.lobinary.android.common.util.communication.MessageUtil;
 
 /**
@@ -81,7 +82,6 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 					isRunnStatus = true;
 					while (true) {
 						try {
-							@SuppressWarnings("resource")
 							Socket s = new Socket();
 							s = serverSocket.accept();
 							logger.info("Socket业务交互类:接收到连接请求");
@@ -97,7 +97,6 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 								}
 								continue;
 							} else {
-
 								try {
 									CommunicationSocketThread socketThread = new CommunicationSocketThread(s);
 									socketThread.start();
@@ -193,8 +192,50 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 	 */
 	@Override
 	public List<ConnectionBean> getCanConnectList() {
-		// TODO Auto-generated method stub
-		return null;
+		final List<ConnectionBean> resultList = new ArrayList<ConnectionBean>();
+		List<String> localIpList = NetUtil.getLocalIpList();
+		for (String localIp : localIpList) {
+			List<String> lanIpList = NetUtil.getLANIp(localIp);
+			for (final String lanIp : lanIpList) {
+				final ConnectionBean connectionBean = new ConnectionBean();
+				connectionBean.ip = lanIp;
+				new Thread() {
+					@Override
+					public void run() {
+						try {
+							Socket clientSocket = new Socket(connectionBean.ip, Constants.CONNECTION.PARAM.SOCKET_PORT);
+							clientSocket.setSoTimeout(500);
+							BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(),
+									Constants.CONNECTION.PARAM.SOCKET_ENCODING));
+							PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+
+							Message message = MessageUtil.getNewRequestMessage(Constants.MESSAGE.TYPE.REQUEST_PING);
+							out.println(MessageUtil.message2String(message));
+							out.flush();
+
+							String clientReturnMessageStr = in.readLine();
+							Message clientReturnMessage = MessageUtil.string2Messag(clientReturnMessageStr);
+							if (Constants.MESSAGE.TYPE.REQUEST_PING_SUCCESS.equals(clientReturnMessage.getMessageType())) {
+								connectionBean.setName(clientReturnMessage.getMessageTitle().getSendClientName());
+								resultList.add(connectionBean);
+								logger.info("Socket交互业务类:获取可连接设备列表,捕获到可连接设备,IP:"+lanIp);
+							}
+							clientSocket.close();
+						} catch (Exception e) {
+//							logger.error("Socket交互业务类:获取可连接设备列表,尝试连接IP:"+lanIp+"失败");
+						}
+					}
+				}.start();
+			}
+
+			try {
+				Thread.sleep(1000);
+				logger.info("Socket交互业务类:获取可连接设备列表,准备将查询结果返回");
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		return resultList;
 	}
 
 	/*
@@ -206,12 +247,12 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 	 */
 	@Override
 	public ConnectionBean connect(ConnectionBean connectionBean) {
+		final String connIp = connectionBean.ip;
 		new Thread() {
 			@Override
 			public void run() {
 				try {
-					@SuppressWarnings("resource")
-					Socket servertome = new Socket("127.0.0.1", 6666);
+					Socket servertome = new Socket(connIp, Constants.CONNECTION.PARAM.SOCKET_PORT);
 					BufferedReader in = new BufferedReader(new InputStreamReader(servertome.getInputStream(), "UTF8"));
 					PrintWriter out = new PrintWriter(servertome.getOutputStream(), true);
 					Message message = MessageUtil.getNewRequestMessage(Constants.MESSAGE.TYPE.REQUEST_CONNECT);

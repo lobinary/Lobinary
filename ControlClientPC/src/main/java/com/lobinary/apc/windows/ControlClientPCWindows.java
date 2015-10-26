@@ -22,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
@@ -270,7 +271,15 @@ public class ControlClientPCWindows {
 		statusPanel.add(panel_9);
 		panel_9.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JToggleButton btnNewButton_4 = new JToggleButton("New button");
+		JButton btnNewButton_4 = new JButton("测试(获取可连接列表)");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				List<ConnectionBean> canConnectList = CommonFactory.getCommunicationService().getCanConnectList();
+				for (ConnectionBean connectionBean : canConnectList) {
+					logger.info(connectionBean.ip);
+				}
+			}
+		});
 		panel_9.add(btnNewButton_4);
 		
 		JPanel operatePanel = new JPanel();
