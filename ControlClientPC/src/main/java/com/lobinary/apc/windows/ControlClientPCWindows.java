@@ -79,6 +79,9 @@ public class ControlClientPCWindows {
 	private Image logo;
 	public static JTextArea logTextArea = new JTextArea("===========================================欢迎使用APC安卓PC互控Windows客户端===========================================");
 	public static JTextField musicFolderText;
+	public static String playerPath;
+	public static String musicPath;
+	WindowsParamAcceptor winParAcp = new WindowsParamAcceptor();
 
 	/**
 	 * Launch the application.
@@ -359,11 +362,42 @@ public class ControlClientPCWindows {
 		tabbedPane.addTab("设置", null, panel_10, null);
 		panel_10.setLayout(null);
 		
+		/*************设置默认播放器**************/
+		JLabel player = new JLabel("默认播放器");
+		player.setBounds(0, 25, 75, 15);
+		panel_10.add(player);
+		
+		final JTextField defaultplayer = new JTextField();
+		defaultplayer.setBounds(76, 22, 527, 21);
+		panel_10.add(defaultplayer);
+		FileSystemView dfp = FileSystemView.getFileSystemView(); 
+		defaultplayer.setColumns(10);
+		
+		JButton btnNewButton2 = new JButton("选取文件夹");
+		btnNewButton2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser outFileFolderChooser = new JFileChooser(defaultplayer.getText());
+				outFileFolderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				int intRetVal = outFileFolderChooser.showDialog(frame, "选择");
+				if (intRetVal == JFileChooser.APPROVE_OPTION) {
+					String dirStr = outFileFolderChooser.getSelectedFile().getPath();
+					defaultplayer.setText(dirStr);
+				}
+				outFileFolderChooser.setVisible(true);
+			}
+		});
+		btnNewButton2.setBounds(602, 21, 117, 23);
+		panel_10.add(btnNewButton2);
+		
+
+		
+		/*************设置音乐文件夹*****8********/
 		JLabel label = new JLabel("音乐文件夹");
 		label.setBounds(0, 0, 75, 15);
 		panel_10.add(label);
 		
 		musicFolderText = new JTextField();
+		musicPath = musicFolderText.getText();
 		musicFolderText.setBounds(76, -3, 527, 21);
 		panel_10.add(musicFolderText);
 		FileSystemView fsv = FileSystemView.getFileSystemView(); 
@@ -411,6 +445,18 @@ public class ControlClientPCWindows {
 
 		JTextArea textArea = new JTextArea();
 		scrollPane.setViewportView(logTextArea);
+		
+		/*********************提交****************************/
+		JButton submit = new JButton("提交");
+		submit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				winParAcp.setMusicPath(musicFolderText.getText());
+				winParAcp.setPlayerPath(defaultplayer.getText());
+			}
+		});
+		submit.setBounds(600, 450, 100, 40);
+		panel_10.add(submit);
 		
 	}
 

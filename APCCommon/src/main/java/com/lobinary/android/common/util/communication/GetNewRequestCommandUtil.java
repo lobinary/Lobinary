@@ -22,22 +22,6 @@ public class GetNewRequestCommandUtil extends Command{
 	String Command;
 	
 	/**
-	 * <pre>
-	 * 播放音乐test
-	 * </pre>
-	 *
-	 */
-	private void play() {
-		// TODO Auto-generated method stub
-		try {
-				String musicPath = "F:\\KGMusic\\Kugou";
-				Runtime.getRuntime().exec("cmd /c start "   +   musicPath.replaceAll(" ", "\" \""));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-	}
-	
-	/**
 	 * 具体注释请点击Also see
 	 * @see com.lobinary.android.common.util.communication.GetNewRequestCommandUtil#Command
 	 * @return the command
