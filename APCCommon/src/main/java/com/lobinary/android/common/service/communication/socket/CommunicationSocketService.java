@@ -75,10 +75,10 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 			public void run() {
 				super.run();
 				try {
-					logger.info("Socket业务交互类:准备开启服务器");
+					logger.debug("Socket业务交互类:准备开启服务器");
 					serverSocket = new ServerSocket(PORT);
 
-					logger.info("Socket业务交互类:Socket服务器启动成功,正在监听连接请求.");
+					logger.info("Socket业务交互类:Socket服务器启动成功,正在监听连接请求......");
 					isRunnStatus = true;
 					while (true) {
 						try {

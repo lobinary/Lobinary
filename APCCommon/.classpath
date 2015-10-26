@@ -32,5 +32,14 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="src/main/resources/lib/commons-codec-1.8.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/commons-lang3-3.4.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/commons-net-2.0.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/slf4j-api-1.7.12.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/slf4j-log4j12-1.7.12.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/xercesImpl-2.4.0.jar"/>
+	<classpathentry kind="lib" path="src/main/resources/lib/gson-2.4.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

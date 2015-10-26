@@ -37,6 +37,8 @@ public class PropertiesUtil {
 
 	static {
 		try {
+			System.out.println("配置工具类:配置信息初始化完成,存储文件(StoreFile)位置:"+storeFile.getAbsolutePath());
+		
 			String propFile = "apc.properties";
 			properties = new Properties();
 			InputStream file = PropertiesUtil.class.getClassLoader().getResourceAsStream(propFile);
@@ -48,7 +50,6 @@ public class PropertiesUtil {
 			}
 
 			fileStoreMap = FileUtil.getObj(storeFile,Map.class);
-			
 			logger.info("配置工具类:配置信息初始化完成,存储文件(StoreFile)位置:"+storeFile.getAbsolutePath());
 		} catch (Exception e) {
 			logger.error("配置工具类:初始化配置工具类异常",e);

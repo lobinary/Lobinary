@@ -69,7 +69,7 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 		out = new PrintWriter(clientSocket.getOutputStream(), true);
 		
 		if(isReceiveRequest){
-			logger.info("Socket服务端监控客户端子线程:收到客户端数据:客户端子线程初始化成功");
+			logger.debug("Socket服务端监控客户端子线程:收到客户端数据:客户端子线程初始化成功");
 		}else{
 			Message reqMessage = MessageUtil.getNewResponseMessage(Constants.MESSAGE.TYPE.REQUEST_CONNECT);
 			String respMsg = MessageUtil.message2String(reqMessage);
@@ -89,7 +89,7 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 		super.run();
 		try {
 			String messageStr = in.readLine();
-			logger.info("Socket服务端监控客户端子线程:接收到客户端请求,请求报文为："+messageStr);
+			logger.debug("Socket服务端监控客户端子线程:接收到客户端请求,请求报文为："+messageStr);
 			Message initialMessage = null;
 			Message respMessage;
 			try {

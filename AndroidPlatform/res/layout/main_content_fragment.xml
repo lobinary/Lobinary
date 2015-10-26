@@ -5,6 +5,34 @@
     android:background="@color/main_bg"
     android:orientation="vertical" >
 
+    
+    <!--  ############################## 日志页面上  ##############################  -->
+    
+    <RelativeLayout
+        android:id="@+id/settingContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:columnCount="2"
+        android:orientation="vertical"
+        android:rowCount="2"
+        android:visibility="visible"> 
+	    <TextView
+	        android:id="@+id/logText"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentBottom="true"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentRight="true"
+	        android:layout_alignParentTop="true"
+	        android:textIsSelectable="false"
+	        android:ems="10"
+	        android:textColor="@color/black"
+	        android:text="欢迎使用APC系统">
+	    </TextView>
+    </RelativeLayout>
+    <!--  ############################## 日志页面 下  ##############################  -->
+    
     <LinearLayout
         android:id="@+id/homeContent"
         android:layout_width="match_parent"
@@ -211,8 +239,7 @@
             android:layout_below="@+id/test1"
             android:background="@color/grey" />
     </LinearLayout>
-
-    <!-- 联系人页面 -->
+    <!-- ############################## 联系人页面 ############################## -->
 
     <com.lobinary.android.platform.ui.listview.ListViewCompat
         android:id="@+id/contactContent"
@@ -220,13 +247,14 @@
         android:layout_height="match_parent"
         android:visibility="gone" />
 
-    <!-- 功能页面 -->
+    <!-- ############################## 功能页面 ############################## -->
 
     <RelativeLayout
         android:id="@+id/featuresContent"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_gravity="center"
+        android:visibility="gone"
         android:background="#eee">
 
         <fragment
@@ -255,7 +283,7 @@
 
     </RelativeLayout>
 
-    <!-- 测试页面 -->
+    <!--  ############################## 测试页面  ##############################  -->
 
     <RelativeLayout
         android:id="@+id/testContent"
@@ -318,5 +346,6 @@
             android:layout_toRightOf="@+id/messageTitle"
             android:text="连接服务器" />
     </RelativeLayout>
+
 
 </RelativeLayout>

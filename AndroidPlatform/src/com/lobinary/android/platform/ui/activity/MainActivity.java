@@ -6,6 +6,7 @@ import android.view.KeyEvent;
 import android.view.Window;
 
 import com.lobinary.android.platform.R;
+import com.lobinary.android.platform.util.InitialUtil;
 
 public class MainActivity extends Activity {
 

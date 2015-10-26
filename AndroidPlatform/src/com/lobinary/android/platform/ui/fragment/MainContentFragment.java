@@ -3,9 +3,10 @@ package com.lobinary.android.platform.ui.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import android.app.Fragment;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -27,10 +29,14 @@ import com.lobinary.android.platform.ui.listview.ListViewCompat;
 import com.lobinary.android.platform.ui.listview.PinnedSectionListView;
 import com.lobinary.android.platform.ui.listview.SlideView;
 import com.lobinary.android.platform.ui.listview.SlideView.OnSlideListener;
+import com.lobinary.android.platform.util.AndroidLogUtil;
+import com.lobinary.android.platform.util.InitialUtil;
 
 public class MainContentFragment extends Fragment implements OnItemClickListener, OnClickListener, OnSlideListener {
 
 	private static final String TAG = "MainContentFragment";
+
+	Handler logHandler;
 
 	private ListViewCompat mListView;
 
@@ -39,10 +45,9 @@ public class MainContentFragment extends Fragment implements OnItemClickListener
 	private SlideView mLastSlideViewWithStatusOn;
 
 	private View homeContent;
-
 	private View contactContent;
-
 	private View featuresContent;
+	private View settingContent;
 
 	private PinnedSectionListView listview;
 
@@ -65,7 +70,7 @@ public class MainContentFragment extends Fragment implements OnItemClickListener
 		} else if (lastClick == R.id.featuresBtnView) {
 			featuresContent.setVisibility(View.GONE);
 		} else if (lastClick == R.id.settingBtnView) {
-
+			settingContent.setVisibility(View.GONE);
 		}
 
 		if (clickBtnId == R.id.homeBtnView) {
@@ -75,15 +80,34 @@ public class MainContentFragment extends Fragment implements OnItemClickListener
 		} else if (clickBtnId == R.id.featuresBtnView) {
 			featuresContent.setVisibility(View.VISIBLE);
 		} else if (clickBtnId == R.id.settingBtnView) {
-
+			settingContent.setVisibility(View.VISIBLE);
 		}
 
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		logHandler = new Handler() {
+			public void handleMessage(Message msg) {
+				EditText logText = (EditText) getActivity().findViewById(R.id.logText);
+				logText.setText(logText.getText() + "\n" + msg.obj);
+			}
+		};
+		AndroidLogUtil.setLogHandler(logHandler);
 
+        InitialUtil.initial();//初始化
 		return inflater.inflate(R.layout.main_content_fragment, container, false);
+	}
+
+	/**
+	 * 输出日志
+	 * 
+	 * @param message
+	 */
+	public final void outLog(final String message) {
+		Message msg = new Message();
+		msg.obj = message;
+		logHandler.sendMessage(msg);
 	}
 
 	@Override
@@ -93,12 +117,13 @@ public class MainContentFragment extends Fragment implements OnItemClickListener
 	}
 
 	private void initView() {
-		
+
 		initialFeatures();
-		
+
 		homeContent = getActivity().findViewById(R.id.homeContent);
 		contactContent = getActivity().findViewById(R.id.contactContent);
 		featuresContent = getActivity().findViewById(R.id.featuresContent);
+		settingContent = getActivity().findViewById(R.id.settingContent);
 
 		mListView = (ListViewCompat) getActivity().findViewById(R.id.contactContent);
 		MessageItem item = new MessageItem();
@@ -121,41 +146,41 @@ public class MainContentFragment extends Fragment implements OnItemClickListener
 	 * 初始化功能页面
 	 */
 	private void initialFeatures() {
-		listview=(PinnedSectionListView)getActivity().findViewById(R.id.pinnedSectionListView1);
+		listview = (PinnedSectionListView) getActivity().findViewById(R.id.pinnedSectionListView1);
 		listview.setAdapter(null);
-		
-		
-		adapter=new AdapterListView(getActivity(),FeaturesQueryListBean.getData());
+
+		adapter = new AdapterListView(getActivity(), FeaturesQueryListBean.getData());
 		listview.setAdapter(adapter);
 		listview.setOnItemClickListener(getListenerForListView());
-		
 
 		setListViewHeightBasedOnChildren(listview);
 	}
-	
+
 	public static void setListViewHeightBasedOnChildren(ListView listView) {
-	    if(listView == null) return;
-	    ListAdapter listAdapter = listView.getAdapter();
-	    if (listAdapter == null) {
-	        // pre-condition
-	    	Log.e(TAG, "adapter为空");
-	        return;
-	    }
-	    int totalHeight = 0;
-	    for (int i = 0; i < listAdapter.getCount(); i++) {
-	        View listItem = listAdapter.getView(i, null, listView);
-	        listItem.measure(0, 0);
-	        totalHeight += listItem.getMeasuredHeight();
-	    }
-	    ViewGroup.LayoutParams params = listView.getLayoutParams();
-	    int heightTemp = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-	    Log.e(TAG, "heightTemp设置成功："+heightTemp);
-	    params.height = heightTemp;
-	    listView.setLayoutParams(params);
+		if (listView == null)
+			return;
+		ListAdapter listAdapter = listView.getAdapter();
+		if (listAdapter == null) {
+			// pre-condition
+			Log.e(TAG, "adapter为空");
+			return;
+		}
+		int totalHeight = 0;
+		for (int i = 0; i < listAdapter.getCount(); i++) {
+			View listItem = listAdapter.getView(i, null, listView);
+			listItem.measure(0, 0);
+			totalHeight += listItem.getMeasuredHeight();
+		}
+		ViewGroup.LayoutParams params = listView.getLayoutParams();
+		int heightTemp = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+		Log.e(TAG, "heightTemp设置成功：" + heightTemp);
+		params.height = heightTemp;
+		listView.setLayoutParams(params);
 	}
 
 	/**
 	 * 功能页面增加监听程序
+	 * 
 	 * @return
 	 */
 	private OnItemClickListener getListenerForListView() {
@@ -163,12 +188,11 @@ public class MainContentFragment extends Fragment implements OnItemClickListener
 		return new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position,
-					long id) {
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// TODO Auto-generated method stub
-				if(position>0){
-					FeaturesQueryListBean bean=adapter.getItem(position);
-					if(bean.type==FeaturesQueryListBean.ITEM){
+				if (position > 0) {
+					FeaturesQueryListBean bean = adapter.getItem(position);
+					if (bean.type == FeaturesQueryListBean.ITEM) {
 						Toast.makeText(getActivity(), bean.text, Toast.LENGTH_SHORT).show();
 					}
 				}
@@ -176,7 +200,6 @@ public class MainContentFragment extends Fragment implements OnItemClickListener
 		};
 	}
 
-	
 	private class SlideAdapter extends BaseAdapter {
 
 		private LayoutInflater mInflater;
@@ -258,7 +281,7 @@ public class MainContentFragment extends Fragment implements OnItemClickListener
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//		Log.e(TAG, "点击位置：" + position);
+		// Log.e(TAG, "点击位置：" + position);
 	}
 
 	@Override

@@ -281,7 +281,7 @@ public class ControlClientPCWindows {
 			public void actionPerformed(ActionEvent e) {
 				List<ConnectionBean> canConnectList = CommonFactory.getCommunicationService().getConnectableList();
 				for (ConnectionBean connectionBean : canConnectList) {
-					logger.info(connectionBean.name);
+					logger.info(connectionBean.name+":"+connectionBean.ip);
 				}
 			}
 		});
