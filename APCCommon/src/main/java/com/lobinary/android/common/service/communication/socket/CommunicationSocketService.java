@@ -84,7 +84,7 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 						try {
 							Socket s = new Socket();
 							s = serverSocket.accept();
-							logger.info("Socket业务交互类:接收到连接请求");
+							logger.info("Socket业务交互类:接收到连接请求:"+s.getRemoteSocketAddress());
 							if (isPauseStatus) {
 								try {
 									logger.info("Socket业务交互类:因服务器处于暂停状态,拒绝了一个新连接请求.");
@@ -98,7 +98,7 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 								continue;
 							} else {
 								try {
-									CommunicationSocketThread socketThread = new CommunicationSocketThread(s);
+									CommunicationSocketThread socketThread = new CommunicationSocketThread(s,true);
 									socketThread.start();
 								} catch (Exception e) {
 									logger.error("Socket业务交互类:在创建与新客户端连接的过程中发生异常,异常原因如下:", e);
@@ -110,7 +110,6 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 						}
 					}
 				} catch (Exception e) {
-
 					logger.error("Socket业务交互类:创建Socket失败,异常原因如下:", e);
 				}
 
@@ -222,7 +221,7 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 							}
 							clientSocket.close();
 						} catch (Exception e) {
-							logger.error("Socket交互业务类:获取可连接设备列表,尝试连接IP:"+lanIp+"失败");
+//							logger.error("Socket交互业务类:获取可连接设备列表,尝试连接IP:"+lanIp+"失败");
 						}
 					}
 				}.start();
@@ -230,7 +229,7 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 
 			try {
 				Thread.sleep(1500);//只捕获1.5秒内的数据,其余均为超时设备
-				logger.info("Socket交互业务类:获取可连接设备列表,准备将查询结果返回");
+//				logger.debug("Socket交互业务类:获取可连接设备列表,准备将查询结果返回");
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -246,40 +245,11 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 	 * #connect(com.lobinary.android.common.pojo.communication.ConnectionBean)
 	 */
 	@Override
-	public ConnectionBean connect(ConnectionBean connectionBean) {
+	public void connect(ConnectionBean connectionBean) throws UnknownHostException, IOException {
 		final String connIp = connectionBean.ip;
-		new Thread() {
-			@Override
-			public void run() {
-				try {
-					Socket servertome = new Socket(connIp, Constants.CONNECTION.PARAM.SOCKET_PORT);
-					BufferedReader in = new BufferedReader(new InputStreamReader(servertome.getInputStream(), "UTF8"));
-					PrintWriter out = new PrintWriter(servertome.getOutputStream(), true);
-					Message message = MessageUtil.getNewRequestMessage(Constants.MESSAGE.TYPE.REQUEST_CONNECT);
-					out.println(MessageUtil.message2String(message));
-					out.flush();
-					String str = in.readLine();
-					logger.info("#####与客户端连接成功,接收到客户端信息:" + str);
-
-					while (true) {
-						logger.info("#####等待客户端反馈消息");
-						String str2 = in.readLine();
-						logger.info("#####与客户端连接成功,接收到客户端信息2:" + str2);
-						out.println(str2);
-						out.flush();
-					}
-
-				} catch (UnknownHostException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				super.run();
-			}
-
-		}.start();
-
-		return connectionBean;
+		Socket clientSocket = new Socket(connIp, Constants.CONNECTION.PARAM.SOCKET_PORT);
+		CommunicationSocketThread socketThread = new CommunicationSocketThread(clientSocket,false);
+		socketThread.start();
 	}
 
 	/*
@@ -351,9 +321,9 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 		return connectionMap;
 	}
 
-	public static void addConnection(String clientId, ConnectionBean connectionBean) {
-		connectionMap.put(clientId, connectionBean);
-		logger.info("Socket业务交互类:新连接(clientId:" + clientId + ")被添加,当前连接总数为:" + connectionMap.size() + "个");
+	public static void addConnection(ConnectionBean connectionBean) {
+		connectionMap.put(connectionBean.clientId, connectionBean);
+		logger.info("Socket业务交互类:新连接(clientId:" + connectionBean.clientId + ")被添加,当前连接总数为:" + connectionMap.size() + "个");
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.lobinary.android.common.pojo.communication;
 
 import com.lobinary.android.common.service.communication.ConnectionThreadInterface;
+import com.lobinary.android.common.service.communication.socket.CommunicationSocketThread;
 
 /**
  * <pre>
@@ -16,6 +17,11 @@ import com.lobinary.android.common.service.communication.ConnectionThreadInterfa
 public class ConnectionBean {
 	
 	/**
+	 * 客户端Id
+	 */
+	public String clientId;
+	
+	/**
 	 * 连接名称
 	 */
 	public String name;
@@ -29,6 +35,26 @@ public class ConnectionBean {
 	 * 连接监控子线程
 	 */
 	private ConnectionThreadInterface connectionThread;
+
+	/**
+	 * 初始化
+	 * @param initialMessage
+	 * @param communicationSocketThread 
+	 */
+	public ConnectionBean(Message initialMessage, CommunicationSocketThread communicationSocketThread) {
+		MessageTitle messageTitle = initialMessage.getMessageTitle();
+		this.clientId = messageTitle.getSendClientId();
+		this.name = messageTitle.getSendClientName();
+		this.ip = messageTitle.getSendClientIp();
+		this.connectionThread = communicationSocketThread;
+	}
+
+	/**
+	 * 
+	 */
+	public ConnectionBean() {
+		super();
+	}
 
 	/**
 	 * 具体注释请点击Also see

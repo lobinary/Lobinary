@@ -54,14 +54,31 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 
 	private long num = 1;
 
-	public CommunicationSocketThread(Socket clientSocket) throws UnsupportedEncodingException, IOException {
+	/**
+	 * 构造方法
+	 * @param clientSocket
+	 * @param isReceiveRequest 是否是接受的请求 true是    false不是，是主动发起的连接请求
+	 * @throws UnsupportedEncodingException
+	 * @throws IOException
+	 */
+	public CommunicationSocketThread(Socket clientSocket,boolean isReceiveRequest) throws UnsupportedEncodingException, IOException {
 		super();
-		this.clientSocket = clientSocket;
-		in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(), "UTF8"));
-		out = new PrintWriter(clientSocket.getOutputStream(), true);
-		logger.info("Socket服务端监控客户端子线程:收到客户端数据:客户端子线程初始化成功");
-	}
 
+		this.clientSocket = clientSocket;
+		in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(),Constants.CONNECTION.PARAM.SOCKET_ENCODING));
+		out = new PrintWriter(clientSocket.getOutputStream(), true);
+		
+		if(isReceiveRequest){
+			logger.info("Socket服务端监控客户端子线程:收到客户端数据:客户端子线程初始化成功");
+		}else{
+			Message reqMessage = MessageUtil.getNewResponseMessage(Constants.MESSAGE.TYPE.REQUEST_CONNECT);
+			String respMsg = MessageUtil.message2String(reqMessage);
+			out.println(respMsg);
+			out.flush();
+			logger.info("Socket服务端监控客户端子线程:向客户端发起连接请求成功");
+		}
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -82,6 +99,23 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 					String respMsg = MessageUtil.message2String(respMessage);
 					sendLastMsg(respMsg);
 				}else if(Constants.MESSAGE.TYPE.REQUEST_CONNECT.equals(initialMessage.getMessageType())){
+
+					respMessage = MessageUtil.getNewResponseMessage(Constants.MESSAGE.TYPE.ACCEPT_CONNECT);
+					String respMsg = MessageUtil.message2String(respMessage);
+					out.println(respMsg);
+					out.flush();
+					
+					messageTitle = initialMessage.getMessageTitle();
+					ConnectionBean connectionBean = new ConnectionBean(initialMessage,this);
+					CommunicationSocketService.addConnection(connectionBean);
+					
+					establishConnection(initialMessage);
+				}else if(Constants.MESSAGE.TYPE.ACCEPT_CONNECT.equals(initialMessage.getMessageType())){
+
+					messageTitle = initialMessage.getMessageTitle();
+					ConnectionBean connectionBean = new ConnectionBean(initialMessage,this);
+					CommunicationSocketService.addConnection(connectionBean);
+					
 					establishConnection(initialMessage);
 				}else{
 					respMessage = MessageUtil.getNewResponseMessage(Constants.MESSAGE.TYPE.EXCEPTION);
@@ -98,7 +132,7 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 			if(isReconnect){
 				logger.error("Socket服务端监控客户端子线程:与客户端进行交互时发生异常,准备重新连接！",e);
 			}else{
-				logger.error("Socket服务端监控客户端子线程:与"+messageTitle.getSendClientName()+"的连接被关闭！");
+				logger.error("Socket服务端监控客户端子线程:与"+messageTitle.getSendClientName()+"的连接被关闭！",e);
 			}
 		}
 	}
@@ -125,15 +159,6 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 	 * @throws IOException
 	 */
 	private void establishConnection(Message initialMessage) throws IOException {
-		Message respMessage = MessageUtil.getNewResponseMessage(Constants.MESSAGE.TYPE.ACCEPT_CONNECT);
-		String respMsg = MessageUtil.message2String(respMessage);
-		out.println(respMsg);
-		out.flush();
-		
-		messageTitle = initialMessage.getMessageTitle();
-		ConnectionBean connectionBean = new ConnectionBean();
-		connectionBean.setConnectionThread(this);
-		CommunicationSocketService.addConnection(initialMessage.getMessageTitle().getSendClientId(), connectionBean);
 		
 		logger.info("Socket服务端监控客户端子线程:收到客户端数据:客户端("+messageTitle.getSendClientName()+")子线程启动成功");
 		String line = in.readLine();

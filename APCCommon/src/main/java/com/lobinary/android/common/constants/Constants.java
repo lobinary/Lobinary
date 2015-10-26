@@ -58,6 +58,14 @@ public class Constants {
 		 *
 		 */
 		public class COMMAND{
+
+			public class CODE{
+
+				/**
+				 * 远程方法
+				 */
+				public final static String REMOTE_METHOD = "REMOTE_METHOD";
+			} 
 			
 		}
 		

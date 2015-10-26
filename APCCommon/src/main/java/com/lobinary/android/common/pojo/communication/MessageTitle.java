@@ -23,22 +23,22 @@ public class MessageTitle implements Serializable{
 	/**
 	 * 版本
 	 */
-	private String version = "1.0.0";
+	private String version ;
 	
 	/**
 	 * 发送客户端ID
 	 */
-	private String sendClientId = "APCTest0001";
+	private String sendClientId ;
 
 	/**
 	 * 发送客户端名称
 	 */
-	private String sendClientName = "APCTestClientName";
+	private String sendClientName;
 	
 	/**
 	 * 发送客户端IP
 	 */
-	private String sendClientIp = "127.0.0.1";
+	private String sendClientIp;
 	
 	/**
 	 * 发送时间

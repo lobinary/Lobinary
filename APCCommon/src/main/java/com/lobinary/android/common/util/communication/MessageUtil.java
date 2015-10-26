@@ -3,6 +3,10 @@ package com.lobinary.android.common.util.communication;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.lobinary.android.common.constants.CodeDescConstants;
 import com.lobinary.android.common.constants.Constants;
@@ -10,7 +14,11 @@ import com.lobinary.android.common.exception.APCSysException;
 import com.lobinary.android.common.pojo.communication.Command;
 import com.lobinary.android.common.pojo.communication.Message;
 import com.lobinary.android.common.pojo.communication.MessageTitle;
+import com.lobinary.android.common.service.communication.socket.CommunicationSocketThread;
 import com.lobinary.android.common.service.control.BaseServiceInterface;
+import com.lobinary.android.common.util.NetUtil;
+import com.lobinary.android.common.util.PropertiesUtil;
+import com.lobinary.android.common.util.date.DateUtil;
 import com.lobinary.android.common.util.factory.CommonFactory;
 
 /**
@@ -25,12 +33,23 @@ import com.lobinary.android.common.util.factory.CommonFactory;
  * 
  */
 public class MessageUtil {
+
+	private static Logger logger = LoggerFactory.getLogger(MessageUtil.class);
 	
-	public static String clientId = MessageUtil.generateClientId();
+	public static String clientId;
 	public static String clientIp;
 	public static String clientName;
 	public static MessageTranslatorInterface messageTranlator = CommonFactory.getMessageTranslator();
 	private static BaseServiceInterface baseService = CommonFactory.getBaseService();
+	
+	static{
+		clientId = MessageUtil.generateClientId();
+		List<String> localIpList = NetUtil.getLocalIpList();
+		if(localIpList.size()>0){
+			clientIp = localIpList.get(0);
+		}
+		clientName = (String) PropertiesUtil.getFileValue("ClientName");
+	}
 	
 	/**
 	 * 
@@ -53,8 +72,12 @@ public class MessageUtil {
 	 * @return
 	 */
 	private static String generateClientId() {
-		
-		return null;
+		String clientId = (String) PropertiesUtil.getFileValue("ClientName");
+		if(clientId==null){
+			clientId = DateUtil.getCurrDateTime("yyyyMMddhh24mmssSSS");
+			PropertiesUtil.saveFileValue("ClientName", clientId);
+		}
+		return clientId;
 	}
 
 	/**
@@ -72,6 +95,8 @@ public class MessageUtil {
 			messageType = Constants.MESSAGE.TYPE.COMMAND;
 		}
 		Message message = new Message();
+		
+		message.isReq = true;
 		
 		MessageTitle messageTitle = getMessageTitle();
 		
@@ -100,6 +125,7 @@ public class MessageUtil {
 	 */
 	public static Message getNewResponseMessage(String messageType){
 		Message message = new Message();
+		message.isReq = false;
 		MessageTitle messageTitle = getMessageTitle();
 		message.setMessageTitle(messageTitle);
 		message.setMessageType(messageType);
@@ -200,12 +226,14 @@ public class MessageUtil {
 			}else if(Constants.MESSAGE.TYPE.COMMAND.equals(messageType)){
 				Command command = message.getCommand();
 				String commandCode = command.getCommandCode();
-				if(commandCode.equals("远程方法")){
+				if(Constants.MESSAGE.COMMAND.CODE.REMOTE_METHOD.equals(commandCode)){
 					String methodName = command.getRemoteMethodName();
 					Class<?> clazz = baseService.getClass(); 
 					Method m1 = clazz.getDeclaredMethod(methodName,Command.class); 
 					respMessage = (Message) m1.invoke(baseService,command); 
 				}
+				respMessage = getNewResponseMessage(Constants.MESSAGE.TYPE.COMMAND);
+				logger.info("报文工具类:接收到客户端调用命令,调用命令成功");
 			}else{
 				throw new APCSysException(CodeDescConstants.SERVICE_MESSAGE_ERROR_MESSAGE_TYPE, "报文类型("+messageType+")错误");
 			}

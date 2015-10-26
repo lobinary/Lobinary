@@ -90,7 +90,9 @@ public class NetUtil {
 				for (InetAddress addrIndex : addrs) {
 					String ip = addrIndex.getHostAddress();
 					if (ip.length() <= 15) {// 大于15的大部分为ipv6或者其他隧道参数，非IPV4
-						list.add(ip);
+						if(!ip.contains("172.16")){
+							list.add(ip);
+						}
 					}
 				}
 			}

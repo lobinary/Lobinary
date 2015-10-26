@@ -22,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -87,10 +88,10 @@ public class ControlClientPCWindows {
 			public void run() {
 				try {
 					ControlClientPCWindows window = new ControlClientPCWindows();
-					window.frame.setVisible(true);
 					InitialUtil.initial();
 					CommunicationServiceInterface communicationService = CommonFactory.getCommunicationService();
 					communicationService.startServer();
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -234,7 +235,18 @@ public class ControlClientPCWindows {
 		JButton btnNewButton_2 = new JButton("测试(连接服务器)");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CommonFactory.getCommunicationService().connect(null);
+				try {
+					List<ConnectionBean> connectableList = CommonFactory.getCommunicationService().getConnectableList();
+					for (ConnectionBean connectionBean : connectableList) {
+						CommonFactory.getCommunicationService().connect(connectionBean);
+					}
+				} catch (UnknownHostException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		panel_6.add(btnNewButton_2);
@@ -253,15 +265,8 @@ public class ControlClientPCWindows {
 		JButton btnNewButton_3 = new JButton("测试(向客户端发送请求)");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for (int i = 0; i < 200; i++) {
-					new Thread(){
-						@Override
-						public void run() {
-							Message requestMessage = MessageUtil.getNewRequestMessage(Constants.MESSAGE.TYPE.COMMAND);
-							CommonFactory.getCommunicationService().sendMessageToAll(requestMessage);
-						}
-					}.start();
-				}
+					Message requestMessage = MessageUtil.getNewRequestMessage(Constants.MESSAGE.TYPE.COMMAND);
+					CommonFactory.getCommunicationService().sendMessageToAll(requestMessage);
 			}
 		});
 		panel_8.add(btnNewButton_3);

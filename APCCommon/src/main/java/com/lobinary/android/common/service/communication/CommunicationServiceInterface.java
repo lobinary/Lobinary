@@ -1,5 +1,7 @@
 package com.lobinary.android.common.service.communication;
 
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +22,12 @@ import com.lobinary.android.common.pojo.communication.Message;
  */
 public interface CommunicationServiceInterface {
 	
+	/**
+	 * <pre>
+	 * 连接列表 
+	 * key:clientId 
+	 * value:连接实体
+	 */
 	public static Map<String, ConnectionBean> connectionMap = new HashMap<String, ConnectionBean>();
 	
 	/**
@@ -86,13 +94,15 @@ public interface CommunicationServiceInterface {
 	/**
 	 * 
 	 * <pre>
-	 * 连接指定服务器
+	 * 连接指定服务器 想操作已经建立的连接 请在 {@link #connectionMap} 中查找
 	 * </pre>
 	 *
 	 * @param connectionBean
 	 * @return
+	 * @throws IOException 
+	 * @throws UnknownHostException 
 	 */
-	public ConnectionBean connect(ConnectionBean connectionBean);
+	public void connect(ConnectionBean connectionBean) throws UnknownHostException, IOException;
 	
 	/**
 	 * 
