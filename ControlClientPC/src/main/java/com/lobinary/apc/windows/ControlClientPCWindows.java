@@ -50,6 +50,7 @@ import com.lobinary.android.common.constants.Constants;
 import com.lobinary.android.common.pojo.communication.ConnectionBean;
 import com.lobinary.android.common.pojo.communication.Message;
 import com.lobinary.android.common.service.communication.CommunicationServiceInterface;
+import com.lobinary.android.common.util.PropertiesUtil;
 import com.lobinary.android.common.util.communication.MessageUtil;
 import com.lobinary.android.common.util.factory.CommonFactory;
 import com.lobinary.apc.util.initial.InitialUtil;
@@ -85,12 +86,11 @@ public class ControlClientPCWindows {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					InitialUtil.initial();
 					ControlClientPCWindows window = new ControlClientPCWindows();
+					window.frame.setVisible(true);
+					InitialUtil.initial();
 					CommunicationServiceInterface communicationService = CommonFactory.getCommunicationService();
 					communicationService.startServer();
-					window.frame.setVisible(true);
-					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -274,9 +274,9 @@ public class ControlClientPCWindows {
 		JButton btnNewButton_4 = new JButton("测试(获取可连接列表)");
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				List<ConnectionBean> canConnectList = CommonFactory.getCommunicationService().getCanConnectList();
+				List<ConnectionBean> canConnectList = CommonFactory.getCommunicationService().getConnectableList();
 				for (ConnectionBean connectionBean : canConnectList) {
-					logger.info(connectionBean.ip);
+					logger.info(connectionBean.name);
 				}
 			}
 		});

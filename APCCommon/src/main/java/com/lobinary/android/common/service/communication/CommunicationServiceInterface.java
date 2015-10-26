@@ -81,7 +81,7 @@ public interface CommunicationServiceInterface {
 	 *
 	 * @return 服务器列表
 	 */
-	public List<ConnectionBean> getCanConnectList();
+	public List<ConnectionBean> getConnectableList();
 	
 	/**
 	 * 

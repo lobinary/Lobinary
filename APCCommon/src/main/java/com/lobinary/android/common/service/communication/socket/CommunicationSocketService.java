@@ -191,7 +191,7 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 	 * CommunicationServiceInterface#getCanConnecList()
 	 */
 	@Override
-	public List<ConnectionBean> getCanConnectList() {
+	public List<ConnectionBean> getConnectableList() {
 		final List<ConnectionBean> resultList = new ArrayList<ConnectionBean>();
 		List<String> localIpList = NetUtil.getLocalIpList();
 		for (String localIp : localIpList) {
@@ -222,14 +222,14 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 							}
 							clientSocket.close();
 						} catch (Exception e) {
-//							logger.error("Socket交互业务类:获取可连接设备列表,尝试连接IP:"+lanIp+"失败");
+							logger.error("Socket交互业务类:获取可连接设备列表,尝试连接IP:"+lanIp+"失败");
 						}
 					}
 				}.start();
 			}
 
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(1500);//只捕获1.5秒内的数据,其余均为超时设备
 				logger.info("Socket交互业务类:获取可连接设备列表,准备将查询结果返回");
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -256,7 +256,6 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 					BufferedReader in = new BufferedReader(new InputStreamReader(servertome.getInputStream(), "UTF8"));
 					PrintWriter out = new PrintWriter(servertome.getOutputStream(), true);
 					Message message = MessageUtil.getNewRequestMessage(Constants.MESSAGE.TYPE.REQUEST_CONNECT);
-					message.getMessageTitle().setSendClientId("" + System.currentTimeMillis());
 					out.println(MessageUtil.message2String(message));
 					out.flush();
 					String str = in.readLine();

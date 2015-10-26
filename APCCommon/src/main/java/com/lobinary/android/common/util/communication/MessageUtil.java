@@ -26,7 +26,7 @@ import com.lobinary.android.common.util.factory.CommonFactory;
  */
 public class MessageUtil {
 	
-	public static String clientId;
+	public static String clientId = MessageUtil.generateClientId();
 	public static String clientIp;
 	public static String clientName;
 	public static MessageTranslatorInterface messageTranlator = CommonFactory.getMessageTranslator();
@@ -45,6 +45,18 @@ public class MessageUtil {
 		return Constants.MESSAGE.TYPE.DISCONNECT.equals(string2Messag(messageStr).getMessageType());
 	}
 	
+	/**
+	 * <pre>
+	 * 生成客户端ID
+	 * </pre>
+	 *
+	 * @return
+	 */
+	private static String generateClientId() {
+		
+		return null;
+	}
+
 	/**
 	 * 
 	 * <pre>

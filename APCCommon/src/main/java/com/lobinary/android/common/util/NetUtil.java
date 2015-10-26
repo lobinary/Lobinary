@@ -137,7 +137,7 @@ public class NetUtil {
 			logger.error("网络工具类:获取局域网内其他设备IP发生异常",e);
 			throw new APCSysException(CodeDescConstants.NET_GET_LOCAL_IP_EXCEPTION,e);
 		}
-		
+//		list.remove(localIp);
 		return list;
 	}
 

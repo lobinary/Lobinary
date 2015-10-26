@@ -101,7 +101,12 @@ public enum CodeDescConstants {
 	
 	/** "905401","获取本地IP异常" */
 	NET_GET_LOCAL_IP_EXCEPTION("905401","获取本地IP异常"),
-	NET_GET_LOCAL_LAN_IP_EXCEPTION("905401","获取本地局域网IP异常")
+	/** "905402","获取本地局域网IP异常" */
+	NET_GET_LOCAL_LAN_IP_EXCEPTION("905402","获取本地局域网IP异常"),
+
+	//906*** 配置工具类状态码
+	/** "906401","配置初始化失败" */
+	PROPERTIES_INITIAL_EXCEPTION("906401","配置初始化失败")
 	
 	;
 	
