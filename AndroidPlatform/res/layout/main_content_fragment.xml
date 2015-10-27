@@ -8,14 +8,12 @@
     
     <!--  ############################## 日志页面上  ##############################  -->
     
-    <RelativeLayout
+    <ScrollView
         android:id="@+id/settingContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:columnCount="2"
         android:orientation="vertical"
-        android:rowCount="2"
         android:visibility="visible"> 
 	    <TextView
 	        android:id="@+id/logText"
@@ -25,12 +23,12 @@
 	        android:layout_alignParentLeft="true"
 	        android:layout_alignParentRight="true"
 	        android:layout_alignParentTop="true"
+	        android:scrollbars="vertical" 
 	        android:textIsSelectable="false"
-	        android:ems="10"
 	        android:textColor="@color/black"
 	        android:text="欢迎使用APC系统">
 	    </TextView>
-    </RelativeLayout>
+    </ScrollView>
     <!--  ############################## 日志页面 下  ##############################  -->
     
     <LinearLayout

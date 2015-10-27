@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.lobinary.android.common.util.log.LogUtil;
 import com.lobinary.android.platform.R;
 
 public class MainBottomFragment extends Fragment {
@@ -80,6 +81,7 @@ public class MainBottomFragment extends Fragment {
 	}
 
 	public void setClickAnimal(long clickBtnId){
+		LogUtil.out("准备切换页面"+clickBtnId);
 		mainContent.clickShowContent(clickBtnId,activitionBtnId);
 		if(activitionBtnId==R.id.homeBtnView){
 			homeBtnView.setImageDrawable(getResources().getDrawable(R.drawable.home));
