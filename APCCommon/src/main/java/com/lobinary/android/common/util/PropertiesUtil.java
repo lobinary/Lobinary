@@ -100,8 +100,8 @@ public class PropertiesUtil {
 	 */
 	public static void saveFileValue(String key,Object object){
 		fileStoreMap.put(key,  object);
-		logger.info("保存对象("+key+":"+object+")成功");
 		FileUtil.saveObj(storeFile, fileStoreMap);
+		logger.info("保存对象("+key+":"+object+")成功");
 	}
 
 }
