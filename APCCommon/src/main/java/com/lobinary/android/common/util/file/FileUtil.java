@@ -174,12 +174,14 @@ public class FileUtil {
 			object = (T) ois.readObject();
 		} catch(Exception e) {
 			logger.error("文件工具类:从文件读取对象异常",e);
+			System.out.println("读取文件失败"+e.getMessage());
 		} finally {
 			try {
 				ois.close();
 				fis.close();
 			} catch (IOException e) {
 				logger.error("文件工具类:从文件读取对象异常",e);
+				System.out.println("关闭异常"+e.getMessage());
 			}
 		}
 		return object;

@@ -11,6 +11,8 @@
  */
 package com.lobinary.android.platform.util;
 
+import java.io.File;
+
 import com.lobinary.android.common.service.communication.socket.CommunicationSocketService;
 import com.lobinary.android.common.util.PropertiesUtil;
 import com.lobinary.android.common.util.communication.MessageUtil;
@@ -36,12 +38,16 @@ public class InitialUtil {
 		System.out.println("初始化工具类准备初始化相关配置");
 		
 		CommonFactory.setLogUtil(new AndroidLogUtil());//需要最先装配日志工具,否则日志输出将造成空指针
-		
-		CommonFactory.setCommunicationService(new CommunicationSocketService());
-		CommonFactory.setMessageTranslator(new MessageJsonTranslator());
-		CommonFactory.setBaseService(new AndroidService());
+
+
+		CommonFactory.storeFile = AndroidFileUtil.getFile(CommonFactory.storeFileName);
+		//		CommonFactory.setCommunicationService(new CommunicationSocketService());
+//		CommonFactory.setMessageTranslator(new MessageJsonTranslator());
+//		CommonFactory.setBaseService(new AndroidService());
 
 //		PropertiesUtil.getPropertiesValue("test");
+		
+
 		LogUtil.out("初始化工具类:相关配置信息初始化完成！");
 		
 		MessageUtil.clientName = "Windows互控客户端";

@@ -11,7 +11,9 @@ import org.slf4j.LoggerFactory;
 
 import com.lobinary.android.common.constants.CodeDescConstants;
 import com.lobinary.android.common.exception.APCSysException;
+import com.lobinary.android.common.util.factory.CommonFactory;
 import com.lobinary.android.common.util.file.FileUtil;
+import com.lobinary.android.common.util.log.LogUtil;
 
 /**
  * <pre>
@@ -31,29 +33,34 @@ public class PropertiesUtil {
 	private static Logger logger = LoggerFactory.getLogger(PropertiesUtil.class);
 	
 	private static Properties properties;
-	private static String fileStoreLocaltion = "lobinary_apc_store_file.apc";
 	private static Map<String, Object> fileStoreMap;
-	private static File storeFile = new File(fileStoreLocaltion);
+	public static File storeFile = CommonFactory.storeFile;
+//	public static String propFile = "apc.properties";
 
 	static {
 		try {
-			System.out.println("配置工具类:配置信息初始化完成,存储文件(StoreFile)位置:"+storeFile.getAbsolutePath());
+			LogUtil.out("配置工具类:配置信息初始化开始,存储文件(StoreFile)位置:"+storeFile.getAbsolutePath());
 		
-			String propFile = "apc.properties";
 			properties = new Properties();
-			InputStream file = PropertiesUtil.class.getClassLoader().getResourceAsStream(propFile);
-			properties.load(file);
-		
-			if (!FileUtil.fileIsExistAndCreate(storeFile)) {
-				fileStoreMap = new HashMap<String, Object>();
-				FileUtil.saveObj(storeFile, fileStoreMap);
+//			InputStream file = PropertiesUtil.class.getClassLoader().getResourceAsStream(propFile);
+//			properties.load(file);
+			if("android".equals("android")){
+				
+			}else{
+				if (!FileUtil.fileIsExistAndCreate(storeFile)) {
+					fileStoreMap = new HashMap<String, Object>();
+					FileUtil.saveObj(storeFile, fileStoreMap);
+				}
 			}
-
+//			fileStoreMap = new HashMap<String, Object>();
+//			FileUtil.saveObj(storeFile, fileStoreMap);//XXX 安卓需要修复相关BUG
+			LogUtil.out("读取storeFile开始"+storeFile);
 			fileStoreMap = FileUtil.getObj(storeFile,Map.class);
 			logger.info("配置工具类:配置信息初始化完成,存储文件(StoreFile)位置:"+storeFile.getAbsolutePath());
 		} catch (Exception e) {
 			logger.error("配置工具类:初始化配置工具类异常",e);
-			throw new APCSysException(CodeDescConstants.PROPERTIES_INITIAL_EXCEPTION);
+			System.out.println("配置工具类:初始化配置工具类异常"+e.getMessage());
+			throw new APCSysException(CodeDescConstants.PROPERTIES_INITIAL_EXCEPTION,e);
 		}
 
 	}

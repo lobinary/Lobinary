@@ -58,6 +58,7 @@ public class APCSysException extends RuntimeException {
 		super(e);
 		this.errCode = msg.getCode();
 		this.errMessage = msg.getDesc();
+		this.orignalException = e;
 	}
 	
 	public String getErrCode() {
@@ -70,7 +71,8 @@ public class APCSysException extends RuntimeException {
 	}
 	
 	public String toString() {
-		return  "错误编码[" + this.errCode + "],错误信息[" + this.errMessage + "],错误描述[" + this.errDesc + "]";
+		return  "错误编码[" + this.errCode + "],错误信息[" + this.errMessage + "],错误描述[" + this.errDesc + "]," +
+				(this.orignalException==null?"":"java异常["+this.orignalException.getMessage())+"]";
 	}
 
 	/**

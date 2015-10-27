@@ -44,10 +44,11 @@ public class MessageUtil {
 	
 	static{
 		clientId = MessageUtil.generateClientId();
-		List<String> localIpList = NetUtil.getLocalIpList();
-		if(localIpList.size()>0){
-			clientIp = localIpList.get(0);
-		}
+//		List<String> localIpList = NetUtil.getLocalIpList();
+//		if(localIpList.size()>0){
+//			clientIp = localIpList.get(0);
+//		}
+		//XXX  因安卓有问题 暂注释
 		clientName = (String) PropertiesUtil.getFileValue("ClientName");
 	}
 	

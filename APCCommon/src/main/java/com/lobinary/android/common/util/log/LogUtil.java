@@ -33,6 +33,7 @@ public class LogUtil {
 	 * @return
 	 */
 	public static boolean out(String log){
+		System.out.println(log);
 		return logUtilImpl.out(log);
 	}
 

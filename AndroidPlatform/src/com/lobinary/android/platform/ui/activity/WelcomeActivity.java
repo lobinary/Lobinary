@@ -1,12 +1,16 @@
 package com.lobinary.android.platform.ui.activity;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Environment;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -14,11 +18,12 @@ import android.view.animation.Animation.AnimationListener;
 import android.widget.Toast;
 
 import com.lobinary.android.platform.R;
-import com.lobinary.android.platform.constants.Constants;
 import com.lobinary.android.platform.dao.InteractionMessageDAO;
 import com.lobinary.android.platform.pojo.bean.InteractionMessage;
 import com.lobinary.android.platform.util.NetworkUtils;
 import com.lobinary.android.platform.util.SystemUiHider;
+
+import de.mindpipe.android.logging.log4j.LogConfigurator;
 
 
 /**
@@ -30,6 +35,23 @@ import com.lobinary.android.platform.util.SystemUiHider;
 public class WelcomeActivity extends Activity {
 	
 	private boolean connectionStatus = false;
+	
+	  private Logger gLogger;
+	     
+    public void configLog()
+    {
+        final LogConfigurator logConfigurator = new LogConfigurator();
+         
+        logConfigurator.setFileName(Environment.getExternalStorageDirectory() + File.separator + "apc_log4j.log");
+        // Set the root log level
+        logConfigurator.setRootLevel(Level.DEBUG);
+        // Set log level of a specific logger
+        logConfigurator.setLevel("org.apache", Level.ERROR);
+        logConfigurator.configure();
+ 
+        //gLogger = Logger.getLogger(this.getClass());
+        gLogger = Logger.getLogger("CrifanLiLog4jTest");
+    }
 
     /**
      * The instance of the {@link SystemUiHider} for this activity.
@@ -37,6 +59,8 @@ public class WelcomeActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+    	configLog();
+    	gLogger.info("日志系统初始化完成");
         super.onCreate(savedInstanceState);
         init();
         setContentView(R.layout.activity_welcome);

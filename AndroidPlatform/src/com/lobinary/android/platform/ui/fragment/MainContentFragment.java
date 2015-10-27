@@ -89,7 +89,7 @@ public class MainContentFragment extends Fragment implements OnItemClickListener
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		logHandler = new Handler() {
 			public void handleMessage(Message msg) {
-				EditText logText = (EditText) getActivity().findViewById(R.id.logText);
+				TextView logText = (TextView) getActivity().findViewById(R.id.logText);
 				logText.setText(logText.getText() + "\n" + msg.obj);
 			}
 		};

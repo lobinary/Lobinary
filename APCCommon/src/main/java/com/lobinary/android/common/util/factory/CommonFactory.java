@@ -1,5 +1,7 @@
 package com.lobinary.android.common.util.factory;
 
+import java.io.File;
+
 import com.lobinary.android.common.service.communication.CommunicationServiceInterface;
 import com.lobinary.android.common.service.control.BaseServiceInterface;
 import com.lobinary.android.common.util.communication.MessageTranslatorInterface;
@@ -17,6 +19,9 @@ import com.lobinary.android.common.util.log.LogUtilInterface;
  * 
  */
 public class CommonFactory {
+	
+	public static String storeFileName = "apc_store_file.apc";
+	public static File storeFile;
 	
 	/**
 	 * 日志工具类
@@ -53,6 +58,7 @@ public class CommonFactory {
 	 */
 	public static void setLogUtil(LogUtilInterface logUtil) {
 		CommonFactory.logUtil = logUtil;
+		System.out.println("日志工具类初始化完成："+logUtil);
 	}
 
 	/**
