@@ -1,5 +1,8 @@
 package com.lobinary.android.platform.ui.fragment;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,10 +13,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.lobinary.android.common.util.communication.MessageUtil;
 import com.lobinary.android.common.util.log.LogUtil;
 import com.lobinary.android.platform.R;
 
 public class MainBottomFragment extends Fragment {
+
+	private static Logger logger = LoggerFactory.getLogger(MessageUtil.class);
 	
 	private MainContentFragment mainContent;
 
@@ -81,7 +87,7 @@ public class MainBottomFragment extends Fragment {
 	}
 
 	public void setClickAnimal(long clickBtnId){
-		LogUtil.out("准备切换页面"+clickBtnId);
+		logger.debug("准备切换页面"+clickBtnId);
 		mainContent.clickShowContent(clickBtnId,activitionBtnId);
 		if(activitionBtnId==R.id.homeBtnView){
 			homeBtnView.setImageDrawable(getResources().getDrawable(R.drawable.home));

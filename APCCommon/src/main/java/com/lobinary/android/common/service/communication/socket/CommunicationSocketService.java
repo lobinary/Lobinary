@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import com.lobinary.android.common.constants.Constants;
 import com.lobinary.android.common.pojo.communication.ConnectionBean;
 import com.lobinary.android.common.pojo.communication.Message;
+import com.lobinary.android.common.pojo.communication.MessageTitle;
 import com.lobinary.android.common.service.communication.CommunicationServiceInterface;
 import com.lobinary.android.common.util.NetUtil;
 import com.lobinary.android.common.util.communication.MessageUtil;
@@ -84,7 +85,7 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 						try {
 							Socket s = new Socket();
 							s = serverSocket.accept();
-							logger.info("Socket业务交互类:接收到连接请求:"+s.getRemoteSocketAddress());
+							logger.info("Socket业务交互类:接收到连接请求:" + s.getRemoteSocketAddress());
 							if (isPauseStatus) {
 								try {
 									logger.info("Socket业务交互类:因服务器处于暂停状态,拒绝了一个新连接请求.");
@@ -98,7 +99,7 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 								continue;
 							} else {
 								try {
-									CommunicationSocketThread socketThread = new CommunicationSocketThread(s,true);
+									CommunicationSocketThread socketThread = new CommunicationSocketThread(s, true);
 									socketThread.start();
 								} catch (Exception e) {
 									logger.error("Socket业务交互类:在创建与新客户端连接的过程中发生异常,异常原因如下:", e);
@@ -190,51 +191,51 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 	 * CommunicationServiceInterface#getCanConnecList()
 	 */
 	@Override
-	public List<ConnectionBean> getConnectableList() {
-		final List<ConnectionBean> resultList = new ArrayList<ConnectionBean>();
-		List<String> localIpList = NetUtil.getLocalIpList();
-		for (String localIp : localIpList) {
-			List<String> lanIpList = NetUtil.getLANIp(localIp);
-			for (final String lanIp : lanIpList) {
-				final ConnectionBean connectionBean = new ConnectionBean();
-				connectionBean.ip = lanIp;
-				new Thread() {
-					@Override
-					public void run() {
-						try {
-							Socket clientSocket = new Socket(connectionBean.ip, Constants.CONNECTION.PARAM.SOCKET_PORT);
-							clientSocket.setSoTimeout(500);
-							BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(),
-									Constants.CONNECTION.PARAM.SOCKET_ENCODING));
-							PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+	public boolean refreshConnectableList() {
+		new Thread() {
+			@Override
+			public void run() {
+				List<String> localIpList = NetUtil.getLocalIpList();
+				for (String localIp : localIpList) {
+					List<String> lanIpList = NetUtil.getLANIp(localIp);
+					for (final String lanIp : lanIpList) {
+						final ConnectionBean connectionBean = new ConnectionBean();
+						connectionBean.ip = lanIp;
+						new Thread() {
+							@Override
+							public void run() {
+								try {
+									Socket clientSocket = new Socket(connectionBean.ip, Constants.CONNECTION.PARAM.SOCKET_PORT);
+									clientSocket.setSoTimeout(500);
+									BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(),
+											Constants.CONNECTION.PARAM.SOCKET_ENCODING));
+									PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 
-							Message message = MessageUtil.getNewRequestMessage(Constants.MESSAGE.TYPE.REQUEST_PING);
-							out.println(MessageUtil.message2String(message));
-							out.flush();
+									Message message = MessageUtil.getNewRequestMessage(Constants.MESSAGE.TYPE.REQUEST_PING);
+									out.println(MessageUtil.message2String(message));
+									out.flush();
 
-							String clientReturnMessageStr = in.readLine();
-							Message clientReturnMessage = MessageUtil.string2Messag(clientReturnMessageStr);
-							if (Constants.MESSAGE.TYPE.REQUEST_PING_SUCCESS.equals(clientReturnMessage.getMessageType())) {
-								connectionBean.setName(clientReturnMessage.getMessageTitle().getSendClientName());
-								resultList.add(connectionBean);
-								logger.info("Socket交互业务类:获取可连接设备列表,捕获到可连接设备,IP:"+lanIp);
+									String clientReturnMessageStr = in.readLine();
+									Message clientReturnMessage = MessageUtil.string2Messag(clientReturnMessageStr);
+									if (Constants.MESSAGE.TYPE.REQUEST_PING_SUCCESS.equals(clientReturnMessage.getMessageType())) {
+										MessageTitle messageTitle = clientReturnMessage.getMessageTitle();
+										connectionBean.setName(messageTitle.getSendClientName());
+										connectionBean.setClientId(messageTitle.getSendClientId());
+										connectionBean.setIp(lanIp);//用户返回ip不准
+										connectionMap.put(connectionBean.clientId, connectionBean);
+										logger.info("Socket交互业务类:获取可连接设备("+connectionBean.name+",IP:" + lanIp + ")");
+									}
+									clientSocket.close();
+								} catch (Exception e) {
+//									 logger.error("Socket交互业务类:获取可连接设备列表,尝试连接IP:"+lanIp+"失败");
+								}
 							}
-							clientSocket.close();
-						} catch (Exception e) {
-//							logger.error("Socket交互业务类:获取可连接设备列表,尝试连接IP:"+lanIp+"失败");
-						}
+						}.start();
 					}
-				}.start();
+				}
 			}
-
-			try {
-				Thread.sleep(1500);//只捕获1.5秒内的数据,其余均为超时设备
-//				logger.debug("Socket交互业务类:获取可连接设备列表,准备将查询结果返回");
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		return resultList;
+		}.start();
+		return true;
 	}
 
 	/*
@@ -248,7 +249,7 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 	public void connect(ConnectionBean connectionBean) throws UnknownHostException, IOException {
 		final String connIp = connectionBean.ip;
 		Socket clientSocket = new Socket(connIp, Constants.CONNECTION.PARAM.SOCKET_PORT);
-		CommunicationSocketThread socketThread = new CommunicationSocketThread(clientSocket,false);
+		CommunicationSocketThread socketThread = new CommunicationSocketThread(clientSocket, false);
 		socketThread.start();
 	}
 

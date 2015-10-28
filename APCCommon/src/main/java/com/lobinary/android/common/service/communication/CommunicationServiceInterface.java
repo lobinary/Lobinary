@@ -83,13 +83,13 @@ public interface CommunicationServiceInterface {
 	/**
 	 * 
 	 * <pre>
-	 * 获取可以连接的服务器List
+	 * 刷新可以连接的服务器List
 	 * <font color="red"><b>(连接list会不定时有变动,可能需要协助定时刷新服务,具体实现需要考虑该问题)</b></font>
 	 * </pre>
 	 *
 	 * @return 服务器列表
 	 */
-	public List<ConnectionBean> getConnectableList();
+	public boolean refreshConnectableList();
 	
 	/**
 	 * 

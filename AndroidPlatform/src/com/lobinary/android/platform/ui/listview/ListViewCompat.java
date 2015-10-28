@@ -1,14 +1,20 @@
 package com.lobinary.android.platform.ui.listview;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ListView;
 
+import com.lobinary.android.common.util.communication.MessageUtil;
 import com.lobinary.android.platform.ui.fragment.MainContentContactFragment.MessageItem;
 
 public class ListViewCompat extends ListView {
+	
+	private static Logger logger = LoggerFactory.getLogger(MessageUtil.class);
 
     private static final String TAG = "ListViewCompat";
 

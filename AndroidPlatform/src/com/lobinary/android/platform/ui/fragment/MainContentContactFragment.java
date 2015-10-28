@@ -16,6 +16,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.lobinary.android.common.pojo.communication.ConnectionBean;
 import com.lobinary.android.platform.R;
 import com.lobinary.android.platform.ui.listview.ListViewCompat;
 import com.lobinary.android.platform.ui.listview.SlideView;
@@ -39,7 +40,7 @@ public class MainContentContactFragment extends Fragment implements OnItemClickL
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-
+		initView();
 	}
 	
 
@@ -61,18 +62,29 @@ public class MainContentContactFragment extends Fragment implements OnItemClickL
 		mListView.setAdapter(new SlideAdapter());
 		mListView.setOnItemClickListener(this);
 	}
+
+
+	public void addContact(List<ConnectionBean> connectableList) {
+
+		mListView = (ListViewCompat) getActivity().findViewById(R.id.contactContent);
+		for (ConnectionBean connectionBean : connectableList) {
+			MessageItem item = new MessageItem();
+			item.iconRes = R.drawable.sound;
+			item.title = connectionBean.name;
+			item.msg = connectionBean.ip;
+			item.time = "未连接";
+			mMessageItems.add(item);
+		}
+	}
+
 	
-
-
 	private class SlideAdapter extends BaseAdapter {
 
 		private LayoutInflater mInflater;
-
 		SlideAdapter() {
 			super();
 			mInflater = getActivity().getLayoutInflater();
 		}
-
 		@Override
 		public int getCount() {
 			return mMessageItems.size();

@@ -91,6 +91,7 @@ public class NetUtil {
 					String ip = addrIndex.getHostAddress();
 					if (ip.length() <= 15) {// 大于15的大部分为ipv6或者其他隧道参数，非IPV4
 						if(!ip.contains("172.16")){
+							logger.debug("添加ip到本地ip列表："+ip);
 							list.add(ip);
 						}
 					}
@@ -115,7 +116,6 @@ public class NetUtil {
 	 */
 	public static List<String> getLANIp(String localIp){
 		List<String> list = new ArrayList<String>();
-		
 		try {
 			String[] localIpStrArray = localIp.split("\\.");
 			String beforeIpStr = localIpStrArray[0] + "." + localIpStrArray[1] + "." + localIpStrArray[2] + ".";

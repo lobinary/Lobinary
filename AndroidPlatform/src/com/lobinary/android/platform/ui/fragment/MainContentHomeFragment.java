@@ -16,9 +16,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
+import com.lobinary.android.common.pojo.communication.ConnectionBean;
+import com.lobinary.android.common.service.communication.CommunicationServiceInterface;
+import com.lobinary.android.common.util.NetUtil;
 import com.lobinary.android.common.util.PropertiesUtil;
+import com.lobinary.android.common.util.factory.CommonFactory;
 import com.lobinary.android.platform.R;
 import com.lobinary.android.platform.pojo.bean.ButtonListenerBean;
+import com.lobinary.android.platform.util.AndroidNetUtil;
 
 @SuppressLint("UseSparseArrays")
 public class MainContentHomeFragment extends Fragment {
@@ -88,6 +93,13 @@ public class MainContentHomeFragment extends Fragment {
 				ButtonListenerBean buttonListenerBean = mainHomeBtnListenerMap.get(v.getId());
 				String methodName = buttonListenerBean.methodName;
 				logger.info("点击了主页按钮"+v.getId()+"执行方法："+methodName);
+				CommunicationServiceInterface communicationService = CommonFactory.getCommunicationService();
+				communicationService.refreshConnectableList();
+				
+				List<String> s = AndroidNetUtil.getLocalIpAddress();
+				for (String ss : s) {
+					logger.info("安卓网络工具类捕获到ip：" + ss);
+				}
 			}
 		});
 	}

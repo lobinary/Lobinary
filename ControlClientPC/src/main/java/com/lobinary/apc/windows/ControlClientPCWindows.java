@@ -238,18 +238,18 @@ public class ControlClientPCWindows {
 		JButton btnNewButton_2 = new JButton("测试(连接服务器)");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					List<ConnectionBean> connectableList = CommonFactory.getCommunicationService().getConnectableList();
-					for (ConnectionBean connectionBean : connectableList) {
-						CommonFactory.getCommunicationService().connect(connectionBean);
-					}
-				} catch (UnknownHostException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+//				try {
+//					List<ConnectionBean> connectableList = CommonFactory.getCommunicationService().getConnectableList();
+//					for (ConnectionBean connectionBean : connectableList) {
+//						CommonFactory.getCommunicationService().connect(connectionBean);
+//					}
+//				} catch (UnknownHostException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				} catch (IOException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
 			}
 		});
 		panel_6.add(btnNewButton_2);
@@ -282,10 +282,10 @@ public class ControlClientPCWindows {
 		JButton btnNewButton_4 = new JButton("测试(获取可连接列表)");
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				List<ConnectionBean> canConnectList = CommonFactory.getCommunicationService().getConnectableList();
-				for (ConnectionBean connectionBean : canConnectList) {
-					logger.info(connectionBean.name+":"+connectionBean.ip);
-				}
+				CommonFactory.getCommunicationService().refreshConnectableList();
+//				for (ConnectionBean connectionBean : canConnectList) {
+//					logger.info(connectionBean.name+":"+connectionBean.ip);
+//				}
 			}
 		});
 		panel_9.add(btnNewButton_4);
@@ -412,7 +412,7 @@ public class ControlClientPCWindows {
 //					String folder = fileDir.substring(0, fileDir.lastIndexOf('\\'));
 					java.awt.Desktop.getDesktop().open(new java.io.File(folder));
 				} catch (Exception e1) {
-					logger.error("窗口：打开文件夹发生异常",e);
+					logger.error("窗口：打开文件夹发生异常");
 				}
 			
 			}

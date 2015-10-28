@@ -11,10 +11,9 @@
  */
 package com.lobinary.android.platform.util;
 
-import com.lobinary.android.common.util.PropertiesUtil;
 import com.lobinary.android.common.util.factory.CommonFactory;
 import com.lobinary.android.common.util.log.LogUtil;
-import com.lobinary.android.platform.constants.Constants;
+import com.lobinary.android.platform.service.communication.AndroidCommunicationSocketService;
 
 /**
  * <pre>
@@ -38,7 +37,7 @@ public class InitialUtil {
 			CommonFactory.androidNewStoreFile = true;
 		}
 		CommonFactory.storeFile = AndroidFileUtil.getFile(CommonFactory.storeFileName);
-		//		CommonFactory.setCommunicationService(new CommunicationSocketService());
+		CommonFactory.setCommunicationService(new AndroidCommunicationSocketService());
 //		CommonFactory.setMessageTranslator(new MessageJsonTranslator());
 //		CommonFactory.setBaseService(new AndroidService());
 
