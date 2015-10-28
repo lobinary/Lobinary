@@ -11,6 +11,8 @@
  */
 package com.lobinary.android.common.pojo.model;
 
+import java.util.Random;
+
 /**
  * <pre>
  * 音乐实体
@@ -24,7 +26,7 @@ package com.lobinary.android.common.pojo.model;
  */
 public class Music {
 	
-	private String id;
+	private Random id;
 	
 	private String name;
 	
@@ -39,17 +41,17 @@ public class Music {
 	 * @see com.lobinary.android.common.pojo.model.Music#id
 	 * @return the id
 	 */
-	public String getId() {
+	public Random getId() {
 		return id;
 	}
 
 	/**
 	 * 具体注释请点击Also see
 	 * @see com.lobinary.android.common.pojo.model.Music#id
-	 * @param id the id to set
+	 * @param random the id to set
 	 */
-	public void setId(String id) {
-		this.id = id;
+	public void setId(Random random) {
+		this.id = random;
 	}
 
 	/**

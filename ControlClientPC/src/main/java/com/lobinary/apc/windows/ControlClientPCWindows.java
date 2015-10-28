@@ -391,7 +391,7 @@ public class ControlClientPCWindows {
 		
 
 		
-		/*************设置音乐文件夹*****8********/
+		/*************设置音乐文件夹**************/
 		JLabel label = new JLabel("音乐文件夹");
 		label.setBounds(0, 0, 75, 15);
 		panel_10.add(label);
