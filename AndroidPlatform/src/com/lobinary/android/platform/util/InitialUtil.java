@@ -11,15 +11,10 @@
  */
 package com.lobinary.android.platform.util;
 
-import java.io.File;
-
-import com.lobinary.android.common.service.communication.socket.CommunicationSocketService;
 import com.lobinary.android.common.util.PropertiesUtil;
-import com.lobinary.android.common.util.communication.MessageUtil;
-import com.lobinary.android.common.util.communication.impl.MessageJsonTranslator;
 import com.lobinary.android.common.util.factory.CommonFactory;
 import com.lobinary.android.common.util.log.LogUtil;
-import com.lobinary.android.platform.service.AndroidService;
+import com.lobinary.android.platform.constants.Constants;
 
 /**
  * <pre>
@@ -38,8 +33,10 @@ public class InitialUtil {
 		System.out.println("初始化工具类准备初始化相关配置");
 		
 		CommonFactory.setLogUtil(new AndroidLogUtil());//需要最先装配日志工具,否则日志输出将造成空指针
-
-
+		CommonFactory.SYSTEM_CODE = com.lobinary.android.common.constants.Constants.SYSTEM_CODE_ANDROID;
+		if(!AndroidFileUtil.isExist(CommonFactory.storeFileName)){
+			CommonFactory.androidNewStoreFile = true;
+		}
 		CommonFactory.storeFile = AndroidFileUtil.getFile(CommonFactory.storeFileName);
 		//		CommonFactory.setCommunicationService(new CommunicationSocketService());
 //		CommonFactory.setMessageTranslator(new MessageJsonTranslator());
@@ -49,8 +46,6 @@ public class InitialUtil {
 		
 
 		LogUtil.out("初始化工具类:相关配置信息初始化完成！");
-		
-		MessageUtil.clientName = "Windows互控客户端";
 		
 	}
 	

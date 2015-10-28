@@ -16,6 +16,8 @@ public class MainActivity extends Activity {
 //		MainActivity.this.setContentView(R.layout.activity_main);
         requestWindowFeature(Window.FEATURE_NO_TITLE);  
         setContentView(R.layout.activity_main);
+
+        InitialUtil.initial();//初始化
 //        Button testIntoListViewButtonView = (Button) findViewById(R.id.testIntoListViewButton);
 //        testIntoListViewButtonView.setOnClickListener(new OnClickListener() {
 //			@Override

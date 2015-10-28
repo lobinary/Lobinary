@@ -16,9 +16,13 @@ public class AndroidLogUtil implements LogUtilInterface{
 	
 	@Override
 	public boolean out(String log) {
-		Message msg = new Message();  
-		msg.obj = log;
-		logHandler.sendMessage(msg);  
+		if(logHandler!=null){
+			Message msg = new Message();  
+			msg.obj = log;
+			logHandler.sendMessage(msg); 
+		}else{
+			System.out.println("[日志工具暂未初始化]"+log);
+		}
 		return true;
 	}
 	

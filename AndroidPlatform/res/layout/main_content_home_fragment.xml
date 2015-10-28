@@ -6,7 +6,6 @@
     android:stretchColumns="*" >
 
     <TableRow
-        android:id="@+id/tableRow1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1" >
@@ -17,7 +16,7 @@
             android:layout_gravity="center">
 
             <LinearLayout
-                android:id="@+id/aaa"
+                android:id="@+id/maintContentHomeBtn1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -44,6 +43,7 @@
 
 
         <LinearLayout
+                android:id="@+id/maintContentHomeBtn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -80,6 +80,7 @@
         android:layout_weight="1" >
 
         <LinearLayout
+                android:id="@+id/maintContentHomeBtn3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -104,6 +105,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/maintContentHomeBtn4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

@@ -43,6 +43,7 @@ public class CommonFactory {
 	 * 交互业务类
 	 */
 	private static CommunicationServiceInterface communicationService;
+	public static boolean androidNewStoreFile = false;
 
 	/**
 	 * 具体注释请点击Also see

@@ -6,7 +6,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ListView;
 
-import com.lobinary.android.platform.ui.fragment.MainContentFragment.MessageItem;
+import com.lobinary.android.platform.ui.fragment.MainContentContactFragment.MessageItem;
 
 public class ListViewCompat extends ListView {
 

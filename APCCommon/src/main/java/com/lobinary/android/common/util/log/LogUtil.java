@@ -33,7 +33,12 @@ public class LogUtil {
 	 * @return
 	 */
 	public static boolean out(String log){
-		return logUtilImpl.out(log);
+		if(logUtilImpl!=null){
+			return logUtilImpl.out(log);
+		}else{
+			System.out.println("【日志实现类未初始化】"+log);
+			return false;
+		}
 	}
 
 }

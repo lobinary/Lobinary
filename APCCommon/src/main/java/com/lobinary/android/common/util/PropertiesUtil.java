@@ -37,6 +37,7 @@ public class PropertiesUtil {
 	private static Map<String, Object> fileStoreMap;
 	public static File storeFile;
 	public static String propFile = "apc.properties";
+	public static boolean androidNewStoreFile = CommonFactory.androidNewStoreFile;
 
 	static {
 		try {
@@ -52,8 +53,12 @@ public class PropertiesUtil {
 				InputStream file = PropertiesUtil.class.getClassLoader().getResourceAsStream(propFile);
 				properties.load(file);
 			}else{
-//				fileStoreMap = new HashMap<String, Object>();
-//				FileUtil.saveObj(storeFile, fileStoreMap);//XXX 安卓需要修复相关BUG
+				System.out.println("安卓系统配置工具初始化");
+				if(androidNewStoreFile){
+					System.out.println("安卓配置工具类正在新建存储文件");
+					fileStoreMap = new HashMap<String, Object>();
+					FileUtil.saveObj(storeFile, fileStoreMap);//XXX 安卓需要修复相关BUG
+				}
 			}
 			LogUtil.out("读取storeFile开始"+storeFile);
 			fileStoreMap = FileUtil.getObj(storeFile,Map.class);

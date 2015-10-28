@@ -20,7 +20,6 @@ public class AndroidFileUtil {
 			if(androidLocalFile.exists()){
 				LogUtil.out("文件已经存在,准备返回该文件");
 			    androidLocalFile.setWritable(Boolean.TRUE);
-				return androidLocalFile;
 			}else{
 				LogUtil.out("文件不存在,新建文件后返回");
 			    androidLocalFile.createNewFile();
@@ -31,7 +30,16 @@ public class AndroidFileUtil {
 		    e.printStackTrace();
 		    System.out.println(e.getMessage());
 		}
-		return null;
+		return androidLocalFile;
+	}
+	
+	public static boolean isExist(String fileName){
+		File extDir = Environment.getExternalStorageDirectory();
+		File androidLocalFile = new File(extDir, fileName);
+		if(androidLocalFile.exists()){
+			return true;
+		}
+		return false;
 	}
 	
 	/**

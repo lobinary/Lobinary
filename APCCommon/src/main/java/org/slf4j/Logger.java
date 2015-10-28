@@ -1,6 +1,8 @@
 package org.slf4j;
 
 
+
+import com.lobinary.android.common.util.date.DateUtil;
 import com.lobinary.android.common.util.log.LogUtil;
 
 public class Logger {
@@ -8,7 +10,11 @@ public class Logger {
 	public Class<?> clazz;
 	
 	private String getPreStr(){
-		return clazz.getName()+":";
+		return DateUtil.getCurrDateTime("[HH:MM:ss SSS] ");
+	}
+	
+	private String getEndStr(){
+		return " [" + clazz.getSimpleName() + "]";
 	}
 	
 	public void debug(String log){
@@ -35,12 +41,12 @@ public class Logger {
 	
 
 	private void outLog(String log) {
-		LogUtil.out(getPreStr()+log);
-		System.out.println(getPreStr()+log);
+		LogUtil.out(getPreStr()+log+getEndStr());
+		System.out.println(getPreStr()+log+getEndStr());
 	}
 
 	private void outExceptionLog(String log,Throwable t) {
-		LogUtil.out(getPreStr()+log+t.getMessage());
-		System.out.println(getPreStr()+log+t.getMessage());
+		LogUtil.out(getPreStr()+log+getEndStr()+t.getMessage());
+		System.out.println(getPreStr()+log+getEndStr()+t.getMessage());
 	}
 }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:stretchColumns="*" >
+
+
+    <!-- ############################## 功能页面 ############################## -->
+
+    <RelativeLayout
+        android:id="@+id/featuresContent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:background="#eee">
+
+        <fragment
+            android:id="@+id/features_left_content"
+            android:name="com.lobinary.android.platform.ui.fragment.FeaturesLeftFragment"
+            android:layout_width="80dp"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true" />
+        
+        <fragment
+            android:id="@+id/features_right_content"
+            android:name="com.lobinary.android.platform.ui.fragment.FeaturesRightFragment"
+            android:layout_width="45dp"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/features_left_content" />
+
+        <TextView
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@+id/features_right_content"
+            android:layout_alignParentTop="true"
+            android:background="@color/grey" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

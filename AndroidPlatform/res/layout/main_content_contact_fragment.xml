@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:stretchColumns="*" >
+
+     
+    
+    <!-- ############################## 联系人页面 ############################## -->
+
+    <com.lobinary.android.platform.ui.listview.ListViewCompat
+        android:id="@+id/contactContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+         />
+    <!-- ############################## 联系人页面 ############################## -->
+
+</RelativeLayout>
