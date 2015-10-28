@@ -2,6 +2,7 @@ package com.lobinary.android.common.util.factory;
 
 import java.io.File;
 
+import com.lobinary.android.common.constants.Constants;
 import com.lobinary.android.common.service.communication.CommunicationServiceInterface;
 import com.lobinary.android.common.service.control.BaseServiceInterface;
 import com.lobinary.android.common.util.communication.MessageTranslatorInterface;
@@ -22,6 +23,7 @@ public class CommonFactory {
 	
 	public static String storeFileName = "apc_store_file.apc";
 	public static File storeFile;
+	public static String SYSTEM_CODE = Constants.SYSTEM_CODE_WINDOWS;//默认windows
 	
 	/**
 	 * 日志工具类

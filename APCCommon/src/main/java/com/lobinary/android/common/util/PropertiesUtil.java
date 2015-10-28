@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lobinary.android.common.constants.CodeDescConstants;
+import com.lobinary.android.common.constants.Constants;
 import com.lobinary.android.common.exception.APCSysException;
 import com.lobinary.android.common.util.factory.CommonFactory;
 import com.lobinary.android.common.util.file.FileUtil;
@@ -34,26 +35,26 @@ public class PropertiesUtil {
 	
 	private static Properties properties;
 	private static Map<String, Object> fileStoreMap;
-	public static File storeFile = CommonFactory.storeFile;
-//	public static String propFile = "apc.properties";
+	public static File storeFile;
+	public static String propFile = "apc.properties";
 
 	static {
 		try {
-			LogUtil.out("配置工具类:配置信息初始化开始,存储文件(StoreFile)位置:"+storeFile.getAbsolutePath());
-		
+			storeFile = CommonFactory.storeFile;
+			LogUtil.out("配置工具类:配置信息初始化......");
 			properties = new Properties();
-//			InputStream file = PropertiesUtil.class.getClassLoader().getResourceAsStream(propFile);
-//			properties.load(file);
-			if("android".equals("android")){
-				
-			}else{
+			if(Constants.SYSTEM_CODE_WINDOWS.equals(CommonFactory.SYSTEM_CODE)){//如果是windows
 				if (!FileUtil.fileIsExistAndCreate(storeFile)) {
+					logger.info("存储文件不存在,准备新建存储文件");
 					fileStoreMap = new HashMap<String, Object>();
 					FileUtil.saveObj(storeFile, fileStoreMap);
 				}
+				InputStream file = PropertiesUtil.class.getClassLoader().getResourceAsStream(propFile);
+				properties.load(file);
+			}else{
+//				fileStoreMap = new HashMap<String, Object>();
+//				FileUtil.saveObj(storeFile, fileStoreMap);//XXX 安卓需要修复相关BUG
 			}
-//			fileStoreMap = new HashMap<String, Object>();
-//			FileUtil.saveObj(storeFile, fileStoreMap);//XXX 安卓需要修复相关BUG
 			LogUtil.out("读取storeFile开始"+storeFile);
 			fileStoreMap = FileUtil.getObj(storeFile,Map.class);
 			logger.info("配置工具类:配置信息初始化完成,存储文件(StoreFile)位置:"+storeFile.getAbsolutePath());

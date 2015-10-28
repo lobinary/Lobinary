@@ -128,4 +128,13 @@ public class Constants {
 		}
 	}
 
+	/**
+	 * 系统编码
+	 */
+	public static final String SYSTEM_CODE_WINDOWS = "Windows";
+	/**
+	 * 系统编码
+	 */
+	public static final String SYSTEM_CODE_ANDROID = "Android";
+
 }

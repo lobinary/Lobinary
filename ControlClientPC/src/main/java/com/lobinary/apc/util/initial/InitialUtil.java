@@ -11,6 +11,8 @@
  */
 package com.lobinary.apc.util.initial;
 
+import java.io.File;
+
 import com.lobinary.android.common.service.communication.socket.CommunicationSocketService;
 import com.lobinary.android.common.util.PropertiesUtil;
 import com.lobinary.android.common.util.communication.MessageUtil;
@@ -35,7 +37,8 @@ public class InitialUtil {
 	
 	static{
 		System.out.println("初始化工具类准备初始化相关配置");
-		
+		CommonFactory.storeFile = new File(CommonFactory.storeFileName);
+		System.out.println("配置工具类文件初始化完成:"+CommonFactory.storeFile);
 		CommonFactory.setLogUtil(new WindowsLogUtil());//需要最先装配日志工具,否则日志输出将造成空指针
 		
 		CommonFactory.setCommunicationService(new CommunicationSocketService());

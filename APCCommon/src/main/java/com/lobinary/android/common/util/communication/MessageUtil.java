@@ -50,6 +50,11 @@ public class MessageUtil {
 //		}
 		//XXX  因安卓有问题 暂注释
 		clientName = (String) PropertiesUtil.getFileValue("ClientName");
+		if(clientName==null){
+			clientName = clientId;
+			PropertiesUtil.saveFileValue("ClientName", clientName);
+		}
+		logger.info("报文工具类初始化完成:客户端名称"+clientName+"客户端Id:"+clientId);
 	}
 	
 	/**
@@ -73,10 +78,10 @@ public class MessageUtil {
 	 * @return
 	 */
 	private static String generateClientId() {
-		String clientId = (String) PropertiesUtil.getFileValue("ClientName");
+		String clientId = (String) PropertiesUtil.getFileValue("ClientId");
 		if(clientId==null){
 			clientId = DateUtil.getCurrDateTime("yyyyMMddhh24mmssSSS");
-			PropertiesUtil.saveFileValue("ClientName", clientId);
+			PropertiesUtil.saveFileValue("ClientId", clientId);
 		}
 		return clientId;
 	}
