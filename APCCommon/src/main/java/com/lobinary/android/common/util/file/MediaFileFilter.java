@@ -8,27 +8,36 @@ import java.io.FilenameFilter;
  * <pre>
  * 
  * </pre>
- * @author 吕斌：lvb3@chinaunicom.cn
+ * 
+ * @author ljrxxx
  * @since 2015年10月28日 上午12:25:06
  * @version V1.0.0 描述 : 创建文件MusicFileFilter
  * 
- *         
+ * 
  * 
  */
-public class MusicFileFilter implements FileFilter{
+public class MediaFileFilter implements FileFilter {
+	public String[] postfix;
+	int i;
 
+	MediaFileFilter(String[] pf) {
+		this.postfix = pf;
+	}
 
 	@Override
 	public boolean accept(File pathname) {
-		if(pathname.isDirectory()){
+		String getpf;
+		if (pathname.isDirectory()) {
 			return true;
-		}else{
+		} else {
 			String name = pathname.getName();
-			if (name.endsWith(".mp3"))
-				return true;
-			else
-				return false;
+			for (i = 0; i < postfix.length; i++) {
+				getpf = postfix[i];
+				if (name.endsWith(getpf)) {
+					return true;
+				} 
+			}
+			return false;
 		}
 	}
-
 }

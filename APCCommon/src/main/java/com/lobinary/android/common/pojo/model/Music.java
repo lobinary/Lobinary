@@ -26,7 +26,7 @@ import java.util.Random;
  */
 public class Music {
 	
-	private Random id;
+	private long id;
 	
 	private String name;
 	
@@ -36,22 +36,23 @@ public class Music {
 	
 	private String playTime;
 
+
 	/**
 	 * 具体注释请点击Also see
 	 * @see com.lobinary.android.common.pojo.model.Music#id
 	 * @return the id
 	 */
-	public Random getId() {
+	public long getId() {
 		return id;
 	}
 
 	/**
 	 * 具体注释请点击Also see
 	 * @see com.lobinary.android.common.pojo.model.Music#id
-	 * @param random the id to set
+	 * @param id the id to set
 	 */
-	public void setId(Random random) {
-		this.id = random;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	/**
