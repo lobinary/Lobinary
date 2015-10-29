@@ -23,6 +23,7 @@ import com.lobinary.android.common.pojo.communication.MessageTitle;
 import com.lobinary.android.common.pojo.model.Music;
 import com.lobinary.android.common.service.communication.ConnectionThreadInterface;
 import com.lobinary.android.common.util.communication.MessageUtil;
+import com.lobinary.android.common.util.factory.CommonFactory;
 
 /**
  * <pre>
@@ -107,14 +108,14 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 					
 					messageTitle = initialMessage.getMessageTitle();
 					ConnectionBean connectionBean = new ConnectionBean(initialMessage,this);
-					CommunicationSocketService.addConnection(connectionBean);
+					CommonFactory.getCommunicationService().addConnection(connectionBean);
 					
 					establishConnection(initialMessage);
 				}else if(Constants.MESSAGE.TYPE.ACCEPT_CONNECT.equals(initialMessage.getMessageType())){
 
 					messageTitle = initialMessage.getMessageTitle();
 					ConnectionBean connectionBean = new ConnectionBean(initialMessage,this);
-					CommunicationSocketService.addConnection(connectionBean);
+					CommonFactory.getCommunicationService().addConnection(connectionBean);
 					
 					establishConnection(initialMessage);
 				}else{

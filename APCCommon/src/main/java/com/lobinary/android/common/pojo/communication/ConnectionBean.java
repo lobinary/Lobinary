@@ -16,6 +16,11 @@ import com.lobinary.android.common.service.communication.socket.CommunicationSoc
  */
 public class ConnectionBean {
 	
+	/**
+	 * 刷新id,一般 交互类 更新可连接设备和已连接设备时 需要将 以前批次(从交互业务类connectionMap中删除)和 本批次(加入交互connectionMap)作区分使用
+	 */
+	public long refreshId;
+	
 	public String getClientId() {
 		return clientId;
 	}
@@ -109,5 +114,13 @@ public class ConnectionBean {
 		this.connectionThread = connectionThread;
 	}
 
+
+	public long getRefreshId() {
+		return refreshId;
+	}
+
+	public void setRefreshId(long refreshId) {
+		this.refreshId = refreshId;
+	}
 
 }

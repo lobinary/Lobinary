@@ -1,10 +1,18 @@
 package com.lobinary.android.platform.ui.fragment;
 
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +25,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lobinary.android.common.pojo.communication.ConnectionBean;
+import com.lobinary.android.common.service.communication.socket.CommunicationSocketService;
+import com.lobinary.android.common.util.factory.CommonFactory;
 import com.lobinary.android.platform.R;
+import com.lobinary.android.platform.service.communication.AndroidCommunicationSocketService;
 import com.lobinary.android.platform.ui.listview.ListViewCompat;
 import com.lobinary.android.platform.ui.listview.SlideView;
 import com.lobinary.android.platform.ui.listview.SlideView.OnSlideListener;
@@ -25,6 +36,15 @@ import com.lobinary.android.platform.ui.listview.SlideView.OnSlideListener;
 public class MainContentContactFragment extends Fragment implements OnItemClickListener, OnClickListener, OnSlideListener  {
 
 	private static final String TAG = "MainContentContactFragment";
+
+	private static Logger logger = LoggerFactory.getLogger(CommunicationSocketService.class);
+	
+	Handler contactHandler;
+	
+	/**
+	 * 当前Contact列表list
+	 */
+	private List<ConnectionBean> currentContactList = new ArrayList<ConnectionBean>();
 	
 	private ListViewCompat mListView;
 
@@ -41,6 +61,12 @@ public class MainContentContactFragment extends Fragment implements OnItemClickL
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		initView();
+		contactHandler = new Handler() {
+			public void handleMessage(Message msg) {
+				refreshContact((Map<String, ConnectionBean>) msg.obj);
+			}
+		};
+		AndroidCommunicationSocketService.contactHandler = this.contactHandler;
 	}
 	
 
@@ -64,16 +90,19 @@ public class MainContentContactFragment extends Fragment implements OnItemClickL
 	}
 
 
-	public void addContact(List<ConnectionBean> connectableList) {
-
-		mListView = (ListViewCompat) getActivity().findViewById(R.id.contactContent);
-		for (ConnectionBean connectionBean : connectableList) {
+	public void refreshContact(Map<String, ConnectionBean> connectionMap) {
+		currentContactList.clear();
+		mMessageItems.clear();
+		for (String key : connectionMap.keySet()) {
+			ConnectionBean connectionBean = connectionMap.get(key);
 			MessageItem item = new MessageItem();
 			item.iconRes = R.drawable.sound;
 			item.title = connectionBean.name;
 			item.msg = connectionBean.ip;
 			item.time = "未连接";
 			mMessageItems.add(item);
+			currentContactList.add(connectionBean);
+			logger.info("增加新的Contact数据"+connectionBean.name);
 		}
 	}
 
@@ -158,7 +187,17 @@ public class MainContentContactFragment extends Fragment implements OnItemClickL
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		// Log.e(TAG, "点击位置：" + position);
+		logger.info("点击按钮"+position);
+		ConnectionBean connectionBean = currentContactList.get(position);
+		try {
+			CommonFactory.getCommunicationService().connect(connectionBean);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

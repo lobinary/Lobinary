@@ -66,12 +66,25 @@ public class MainContentHomeFragment extends Fragment {
 		
 		mainHomeBtnListenerMap = (Map<Integer, ButtonListenerBean>) PropertiesUtil.getFileValue("mainHomeBtnListenerMap");
 		if(mainHomeBtnListenerMap==null){
-			mainHomeBtnListenerMap = new HashMap<Integer,ButtonListenerBean>();
+			initialHomeBtnListInFile();
+		}else {
 			for(View view :btnList){
-				mainHomeBtnListenerMap.put(view.getId(), new ButtonListenerBean("日志","","log"));
+				ButtonListenerBean buttonListenerBean = mainHomeBtnListenerMap.get(view.getId());
+				if(buttonListenerBean==null){
+					logger.info("发现主页按钮未在存储文件中,准备重新初始化主页按钮参数");
+					initialHomeBtnListInFile();
+					break;
+				}
 			}
-			PropertiesUtil.saveFileValue("mainHomeBtnListenerMap", mainHomeBtnListenerMap);
 		}
+	}
+
+	private void initialHomeBtnListInFile() {
+		mainHomeBtnListenerMap = new HashMap<Integer,ButtonListenerBean>();
+		for(View view :btnList){
+			mainHomeBtnListenerMap.put(view.getId(), new ButtonListenerBean("日志","","log"));
+		}
+		PropertiesUtil.saveFileValue("mainHomeBtnListenerMap", mainHomeBtnListenerMap);
 	}
 
 	private void addListener() {

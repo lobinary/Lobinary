@@ -23,6 +23,7 @@ import com.lobinary.android.common.pojo.communication.MessageTitle;
 import com.lobinary.android.common.service.communication.CommunicationServiceInterface;
 import com.lobinary.android.common.util.NetUtil;
 import com.lobinary.android.common.util.communication.MessageUtil;
+import com.lobinary.android.common.util.factory.CommonFactory;
 
 /**
  * <pre>
@@ -38,6 +39,8 @@ import com.lobinary.android.common.util.communication.MessageUtil;
  */
 public class CommunicationSocketService implements CommunicationServiceInterface {
 
+	public long connectionMapVersionId = 0;
+	
 	private static Logger logger = LoggerFactory.getLogger(CommunicationSocketService.class);
 
 	/**
@@ -195,12 +198,14 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 		new Thread() {
 			@Override
 			public void run() {
+				long connectionMapVersionIdTemp = connectionMapVersionId+1;
 				List<String> localIpList = NetUtil.getLocalIpList();
 				for (String localIp : localIpList) {
 					List<String> lanIpList = NetUtil.getLANIp(localIp);
 					for (final String lanIp : lanIpList) {
 						final ConnectionBean connectionBean = new ConnectionBean();
 						connectionBean.ip = lanIp;
+						connectionBean.refreshId = connectionMapVersionIdTemp;
 						new Thread() {
 							@Override
 							public void run() {
@@ -222,7 +227,7 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 										connectionBean.setName(messageTitle.getSendClientName());
 										connectionBean.setClientId(messageTitle.getSendClientId());
 										connectionBean.setIp(lanIp);//用户返回ip不准
-										connectionMap.put(connectionBean.clientId, connectionBean);
+										CommonFactory.getCommunicationService().addConnection(connectionBean);
 										logger.info("Socket交互业务类:获取可连接设备("+connectionBean.name+",IP:" + lanIp + ")");
 									}
 									clientSocket.close();
@@ -322,8 +327,16 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 		return connectionMap;
 	}
 
-	public static void addConnection(ConnectionBean connectionBean) {
-		connectionMap.put(connectionBean.clientId, connectionBean);
+	@Override
+	public void addConnection(ConnectionBean connectionBean) {
+		if(connectionMapVersionId<connectionBean.getRefreshId()){//新版本 将会更新versionid id按时间取
+			connectionMapVersionId = connectionBean.getRefreshId();
+			connectionMap.clear();
+			logger.info("Socket业务交互类:新版本批次("+connectionMapVersionId+")连接更新中......");
+		}
+		if(connectionMapVersionId == connectionBean.getRefreshId()){
+			connectionMap.put(connectionBean.clientId, connectionBean);
+		}
 		logger.info("Socket业务交互类:新连接(clientId:" + connectionBean.clientId + ")被添加,当前连接总数为:" + connectionMap.size() + "个");
 	}
 

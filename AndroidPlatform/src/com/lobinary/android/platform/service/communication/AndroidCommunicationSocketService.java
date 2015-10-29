@@ -9,6 +9,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import android.os.Handler;
+
 import com.lobinary.android.common.constants.Constants;
 import com.lobinary.android.common.pojo.communication.ConnectionBean;
 import com.lobinary.android.common.pojo.communication.Message;
@@ -16,45 +18,54 @@ import com.lobinary.android.common.pojo.communication.MessageTitle;
 import com.lobinary.android.common.service.communication.socket.CommunicationSocketService;
 import com.lobinary.android.common.util.NetUtil;
 import com.lobinary.android.common.util.communication.MessageUtil;
+import com.lobinary.android.common.util.factory.CommonFactory;
 import com.lobinary.android.platform.util.AndroidNetUtil;
 
 public class AndroidCommunicationSocketService extends CommunicationSocketService{
 
 	private static Logger logger = LoggerFactory.getLogger(AndroidCommunicationSocketService.class);
 	
+	public static Handler contactHandler;
+	
 	@Override
 	public boolean refreshConnectableList() {
 		new Thread() {
 			@Override
 			public void run() {
+				long connectionMapVersionIdTemp = connectionMapVersionId+1;//连接刷新临时ID
 				List<String> localIpList = AndroidNetUtil.getLocalIpAddress();
 				for (String localIp : localIpList) {
 					List<String> lanIpList = NetUtil.getLANIp(localIp);
 					for (final String lanIp : lanIpList) {
 						final ConnectionBean connectionBean = new ConnectionBean();
 						connectionBean.ip = lanIp;
+						connectionBean.refreshId = connectionMapVersionIdTemp;
 						new Thread() {
 							@Override
 							public void run() {
 								try {
 									Socket clientSocket = new Socket(connectionBean.ip, Constants.CONNECTION.PARAM.SOCKET_PORT);
-									clientSocket.setSoTimeout(500);
 									BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(),
 											Constants.CONNECTION.PARAM.SOCKET_ENCODING));
 									PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 
 									Message message = MessageUtil.getNewRequestMessage(Constants.MESSAGE.TYPE.REQUEST_PING);
-									out.println(MessageUtil.message2String(message));
-									out.flush();
-
+									logger.debug("安卓Socket交互类:发现可连接服务器("+connectionBean.ip+"),准备发送报文交换身份数据");
+									try {
+										out.println(MessageUtil.message2String(message));
+										out.flush();
+									} catch (Exception e) {
+										logger.debug("安卓Socket交互类:向服务器("+connectionBean.ip+")发送数据失败,失败原因为:",e);
+									}
+									logger.debug("安卓Socket交互类:身份交换数据发送完成:"+MessageUtil.message2String(message));
 									String clientReturnMessageStr = in.readLine();
+									logger.debug("安卓Socket交互类:读取到服务器返回身份数据:"+clientReturnMessageStr);
 									Message clientReturnMessage = MessageUtil.string2Messag(clientReturnMessageStr);
 									if (Constants.MESSAGE.TYPE.REQUEST_PING_SUCCESS.equals(clientReturnMessage.getMessageType())) {
 										MessageTitle messageTitle = clientReturnMessage.getMessageTitle();
 										connectionBean.setName(messageTitle.getSendClientName());
 										connectionBean.setClientId(messageTitle.getSendClientId());
-										connectionBean.setIp(lanIp);//用户返回ip不准
-										connectionMap.put(connectionBean.clientId, connectionBean);
+										CommonFactory.getCommunicationService().addConnection(connectionBean);
 										logger.info("Socket交互业务类:获取可连接设备("+connectionBean.name+",IP:" + lanIp + ")");
 									}
 									clientSocket.close();
@@ -69,5 +80,14 @@ public class AndroidCommunicationSocketService extends CommunicationSocketServic
 		}.start();
 		return true;
 	}
+
+	@Override
+	public void addConnection(ConnectionBean connectionBean) {
+		super.addConnection(connectionBean);
+		android.os.Message msg = new android.os.Message();  
+		msg.obj = connectionMap;
+		contactHandler.sendMessage(msg); 
+	}
+
 
 }

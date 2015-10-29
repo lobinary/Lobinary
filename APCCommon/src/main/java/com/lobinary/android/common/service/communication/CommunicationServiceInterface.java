@@ -22,6 +22,7 @@ import com.lobinary.android.common.pojo.communication.Message;
  */
 public interface CommunicationServiceInterface {
 	
+	
 	/**
 	 * <pre>
 	 * 连接列表 
@@ -90,6 +91,16 @@ public interface CommunicationServiceInterface {
 	 * @return 服务器列表
 	 */
 	public boolean refreshConnectableList();
+
+	/**
+	 * 
+	 * <pre>
+	 * 添加连接(同批次更新,将不同批次删除)
+	 * </pre>
+	 *
+	 * @param connectionBean
+	 */
+	public void addConnection(ConnectionBean connectionBean);
 	
 	/**
 	 * 
@@ -125,7 +136,5 @@ public interface CommunicationServiceInterface {
 	 * @return
 	 */
 	public Map<ConnectionBean,Message> sendMessageToAll(Message message);
-	
-	
 	
 }
