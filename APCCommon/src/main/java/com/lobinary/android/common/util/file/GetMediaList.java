@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import com.lobinary.android.common.pojo.model.Model;
 import com.lobinary.android.common.pojo.model.Music;
 
 /**
@@ -26,14 +27,20 @@ public class GetMediaList {
 	int i;
 	static int j,k;
 	String musicPath;
-	Map<Long,Music> musicMap= new HashMap<Long,Music>();
+	Map<Long,Music> musicMap = new HashMap<Long,Music>();
+	Map<Long,Music>	videoMap = new HashMap<Long, Music>(); 
 	Map<String,String[]> mediaType = new HashMap<String,String[]>();
+	Map<String,Map> storeMedia = new HashMap<String,Map>();
+	Map<String, Model> getObject = new HashMap<String,Model>();
 	String[] music = {".mp3",".wma",".wav",".asf"};
 	String[] video = {".avi",".asf","mpg","rm","rmvb","wmv","mp4","divx"};
 	
 	private void mediaTypeMap(){
 		mediaType.put("music", music);
 		mediaType.put("video", video);
+		storeMedia.put("music", musicMap);
+		storeMedia.put("video", videoMap);
+		getObject.put("music", new Music());
 	}
 
 	/**
@@ -48,13 +55,20 @@ public class GetMediaList {
 				GetList(files[i].getPath(),type);
 			}
 			else{
-				Music mu = new Music();
-				mu.setName(files[i].getName());
+				Model me = getObject.get(type);
+				me.setName(files[i].getName());
 				sequence++;
-				mu.setId(System.currentTimeMillis()+sequence);
-				musicMap.put(mu.getId(), mu);
-				System.out.println(musicMap.get(mu.getId()).getName());
+				me.setId(System.currentTimeMillis()+sequence);
+				storeMedia.get(type).put(me.getId(), me);
+				Model pri = getObject.get(type);//test
+				pri = (Model) storeMedia.get(type).get(me.getId());//test
+				System.out.println(pri.getName());//test
 			}
 		}
+	}
+	
+	public static void main(String[] args) {
+		GetMediaList haha = new GetMediaList();
+		haha.GetList("H:\\music","music");
 	}
 }

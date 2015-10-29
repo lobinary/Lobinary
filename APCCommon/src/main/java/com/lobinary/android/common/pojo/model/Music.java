@@ -24,7 +24,7 @@ import java.util.Random;
  *         
  * 
  */
-public class Music {
+public class Music extends Model{
 	
 	private long id;
 	
