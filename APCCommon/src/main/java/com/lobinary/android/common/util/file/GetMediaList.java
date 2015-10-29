@@ -20,32 +20,41 @@ import com.lobinary.android.common.pojo.model.Music;
  * 
  */
 public class GetMediaList {
+	
+	long sequence = 0;
+	
 	int i;
 	static int j,k;
 	String musicPath;
-	Map<Random,Music> musicMap= new HashMap<Random,Music>();
+	Map<Long,Music> musicMap= new HashMap<Long,Music>();
+	Map<String,String[]> mediaType = new HashMap<String,String[]>();
+	String[] music = {".mp3",".wma",".wav",".asf"};
+	String[] video = {".avi",".asf","mpg","rm","rmvb","wmv","mp4","divx"};
+	
+	private void mediaTypeMap(){
+		mediaType.put("music", music);
+		mediaType.put("video", video);
+	}
+
 	/**
 	 * 
 	 */
-	public void GetMusicList(String mp) {
+	public void GetList(String mp,String type) {
+		mediaTypeMap();
 		File file = new File(mp);
-		File[] files = file.listFiles(new MusicFileFilter());
+		File[] files = file.listFiles(new MediaFileFilter(mediaType.get(type)));
 		for(int i = 0;i<files.length;i++){
 			if(files[i].isDirectory()){
-				GetMusicList(files[i].getPath());
+				GetList(files[i].getPath(),type);
 			}
 			else{
 				Music mu = new Music();
 				mu.setName(files[i].getName());
-				mu.setId(new Random(10000));
+				sequence++;
+				mu.setId(System.currentTimeMillis()+sequence);
 				musicMap.put(mu.getId(), mu);
+				System.out.println(musicMap.get(mu.getId()).getName());
 			}
 		}
-	}
-	
-	
-	public static void main(String[] args) {
-		GetMediaList haha = new GetMediaList();
-		haha.GetMusicList("H:\\music");
 	}
 }
