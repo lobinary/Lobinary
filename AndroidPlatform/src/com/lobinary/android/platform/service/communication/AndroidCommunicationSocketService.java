@@ -1,9 +1,11 @@
 package com.lobinary.android.platform.service.communication;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -16,6 +18,7 @@ import com.lobinary.android.common.pojo.communication.ConnectionBean;
 import com.lobinary.android.common.pojo.communication.Message;
 import com.lobinary.android.common.pojo.communication.MessageTitle;
 import com.lobinary.android.common.service.communication.socket.CommunicationSocketService;
+import com.lobinary.android.common.service.communication.socket.CommunicationSocketThread;
 import com.lobinary.android.common.util.NetUtil;
 import com.lobinary.android.common.util.communication.MessageUtil;
 import com.lobinary.android.common.util.factory.CommonFactory;
@@ -32,6 +35,8 @@ public class AndroidCommunicationSocketService extends CommunicationSocketServic
 		new Thread() {
 			@Override
 			public void run() {
+				removeAllUnConnectionBean();
+				contactHandler.sendMessage(new android.os.Message());
 				long connectionMapVersionIdTemp = connectionMapVersionId+1;//连接刷新临时ID
 				List<String> localIpList = AndroidNetUtil.getLocalIpAddress();
 				for (String localIp : localIpList) {
@@ -84,10 +89,17 @@ public class AndroidCommunicationSocketService extends CommunicationSocketServic
 	@Override
 	public void addConnection(ConnectionBean connectionBean) {
 		super.addConnection(connectionBean);
-		android.os.Message msg = new android.os.Message();  
-		msg.obj = connectionMap;
-		contactHandler.sendMessage(msg); 
+		contactHandler.sendMessage(new android.os.Message()); 
 	}
 
+	@Override
+	public void connect(ConnectionBean connectionBean) throws UnknownHostException, IOException {
+		CommunicationSocketThread socketThread = new CommunicationSocketThread(connectionBean, false);
+		socketThread.start();
+	}
 
+	public void refreshContactList(){
+		contactHandler.sendMessage(new android.os.Message()); 
+	}
+	
 }

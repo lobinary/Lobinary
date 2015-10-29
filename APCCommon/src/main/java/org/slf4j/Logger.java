@@ -48,5 +48,6 @@ public class Logger {
 	private void outExceptionLog(String log,Throwable t) {
 		LogUtil.out(getPreStr()+log+getEndStr()+t.getMessage());
 		System.out.println(getPreStr()+log+getEndStr()+t.getMessage());
+		t.printStackTrace();
 	}
 }

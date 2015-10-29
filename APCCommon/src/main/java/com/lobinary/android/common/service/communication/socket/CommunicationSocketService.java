@@ -334,10 +334,26 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 			connectionMap.clear();
 			logger.info("Socket业务交互类:新版本批次("+connectionMapVersionId+")连接更新中......");
 		}
-		if(connectionMapVersionId == connectionBean.getRefreshId()){
+		if(connectionMapVersionId == connectionBean.getRefreshId()||connectionBean.getRefreshId()==0){
 			connectionMap.put(connectionBean.clientId, connectionBean);
 		}
 		logger.info("Socket业务交互类:新连接(clientId:" + connectionBean.clientId + ")被添加,当前连接总数为:" + connectionMap.size() + "个");
+	}
+	
+	/**
+	 * 
+	 * <pre>
+	 * 移除所有处于未连接状态的connectionbean
+	 * </pre>
+	 *
+	 */
+	public void removeAllUnConnectionBean(){
+		for (String key : connectionMap.keySet()) {
+			ConnectionBean connectionBean = connectionMap.get(key);
+			if(Constants.CONNECTION.STATUS_UNCONNECTION==connectionBean.status){
+				connectionMap.remove(key);
+			}
+		}
 	}
 
 }

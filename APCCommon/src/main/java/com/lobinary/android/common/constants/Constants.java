@@ -15,6 +15,21 @@ public class Constants {
 	
 	public class CONNECTION{
 		
+		/**
+		 * 连接状态 - 未连接
+		 */
+		public final static int STATUS_UNCONNECTION = 0;
+		
+		/**
+		 * 连接状态 - 已经连接
+		 */
+		public final static int STATUS_CONNECTION = 1;
+		
+		/**
+		 * 连接状态 - 连接异常
+		 */
+		public final static int STATUS_EXCEPTION = 4;
+		
 		public class PARAM{
 			
 			/**

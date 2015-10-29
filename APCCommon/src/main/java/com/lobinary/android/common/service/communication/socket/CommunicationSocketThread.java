@@ -47,6 +47,8 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 	private MessageTitle messageTitle;
 	Map<Long,Thread> waitThread = new HashMap<Long,Thread>();
 	Map<Long,Message> waitDealMessage = new HashMap<Long,Message>();
+	boolean isReceiveNewConnection;//isReceiveNewConnection 是否是接收新建连接请求 true是    false不是，是主动发起的连接请求
+	String ip;
 	
 	/**
 	 * 是否重新连接
@@ -55,21 +57,47 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 
 	private long num = 1;
 
+	private ConnectionBean connectionBean;
+
 	/**
 	 * 构造方法
 	 * @param clientSocket
-	 * @param isReceiveRequest 是否是接受的请求 true是    false不是，是主动发起的连接请求
+	 * @param isReceiveNewConnection 是否是接收新建连接请求 true是    false不是，是主动发起的连接请求
 	 * @throws UnsupportedEncodingException
 	 * @throws IOException
 	 */
-	public CommunicationSocketThread(Socket clientSocket,boolean isReceiveRequest) throws UnsupportedEncodingException, IOException {
+	public CommunicationSocketThread(Socket clientSocket,boolean isReceiveNewConnection) throws UnsupportedEncodingException, IOException {
 		super();
-
+		this.isReceiveNewConnection = isReceiveNewConnection;
 		this.clientSocket = clientSocket;
+		initial(isReceiveNewConnection);
+	}
+
+	/**
+	 * 
+	 */
+	public CommunicationSocketThread(ConnectionBean connectionBean,boolean isReceiveNewConnection) {
+		super();
+		this.ip = connectionBean.ip;
+		this.connectionBean = connectionBean;
+	}
+
+	/**
+	 * 
+	 * <pre>
+	 * 初始化构造器
+	 * </pre>
+	 *
+	 * @param clientSocket
+	 * @param isReceiveNewConnection
+	 * @throws UnsupportedEncodingException
+	 * @throws IOException
+	 */
+	private void initial(boolean isReceiveNewConnection) throws UnsupportedEncodingException, IOException {
 		in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(),Constants.CONNECTION.PARAM.SOCKET_ENCODING));
 		out = new PrintWriter(clientSocket.getOutputStream(), true);
 		
-		if(isReceiveRequest){
+		if(isReceiveNewConnection){
 			logger.debug("Socket服务端监控客户端子线程:收到客户端数据:客户端子线程初始化成功");
 		}else{
 			Message reqMessage = MessageUtil.getNewResponseMessage(Constants.MESSAGE.TYPE.REQUEST_CONNECT);
@@ -89,6 +117,11 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 	public void run() {
 		super.run();
 		try {
+			if(!isReceiveNewConnection){
+				logger.info("准备与设备("+ip+")建立连接");
+				this.clientSocket = new Socket(ip, Constants.CONNECTION.PARAM.SOCKET_PORT);
+				initial(isReceiveNewConnection);
+			}
 			String messageStr = in.readLine();
 			logger.debug("Socket服务端监控客户端子线程:接收到客户端请求,请求报文为："+messageStr);
 			Message initialMessage = null;
@@ -107,15 +140,21 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 					out.flush();
 					
 					messageTitle = initialMessage.getMessageTitle();
-					ConnectionBean connectionBean = new ConnectionBean(initialMessage,this);
-					CommonFactory.getCommunicationService().addConnection(connectionBean);
+					ConnectionBean connectionBeanTemp = new ConnectionBean(initialMessage,this);
+					connectionBeanTemp.ip = ip;
+					connectionBeanTemp.status = Constants.CONNECTION.STATUS_CONNECTION;
+					this.connectionBean = connectionBeanTemp;
+					CommonFactory.getCommunicationService().addConnection(connectionBeanTemp);
 					
 					establishConnection(initialMessage);
 				}else if(Constants.MESSAGE.TYPE.ACCEPT_CONNECT.equals(initialMessage.getMessageType())){
 
 					messageTitle = initialMessage.getMessageTitle();
-					ConnectionBean connectionBean = new ConnectionBean(initialMessage,this);
-					CommonFactory.getCommunicationService().addConnection(connectionBean);
+					ConnectionBean connectionBeanTemp = new ConnectionBean(initialMessage,this);
+					connectionBeanTemp.ip = ip;
+					connectionBeanTemp.status = Constants.CONNECTION.STATUS_CONNECTION;
+					this.connectionBean = connectionBeanTemp;
+					CommonFactory.getCommunicationService().addConnection(connectionBeanTemp);
 					
 					establishConnection(initialMessage);
 				}else{
@@ -293,6 +332,9 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 			out.println(message);
 			out.flush();
 			closeConnection();
+			connectionBean.status = Constants.CONNECTION.STATUS_UNCONNECTION;
+			CommonFactory.getCommunicationService().addConnection(connectionBean);
+			CommonFactory.getCommunicationService().refreshConnectableList();
 		} catch (Exception e) {
 			logger.error("Socket服务端监控客户端子线程:关闭连接时发送异常！",e);
 			return false;

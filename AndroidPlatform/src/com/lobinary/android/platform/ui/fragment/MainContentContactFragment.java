@@ -24,6 +24,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.lobinary.android.common.constants.Constants;
 import com.lobinary.android.common.pojo.communication.ConnectionBean;
 import com.lobinary.android.common.service.communication.socket.CommunicationSocketService;
 import com.lobinary.android.common.util.factory.CommonFactory;
@@ -63,34 +64,39 @@ public class MainContentContactFragment extends Fragment implements OnItemClickL
 		initView();
 		contactHandler = new Handler() {
 			public void handleMessage(Message msg) {
-				refreshContact((Map<String, ConnectionBean>) msg.obj);
+				refreshContact();
 			}
 		};
 		AndroidCommunicationSocketService.contactHandler = this.contactHandler;
 	}
 	
-
+	/**
+	 * 初始化listView
+	 */
 	private void initView() {
-
 		mListView = (ListViewCompat) getActivity().findViewById(R.id.contactContent);
-		MessageItem item = new MessageItem();
-		item.iconRes = R.drawable.default_qq_avatar;
-		item.title = "局域网PC服务器";
-		item.msg = "IP:127.0.0.1";
-		item.time = "未连接";
-		mMessageItems.add(item);
-		MessageItem item2 = new MessageItem();
-		item2.iconRes = R.drawable.wechat_icon;
-		item2.title = "公网PC服务器";
-		item2.msg = "URL:http://www.lobinary.com";
-		item2.time = "已连接";
-		mMessageItems.add(item2);
-		mListView.setAdapter(new SlideAdapter());
-		mListView.setOnItemClickListener(this);
+//		MessageItem item = new MessageItem();
+//		item.iconRes = R.drawable.default_qq_avatar;
+//		item.title = "局域网PC服务器";
+//		item.msg = "IP:127.0.0.1";
+//		item.time = "未连接";
+//		mMessageItems.add(item);
+//		MessageItem item2 = new MessageItem();
+//		item2.iconRes = R.drawable.wechat_icon;
+//		item2.title = "公网PC服务器";
+//		item2.msg = "URL:http://www.lobinary.com";
+//		item2.time = "已连接";
+//		mMessageItems.add(item2);
+//		mListView.setAdapter(new SlideAdapter());
+//		mListView.setOnItemClickListener(this);
 	}
 
-
-	public void refreshContact(Map<String, ConnectionBean> connectionMap) {
+	/**
+	 * 刷新contact列表
+	 * @param connectionMap
+	 */
+	public void refreshContact() {
+		Map<String, ConnectionBean> connectionMap = CommonFactory.getCommunicationService().connectionMap;
 		currentContactList.clear();
 		mMessageItems.clear();
 		for (String key : connectionMap.keySet()) {
@@ -99,10 +105,17 @@ public class MainContentContactFragment extends Fragment implements OnItemClickL
 			item.iconRes = R.drawable.sound;
 			item.title = connectionBean.name;
 			item.msg = connectionBean.ip;
-			item.time = "未连接";
+			String statusName = "未连接";
+			if(Constants.CONNECTION.STATUS_CONNECTION==connectionBean.status){
+				statusName = "已连接";
+			}else if(Constants.CONNECTION.STATUS_EXCEPTION==connectionBean.status){
+				statusName = "连接异常";
+			}
+			item.time = statusName;
 			mMessageItems.add(item);
 			currentContactList.add(connectionBean);
 			logger.info("增加新的Contact数据"+connectionBean.name);
+			reloadContactListPage();
 		}
 	}
 
@@ -139,7 +152,7 @@ public class MainContentContactFragment extends Fragment implements OnItemClickL
 				slideView = new SlideView(getActivity());
 				slideView.setContentView(itemView);
 
-				holder = new ViewHolder(slideView);
+				holder = new ViewHolder(slideView,position);
 				slideView.setOnSlideListener(MainContentContactFragment.this);
 				slideView.setTag(holder);
 			} else {
@@ -160,6 +173,14 @@ public class MainContentContactFragment extends Fragment implements OnItemClickL
 
 	}
 	
+	/**
+	 * 重新根据list数据加载页面
+	 */
+	public void reloadContactListPage(){
+		mListView.setAdapter(new SlideAdapter());
+		mListView.setOnItemClickListener(this);
+	}
+	
 
 	public class MessageItem {
 		public int iconRes;
@@ -176,18 +197,18 @@ public class MainContentContactFragment extends Fragment implements OnItemClickL
 		public TextView time;
 		public ViewGroup deleteHolder;
 
-		ViewHolder(View view) {
+		ViewHolder(View view,int position) {
 			icon = (ImageView) view.findViewById(R.id.icon);
 			title = (TextView) view.findViewById(R.id.title);
 			msg = (TextView) view.findViewById(R.id.msg);
 			time = (TextView) view.findViewById(R.id.time);
 			deleteHolder = (ViewGroup) view.findViewById(R.id.holder);
+			deleteHolder.setTag(position);
 		}
 	}
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		logger.info("点击按钮"+position);
 		ConnectionBean connectionBean = currentContactList.get(position);
 		try {
 			CommonFactory.getCommunicationService().connect(connectionBean);
@@ -214,7 +235,9 @@ public class MainContentContactFragment extends Fragment implements OnItemClickL
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.holder) {
-			Log.e(TAG, "点击View对象：" + v);
+			int position = (Integer) v.getTag();
+			ConnectionBean connectionBean = currentContactList.get(position);
+			connectionBean.getConnectionThread().shutDownConnection();
 		}
 	}
 

@@ -1,5 +1,6 @@
 package com.lobinary.android.common.pojo.communication;
 
+import com.lobinary.android.common.constants.Constants;
 import com.lobinary.android.common.service.communication.ConnectionThreadInterface;
 import com.lobinary.android.common.service.communication.socket.CommunicationSocketThread;
 
@@ -20,21 +21,11 @@ public class ConnectionBean {
 	 * 刷新id,一般 交互类 更新可连接设备和已连接设备时 需要将 以前批次(从交互业务类connectionMap中删除)和 本批次(加入交互connectionMap)作区分使用
 	 */
 	public long refreshId;
-	
-	public String getClientId() {
-		return clientId;
-	}
 
-	public void setClientId(String clientId) {
-		this.clientId = clientId;
-	}
-
-	public String getIp() {
-		return ip;
-	}
-
-	public void setIp(String ip) {
-		this.ip = ip;
+	@Override
+	public String toString() {
+		return "ConnectionBean [refreshId=" + refreshId + ", clientId=" + clientId + ", name=" + name + ", ip=" + ip + ", connectionThread=" + connectionThread
+				+ ", status=" + status + "]";
 	}
 
 	/**
@@ -56,6 +47,36 @@ public class ConnectionBean {
 	 * 连接监控子线程
 	 */
 	private ConnectionThreadInterface connectionThread;
+	
+	/**
+	 * {@link Constants.CONNECTION.STATUS_* }
+	 */
+	public int status = Constants.CONNECTION.STATUS_UNCONNECTION;
+	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public String getClientId() {
+		return clientId;
+	}
+
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
 
 	/**
 	 * 初始化
