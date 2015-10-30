@@ -355,5 +355,24 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 			}
 		}
 	}
+	
+	/**
+	 * 
+	 * <pre>
+	 * 获取已经连接的设备
+	 * </pre>
+	 *
+	 * @return
+	 */
+	public List<ConnectionBean> getAlreadyConnectionBean(){
+		List<ConnectionBean> list = new ArrayList<ConnectionBean>();
+		for (String key : connectionMap.keySet()) {
+			ConnectionBean connectionBean = connectionMap.get(key);
+			if(Constants.CONNECTION.STATUS_CONNECTION==connectionBean.status){
+				list.add(connectionMap.get(key));
+			}
+		}
+		return list ;
+	}
 
 }

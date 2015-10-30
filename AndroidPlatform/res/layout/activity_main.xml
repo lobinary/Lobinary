@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/main_title_fragment"
-        android:name="com.lobinary.android.platform.ui.fragment.MainTitleFragment"
+        android:name="com.lobinary.android.platform.ui.fragment.MainTopFragment"
         android:layout_width="fill_parent"
         android:layout_height="45dp" />
 

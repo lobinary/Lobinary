@@ -13,7 +13,6 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,10 +28,11 @@ import com.lobinary.android.common.pojo.communication.ConnectionBean;
 import com.lobinary.android.common.service.communication.socket.CommunicationSocketService;
 import com.lobinary.android.common.util.factory.CommonFactory;
 import com.lobinary.android.platform.R;
-import com.lobinary.android.platform.service.communication.AndroidCommunicationSocketService;
 import com.lobinary.android.platform.ui.listview.ListViewCompat;
 import com.lobinary.android.platform.ui.listview.SlideView;
 import com.lobinary.android.platform.ui.listview.SlideView.OnSlideListener;
+import com.lobinary.android.platform.ui.refreshview.RefreshableView;
+import com.lobinary.android.platform.ui.refreshview.RefreshableView.PullToRefreshListener;
 
 public class MainContentContactFragment extends Fragment implements OnItemClickListener, OnClickListener, OnSlideListener  {
 
@@ -40,7 +40,8 @@ public class MainContentContactFragment extends Fragment implements OnItemClickL
 
 	private static Logger logger = LoggerFactory.getLogger(CommunicationSocketService.class);
 	
-	Handler contactHandler;
+	public static Handler contactHandler;
+	RefreshableView refreshableView;
 	
 	/**
 	 * 当前Contact列表list
@@ -65,9 +66,9 @@ public class MainContentContactFragment extends Fragment implements OnItemClickL
 		contactHandler = new Handler() {
 			public void handleMessage(Message msg) {
 				refreshContact();
+				MainTopFragment.topContactHandler.sendMessage(new Message());
 			}
 		};
-		AndroidCommunicationSocketService.contactHandler = this.contactHandler;
 	}
 	
 	/**
@@ -75,6 +76,20 @@ public class MainContentContactFragment extends Fragment implements OnItemClickL
 	 */
 	private void initView() {
 		mListView = (ListViewCompat) getActivity().findViewById(R.id.contactContent);
+		refreshableView = (RefreshableView) getActivity().findViewById(R.id.contact_refresh_view);
+		
+		refreshableView.setOnRefreshListener(new PullToRefreshListener() {  
+            @Override  
+            public void onRefresh() {  
+                try {  
+                    CommonFactory.getCommunicationService().refreshConnectableList();
+                    Thread.sleep(3000);  
+                } catch (InterruptedException e) {  
+                    e.printStackTrace();  
+                }  
+                refreshableView.finishRefreshing();  
+            }  
+        }, 0); 
 //		MessageItem item = new MessageItem();
 //		item.iconRes = R.drawable.default_qq_avatar;
 //		item.title = "局域网PC服务器";
@@ -210,14 +225,19 @@ public class MainContentContactFragment extends Fragment implements OnItemClickL
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		ConnectionBean connectionBean = currentContactList.get(position);
-		try {
-			CommonFactory.getCommunicationService().connect(connectionBean);
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(Constants.CONNECTION.STATUS_CONNECTION==connectionBean.status){
+			logger.info("您已经与该设备建立连接,无法再次连接");
+		}else{
+			try {
+				logger.debug("准备连接设备("+connectionBean.ip+")");
+				CommonFactory.getCommunicationService().connect(connectionBean);
+			} catch (UnknownHostException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 

@@ -137,4 +137,14 @@ public interface CommunicationServiceInterface {
 	 */
 	public Map<ConnectionBean,Message> sendMessageToAll(Message message);
 	
+	/**
+	 * 
+	 * <pre>
+	 * 获取已连接设备
+	 * </pre>
+	 *
+	 * @return
+	 */
+	public List<ConnectionBean> getAlreadyConnectionBean();
+	
 }

@@ -7,12 +7,24 @@
      
     
     <!-- ############################## 联系人页面 ############################## -->
-
-    <com.lobinary.android.platform.ui.listview.ListViewCompat
+ 	<com.lobinary.android.platform.ui.refreshview.RefreshableView  
+        android:id="@+id/contact_refresh_view"  
+        android:layout_width="fill_parent"  
+        android:layout_height="fill_parent" >  
+  
+    <!--     <ListView  
+            android:id="@+id/list_view"  
+            android:layout_width="fill_parent"  
+            android:layout_height="fill_parent" >  
+        </ListView>   -->
+        
+        <com.lobinary.android.platform.ui.listview.ListViewCompat
         android:id="@+id/contactContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
          />
+    </com.lobinary.android.platform.ui.refreshview.RefreshableView> 
+    
     <!-- ############################## 联系人页面 ############################## -->
 
 </RelativeLayout>

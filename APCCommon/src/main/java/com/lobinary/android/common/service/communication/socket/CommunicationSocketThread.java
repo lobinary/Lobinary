@@ -70,6 +70,7 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 		super();
 		this.isReceiveNewConnection = isReceiveNewConnection;
 		this.clientSocket = clientSocket;
+		this.ip = clientSocket.getLocalAddress().getHostAddress();
 		initial(isReceiveNewConnection);
 	}
 
@@ -175,6 +176,7 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 				logger.error("Socket服务端监控客户端子线程:与"+messageTitle.getSendClientName()+"的连接被关闭！",e);
 			}
 		}
+		logger.info("与设备("+ip+")的连接线程准备关闭");
 	}
 
 	/**
@@ -234,6 +236,7 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 		if(!clientSocket.isClosed()){
 			try {
 				clientSocket.close();
+				logger.info("与设备("+ip+")的连接socket已经被关闭");
 			} catch (IOException e) {
 				logger.error("Socket服务端监控客户端子线程:关闭当前连接时发生异常,予以忽略",e);
 			}
@@ -255,7 +258,7 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 		Message returnMessage = waitDealMessage.get(messageId);
 		waitDealMessage.remove(messageId);
 		waitThread.remove(messageId);
-		logger.info("@@@@@@@@@@本次返回returnMessage:"+returnMessage+"waitDealMessage:"+waitDealMessage.size()+"条,waitThread:"+waitThread.size());
+		logger.info("本次返回returnMessage:"+returnMessage+"waitDealMessage:"+waitDealMessage.size()+"条,waitThread:"+waitThread.size());
 		return returnMessage;
 	}
 	
@@ -329,7 +332,7 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 	public boolean shutDownConnection() {
 		try {
 			Message message = MessageUtil.getNewRequestMessage(Constants.MESSAGE.TYPE.DISCONNECT);
-			out.println(message);
+			out.println(MessageUtil.message2String(message));
 			out.flush();
 			closeConnection();
 			connectionBean.status = Constants.CONNECTION.STATUS_UNCONNECTION;

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/AppBaseTheme"
     android:layout_width="wrap_content"
     android:layout_height="45dp"
     android:background="@color/main_title_bg" >
@@ -18,7 +19,8 @@
         android:text="@string/main_title_name"
         android:textColor="@color/grey"
         android:textSize="18sp"
-        android:textStyle="normal" />
+        android:textStyle="normal"
+        android:visibility="gone" />
 
     <TextView
         android:layout_width="match_parent"
@@ -26,5 +28,31 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:background="@color/grey" />
+
+    <!-- 
+    <com.lobinary.android.platform.ui.spinner.CustomerSpinner
+        android:id="@+id/spinner_contact_view"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:spinnerMode="dropdown"
+        android:layout_toRightOf="@+id/main_head_title_logo"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/spinner_contact_bg_layout" />
+     -->
+     
+      <Spinner
+        android:id="@+id/spinner_contact_view"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:spinnerMode="dropdown"
+        android:layout_toRightOf="@+id/main_head_title_logo"
+        android:layout_marginTop="10dp" 
+        android:background="@drawable/spinner_contact_bg_layout" />
+    
+    
 
 </RelativeLayout>
