@@ -19,7 +19,7 @@ import com.lobinary.android.platform.R;
 
 public class MainBottomFragment extends Fragment {
 
-	private static Logger logger = LoggerFactory.getLogger(MessageUtil.class);
+	private static Logger logger = LoggerFactory.getLogger(MainBottomFragment.class);
 	
 	private MainContentFragment mainContent;
 
@@ -33,13 +33,13 @@ public class MainBottomFragment extends Fragment {
 	private TextView featuresBtnText;
 	private TextView settingBtnText;
 	
-	private long activitionBtnId = R.id.homeBtnView;
+	private long activitionBtnId = R.id.homeBtnBg;
 
 	private LinearLayout homeBtnBg;
 
 	private LinearLayout contactBtnBg;
 
-	private LinearLayout functionBtnBg;
+	private LinearLayout featuresBtnBg;
 
 	private LinearLayout settingBtnBg;
 
@@ -53,7 +53,7 @@ public class MainBottomFragment extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 		initialView();
 		setBtnListener();
-		setClickAnimal(R.id.homeBtnView);
+//		setClickAnimal(R.id.homeBtnBg);
 	}
 	
 	private void initialView() {
@@ -66,12 +66,12 @@ public class MainBottomFragment extends Fragment {
 		
 		homeBtnText = (TextView) getActivity().findViewById(R.id.homeBtnText);
 		contactBtnText = (TextView) getActivity().findViewById(R.id.contactBtnText);
-		featuresBtnText = (TextView) getActivity().findViewById(R.id.functionBtnText);
+		featuresBtnText = (TextView) getActivity().findViewById(R.id.featuresBtnText);
 		settingBtnText = (TextView) getActivity().findViewById(R.id.settingBtnText);  
 		
 		homeBtnBg = (LinearLayout) getActivity().findViewById(R.id.homeBtnBg);
 		contactBtnBg = (LinearLayout) getActivity().findViewById(R.id.contactBtnBg);
-		functionBtnBg = (LinearLayout) getActivity().findViewById(R.id.functionBtnBg);
+		featuresBtnBg = (LinearLayout) getActivity().findViewById(R.id.featuresBtnBg);
 		settingBtnBg = (LinearLayout) getActivity().findViewById(R.id.settingBtnBg);		
 	}
 
@@ -79,40 +79,41 @@ public class MainBottomFragment extends Fragment {
 	 * 设置按钮监听
 	 */
 	private void setBtnListener() {
-		setLisener(homeBtnView);
-		setLisener(contactBtnView);
-		setLisener(featuresBtnView);
-		setLisener(settingBtnView);
+		setLisener(homeBtnBg);
+		setLisener(contactBtnBg);
+		setLisener(featuresBtnBg);
+		setLisener(settingBtnBg);
 		
 	}
 
 	public void setClickAnimal(long clickBtnId){
+		if(activitionBtnId==clickBtnId)return;
 		logger.debug("准备切换页面"+clickBtnId);
 		mainContent.clickShowContent(clickBtnId,activitionBtnId);
-		if(activitionBtnId==R.id.homeBtnView){
+		if(activitionBtnId==R.id.homeBtnBg){
 			homeBtnView.setImageDrawable(getResources().getDrawable(R.drawable.home));
 			homeBtnText.setTextColor(getResources().getColor(R.color.grey));
-		}else if(activitionBtnId==R.id.contactBtnView){
+		}else if(activitionBtnId==R.id.contactBtnBg){
 			contactBtnView.setImageDrawable(getResources().getDrawable(R.drawable.contact));
 			contactBtnText.setTextColor(getResources().getColor(R.color.grey));
-		}else if(activitionBtnId==R.id.featuresBtnView){
+		}else if(activitionBtnId==R.id.featuresBtnBg){
 			featuresBtnView.setImageDrawable(getResources().getDrawable(R.drawable.features));
 			featuresBtnText.setTextColor(getResources().getColor(R.color.grey));
-		}else if(activitionBtnId==R.id.settingBtnView){
+		}else if(activitionBtnId==R.id.settingBtnBg){
 			settingBtnView.setImageDrawable(getResources().getDrawable(R.drawable.setting));
 			settingBtnText.setTextColor(getResources().getColor(R.color.grey));
 		}
 
-		if(clickBtnId==R.id.homeBtnView){
+		if(clickBtnId==R.id.homeBtnBg){
 			homeBtnView.setImageDrawable(getResources().getDrawable(R.drawable.home_activition));
 			homeBtnText.setTextColor(getResources().getColor(R.color.orangered));
-		}else if(clickBtnId==R.id.contactBtnView){
+		}else if(clickBtnId==R.id.contactBtnBg){
 			contactBtnView.setImageDrawable(getResources().getDrawable(R.drawable.contact_activition));
 			contactBtnText.setTextColor(getResources().getColor(R.color.orangered));
-		}else if(clickBtnId==R.id.featuresBtnView){
+		}else if(clickBtnId==R.id.featuresBtnBg){
 			featuresBtnView.setImageDrawable(getResources().getDrawable(R.drawable.features_activition));
 			featuresBtnText.setTextColor(getResources().getColor(R.color.orangered));
-		}else if(clickBtnId==R.id.settingBtnView){
+		}else if(clickBtnId==R.id.settingBtnBg){
 			settingBtnView.setImageDrawable(getResources().getDrawable(R.drawable.setting_activition));
 			settingBtnText.setTextColor(getResources().getColor(R.color.orangered));
 		}
@@ -123,7 +124,7 @@ public class MainBottomFragment extends Fragment {
 	 * 
 	 * @param view
 	 */
-	public void setLisener(final ImageView view){
+	public void setLisener(final View view){
 		view.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

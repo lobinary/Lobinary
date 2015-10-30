@@ -28,7 +28,7 @@ import com.lobinary.android.platform.R;
 
 public class MainTopFragment extends Fragment {
 
-	private static Logger logger = LoggerFactory.getLogger(CommunicationSocketService.class);
+	private static Logger logger = LoggerFactory.getLogger(MainTopFragment.class);
 
 	public static Handler topContactHandler;
 	String noClientInfo = "暂无已连接设备";

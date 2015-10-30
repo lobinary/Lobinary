@@ -9,6 +9,7 @@
         android:id="@+id/features_query_btn"
         android:layout_width="fill_parent"
         android:layout_height="60dp"
+        android:clickable="true"
         android:background="@color/orange"
         android:textAlignment="center" >
 
@@ -19,15 +20,17 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:text="查询"
+            android:duplicateParentState="true"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textStyle="bold" />
         
     </RelativeLayout>
 
     <RelativeLayout
-        	android:id="@+id/features_control_btn"
+        android:id="@+id/features_control_btn"
         android:layout_width="fill_parent"
         android:layout_height="60dp"
+        android:clickable="true"
         android:background="@color/features_left"
         android:textAlignment="center" >
 
@@ -38,6 +41,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:text="控制"
+            android:duplicateParentState="true"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/black"
             android:textStyle="bold" />
@@ -47,6 +51,7 @@
         android:id="@+id/features_communication_btn"
         android:layout_width="fill_parent"
         android:layout_height="60dp"
+        android:clickable="true"
         android:background="@color/features_left"
         android:textAlignment="center" >
 
@@ -57,6 +62,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:text="交互"
+            android:duplicateParentState="true"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/black"
             android:textStyle="bold" />

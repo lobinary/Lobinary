@@ -8,7 +8,7 @@
     <!-- //底部菜单的父布局 -->
 
     <LinearLayout
-        android:id="@+id/linearLayout1"
+        android:id="@+id/main_bottom_layout_view"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -20,6 +20,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:clickable="true"
+			android:focusable="true"
             android:gravity="center_horizontal"
             android:orientation="vertical" >
 
@@ -28,9 +30,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_margin="5dp"
-                android:clickable="true"
+            	android:duplicateParentState="true"
                 android:contentDescription="@string/homeBtnDesc"
-                android:src="@drawable/home" />
+                android:src="@drawable/home_activition" />
 
             <TextView
                 android:id="@+id/homeBtnText"
@@ -38,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="2dp"
                 android:text="主页"
+            	android:duplicateParentState="true"
                 android:textColor="@color/orangered"
                 android:textSize="11sp" />
         </LinearLayout>
@@ -47,6 +50,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:clickable="true"
+			android:focusable="true"
             android:gravity="center_horizontal"
             android:orientation="vertical" >
 
@@ -55,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_margin="5dp"
-                android:clickable="true"
+            	android:duplicateParentState="true"
                 android:src="@drawable/contact" />
 
             <TextView
@@ -63,15 +68,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="通讯录"
+            	android:duplicateParentState="true"
                 android:textColor="@color/grey"
                 android:textSize="11sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/functionBtnBg"
+            android:id="@+id/featuresBtnBg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:clickable="true"
+			android:focusable="true"
             android:gravity="center_horizontal"
             android:orientation="vertical" >
 
@@ -80,15 +88,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_margin="5dp"
-                android:clickable="true"
+            	android:duplicateParentState="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/features" />
 
             <TextView
-                android:id="@+id/functionBtnText"
+                android:id="@+id/featuresBtnText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="功能"
+            	android:duplicateParentState="true"
                 android:textColor="@color/grey"
                 android:textSize="11sp" />
         </LinearLayout>
@@ -98,6 +107,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:clickable="true"
+			android:focusable="true"
             android:gravity="center_horizontal"
             android:orientation="vertical" >
 
@@ -106,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_margin="5dp"
-                android:clickable="true"
+            	android:duplicateParentState="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/setting" />
 
@@ -115,6 +126,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="设置"
+            	android:duplicateParentState="true"
                 android:textColor="@color/grey"
                 android:textSize="11sp" />
         </LinearLayout>
@@ -124,7 +136,7 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/linearLayout1"
+        android:layout_alignTop="@+id/main_bottom_layout_view"
         android:background="@color/grey" />
 
 </RelativeLayout>

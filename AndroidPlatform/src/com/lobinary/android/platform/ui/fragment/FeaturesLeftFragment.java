@@ -1,7 +1,11 @@
 package com.lobinary.android.platform.ui.fragment;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import android.app.Fragment;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,6 +17,8 @@ import android.widget.TextView;
 import com.lobinary.android.platform.R;
 
 public class FeaturesLeftFragment extends Fragment {
+
+	private static Logger logger = LoggerFactory.getLogger(FeaturesLeftFragment.class);
 	
 	private FeaturesRightFragment rigthContent;
 
@@ -20,11 +26,11 @@ public class FeaturesLeftFragment extends Fragment {
 	private TextView features_control_btn_text;
 	private TextView features_communication_btn_text;
 	
-	private long activitionBtnId = R.id.homeBtnView;
+	private long activitionBtnId = R.id.features_query_btn;
 
-	private RelativeLayout features_query_btn;
-	private RelativeLayout features_control_btn;
-	private RelativeLayout features_communication_btn;
+	private View features_query_btn;
+	private View features_control_btn;
+	private View features_communication_btn;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,7 +42,7 @@ public class FeaturesLeftFragment extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 		initialView();
 		setBtnListener();
-		setClickAnimal(R.id.homeBtnView);
+//		setClickAnimal(R.id.features_query_btn);
 	}
 	
 	private void initialView() {
@@ -61,26 +67,27 @@ public class FeaturesLeftFragment extends Fragment {
 		
 	}
 
-	public void setClickAnimal(long clickBtnId){
-//		rigthContent.clickShowContent(clickBtnId,activitionBtnId);
-		if(activitionBtnId==R.id.homeBtnView){
+	public void setClickAnimal(int clickBtnId){
+		if(activitionBtnId==clickBtnId)return;
+		rigthContent.clickShowContent(clickBtnId);
+		if(activitionBtnId==R.id.features_query_btn){
 			features_query_btn.setBackgroundColor(getResources().getColor(R.color.features_left));
 			features_query_btn_text.setTextColor(getResources().getColor(R.color.black));
-		}else if(activitionBtnId==R.id.contactBtnView){
+		}else if(activitionBtnId==R.id.features_control_btn){
 			features_control_btn.setBackgroundColor(getResources().getColor(R.color.features_left));
 			features_control_btn_text.setTextColor(getResources().getColor(R.color.black));
-		}else if(activitionBtnId==R.id.featuresBtnView){
+		}else if(activitionBtnId==R.id.features_communication_btn){
 			features_communication_btn.setBackgroundColor(getResources().getColor(R.color.features_left));
 			features_communication_btn_text.setTextColor(getResources().getColor(R.color.black));
 		}
 
-		if(activitionBtnId==R.id.homeBtnView){
+		if(clickBtnId==R.id.features_query_btn){
 			features_query_btn.setBackgroundColor(getResources().getColor(R.color.features_left_activition));
 			features_query_btn_text.setTextColor(getResources().getColor(R.color.white));
-		}else if(activitionBtnId==R.id.contactBtnView){
+		}else if(clickBtnId==R.id.features_control_btn){
 			features_control_btn.setBackgroundColor(getResources().getColor(R.color.features_left_activition));
 			features_control_btn_text.setTextColor(getResources().getColor(R.color.white));
-		}else if(activitionBtnId==R.id.featuresBtnView){
+		}else if(clickBtnId==R.id.features_communication_btn){
 			features_communication_btn.setBackgroundColor(getResources().getColor(R.color.features_left_activition));
 			features_communication_btn_text.setTextColor(getResources().getColor(R.color.white));
 		}
@@ -91,11 +98,16 @@ public class FeaturesLeftFragment extends Fragment {
 	 * 
 	 * @param view
 	 */
-	public void setLisener(final RelativeLayout view){
+	public void setLisener(final View view){
 		view.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				logger.info("点击功能左侧按钮"+v);
 				FeaturesLeftFragment.this.setClickAnimal(view.getId());
+				Message msg = new Message();
+				msg.obj = v.getId();
+				FeaturesRightFragment.featureRightHandler.sendMessage(msg);
+				logger.info("点击功能左侧按钮2"+v);
 			}
 		});
 	}

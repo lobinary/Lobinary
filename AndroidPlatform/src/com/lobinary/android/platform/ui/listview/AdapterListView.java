@@ -11,28 +11,29 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lobinary.android.platform.R;
-import com.lobinary.android.platform.pojo.bean.FeaturesQueryListBean;
+import com.lobinary.android.platform.pojo.bean.FeaturesListBaseBean;
+import com.lobinary.android.platform.pojo.bean.FeaturesListBaseBean;
 import com.lobinary.android.platform.ui.listview.PinnedSectionListView.PinnedSectionListAdapter;
-/*
+
+/**
  * 
- * This is company of adapter
- * 
- * @author YangWenlong
+ * @author Lobinary
+ *
  */
 public class AdapterListView extends BaseAdapter implements PinnedSectionListAdapter{
-	private ArrayList<FeaturesQueryListBean> list;
+	private ArrayList<FeaturesListBaseBean> list;
 	private Context context;
-	public ArrayList<FeaturesQueryListBean> getList() {
+	public ArrayList<FeaturesListBaseBean> getList() {
 		return list;
 	}
-	public void setList(ArrayList<FeaturesQueryListBean> list) {
+	public void setList(ArrayList<FeaturesListBaseBean> list) {
 		if(list!=null){
 			this.list = list;
 		}else{
-			list=new ArrayList<FeaturesQueryListBean>();
+			list=new ArrayList<FeaturesListBaseBean>();
 		}
 	}
-	public AdapterListView(Context context,ArrayList<FeaturesQueryListBean> list){
+	public AdapterListView(Context context,ArrayList<FeaturesListBaseBean> list){
 		this.setList(list);
 		this.context=context;
 	}
@@ -43,7 +44,7 @@ public class AdapterListView extends BaseAdapter implements PinnedSectionListAda
 	}
 
 	@Override
-	public FeaturesQueryListBean getItem(int position) {
+	public FeaturesListBaseBean getItem(int position) {
 		// TODO Auto-generated method stub
 		return list.get(position);
 	}
@@ -67,9 +68,9 @@ public class AdapterListView extends BaseAdapter implements PinnedSectionListAda
 		}else{
 			vh=(ViewHolder) converView.getTag();
 		}
-		FeaturesQueryListBean bean=getItem(position);
+		FeaturesListBaseBean bean=getItem(position);
 		vh.company_item.setText(bean.text);
-		if (bean.type == FeaturesQueryListBean.SECTION) {
+		if (bean.type == FeaturesListBaseBean.SECTION) {
 			vh.company_item.setBackgroundResource(R.drawable.features_list_title_bg);
 			vh.image.setVisibility(View.GONE);
 			
@@ -82,18 +83,18 @@ public class AdapterListView extends BaseAdapter implements PinnedSectionListAda
 	@Override
 	public boolean isItemViewTypePinned(int viewType) {
 		// TODO Auto-generated method stub
-		return viewType == FeaturesQueryListBean.SECTION;//0�Ǳ��⣬1������
+		return viewType == FeaturesListBaseBean.SECTION;
 	}
 
 	@Override
 	public int getViewTypeCount() {
-		return 2;//2��view������ baseAdapter�е÷���
+		return 2;
 	}
 	@Override
 	public int getItemViewType(int position) {
-		return ((FeaturesQueryListBean)getItem(position)).type;
+		return ((FeaturesListBaseBean)getItem(position)).type;
 	}
-	public void refresh(ArrayList<FeaturesQueryListBean> arr){
+	public void refresh(ArrayList<FeaturesListBaseBean> arr){
         setList(arr);
         notifyDataSetChanged();
     }
