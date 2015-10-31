@@ -30,5 +30,29 @@ public class AndroidService implements BaseServiceInterface{
 	public boolean playMusic(String player, String musicId) {
 		return false;
 	}
+
+	@Override
+	public boolean cancelShutDown() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean increaseVoice() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean decreaseVoice() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean shutDown() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }

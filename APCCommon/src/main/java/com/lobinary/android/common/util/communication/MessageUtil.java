@@ -234,9 +234,14 @@ public class MessageUtil {
 				String commandCode = command.getCommandCode();
 				if(Constants.MESSAGE.COMMAND.CODE.REMOTE_METHOD.equals(commandCode)){
 					String methodName = command.getRemoteMethodName();
+					List<Object> remoteMethodParam = command.getRemoteMethodParam();
+					Class[] paramClassArray = new Class[remoteMethodParam.size()];
+					for (int i = 0; i < remoteMethodParam.size(); i++) {
+						paramClassArray[i] = remoteMethodParam.get(i).getClass();
+					}
 					Class<?> clazz = baseService.getClass(); 
-					Method m1 = clazz.getDeclaredMethod(methodName,Command.class); 
-					respMessage = (Message) m1.invoke(baseService,command); 
+					Method m1 = clazz.getDeclaredMethod(methodName,paramClassArray); 
+					respMessage = (Message) m1.invoke(baseService,remoteMethodParam.toArray()); 
 				}
 				respMessage = getNewResponseMessage(Constants.MESSAGE.TYPE.COMMAND);
 				logger.info("报文工具类:接收到客户端调用命令,调用命令成功");
@@ -245,20 +250,7 @@ public class MessageUtil {
 			}
 			
 			respMessage.setMessageTitle(MessageUtil.getMessageTitle());//如果执行成功,将准备装载返回报文头
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return message;

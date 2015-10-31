@@ -359,8 +359,12 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 	 */
 	@Override
 	public boolean shutDown(long delayTime) {
-		// TODO Auto-generated method stub
-		return false;
+		Message requestMessage = getRemoteBaseMessage(Thread.currentThread().getStackTrace()[1].getMethodName());
+		Command command = requestMessage.getCommand();
+		command.add(""+delayTime);
+		Message message = sendMessage(requestMessage);
+		boolean result = (Boolean) message.getMessageObj();
+		return result;
 	}
 
 	/* (non-Javadoc)
@@ -400,6 +404,50 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 		Command command = message.getCommand();
 		command.setRemoteMethodName(methodName);
 		return message;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.lobinary.android.common.service.control.BaseServiceInterface#cancelShutDown()
+	 */
+	@Override
+	public boolean cancelShutDown() {
+		Message requestMessage = getRemoteBaseMessage(Thread.currentThread().getStackTrace()[1].getMethodName());
+		Message message = sendMessage(requestMessage);
+		boolean result = (Boolean) message.getMessageObj();
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.lobinary.android.common.service.control.BaseServiceInterface#increaseVoice()
+	 */
+	@Override
+	public boolean increaseVoice() {
+		Message requestMessage = getRemoteBaseMessage(Thread.currentThread().getStackTrace()[1].getMethodName());
+		Message message = sendMessage(requestMessage);
+		boolean result = (Boolean) message.getMessageObj();
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.lobinary.android.common.service.control.BaseServiceInterface#decreaseVoice()
+	 */
+	@Override
+	public boolean decreaseVoice() {
+		Message requestMessage = getRemoteBaseMessage(Thread.currentThread().getStackTrace()[1].getMethodName());
+		Message message = sendMessage(requestMessage);
+		boolean result = (Boolean) message.getMessageObj();
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.lobinary.android.common.service.control.BaseServiceInterface#shutDown()
+	 */
+	@Override
+	public boolean shutDown() {
+		Message requestMessage = getRemoteBaseMessage(Thread.currentThread().getStackTrace()[1].getMethodName());
+		Message message = sendMessage(requestMessage);
+		boolean result = (Boolean) message.getMessageObj();
+		return result;
 	}
 	
 	

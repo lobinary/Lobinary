@@ -62,6 +62,16 @@ public enum CodeDescConstants {
 	/** "202401","发送报文失败" */
 	SERVICE_MESSAGE_SEND_FAIL("202401","发送报文失败"),
 	
+	//2034** 控制业务 异常码
+	/** "203401","增加音量异常"  */
+	SERVICE_CONTORL_INCREASE_VOICE_EXCEPTION("203401","增加音量异常"),
+	/** "203402","减少音量异常" */
+	SERVICE_CONTORL_DECREASE_VOICE_EXCEPTION("203402","减少音量异常"),
+	/** "203403","增加亮度异常"  */
+	SERVICE_CONTORL_INCREASE_LIGHT_EXCEPTION("203403","增加亮度异常"),
+	/** "203404","减少亮度异常" */
+	SERVICE_CONTORL_DECREASE_LIGHT_EXCEPTION("203404","减少亮度异常"),
+	
 	//3***** 远程信息交互状态码
 	
 	//4***** 数据库状态码

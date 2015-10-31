@@ -11,6 +11,9 @@
  */
 package com.lobinary.apc.service.control.imp;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -18,6 +21,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lobinary.android.common.constants.CodeDescConstants;
+import com.lobinary.android.common.exception.APCSysException;
 import com.lobinary.android.common.pojo.communication.Message;
 import com.lobinary.android.common.pojo.model.Music;
 import com.lobinary.android.common.service.control.BaseServiceInterface;
@@ -43,8 +48,7 @@ public class WindowsService implements BaseServiceInterface {
 	 */
 	@Override
 	public long getCurrentTime() {
-		// TODO Auto-generated method stub
-		return 0;
+		return System.currentTimeMillis();
 	}
 
 	/* (non-Javadoc)
@@ -52,10 +56,25 @@ public class WindowsService implements BaseServiceInterface {
 	 */
 	@Override
 	public boolean shutDown(long delayTime) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			Process pt =Runtime.getRuntime().exec("shutdown -s -f -t "+delayTime);//f强制关机 s关机 t 时间
+		} catch (IOException e) {
+			logger.info("关闭计算机时发生异常",e);
+			return false;
+		} 
+		return true;
 	}
-
+	
+	public boolean cancelShutDown(){
+		try {
+			Process pt =Runtime.getRuntime().exec("shutdown -a");
+		} catch (IOException e) {
+			logger.info("关闭计算机时发生异常",e);
+			return false;
+		} 
+		return true;
+	}
+	
 	/* (non-Javadoc)
 	 * @see com.lobinary.android.common.service.control.BaseServiceInterface#playMusic(com.lobinary.android.common.pojo.communication.Command)
 	 */
@@ -88,6 +107,71 @@ public class WindowsService implements BaseServiceInterface {
 			logger.info("获取音乐列表业务:找到文件,文件名称:"+f.getName()+",文件大小:"+f.getTotalSpace()+"文件路径:"+f.getPath());
 		}
 		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.lobinary.android.common.service.control.BaseServiceInterface#increaseVoice()
+	 */
+	@Override
+	public boolean increaseVoice() {
+		try {
+			Process process =Runtime.getRuntime().exec("sndvol.exe");
+			keyPress(KeyEvent.VK_UP,6);
+			process.destroy();
+		} catch (Exception e) {
+			logger.info("增加音量异常",e);
+			throw new APCSysException(CodeDescConstants.SERVICE_CONTORL_INCREASE_VOICE_EXCEPTION,e);
+		}
+		return true;
+	}
+
+	/**
+	 * 
+	 * <pre>
+	 * 通过java代码点击键盘按键
+	 * </pre>
+	 *
+	 * @param key KeyEvent.VK_*
+	 * @param times
+	 * @throws AWTException
+	 */
+	private void keyPress(int key,int times) throws AWTException {
+		Robot robot = new Robot();
+		for (int i = 0; i < times; i++) {
+			robot.keyPress(key);
+			robot.keyRelease(key);
+//			Thread.sleep(100);//点击按键是否需要睡眠等待具体测试时候调试
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.lobinary.android.common.service.control.BaseServiceInterface#decreaseVoice()
+	 */
+	@Override
+	public boolean decreaseVoice() {
+		try {
+			Process process =Runtime.getRuntime().exec("sndvol.exe");
+			keyPress(KeyEvent.VK_DOWN,6);
+			process.destroy();
+		} catch (Exception e) {
+			logger.info("增加音量异常",e);
+			throw new APCSysException(CodeDescConstants.SERVICE_CONTORL_DECREASE_VOICE_EXCEPTION,e);
+		}
+		return true;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.lobinary.android.common.service.control.BaseServiceInterface#shutDown()
+	 */
+	@Override
+	public boolean shutDown() {
+		try {
+			Process pt =Runtime.getRuntime().exec("shutdown -s -f -t 30 ");//f强制关机 s关机 t 时间
+		} catch (IOException e) {
+			logger.info("关闭计算机时发生异常",e);
+			return false;
+		} 
+		return true;
 	}
 	
 }
