@@ -148,6 +148,15 @@ public class ControlClientPCWindows {
 		JMenuItem savePropertiesMenuItem = new JMenuItem("保存配置信息");
 		fileMenu.add(savePropertiesMenuItem);
 		
+		JMenuItem refreshConnectableEquipment = new JMenuItem("刷新可连接设备");
+		refreshConnectableEquipment.addActionListener(new ActionListener(){	
+			public void actionPerformed(ActionEvent e){
+				new RefreshConnectableClients();
+			}
+		});
+		fileMenu.add(refreshConnectableEquipment);
+		
+		
 		JMenu helpMenu = new JMenu("帮助");
 		menuBar.add(helpMenu);
 		
@@ -305,7 +314,7 @@ public class ControlClientPCWindows {
 		controlPanel.add(panel_31);
 		panel_31.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JButton sendmsgButton = new JButton("发送短信");
+		JButton sendmsgButton = new JButton("刷新可连接列表");
 		panel_31.add(sendmsgButton);
 		
 		JPanel panel_32 = new JPanel();
