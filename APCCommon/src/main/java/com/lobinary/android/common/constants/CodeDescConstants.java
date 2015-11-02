@@ -49,6 +49,8 @@ public enum CodeDescConstants {
 	SERVICE_EXECUTE_SUCCESS("200101","业务执行成功"),
 	
 	//2004** 业务公共 异常码
+	/** "200400","业务执行异常" */
+	SERVICE_EXCEPTION("200400","业务执行异常"),
 	/** "200401","无此业务" */
 	SERVICE_NULL_BUSINESS("200401","无此业务"),
 

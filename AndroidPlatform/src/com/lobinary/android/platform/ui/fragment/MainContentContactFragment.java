@@ -79,13 +79,17 @@ public class MainContentContactFragment extends Fragment implements OnItemClickL
 	private void initView() {
 		mListView = (ListViewCompat) getActivity().findViewById(R.id.contactContent);
 		refreshableView = (RefreshableView) getActivity().findViewById(R.id.contact_refresh_view);
+
+//		refreshableView.currentStatus = 1;
+//		refreshableView.updateHeaderView();
+		
 		
 		refreshableView.setOnRefreshListener(new PullToRefreshListener() {  
             @Override  
             public void onRefresh() {  
                 try {  
                     CommonFactory.getCommunicationService().refreshConnectableList();
-                    Thread.sleep(3000);  
+                    Thread.sleep(500);  
                 } catch (InterruptedException e) {  
                     e.printStackTrace();  
                 }  

@@ -29,6 +29,11 @@ public class Constants {
 		 * 连接状态 - 连接异常
 		 */
 		public final static int STATUS_EXCEPTION = 4;
+
+		/**
+		 * 可连接设备 超时时间
+		 */
+		public static final long CONNECTABLE_TIME_OUT = 5000;
 		
 		public class PARAM{
 			

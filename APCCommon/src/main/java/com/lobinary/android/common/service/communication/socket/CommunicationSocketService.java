@@ -195,9 +195,11 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 	 */
 	@Override
 	public boolean refreshConnectableList() {
+		
 		new Thread() {
 			@Override
 			public void run() {
+				List<Thread> runThreadList = new ArrayList<Thread>();
 				long connectionMapVersionIdTemp = connectionMapVersionId+1;
 				List<String> localIpList = NetUtil.getLocalIpList();
 				for (String localIp : localIpList) {
@@ -206,7 +208,7 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 						final ConnectionBean connectionBean = new ConnectionBean();
 						connectionBean.ip = lanIp;
 						connectionBean.refreshId = connectionMapVersionIdTemp;
-						new Thread() {
+						Thread t = new Thread() {
 							@Override
 							public void run() {
 								try {
@@ -235,8 +237,20 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 //									 logger.error("Socket交互业务类:获取可连接设备列表,尝试连接IP:"+lanIp+"失败");
 								}
 							}
-						}.start();
-					}
+						};
+						runThreadList.add(t);
+						t.start();
+					}//单ip所有同级ip循环结束
+				}//本地ip循环结束
+				
+				try {
+					Thread.sleep(Constants.CONNECTION.CONNECTABLE_TIME_OUT);//睡眠5秒 如果连接依然没有连通 证明连接无效
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				for (Thread t : runThreadList) {
+					t.destroy();
 				}
 			}
 		}.start();

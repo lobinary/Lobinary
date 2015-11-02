@@ -215,7 +215,7 @@ public class MessageUtil {
 	 * @return respon报文
 	 */
 	public static Message parseRequestMessage(Message message){
-		Message respMessage = null;
+		Message respMessage = MessageUtil.migrate(message);
 		try {
 			String messageType = message.getMessageType();
 
@@ -234,28 +234,45 @@ public class MessageUtil {
 						Class<?>[] paramClassArray = new Class[remoteMethodParam.size()];
 						for (int i = 0; i < remoteMethodParam.size(); i++) {
 							paramClassArray[i] = remoteMethodParam.get(i).getClass();
-							baseMethod = clazz.getDeclaredMethod(methodName,paramClassArray); 
-							respMessage = (Message) baseMethod.invoke(baseService,remoteMethodParam.toArray()); 
 						}
+						baseMethod = clazz.getDeclaredMethod(methodName,paramClassArray); 
+						Object returnObj = baseMethod.invoke(baseService,remoteMethodParam.toArray()); 
+						respMessage.setMessageObj(returnObj);
 					}else{
-						baseMethod = clazz.getDeclaredMethod(methodName);
-						respMessage = (Message) baseMethod.invoke(baseService); 
+						baseMethod = clazz.getDeclaredMethod(methodName); 
+						Object returnObj = baseMethod.invoke(baseService); 
+						respMessage.setMessageObj(returnObj);
 					}
 
 				}
-				respMessage = getNewResponseMessage(Constants.MESSAGE.TYPE.COMMAND);
 				logger.info("报文工具类:接收到客户端调用命令,调用命令成功");
 			}else{
+				logger.info("报文工具类:接收到客户端调用命令,调用命令失败");
 				throw new APCSysException(CodeDescConstants.SERVICE_MESSAGE_ERROR_MESSAGE_TYPE, "报文类型("+messageType+")错误");
 			}
 			
 			respMessage.setMessageTitle(MessageUtil.getMessageTitle());//如果执行成功,将准备装载返回报文头
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.info("报文工具类:接收到客户端调用命令,调用命令失败",e);
+			throw new APCSysException(CodeDescConstants.SERVICE_EXCEPTION, e);
 		}
-		return message;
+		return respMessage;
 	}
 	
+	/**
+	 * <pre>
+	 * 根据请求数据,装配返回数据
+	 * </pre>
+	 *
+	 * @param message
+	 * @return
+	 */
+	private static Message migrate(Message message) {
+		message.setMessageTitle(getMessageTitle());
+		message.isReq = false;
+		return message;
+	}
+
 	/**
 	 * 
 	 * <pre>

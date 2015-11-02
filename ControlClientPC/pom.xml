@@ -18,6 +18,14 @@
 	</build>
 
 	<dependencies>
+	
+		<!-- 媒体 -->
+		<dependency>
+			<groupId>javax.media</groupId>
+			<artifactId>jmf</artifactId>
+			<version>2.1.1e</version>
+		</dependency>
+		
 
 		<!-- 日志相关包 -->
 		<dependency>

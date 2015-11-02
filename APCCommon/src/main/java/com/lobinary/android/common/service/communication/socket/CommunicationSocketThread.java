@@ -211,7 +211,7 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 				break;//如果是断开连接请求，在返回同意断开连接后，关闭连接
 			}else if(returnMessage.isReq){
 				String respMessageStr = MessageUtil.parseReqMessageStr2RespMessageStr(line);
-				sendLastMsg(respMessageStr);
+				sendMessage(respMessageStr);
 			}else{
 				long messageId = returnMessage.getId();
 				waitDealMessage.put(messageId, returnMessage);

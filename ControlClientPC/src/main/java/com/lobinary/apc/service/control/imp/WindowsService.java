@@ -15,8 +15,13 @@ import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+
+import javax.media.GainControl;
+import javax.media.Player;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -124,6 +129,26 @@ public class WindowsService implements BaseServiceInterface {
 		}
 		return true;
 	}
+	
+	public static void main(String[] args) throws IOException, InterruptedException{
+		Player player = null;
+		GainControl gainControl = null;//player.getGainControl();
+		gainControl.setLevel(20);//Volume是音量值
+		System.out.println("居然没报错");
+//		File file = File.createTempFile("C:/ylkz_vba",".vbs");
+//		System.out.println(file.getAbsoluteFile());
+////		file.deleteOnExit();
+//		FileWriter fw = new FileWriter(file);
+//		String vbs ="'以下命令实现音量减（用循环可以实现一直减）：\n" +
+//		"Set WshShell = CreateObject(\"WScript.Shell\")\n" + 
+//		"Ws.Sendkeys \"爱\"";
+////		"'音量增（用循环可以实现一直增）：\n" + 
+////		"Set WshShell = CreateObject(\"WScript.Shell\")\n" + 
+////		"WshShell.SendKeys(chr(&hAF))";
+//		fw.write(vbs);
+//		fw.close();
+//		Runtime.getRuntime().exec("wscript " + file.getPath()).waitFor();
+	}
 
 	/**
 	 * 
@@ -139,8 +164,13 @@ public class WindowsService implements BaseServiceInterface {
 		Robot robot = new Robot();
 		for (int i = 0; i < times; i++) {
 			robot.keyPress(key);
-			robot.keyRelease(key);
-//			Thread.sleep(100);//点击按键是否需要睡眠等待具体测试时候调试
+			try {
+				Thread.sleep(100); //点击按键是否需要睡眠等待具体测试时候调试
+				robot.keyRelease(key);
+				Thread.sleep(100);//点击按键是否需要睡眠等待具体测试时候调试
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
