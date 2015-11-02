@@ -16,6 +16,7 @@ import java.util.List;
 import com.lobinary.android.common.pojo.communication.ConnectionBean;
 import com.lobinary.android.common.service.communication.socket.CommunicationSocketService;
 import com.lobinary.android.common.util.NetUtil;
+import com.lobinary.apc.util.initial.InitialUtil;
 
 /**
  * <pre>
@@ -57,6 +58,7 @@ public class WindowsCommunicationSocketService extends CommunicationSocketServic
 	}
 	
 	public static void main(String[] args) {
+		InitialUtil.initial();
 		WindowsCommunicationSocketService test = new WindowsCommunicationSocketService();
 		test.refreshConnectableList();
 	}

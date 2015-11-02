@@ -29,6 +29,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
 
 /**
  * <pre>
@@ -70,42 +73,76 @@ public class RefreshConnectableClients {
 		
 		JPanel tabLogPanel = new JPanel();
 		tabLogPanel.setBackground(Color.GREEN);
-		tabLogPanel.setLayout(new GridBagLayout());
-		
-		GridBagConstraints gbc=new GridBagConstraints();
-		gbc.gridx=0;  
-        gbc.gridy=0;  
-        gbc.gridwidth=2;  
-        gbc.gridheight=1;   
-        gbc.anchor=GridBagConstraints.NORTHWEST;  
-        gbc.fill=GridBagConstraints.NONE;  
-        gbc.insets=new Insets(0,0,0,0);  
-          
-          
-		
-		JScrollPane scrollPane = new JScrollPane();
-		tabLogPanel.add(scrollPane);
 		tabbedPane.addTab("可连接设备", null, tabLogPanel, null);
+		GridBagLayout gbl_tabLogPanel = new GridBagLayout();
+		gbl_tabLogPanel.columnWidths = new int[]{532, 104, 104, 0};
+		gbl_tabLogPanel.rowHeights = new int[]{54, 54, 54, 54, 54, 54, 54, 54, 0};
+		gbl_tabLogPanel.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_tabLogPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		tabLogPanel.setLayout(gbl_tabLogPanel);
+		
+		/*******************************每个可连设备的标配***********************************/
+		JLabel connectableLabel = new JLabel("可连接设备1");
+		GridBagConstraints gbc_connectableLabel = new GridBagConstraints();
+		gbc_connectableLabel.fill = GridBagConstraints.VERTICAL;
+		gbc_connectableLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_connectableLabel.gridx = 0;
+		gbc_connectableLabel.gridy = 0;
+		tabLogPanel.add(connectableLabel, gbc_connectableLabel);
+		
+		JButton connectableButton = new JButton("连接");
+		GridBagConstraints gbc_connectableButton = new GridBagConstraints();
+		gbc_connectableButton.fill = GridBagConstraints.BOTH;
+		gbc_connectableButton.insets = new Insets(0, 0, 5, 5);
+		gbc_connectableButton.gridx = 1;
+		gbc_connectableButton.gridy = 0;
+		tabLogPanel.add(connectableButton, gbc_connectableButton);
+		
+		JButton connectableDelButton = new JButton("删除");
+		GridBagConstraints gbc_connectableDelButton = new GridBagConstraints();
+		gbc_connectableDelButton.fill = GridBagConstraints.BOTH;
+		gbc_connectableDelButton.insets = new Insets(0, 0, 5, 0);
+		gbc_connectableDelButton.gridx = 2;
+		gbc_connectableDelButton.gridy = 0;
+		tabLogPanel.add(connectableDelButton, gbc_connectableDelButton);
+		/*******************************每个可连设备的标配***********************************/
 		
 		JPanel contactsPanel = new JPanel();
-		JScrollPane scrollPane2 = new JScrollPane();
-		contactsPanel.add(scrollPane2);
+		GridBagLayout gbl_contactsPanel = new GridBagLayout();
+		gbl_contactsPanel.columnWidths = new int[]{532, 104, 104, 0};
+		gbl_contactsPanel.rowHeights = new int[]{54, 54, 54, 54, 54, 54, 54, 54, 0};
+		gbl_contactsPanel.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contactsPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		contactsPanel.setLayout(gbl_contactsPanel);
 		tabbedPane.addTab("通讯录", null, contactsPanel, null);
 		
-		JPanel conListPanel = new JPanel();
-		conListPanel.setBackground(Color.BLUE);
-		tabLogPanel.add(conListPanel,gbc);
+		/*******************************每个好友的标配***********************************/
+		JLabel label = new JLabel("通讯录设备1");
+		GridBagConstraints gbc_label = new GridBagConstraints();
+		gbc_label.fill = GridBagConstraints.VERTICAL;
+		gbc_label.insets = new Insets(0, 0, 5, 5);
+		gbc_label.gridx = 0;
+		gbc_label.gridy = 0;
+		contactsPanel.add(label, gbc_label);
 		
-		JPanel conPanel1 = new JPanel();
-		conPanel1.setBackground(Color.YELLOW);
-		conListPanel.add(conPanel1);
-		conPanel1.setLayout(new GridLayout(1, 0, 0, 0));
+		JButton button = new JButton("连接");
+		GridBagConstraints gbc_button = new GridBagConstraints();
+		gbc_button.fill = GridBagConstraints.BOTH;
+		gbc_button.insets = new Insets(0, 0, 5, 5);
+		gbc_button.gridx = 1;
+		gbc_button.gridy = 0;
+		contactsPanel.add(button, gbc_button);
 		
-		JButton conEquip1 = new JButton("可连接设备1");
-		conPanel1.setLayout(new FlowLayout());
-		conPanel1.add(conEquip1);
+		JButton contactDelButton = new JButton("删除");
+		GridBagConstraints gbc_button_1 = new GridBagConstraints();
+		gbc_button_1.fill = GridBagConstraints.BOTH;
+		gbc_button_1.insets = new Insets(0, 0, 5, 0);
+		gbc_button_1.gridx = 2;
+		gbc_button_1.gridy = 0;
+		contactsPanel.add(contactDelButton, gbc_button_1);
+		/*******************************每个好友的标配***********************************/
 		
-		frame.add(tabbedPane);
+		frame.getContentPane().add(tabbedPane);
 		
 		frame.setVisible(true);
 	}

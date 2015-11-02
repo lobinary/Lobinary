@@ -250,7 +250,7 @@ public class CommunicationSocketService implements CommunicationServiceInterface
 					e.printStackTrace();
 				}
 				for (Thread t : runThreadList) {
-					t.destroy();
+//					t.destroy();
 				}
 			}
 		}.start();
