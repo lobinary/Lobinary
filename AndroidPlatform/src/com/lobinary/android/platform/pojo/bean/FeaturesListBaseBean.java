@@ -1,8 +1,17 @@
 package com.lobinary.android.platform.pojo.bean;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+/**
+ * 功能列表数据
+ * @author Lobinary
+ *
+ */
 public class FeaturesListBaseBean {
+	
+	private static Map<String,String> baseMethodNameMap = new HashMap<String, String>();
 
 	public FeaturesListBaseBean(int type, String text) {
 		this.type = type;
@@ -101,15 +110,23 @@ public class FeaturesListBaseBean {
 		ArrayList<FeaturesListBaseBean>  list=new ArrayList<FeaturesListBaseBean>();
 		list.add(new FeaturesListBaseBean(SECTION, "媒体"));
 		list.add(new FeaturesListBaseBean(ITEM, "播放音乐"));
+		list.add(new FeaturesListBaseBean(ITEM, "暂停音乐"));
+		list.add(new FeaturesListBaseBean(ITEM, "上一曲"));
+		list.add(new FeaturesListBaseBean(ITEM, "下一曲"));
 		list.add(new FeaturesListBaseBean(ITEM, "播放视频"));
 		list.add(new FeaturesListBaseBean(ITEM, "播放图片"));
 
-		list.add(new FeaturesListBaseBean(SECTION, "服务器查询"));
-		list.add(new FeaturesListBaseBean(ITEM, "未知功能1"));
-		list.add(new FeaturesListBaseBean(ITEM, "未知功能2"));
-		list.add(new FeaturesListBaseBean(ITEM, "未知功能3"));
-		list.add(new FeaturesListBaseBean(ITEM, "未知功能5"));
-		list.add(new FeaturesListBaseBean(ITEM, "未知功能6"));
+		list.add(new FeaturesListBaseBean(SECTION, "电脑"));
+		list.add(new FeaturesListBaseBean(ITEM, "关机"));
+		baseMethodNameMap.put("关机", "shutDown");
+		list.add(new FeaturesListBaseBean(ITEM, "取消关机"));
+		baseMethodNameMap.put("取消关机", "cancelShutDown");
+		list.add(new FeaturesListBaseBean(ITEM, "音量+"));
+		baseMethodNameMap.put("音量+", "increaseVoice");
+		list.add(new FeaturesListBaseBean(ITEM, "音量-"));
+		baseMethodNameMap.put("音量-", "decreaseVoice");
+		list.add(new FeaturesListBaseBean(ITEM, "亮度+"));
+		list.add(new FeaturesListBaseBean(ITEM, "亮度-"));
 
 		return list;
 	}
@@ -127,6 +144,15 @@ public class FeaturesListBaseBean {
 		list.add(new FeaturesListBaseBean(ITEM, "功能3"));
 		
 		return list;
+	}
+	
+	/**
+	 * 通过item的文字 获取 baseService功能
+	 * @param baseString
+	 * @return
+	 */
+	public static String baseMethodName(String baseString){
+		return baseMethodNameMap.get(baseString);
 	}
 	
 }

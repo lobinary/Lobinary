@@ -211,7 +211,7 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 				break;//如果是断开连接请求，在返回同意断开连接后，关闭连接
 			}else if(returnMessage.isReq){
 				String respMessageStr = MessageUtil.parseReqMessageStr2RespMessageStr(line);
-				sendLastMsg(respMessageStr);
+				sendMessage(respMessageStr);
 			}else{
 				long messageId = returnMessage.getId();
 				waitDealMessage.put(messageId, returnMessage);
@@ -265,15 +265,16 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 	/**
 	 * 
 	 * <pre>
-	 * 发送信息到客户端,发方法的message需要配置id，来识别返回message
+	 * 发送信息到客户端,该方法不负责接受信息,只负责发送是否成功,以后有可能会增加发送失败重发机制
 	 * </pre>
 	 *
 	 * @param message
 	 * @return
 	 */
-	public boolean sendMessage(String message){
+	private boolean sendMessage(String messageStr){
 		try {
-			sendLastMsg(message);
+			out.println(messageStr);
+			out.flush();
 		} catch (Exception e) {
 			logger.error("Socket服务端监控客户端子线程:发送信息时发送异常！",e);
 			throw new APCSysException(CodeDescConstants.SERVICE_MESSAGE_SEND_FAIL,e);
@@ -293,9 +294,10 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 	public Message sendMessage(Message requestMessage) {
 		long messageId = getUniqeMessageId();
 		requestMessage.setId(messageId);
-		this.sendMessage(MessageUtil.message2String(requestMessage));
+		String message2String = MessageUtil.message2String(requestMessage);
+		this.sendMessage(message2String);
 		waitThread.put(messageId, Thread.currentThread());
-		logger.info("******发送信息成功messageId:"+messageId);
+		logger.info("向客户端("+connectionBean.getName()+")发送信息成功,内容:"+message2String);
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
@@ -359,8 +361,12 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 	 */
 	@Override
 	public boolean shutDown(long delayTime) {
-		// TODO Auto-generated method stub
-		return false;
+		Message requestMessage = getRemoteBaseMessage("shutDown");
+		Command command = requestMessage.getCommand();
+		command.add(""+delayTime);
+		Message message = sendMessage(requestMessage);
+		boolean result = (Boolean) message.getMessageObj();
+		return result;
 	}
 
 	/* (non-Javadoc)
@@ -377,7 +383,7 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 	 */
 	@Override
 	public boolean playMusic(String player, String musicId) {
-		Message requestMessage = getRemoteBaseMessage(Thread.currentThread().getStackTrace()[1].getMethodName());
+		Message requestMessage = getRemoteBaseMessage("playMusic");
 		Command command = requestMessage.getCommand();
 		command.add(player).add(musicId);
 		Message message = sendMessage(requestMessage);
@@ -398,8 +404,53 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 	public Message getRemoteBaseMessage(String methodName){
 		Message message = MessageUtil.getNewRequestMessage(Constants.MESSAGE.TYPE.COMMAND);
 		Command command = message.getCommand();
+		command.setCommandCode(Constants.MESSAGE.COMMAND.CODE.REMOTE_METHOD);
 		command.setRemoteMethodName(methodName);
 		return message;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.lobinary.android.common.service.control.BaseServiceInterface#cancelShutDown()
+	 */
+	@Override
+	public boolean cancelShutDown() {
+		Message requestMessage = getRemoteBaseMessage("cancelShutDown");
+		Message message = sendMessage(requestMessage);
+		boolean result = (Boolean) message.getMessageObj();
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.lobinary.android.common.service.control.BaseServiceInterface#increaseVoice()
+	 */
+	@Override
+	public boolean increaseVoice() {
+		Message requestMessage = getRemoteBaseMessage("increaseVoice");
+		Message message = sendMessage(requestMessage);
+		boolean result = (Boolean) message.getMessageObj();
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.lobinary.android.common.service.control.BaseServiceInterface#decreaseVoice()
+	 */
+	@Override
+	public boolean decreaseVoice() {
+		Message requestMessage = getRemoteBaseMessage("decreaseVoice");
+		Message message = sendMessage(requestMessage);
+		boolean result = (Boolean) message.getMessageObj();
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.lobinary.android.common.service.control.BaseServiceInterface#shutDown()
+	 */
+	@Override
+	public boolean shutDown() {
+		Message requestMessage = getRemoteBaseMessage("shutDown");
+		Message message = sendMessage(requestMessage);
+		boolean result = (Boolean) message.getMessageObj();
+		return result;
 	}
 	
 	

@@ -34,10 +34,31 @@ public interface BaseServiceInterface {
 	 * 关机
 	 * </pre>
 	 *
-	 * @param delayTime
+	 * @param delayTime 单位 秒
 	 * @return
 	 */
 	public boolean shutDown(long delayTime);
+
+	/**
+	 * 
+	 * <pre>
+	 * 关机
+	 * </pre>
+	 *
+	 * @param delayTime
+	 * @return
+	 */
+	public boolean shutDown();
+	
+	/**
+	 * 
+	 * <pre>
+	 * 取消关机
+	 * </pre>
+	 *
+	 * @return
+	 */
+	public boolean cancelShutDown();
 	
 	/**
 	 * 
@@ -60,5 +81,25 @@ public interface BaseServiceInterface {
 	 * @return
 	 */
 	public boolean playMusic(String player,String musicId);
+	
+	/**
+	 * 
+	 * <pre>
+	 * 增加音量
+	 * </pre>
+	 *
+	 * @return
+	 */
+	public boolean increaseVoice();
+	
+	/**
+	 * 
+	 * <pre>
+	 * 降低音量
+	 * </pre>
+	 *
+	 * @return
+	 */
+	public boolean decreaseVoice();
 
 }

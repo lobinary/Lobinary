@@ -101,21 +101,14 @@ public class MessageUtil {
 			messageType = Constants.MESSAGE.TYPE.COMMAND;
 		}
 		Message message = new Message();
-		
 		message.isReq = true;
 		
 		MessageTitle messageTitle = getMessageTitle();
-		
 		message.setMessageTitle(messageTitle);
-			
 		message.setMessageType(messageType);
 		
-		if(Constants.MESSAGE.TYPE.REQ_TIME.equals(messageType)){
-			
-		}else if(Constants.MESSAGE.TYPE.COMMAND.equals(messageType)){
-			GetNewRequestCommandUtil command = new GetNewRequestCommandUtil();
-			command.setCommand("cmd /c start F:\\KGMusic\\Kugou");
-			message.setCommand(command);
+		if(Constants.MESSAGE.TYPE.COMMAND.equals(messageType)){
+			message.setCommand(new Command());
 		}
 		return message;
 	}
@@ -222,7 +215,7 @@ public class MessageUtil {
 	 * @return respon报文
 	 */
 	public static Message parseRequestMessage(Message message){
-		Message respMessage = null;
+		Message respMessage = MessageUtil.migrate(message);
 		try {
 			String messageType = message.getMessageType();
 
@@ -235,35 +228,51 @@ public class MessageUtil {
 				if(Constants.MESSAGE.COMMAND.CODE.REMOTE_METHOD.equals(commandCode)){
 					String methodName = command.getRemoteMethodName();
 					Class<?> clazz = baseService.getClass(); 
-					Method m1 = clazz.getDeclaredMethod(methodName,Command.class); 
-					respMessage = (Message) m1.invoke(baseService,command); 
+					List<Object> remoteMethodParam = command.getRemoteMethodParam();
+					Method baseMethod = null;
+					if(remoteMethodParam!=null){
+						Class<?>[] paramClassArray = new Class[remoteMethodParam.size()];
+						for (int i = 0; i < remoteMethodParam.size(); i++) {
+							paramClassArray[i] = remoteMethodParam.get(i).getClass();
+						}
+						baseMethod = clazz.getDeclaredMethod(methodName,paramClassArray); 
+						Object returnObj = baseMethod.invoke(baseService,remoteMethodParam.toArray()); 
+						respMessage.setMessageObj(returnObj);
+					}else{
+						baseMethod = clazz.getDeclaredMethod(methodName); 
+						Object returnObj = baseMethod.invoke(baseService); 
+						respMessage.setMessageObj(returnObj);
+					}
+
 				}
-				respMessage = getNewResponseMessage(Constants.MESSAGE.TYPE.COMMAND);
 				logger.info("报文工具类:接收到客户端调用命令,调用命令成功");
 			}else{
+				logger.info("报文工具类:接收到客户端调用命令,调用命令失败");
 				throw new APCSysException(CodeDescConstants.SERVICE_MESSAGE_ERROR_MESSAGE_TYPE, "报文类型("+messageType+")错误");
 			}
 			
 			respMessage.setMessageTitle(MessageUtil.getMessageTitle());//如果执行成功,将准备装载返回报文头
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
+			logger.info("报文工具类:接收到客户端调用命令,调用命令失败",e);
+			throw new APCSysException(CodeDescConstants.SERVICE_EXCEPTION, e);
 		}
-		return message;
+		return respMessage;
 	}
 	
+	/**
+	 * <pre>
+	 * 根据请求数据,装配返回数据
+	 * </pre>
+	 *
+	 * @param message
+	 * @return
+	 */
+	private static Message migrate(Message message) {
+		message.setMessageTitle(getMessageTitle());
+		message.isReq = false;
+		return message;
+	}
+
 	/**
 	 * 
 	 * <pre>

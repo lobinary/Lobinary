@@ -1,5 +1,8 @@
 package com.lobinary.android.platform.ui.fragment;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,13 +20,17 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.lobinary.android.common.pojo.communication.Command;
+import com.lobinary.android.common.pojo.communication.ConnectionBean;
+import com.lobinary.android.common.service.communication.ConnectionThreadInterface;
+import com.lobinary.android.common.util.factory.CommonFactory;
 import com.lobinary.android.platform.R;
 import com.lobinary.android.platform.pojo.bean.FeaturesListBaseBean;
 import com.lobinary.android.platform.ui.listview.AdapterListView;
 import com.lobinary.android.platform.ui.listview.PinnedSectionListView;
 
-public class FeaturesRightFragment extends Fragment{
-	
+public class FeaturesRightFragment extends Fragment {
+
 	private static Logger logger = LoggerFactory.getLogger(FeaturesRightFragment.class);
 
 	private static final String TAG = "FeaturesRightFragment";
@@ -33,14 +40,14 @@ public class FeaturesRightFragment extends Fragment{
 	private PinnedSectionListView feature_control_view;
 
 	private PinnedSectionListView feature_communication_view;
-	
+
 	public static Handler featureRightHandler;
 
 	private AdapterListView queryAdapter;
 	private AdapterListView controlAdapter;
 	private AdapterListView communicationAdapter;
-	
-	long lastClick = R.id.features_query_btn;//上次点击id
+
+	long lastClick = 0;// 上次点击id
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,8 +76,11 @@ public class FeaturesRightFragment extends Fragment{
 		feature_control_view = (PinnedSectionListView) getActivity().findViewById(R.id.feature_control_view);
 		feature_communication_view = (PinnedSectionListView) getActivity().findViewById(R.id.feature_communication_view);
 		clickShowContent(R.id.features_query_btn_text);
-		
+
+		lastClick = R.id.features_query_btn;
 		feature_query_view.setVisibility(View.VISIBLE);
+		feature_control_view.setVisibility(View.GONE);
+		feature_communication_view.setVisibility(View.GONE);
 	}
 
 	/**
@@ -82,8 +92,9 @@ public class FeaturesRightFragment extends Fragment{
 	 *            上次点击
 	 */
 	public void clickShowContent(int clickBtnId) {
-		if(clickBtnId==lastClick)return;
-		
+		if (clickBtnId == lastClick)
+			return;
+
 		if (lastClick == R.id.features_query_btn) {
 			feature_query_view.setVisibility(View.GONE);
 		} else if (lastClick == R.id.features_control_btn) {
@@ -91,7 +102,7 @@ public class FeaturesRightFragment extends Fragment{
 		} else if (lastClick == R.id.features_communication_btn) {
 			feature_communication_view.setVisibility(View.GONE);
 		}
-		
+
 		if (clickBtnId == R.id.features_query_btn) {
 			feature_query_view.setVisibility(View.VISIBLE);
 		} else if (clickBtnId == R.id.features_control_btn) {
@@ -99,10 +110,10 @@ public class FeaturesRightFragment extends Fragment{
 		} else if (clickBtnId == R.id.features_communication_btn) {
 			feature_communication_view.setVisibility(View.VISIBLE);
 		}
-		
+
 		lastClick = clickBtnId;
 	}
-	
+
 	/**
 	 * 初始化功能页面
 	 */
@@ -111,7 +122,7 @@ public class FeaturesRightFragment extends Fragment{
 		queryAdapter = new AdapterListView(getActivity(), FeaturesListBaseBean.getQueryData());
 		feature_query_view.setAdapter(queryAdapter);
 		feature_query_view.setOnItemClickListener(getListenerForListView(queryAdapter));
-		
+
 		controlAdapter = new AdapterListView(getActivity(), FeaturesListBaseBean.getControlData());
 		feature_control_view.setAdapter(controlAdapter);
 		feature_control_view.setOnItemClickListener(getListenerForListView(controlAdapter));
@@ -122,8 +133,6 @@ public class FeaturesRightFragment extends Fragment{
 
 		setListViewHeightBasedOnChildren(feature_query_view);
 	}
-
-
 
 	/**
 	 * 功能页面增加监听程序
@@ -139,16 +148,32 @@ public class FeaturesRightFragment extends Fragment{
 				if (position > 0) {
 					FeaturesListBaseBean bean = adapter.getItem(position);
 					if (bean.type == FeaturesListBaseBean.ITEM) {
-						Toast.makeText(getActivity(), bean.text, Toast.LENGTH_SHORT).show();
+						ConnectionBean currentOpreateConnection = MainTopFragment.getCurrentOpreateConnection();
+						ConnectionThreadInterface connectionThread = currentOpreateConnection.getConnectionThread();
+						String baseMethodName = FeaturesListBaseBean.baseMethodName(bean.text);
+						if (baseMethodName == null) {
+							Toast.makeText(getActivity(), "对不起,“" + bean.text + "”功能暂未实现", Toast.LENGTH_SHORT).show();
+						} else {
+							try {
+								// 如果是普通 远程方法 只是true false 返回则可以反射调用 如果有参数
+								// 需要特殊处理
+								Class<?> clazz = connectionThread.getClass();
+								Method m1 = clazz.getDeclaredMethod(baseMethodName);
+								boolean result = (Boolean) m1.invoke(connectionThread);
+								Toast.makeText(getActivity(), "调用“"+bean.text+"”"+(result?"成功":"失败"), Toast.LENGTH_SHORT).show();
+							} catch (Exception e) {
+								logger.error("调用当前连接设备("+currentOpreateConnection.name+")时发生异常", e);
+							}
+						}
 					}
 				}
 			}
 		};
 	}
-	
 
 	/**
 	 * 该方法暂时无用
+	 * 
 	 * @param listView
 	 */
 	public static void setListViewHeightBasedOnChildren(ListView listView) {
@@ -168,10 +193,9 @@ public class FeaturesRightFragment extends Fragment{
 		}
 		ViewGroup.LayoutParams params = listView.getLayoutParams();
 		int heightTemp = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-//		Log.e(TAG, "heightTemp设置成功：" + heightTemp);
+		// Log.e(TAG, "heightTemp设置成功：" + heightTemp);
 		params.height = heightTemp;
 		listView.setLayoutParams(params);
 	}
-	
-	
+
 }

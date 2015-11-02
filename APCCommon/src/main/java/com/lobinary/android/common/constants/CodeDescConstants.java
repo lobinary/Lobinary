@@ -49,6 +49,8 @@ public enum CodeDescConstants {
 	SERVICE_EXECUTE_SUCCESS("200101","业务执行成功"),
 	
 	//2004** 业务公共 异常码
+	/** "200400","业务执行异常" */
+	SERVICE_EXCEPTION("200400","业务执行异常"),
 	/** "200401","无此业务" */
 	SERVICE_NULL_BUSINESS("200401","无此业务"),
 
@@ -61,6 +63,16 @@ public enum CodeDescConstants {
 	//2024** 发送报文 异常码
 	/** "202401","发送报文失败" */
 	SERVICE_MESSAGE_SEND_FAIL("202401","发送报文失败"),
+	
+	//2034** 控制业务 异常码
+	/** "203401","增加音量异常"  */
+	SERVICE_CONTORL_INCREASE_VOICE_EXCEPTION("203401","增加音量异常"),
+	/** "203402","减少音量异常" */
+	SERVICE_CONTORL_DECREASE_VOICE_EXCEPTION("203402","减少音量异常"),
+	/** "203403","增加亮度异常"  */
+	SERVICE_CONTORL_INCREASE_LIGHT_EXCEPTION("203403","增加亮度异常"),
+	/** "203404","减少亮度异常" */
+	SERVICE_CONTORL_DECREASE_LIGHT_EXCEPTION("203404","减少亮度异常"),
 	
 	//3***** 远程信息交互状态码
 	

@@ -125,7 +125,7 @@ public class RefreshableView extends LinearLayout implements OnTouchListener {
     /** 
      * 上次更新时间的毫秒值 
      */  
-    private long lastUpdateTime;  
+    public long lastUpdateTime;  
   
     /** 
      * 为了防止不同界面的下拉刷新在上次更新时间上互相有冲突，使用id来做区分 
@@ -141,7 +141,7 @@ public class RefreshableView extends LinearLayout implements OnTouchListener {
      * 当前处理什么状态，可选值有STATUS_PULL_TO_REFRESH, STATUS_RELEASE_TO_REFRESH, 
      * STATUS_REFRESHING 和 STATUS_REFRESH_FINISHED 
      */  
-    private int currentStatus = STATUS_REFRESH_FINISHED;;  
+    public int currentStatus = STATUS_REFRESH_FINISHED;;  
   
     /** 
      * 记录上一次的状态是什么，避免进行重复操作 
@@ -317,7 +317,7 @@ public class RefreshableView extends LinearLayout implements OnTouchListener {
     /** 
      * 更新下拉头中的信息。 
      */  
-    private void updateHeaderView() {  
+    public void updateHeaderView() {  
         if (lastStatus != currentStatus) {  
             if (currentStatus == STATUS_PULL_TO_REFRESH) {  
                 description.setText(getResources().getString(R.string.pull_to_refresh));  
