@@ -101,21 +101,14 @@ public class MessageUtil {
 			messageType = Constants.MESSAGE.TYPE.COMMAND;
 		}
 		Message message = new Message();
-		
 		message.isReq = true;
 		
 		MessageTitle messageTitle = getMessageTitle();
-		
 		message.setMessageTitle(messageTitle);
-			
 		message.setMessageType(messageType);
 		
-		if(Constants.MESSAGE.TYPE.REQ_TIME.equals(messageType)){
-			
-		}else if(Constants.MESSAGE.TYPE.COMMAND.equals(messageType)){
-			GetNewRequestCommandUtil command = new GetNewRequestCommandUtil();
-			command.setCommand("cmd /c start F:\\KGMusic\\Kugou");
-			message.setCommand(command);
+		if(Constants.MESSAGE.TYPE.COMMAND.equals(messageType)){
+			message.setCommand(new Command());
 		}
 		return message;
 	}
@@ -234,14 +227,21 @@ public class MessageUtil {
 				String commandCode = command.getCommandCode();
 				if(Constants.MESSAGE.COMMAND.CODE.REMOTE_METHOD.equals(commandCode)){
 					String methodName = command.getRemoteMethodName();
-					List<Object> remoteMethodParam = command.getRemoteMethodParam();
-					Class[] paramClassArray = new Class[remoteMethodParam.size()];
-					for (int i = 0; i < remoteMethodParam.size(); i++) {
-						paramClassArray[i] = remoteMethodParam.get(i).getClass();
-					}
 					Class<?> clazz = baseService.getClass(); 
-					Method m1 = clazz.getDeclaredMethod(methodName,paramClassArray); 
-					respMessage = (Message) m1.invoke(baseService,remoteMethodParam.toArray()); 
+					List<Object> remoteMethodParam = command.getRemoteMethodParam();
+					Method baseMethod = null;
+					if(remoteMethodParam!=null){
+						Class<?>[] paramClassArray = new Class[remoteMethodParam.size()];
+						for (int i = 0; i < remoteMethodParam.size(); i++) {
+							paramClassArray[i] = remoteMethodParam.get(i).getClass();
+							baseMethod = clazz.getDeclaredMethod(methodName,paramClassArray); 
+							respMessage = (Message) baseMethod.invoke(baseService,remoteMethodParam.toArray()); 
+						}
+					}else{
+						baseMethod = clazz.getDeclaredMethod(methodName);
+						respMessage = (Message) baseMethod.invoke(baseService); 
+					}
+
 				}
 				respMessage = getNewResponseMessage(Constants.MESSAGE.TYPE.COMMAND);
 				logger.info("报文工具类:接收到客户端调用命令,调用命令成功");

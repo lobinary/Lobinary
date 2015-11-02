@@ -69,6 +69,8 @@ public class MainContentContactFragment extends Fragment implements OnItemClickL
 				MainTopFragment.topContactHandler.sendMessage(new Message());
 			}
 		};
+		
+		CommonFactory.getCommunicationService().refreshConnectableList();
 	}
 	
 	/**

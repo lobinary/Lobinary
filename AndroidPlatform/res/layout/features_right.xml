@@ -14,8 +14,7 @@
         android:dividerHeight="0.1dp"
         android:fadingEdge="vertical"
         android:listSelector="@drawable/features_list_item_selector"
-        android:scrollbars="vertical"
-        android:visibility="visible" />
+        android:scrollbars="vertical" />
     
     
     <com.lobinary.android.platform.ui.listview.PinnedSectionListView
@@ -27,8 +26,7 @@
         android:dividerHeight="0.1dp"
         android:fadingEdge="vertical"
         android:listSelector="@drawable/features_list_item_selector"
-        android:scrollbars="vertical"
-        android:visibility="gone" />
+        android:scrollbars="vertical" />
     
     
     <com.lobinary.android.platform.ui.listview.PinnedSectionListView
@@ -40,8 +38,7 @@
         android:dividerHeight="0.1dp"
         android:fadingEdge="vertical"
         android:listSelector="@drawable/features_list_item_selector"
-        android:scrollbars="vertical" 
-        android:visibility="gone"/>
+        android:scrollbars="vertical" />
     
     
 

@@ -47,7 +47,7 @@ public class FeaturesRightFragment extends Fragment {
 	private AdapterListView controlAdapter;
 	private AdapterListView communicationAdapter;
 
-	long lastClick = R.id.features_query_btn;// 上次点击id
+	long lastClick = 0;// 上次点击id
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -77,7 +77,10 @@ public class FeaturesRightFragment extends Fragment {
 		feature_communication_view = (PinnedSectionListView) getActivity().findViewById(R.id.feature_communication_view);
 		clickShowContent(R.id.features_query_btn_text);
 
+		lastClick = R.id.features_query_btn;
 		feature_query_view.setVisibility(View.VISIBLE);
+		feature_control_view.setVisibility(View.GONE);
+		feature_communication_view.setVisibility(View.GONE);
 	}
 
 	/**
