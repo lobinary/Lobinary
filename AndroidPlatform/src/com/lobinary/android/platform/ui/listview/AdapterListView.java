@@ -11,8 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lobinary.android.platform.R;
-import com.lobinary.android.platform.pojo.bean.FeaturesListBaseBean;
-import com.lobinary.android.platform.pojo.bean.FeaturesListBaseBean;
+import com.lobinary.android.platform.pojo.bean.PinnerListBean;
+import com.lobinary.android.platform.pojo.bean.PinnerListBean;
 import com.lobinary.android.platform.ui.listview.PinnedSectionListView.PinnedSectionListAdapter;
 
 /**
@@ -21,19 +21,19 @@ import com.lobinary.android.platform.ui.listview.PinnedSectionListView.PinnedSec
  *
  */
 public class AdapterListView extends BaseAdapter implements PinnedSectionListAdapter{
-	private ArrayList<FeaturesListBaseBean> list;
+	private ArrayList<PinnerListBean> list;
 	private Context context;
-	public ArrayList<FeaturesListBaseBean> getList() {
+	public ArrayList<PinnerListBean> getList() {
 		return list;
 	}
-	public void setList(ArrayList<FeaturesListBaseBean> list) {
+	public void setList(ArrayList<PinnerListBean> list) {
 		if(list!=null){
 			this.list = list;
 		}else{
-			list=new ArrayList<FeaturesListBaseBean>();
+			list=new ArrayList<PinnerListBean>();
 		}
 	}
-	public AdapterListView(Context context,ArrayList<FeaturesListBaseBean> list){
+	public AdapterListView(Context context,ArrayList<PinnerListBean> list){
 		this.setList(list);
 		this.context=context;
 	}
@@ -44,7 +44,7 @@ public class AdapterListView extends BaseAdapter implements PinnedSectionListAda
 	}
 
 	@Override
-	public FeaturesListBaseBean getItem(int position) {
+	public PinnerListBean getItem(int position) {
 		// TODO Auto-generated method stub
 		return list.get(position);
 	}
@@ -68,9 +68,9 @@ public class AdapterListView extends BaseAdapter implements PinnedSectionListAda
 		}else{
 			vh=(ViewHolder) converView.getTag();
 		}
-		FeaturesListBaseBean bean=getItem(position);
+		PinnerListBean bean=getItem(position);
 		vh.company_item.setText(bean.text);
-		if (bean.type == FeaturesListBaseBean.SECTION) {
+		if (bean.type == PinnerListBean.SECTION) {
 			vh.company_item.setBackgroundResource(R.drawable.features_list_title_bg);
 			vh.image.setVisibility(View.GONE);
 			
@@ -83,7 +83,7 @@ public class AdapterListView extends BaseAdapter implements PinnedSectionListAda
 	@Override
 	public boolean isItemViewTypePinned(int viewType) {
 		// TODO Auto-generated method stub
-		return viewType == FeaturesListBaseBean.SECTION;
+		return viewType == PinnerListBean.SECTION;
 	}
 
 	@Override
@@ -92,9 +92,9 @@ public class AdapterListView extends BaseAdapter implements PinnedSectionListAda
 	}
 	@Override
 	public int getItemViewType(int position) {
-		return ((FeaturesListBaseBean)getItem(position)).type;
+		return ((PinnerListBean)getItem(position)).type;
 	}
-	public void refresh(ArrayList<FeaturesListBaseBean> arr){
+	public void refresh(ArrayList<PinnerListBean> arr){
         setList(arr);
         notifyDataSetChanged();
     }

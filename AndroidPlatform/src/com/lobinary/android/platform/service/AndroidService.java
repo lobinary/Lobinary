@@ -21,7 +21,7 @@ public class AndroidService implements BaseServiceInterface{
 	}
 
 	@Override
-	public List<Music> getMusicList(Message message) {
+	public List<Music> getMusicList() {
 		// TODO Auto-generated method stub
 		return null;
 	}

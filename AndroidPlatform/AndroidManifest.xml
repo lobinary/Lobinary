@@ -42,6 +42,10 @@
             android:name="com.lobinary.android.platform.ui.activity.TestMessageActivity"
             android:theme="@android:style/Theme.Light" 
              ></activity>
+        <activity
+            android:name="com.lobinary.android.platform.ui.activity.MusicActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+             ></activity>
     </application>
 
 </manifest>

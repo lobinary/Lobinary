@@ -1,12 +1,14 @@
 package com.lobinary.android.platform.ui.fragment;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,16 +18,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.lobinary.android.common.pojo.communication.Command;
 import com.lobinary.android.common.pojo.communication.ConnectionBean;
 import com.lobinary.android.common.service.communication.ConnectionThreadInterface;
-import com.lobinary.android.common.util.factory.CommonFactory;
 import com.lobinary.android.platform.R;
-import com.lobinary.android.platform.pojo.bean.FeaturesListBaseBean;
+import com.lobinary.android.platform.pojo.bean.PinnerListBean;
+import com.lobinary.android.platform.ui.activity.MusicActivity;
 import com.lobinary.android.platform.ui.listview.AdapterListView;
 import com.lobinary.android.platform.ui.listview.PinnedSectionListView;
 
@@ -119,19 +121,91 @@ public class FeaturesRightFragment extends Fragment {
 	 */
 	private void initialFeatures() {
 
-		queryAdapter = new AdapterListView(getActivity(), FeaturesListBaseBean.getQueryData());
+		queryAdapter = new AdapterListView(getActivity(), PinnerListBean.getQueryData());
 		feature_query_view.setAdapter(queryAdapter);
 		feature_query_view.setOnItemClickListener(getListenerForListView(queryAdapter));
+		feature_query_view.setOnItemLongClickListener(getLongClickListenerForListView(queryAdapter));
 
-		controlAdapter = new AdapterListView(getActivity(), FeaturesListBaseBean.getControlData());
+		controlAdapter = new AdapterListView(getActivity(), PinnerListBean.getControlData());
 		feature_control_view.setAdapter(controlAdapter);
 		feature_control_view.setOnItemClickListener(getListenerForListView(controlAdapter));
 
-		communicationAdapter = new AdapterListView(getActivity(), FeaturesListBaseBean.getCommunicationData());
+		communicationAdapter = new AdapterListView(getActivity(), PinnerListBean.getCommunicationData());
 		feature_communication_view.setAdapter(communicationAdapter);
 		feature_communication_view.setOnItemClickListener(getListenerForListView(communicationAdapter));
 
 		setListViewHeightBasedOnChildren(feature_query_view);
+	}
+
+	/**
+	 * 功能页面增加监听程序
+	 * 
+	 * @return
+	 */
+	private OnItemLongClickListener getLongClickListenerForListView(final AdapterListView adapter) {
+		// TODO Auto-generated method stub
+		return new OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				if (position > 0) {
+					PinnerListBean bean = adapter.getItem(position);
+					if (bean.type == PinnerListBean.ITEM) {
+						// Toast.makeText(getActivity(), "按钮"+bean.text+"被长按",
+						// Toast.LENGTH_SHORT).show();
+
+						final CharSequence[] items = { "刷新设备", "播放歌曲", "播放视频", "文件管理", "取消" };
+						AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+						builder.setTitle("选择替换主页功能");
+						builder.setItems(items, new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int item) {
+								Toast.makeText(getActivity().getApplicationContext(), items[item], Toast.LENGTH_SHORT).show();
+							}
+						});
+						AlertDialog alert = builder.create();
+						alert.show();
+					}
+				}
+				return true;
+			}
+
+		};
+	}
+
+	/**
+	 * 调用方法
+	 */
+	public void invokeMethod(String itemName, int position) {
+		ConnectionBean currentOpreateConnection = MainTopFragment.getCurrentOpreateConnection();
+		if (currentOpreateConnection == null) {
+			Toast.makeText(getActivity(), "调用“" + itemName + "”失败,当前无已连接设备", Toast.LENGTH_SHORT).show();
+		} else {
+			ConnectionThreadInterface connectionThread = currentOpreateConnection.getConnectionThread();
+			String baseMethodName = PinnerListBean.baseMethodName(itemName);
+			if (baseMethodName == null) {
+				if (itemName.equals("音乐")) {
+					Intent mainIntent = new Intent();
+					getActivity().overridePendingTransition(android.R.anim.slide_out_right, android.R.anim.slide_in_left);
+					mainIntent.setClass(getActivity(), MusicActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);// 只存在一个activity
+					startActivity(mainIntent);
+					// WelcomeActivity.this.finish();
+				} else {
+					Toast.makeText(getActivity(), "对不起,“" + itemName + "”功能暂未实现", Toast.LENGTH_SHORT).show();
+				}
+			} else {
+				try {
+					// 如果是普通 远程方法 只是true false 返回则可以反射调用 如果有参数
+					// 需要特殊处理
+					Class<?> clazz = connectionThread.getClass();
+					Method m1 = clazz.getDeclaredMethod(baseMethodName);
+					boolean result = (Boolean) m1.invoke(connectionThread);
+					Toast.makeText(getActivity(), "调用“" + itemName + "”" + (result ? "成功" : "失败"), Toast.LENGTH_SHORT).show();
+				} catch (Exception e) {
+					logger.error("调用当前连接设备(" + currentOpreateConnection.name + ")时发生异常", e);
+				}
+			}
+		}
+
 	}
 
 	/**
@@ -146,25 +220,9 @@ public class FeaturesRightFragment extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// TODO Auto-generated method stub
 				if (position > 0) {
-					FeaturesListBaseBean bean = adapter.getItem(position);
-					if (bean.type == FeaturesListBaseBean.ITEM) {
-						ConnectionBean currentOpreateConnection = MainTopFragment.getCurrentOpreateConnection();
-						ConnectionThreadInterface connectionThread = currentOpreateConnection.getConnectionThread();
-						String baseMethodName = FeaturesListBaseBean.baseMethodName(bean.text);
-						if (baseMethodName == null) {
-							Toast.makeText(getActivity(), "对不起,“" + bean.text + "”功能暂未实现", Toast.LENGTH_SHORT).show();
-						} else {
-							try {
-								// 如果是普通 远程方法 只是true false 返回则可以反射调用 如果有参数
-								// 需要特殊处理
-								Class<?> clazz = connectionThread.getClass();
-								Method m1 = clazz.getDeclaredMethod(baseMethodName);
-								boolean result = (Boolean) m1.invoke(connectionThread);
-								Toast.makeText(getActivity(), "调用“"+bean.text+"”"+(result?"成功":"失败"), Toast.LENGTH_SHORT).show();
-							} catch (Exception e) {
-								logger.error("调用当前连接设备("+currentOpreateConnection.name+")时发生异常", e);
-							}
-						}
+					PinnerListBean bean = adapter.getItem(position);
+					if (bean.type == PinnerListBean.ITEM) {
+						invokeMethod(bean.text, position);
 					}
 				}
 			}

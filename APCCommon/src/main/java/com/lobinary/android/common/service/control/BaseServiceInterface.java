@@ -68,7 +68,7 @@ public interface BaseServiceInterface {
 	 *
 	 * @return
 	 */
-	public List<Music> getMusicList(Message message);
+	public List<Music> getMusicList();
 	
 	/**
 	 * 

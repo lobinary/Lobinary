@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:background="@color/floralwhite" >
+
+    <com.lobinary.android.platform.ui.listview.PinnedSectionListView
+        android:id="@+id/music_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/music_bottom_layout"
+        android:layout_alignParentTop="true"
+        android:cacheColorHint="#00000000"
+        android:divider="@drawable/features_list_item_line"
+        android:dividerHeight="0.1dp"
+        android:fadingEdge="vertical"
+        android:listSelector="@drawable/features_list_item_selector"
+        android:scrollbars="vertical" />
+
+    <RelativeLayout
+        android:id="@+id/music_bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" >
+
+        <Button
+            android:id="@+id/musicNextMusic"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="54dp"
+            android:text="下一曲" />
+
+        <Button
+            android:id="@+id/musicPreviousMusic"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/musicPlayOrStop"
+            android:layout_alignBottom="@+id/musicPlayOrStop"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="42dp"
+            android:text="上一曲" />
+
+        <Button
+            android:id="@+id/musicPlayOrStop"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/musicNextMusic"
+            android:layout_alignBottom="@+id/musicNextMusic"
+            android:layout_marginLeft="41dp"
+            android:layout_toRightOf="@+id/musicPreviousMusic"
+            android:text="播放暂停" />
+    </RelativeLayout>
+
+</RelativeLayout>

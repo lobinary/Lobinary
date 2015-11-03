@@ -104,7 +104,7 @@ public class WindowsService implements BaseServiceInterface {
 	 * @see com.lobinary.android.common.service.control.BaseServiceInterface#getMusicList(com.lobinary.android.common.pojo.communication.Command)
 	 */
 	@Override
-	public List<Music> getMusicList(Message message) {
+	public List<Music> getMusicList() {
 		String musicFolderStr = ControlClientPCWindows.musicFolderText.getText();
 		File mf = new File(musicFolderStr);
 		File[] files = mf.listFiles();

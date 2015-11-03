@@ -93,7 +93,6 @@ public class MainContentHomeFragment extends Fragment {
 		setLisener(maintContentHomeBtn3);
 		setLisener(maintContentHomeBtn4);
 	}
-	
 
 	/**
 	 * 

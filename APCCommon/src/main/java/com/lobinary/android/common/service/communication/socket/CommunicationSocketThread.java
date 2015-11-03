@@ -187,8 +187,12 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 	 * @param respMsg
 	 */
 	private void sendLastMsg(String respMsg) {
-		out.println(respMsg);
-		out.flush();
+		try {
+			out.println(respMsg);
+			out.flush();
+		} catch (Exception e) {
+			logger.error("通知客户端断开连接发生异常,准备强制断开客户端");
+		}
 		closeConnection();
 	}
 
@@ -271,10 +275,14 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 	 * @param message
 	 * @return
 	 */
-	private boolean sendMessage(String messageStr){
+	private boolean sendMessage(String messageStr) throws APCSysException{
 		try {
-			out.println(messageStr);
-			out.flush();
+			if(clientSocket.isConnected()){
+				out.println(messageStr);
+				out.flush();
+			}else{
+				throw new APCSysException(CodeDescConstants.SERVICE_MESSAGE_SEND_FAIL);
+			}
 		} catch (Exception e) {
 			logger.error("Socket服务端监控客户端子线程:发送信息时发送异常！",e);
 			throw new APCSysException(CodeDescConstants.SERVICE_MESSAGE_SEND_FAIL,e);
@@ -285,29 +293,35 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 
 	/**
 	 * <pre>
-	 * 
+	 * 发送信息
 	 * </pre>
 	 *
 	 * @param requestMessage
 	 * @return 
 	 */
-	public Message sendMessage(Message requestMessage) {
-		long messageId = getUniqeMessageId();
-		requestMessage.setId(messageId);
-		String message2String = MessageUtil.message2String(requestMessage);
-		this.sendMessage(message2String);
-		waitThread.put(messageId, Thread.currentThread());
-		logger.info("向客户端("+connectionBean.getName()+")发送信息成功,内容:"+message2String);
+	public Message sendMessage(Message requestMessage) throws APCSysException{
+		Message returnMessage = null;
 		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			logger.info("线程被打断，准备获取待处理信息");
-		}
-		Message returnMessage = getWaitDealMessage(messageId);
-		if(returnMessage.getId()==messageId){
-			logger.info("########恭喜成功接受预定返回报文#########id:"+messageId);
-		}else{
-			logger.error("!!!!!!!警告：返回报文为异常报文!!!!!!!!!");
+			long messageId = getUniqeMessageId();
+			requestMessage.setId(messageId);
+			String message2String = MessageUtil.message2String(requestMessage);
+			this.sendMessage(message2String);
+			waitThread.put(messageId, Thread.currentThread());
+			logger.info("向客户端("+connectionBean.getName()+")发送信息成功,内容:"+message2String);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				logger.info("线程被打断，准备获取待处理信息");
+			}
+			returnMessage = getWaitDealMessage(messageId);
+			if(returnMessage.getId()==messageId){
+				logger.info("########恭喜成功接受预定返回报文#########id:"+messageId);
+			}else{
+				logger.error("!!!!!!!警告：返回报文为异常报文!!!!!!!!!");
+				throw new APCSysException(CodeDescConstants.SERVICE_MESSAGE_SEND_FAIL);
+			}
+		} catch (Exception e) {
+			logger.error("信息发送失败,本处暂未增加补发机制",e);
 		}
 		return returnMessage;
 	}
@@ -373,7 +387,7 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 	 * @see com.lobinary.android.common.service.control.BaseServiceInterface#getMusicList(com.lobinary.android.common.pojo.communication.Message)
 	 */
 	@Override
-	public List<Music> getMusicList(Message message) {
+	public List<Music> getMusicList() {
 		// TODO Auto-generated method stub
 		return null;
 	}

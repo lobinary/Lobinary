@@ -14,33 +14,10 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 //		MainActivity.this.setContentView(R.layout.activity_main);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);  
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);  
         setContentView(R.layout.activity_main);
 
         InitialUtil.initial();//初始化
-//        Button testIntoListViewButtonView = (Button) findViewById(R.id.testIntoListViewButton);
-//        testIntoListViewButtonView.setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				Intent mainIntent = new Intent();
-//				mainIntent.setClass(MainActivity.this, ChatListActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//				startActivity(mainIntent);
-////				MainActivity.this.finish();
-//			}
-//		});
-        
-        
-//
-//        Button testIntoSlideViewButtonView = (Button) findViewById(R.id.testIntoSlideViewButton);
-//        testIntoSlideViewButtonView.setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				Intent mainIntent = new Intent();
-//				mainIntent.setClass(MainActivity.this, TestMessageActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//				startActivity(mainIntent);
-////				MainActivity.this.finish();
-//			}
-//		});
 	}
 	
 	/**
