@@ -22,6 +22,8 @@ import java.awt.Insets;
 import java.awt.LayoutManager;
 import java.awt.Panel;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -29,9 +31,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JLabel;
+
+import com.lobinary.android.common.pojo.communication.ConnectionBean;
+import com.lobinary.android.common.service.communication.socket.CommunicationSocketService;
 
 /**
  * <pre>
@@ -47,6 +54,7 @@ import javax.swing.JLabel;
 public class RefreshConnectableClients {
 	private JFrame frame;
 	private Image logo;
+	private static int i = 0;
 	
 	RefreshConnectableClients(){
 		initialize();
@@ -82,29 +90,68 @@ public class RefreshConnectableClients {
 		tabLogPanel.setLayout(gbl_tabLogPanel);
 		
 		/*******************************每个可连设备的标配***********************************/
-		JLabel connectableLabel = new JLabel("可连接设备1");
-		GridBagConstraints gbc_connectableLabel = new GridBagConstraints();
-		gbc_connectableLabel.fill = GridBagConstraints.VERTICAL;
-		gbc_connectableLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_connectableLabel.gridx = 0;
-		gbc_connectableLabel.gridy = 0;
-		tabLogPanel.add(connectableLabel, gbc_connectableLabel);
+//		JLabel connectableLabel = new JLabel("可连接设备1");
+//		GridBagConstraints gbc_connectableLabel = new GridBagConstraints();
+//		gbc_connectableLabel.fill = GridBagConstraints.VERTICAL;
+//		gbc_connectableLabel.insets = new Insets(0, 0, 5, 5);
+//		gbc_connectableLabel.gridx = 0;
+//		gbc_connectableLabel.gridy = 0;
+//		tabLogPanel.add(connectableLabel, gbc_connectableLabel);
+//		
+//		JButton connectableButton = new JButton("连接");
+//		GridBagConstraints gbc_connectableButton = new GridBagConstraints();
+//		gbc_connectableButton.fill = GridBagConstraints.BOTH;
+//		gbc_connectableButton.insets = new Insets(0, 0, 5, 5);
+//		gbc_connectableButton.gridx = 1;
+//		gbc_connectableButton.gridy = 0;
+//		tabLogPanel.add(connectableButton, gbc_connectableButton);
+//		
+//		JButton connectableDelButton = new JButton("删除");
+//		GridBagConstraints gbc_connectableDelButton = new GridBagConstraints();
+//		gbc_connectableDelButton.fill = GridBagConstraints.BOTH;
+//		gbc_connectableDelButton.insets = new Insets(0, 0, 5, 0);
+//		gbc_connectableDelButton.gridx = 2;
+//		gbc_connectableDelButton.gridy = 0;
+//		tabLogPanel.add(connectableDelButton, gbc_connectableDelButton);
 		
-		JButton connectableButton = new JButton("连接");
-		GridBagConstraints gbc_connectableButton = new GridBagConstraints();
-		gbc_connectableButton.fill = GridBagConstraints.BOTH;
-		gbc_connectableButton.insets = new Insets(0, 0, 5, 5);
-		gbc_connectableButton.gridx = 1;
-		gbc_connectableButton.gridy = 0;
-		tabLogPanel.add(connectableButton, gbc_connectableButton);
+		//粑粑问我除了map是不是不会用别的T.T
+		//放置button的规则未完待续
+		Map<String,JLabel> jlabelMap= new HashMap<String,JLabel>();
+		Map<String,JButton> connectButton = new HashMap<String,JButton>();
+		Map<String,JButton> deleteButton = new HashMap<String,JButton>();
+		Map<String,GridBagConstraints> labelGridBag = new HashMap<String,GridBagConstraints>();
+		Map<String,GridBagConstraints> connectButtonGridBag = new HashMap<String,GridBagConstraints>();
+		Map<String,GridBagConstraints> deleteButtonGridBag = new HashMap<String,GridBagConstraints>();
+		for (ConnectionBean conBean : CommunicationSocketService.connectionMap.values()) {
+			String Name = "connectableEquip"+i;
+			jlabelMap.put(Name, new JLabel());
+			connectButton.put(Name, new JButton("连接"));
+			deleteButton.put(Name, new JButton());
+			
+			labelGridBag.put(Name, new GridBagConstraints());
+			labelGridBag.get(Name).fill = GridBagConstraints.VERTICAL;
+			labelGridBag.get(Name).insets = new Insets(0, 0, 5, 5);
+			labelGridBag.get(Name).gridx = 0;
+			labelGridBag.get(Name).gridy = 0;
+			tabLogPanel.add(jlabelMap.get(Name), labelGridBag.get(Name));
+			
+			connectButtonGridBag.put(Name, new GridBagConstraints());
+			connectButtonGridBag.get(Name).fill = GridBagConstraints.BOTH;
+			connectButtonGridBag.get(Name).insets = new Insets(0, 0, 5, 5);
+			connectButtonGridBag.get(Name).gridx = 1;
+			connectButtonGridBag.get(Name).gridy = 0;
+			tabLogPanel.add(connectButton.get(Name), connectButtonGridBag.get(Name));
+			
+			deleteButtonGridBag.put(Name, new GridBagConstraints());
+			deleteButtonGridBag.get(Name).fill = GridBagConstraints.BOTH;
+			deleteButtonGridBag.get(Name).insets = new Insets(0, 0, 5, 0);
+			deleteButtonGridBag.get(Name).gridx = 2;
+			deleteButtonGridBag.get(Name).gridy = 0;
+			tabLogPanel.add(deleteButton.get(Name), deleteButtonGridBag.get(Name));
+			
+			i++;
+		}
 		
-		JButton connectableDelButton = new JButton("删除");
-		GridBagConstraints gbc_connectableDelButton = new GridBagConstraints();
-		gbc_connectableDelButton.fill = GridBagConstraints.BOTH;
-		gbc_connectableDelButton.insets = new Insets(0, 0, 5, 0);
-		gbc_connectableDelButton.gridx = 2;
-		gbc_connectableDelButton.gridy = 0;
-		tabLogPanel.add(connectableDelButton, gbc_connectableDelButton);
 		/*******************************每个可连设备的标配***********************************/
 		
 		JPanel contactsPanel = new JPanel();
@@ -114,9 +161,11 @@ public class RefreshConnectableClients {
 		gbl_contactsPanel.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_contactsPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contactsPanel.setLayout(gbl_contactsPanel);
-		tabbedPane.addTab("通讯录", null, contactsPanel, null);
+		tabbedPane.addTab("通讯录", null, contactsPanel, null); 
 		
 		/*******************************每个好友的标配***********************************/
+
+		
 		JLabel label = new JLabel("通讯录设备1");
 		GridBagConstraints gbc_label = new GridBagConstraints();
 		gbc_label.fill = GridBagConstraints.VERTICAL;

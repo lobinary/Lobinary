@@ -16,15 +16,17 @@ import com.lobinary.android.common.util.log.LogUtilInterface;
  * @since 2015年10月22日 下午1:36:20
  * @version V1.0.0 描述 : 创建文件CommonFactory
  * 
+ * 
  *         
  * 
  */
-public class CommonFactory {
+public class CommonFactory<ControlClientPCWindows> {
 	
 	public static String storeFileName = "apc_store_file.apc";
 	public static File storeFile;
 	public static String SYSTEM_CODE = Constants.SYSTEM_CODE_WINDOWS;//默认windows
-	
+
+
 	/**
 	 * 日志工具类
 	 */
