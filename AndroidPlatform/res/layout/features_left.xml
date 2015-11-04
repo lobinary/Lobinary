@@ -68,6 +68,28 @@
             android:textStyle="bold" />
         
     </RelativeLayout>
+   
+    <RelativeLayout
+        android:id="@+id/features_developer_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:clickable="true"
+        android:background="@color/features_left"
+        android:textAlignment="center" >
+
+        <TextView
+        	android:id="@+id/features_developer_btn_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="开发"
+            android:duplicateParentState="true"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+        
+    </RelativeLayout>
     
     
 

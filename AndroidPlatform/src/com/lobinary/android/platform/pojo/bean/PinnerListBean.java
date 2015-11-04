@@ -1,22 +1,57 @@
 package com.lobinary.android.platform.pojo.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import android.app.Activity;
+
+import com.lobinary.android.platform.R;
+import com.lobinary.android.platform.ui.activity.LogActivity;
+import com.lobinary.android.platform.ui.activity.MusicActivity;
 
 /**
  * 功能列表数据
  * @author Lobinary
  *
  */
-public class PinnerListBean {
-	
-	private static Map<String,String> baseMethodNameMap = new HashMap<String, String>();
+public class PinnerListBean implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 602729587642188398L;
+	/**
+	 * 基本远程方法调用(不带参数型)
+	 */
+	public final static int BASE_REMOTE_METHOD = 1;
+	/**
+	 * 页面跳转-需要client连接
+	 */
+	public final static int ACTIVITY_INTENT_NEED_CLIENT = 2;
+	/**
+	 * 页面跳转-不需要client连接
+	 */
+	public final static int ACTIVITY_INTENT_NOT_NEED_CLIENT = 3;
+	
 	public PinnerListBean(int type, String text) {
 		this.type = type;
 		this.text = text;
+		this.imgId = R.drawable.unknow;
+		this.invokeType = 0;
+		this.baseMethodName = null;
+		this.intentAcivityClass = null;
+	}
+	
+	public PinnerListBean(int type, String text,int imgId,int invokeType,String baseMethodName,Class<? extends Activity> intentAcivity) {
+		this.type = type;
+		this.text = text;
+		this.imgId = imgId;
+		this.invokeType = invokeType;
+		this.baseMethodName = baseMethodName;
+		this.intentAcivityClass = intentAcivity;
 	}
 
 
@@ -26,6 +61,10 @@ public class PinnerListBean {
 		this.text = text;
 		this.sectionPosition = sectionPosition;
 		this.listPosition = listPosition;
+		this.imgId = R.drawable.unknow;
+		this.invokeType = 0;
+		this.baseMethodName = null;
+		this.intentAcivityClass = null;
 	}
 	
 	public static final int ITEM = 0;
@@ -33,6 +72,10 @@ public class PinnerListBean {
 
 	public final int type;
 	public final String text;
+	public final int imgId;
+	public final int invokeType;
+	public final String baseMethodName;
+	public final Class intentAcivityClass;
 
 	public int sectionPosition;
 	public int listPosition;
@@ -126,7 +169,7 @@ public class PinnerListBean {
 	public static ArrayList<PinnerListBean> getControlData(){
 		ArrayList<PinnerListBean>  list=new ArrayList<PinnerListBean>();
 		list.add(new PinnerListBean(SECTION, "媒体"));
-		list.add(new PinnerListBean(ITEM, "音乐"));
+		list.add(new PinnerListBean(ITEM, "音乐",R.drawable.music,ACTIVITY_INTENT_NEED_CLIENT,null,MusicActivity.class));
 		list.add(new PinnerListBean(ITEM, "暂停音乐"));
 		list.add(new PinnerListBean(ITEM, "上一曲"));
 		list.add(new PinnerListBean(ITEM, "下一曲"));
@@ -134,14 +177,10 @@ public class PinnerListBean {
 		list.add(new PinnerListBean(ITEM, "播放图片"));
 
 		list.add(new PinnerListBean(SECTION, "电脑"));
-		list.add(new PinnerListBean(ITEM, "关机"));
-		baseMethodNameMap.put("关机", "shutDown");
-		list.add(new PinnerListBean(ITEM, "取消关机"));
-		baseMethodNameMap.put("取消关机", "cancelShutDown");
-		list.add(new PinnerListBean(ITEM, "音量+"));
-		baseMethodNameMap.put("音量+", "increaseVoice");
-		list.add(new PinnerListBean(ITEM, "音量-"));
-		baseMethodNameMap.put("音量-", "decreaseVoice");
+		list.add(new PinnerListBean(ITEM, "关机",R.drawable.music,BASE_REMOTE_METHOD,"shutDown",null));
+		list.add(new PinnerListBean(ITEM, "取消关机",R.drawable.music,BASE_REMOTE_METHOD,"cancelShutDown",null));
+		list.add(new PinnerListBean(ITEM, "音量+",R.drawable.music,BASE_REMOTE_METHOD,"increaseVoice",null));
+		list.add(new PinnerListBean(ITEM, "音量-",R.drawable.music,BASE_REMOTE_METHOD,"decreaseVoice",null));
 		list.add(new PinnerListBean(ITEM, "亮度+"));
 		list.add(new PinnerListBean(ITEM, "亮度-"));
 
@@ -164,13 +203,21 @@ public class PinnerListBean {
 		return list;
 	}
 	
-	/**
-	 * 通过item的文字 获取 baseService功能
-	 * @param baseString
-	 * @return
-	 */
-	public static String baseMethodName(String baseString){
-		return baseMethodNameMap.get(baseString);
+	public static ArrayList<PinnerListBean> getDeveloperData() {
+		ArrayList<PinnerListBean>  list=new ArrayList<PinnerListBean>();
+		list.add(new PinnerListBean(SECTION, "日志"));
+		list.add(new PinnerListBean(ITEM, "日志页面",R.drawable.music,ACTIVITY_INTENT_NOT_NEED_CLIENT,null,LogActivity.class));
+		list.add(new PinnerListBean(ITEM, "清空日志"));
+		list.add(new PinnerListBean(ITEM, "调整日志级别为:Debug"));
+		list.add(new PinnerListBean(ITEM, "调整日志级别为:Info"));
+		list.add(new PinnerListBean(ITEM, "调整日志级别为:Error"));
+
+		list.add(new PinnerListBean(SECTION, "测试页面"));
+		list.add(new PinnerListBean(ITEM, "Socket测试页面"));
+		list.add(new PinnerListBean(ITEM, "测试页面2"));
+		list.add(new PinnerListBean(ITEM, "测试页面3"));
+		
+		return list;
 	}
 	
 }

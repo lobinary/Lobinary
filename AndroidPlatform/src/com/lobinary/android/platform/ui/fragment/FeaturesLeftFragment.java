@@ -25,12 +25,14 @@ public class FeaturesLeftFragment extends Fragment {
 	private TextView features_query_btn_text;
 	private TextView features_control_btn_text;
 	private TextView features_communication_btn_text;
+	private TextView features_developer_btn_text;
 	
 	private long activitionBtnId = R.id.features_query_btn;
 
 	private View features_query_btn;
 	private View features_control_btn;
 	private View features_communication_btn;
+	private View features_developer_btn;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,10 +53,12 @@ public class FeaturesLeftFragment extends Fragment {
 		features_query_btn_text = (TextView) getActivity().findViewById(R.id.features_query_btn_text);
 		features_control_btn_text = (TextView) getActivity().findViewById(R.id.features_control_btn_text);
 		features_communication_btn_text = (TextView) getActivity().findViewById(R.id.features_communication_btn_text);
+		features_developer_btn_text = (TextView) getActivity().findViewById(R.id.features_developer_btn_text);
 		
 		features_query_btn = (RelativeLayout) getActivity().findViewById(R.id.features_query_btn);
 		features_control_btn = (RelativeLayout) getActivity().findViewById(R.id.features_control_btn);
 		features_communication_btn = (RelativeLayout) getActivity().findViewById(R.id.features_communication_btn);
+		features_developer_btn = (RelativeLayout) getActivity().findViewById(R.id.features_developer_btn);
 	}
 
 	/**
@@ -64,6 +68,7 @@ public class FeaturesLeftFragment extends Fragment {
 		setLisener(features_query_btn);
 		setLisener(features_control_btn);
 		setLisener(features_communication_btn);
+		setLisener(features_developer_btn);
 		
 	}
 
@@ -79,6 +84,9 @@ public class FeaturesLeftFragment extends Fragment {
 		}else if(activitionBtnId==R.id.features_communication_btn){
 			features_communication_btn.setBackgroundColor(getResources().getColor(R.color.features_left));
 			features_communication_btn_text.setTextColor(getResources().getColor(R.color.black));
+		}else if(activitionBtnId==R.id.features_developer_btn){
+			features_developer_btn.setBackgroundColor(getResources().getColor(R.color.features_left));
+			features_developer_btn_text.setTextColor(getResources().getColor(R.color.black));
 		}
 
 		if(clickBtnId==R.id.features_query_btn){
@@ -90,6 +98,9 @@ public class FeaturesLeftFragment extends Fragment {
 		}else if(clickBtnId==R.id.features_communication_btn){
 			features_communication_btn.setBackgroundColor(getResources().getColor(R.color.features_left_activition));
 			features_communication_btn_text.setTextColor(getResources().getColor(R.color.white));
+		}else if(clickBtnId==R.id.features_developer_btn){
+			features_developer_btn.setBackgroundColor(getResources().getColor(R.color.features_left_activition));
+			features_developer_btn_text.setTextColor(getResources().getColor(R.color.white));
 		}
 		activitionBtnId = clickBtnId;
 	}

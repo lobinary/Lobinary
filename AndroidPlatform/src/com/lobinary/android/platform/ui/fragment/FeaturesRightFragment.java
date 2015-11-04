@@ -1,10 +1,12 @@
 package com.lobinary.android.platform.ui.fragment;
 
 import java.lang.reflect.Method;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
@@ -27,6 +29,7 @@ import com.lobinary.android.common.pojo.communication.ConnectionBean;
 import com.lobinary.android.common.service.communication.ConnectionThreadInterface;
 import com.lobinary.android.platform.R;
 import com.lobinary.android.platform.pojo.bean.PinnerListBean;
+import com.lobinary.android.platform.ui.activity.LogActivity;
 import com.lobinary.android.platform.ui.activity.MusicActivity;
 import com.lobinary.android.platform.ui.listview.AdapterListView;
 import com.lobinary.android.platform.ui.listview.PinnedSectionListView;
@@ -38,16 +41,16 @@ public class FeaturesRightFragment extends Fragment {
 	private static final String TAG = "FeaturesRightFragment";
 
 	private PinnedSectionListView feature_query_view;
-
 	private PinnedSectionListView feature_control_view;
-
 	private PinnedSectionListView feature_communication_view;
+	private PinnedSectionListView feature_developer_view;
 
 	public static Handler featureRightHandler;
 
 	private AdapterListView queryAdapter;
 	private AdapterListView controlAdapter;
 	private AdapterListView communicationAdapter;
+	private AdapterListView developerAdapter;
 
 	long lastClick = 0;// 上次点击id
 
@@ -77,12 +80,14 @@ public class FeaturesRightFragment extends Fragment {
 		feature_query_view = (PinnedSectionListView) getActivity().findViewById(R.id.feature_query_view);
 		feature_control_view = (PinnedSectionListView) getActivity().findViewById(R.id.feature_control_view);
 		feature_communication_view = (PinnedSectionListView) getActivity().findViewById(R.id.feature_communication_view);
-		clickShowContent(R.id.features_query_btn_text);
+		feature_developer_view = (PinnedSectionListView) getActivity().findViewById(R.id.feature_developer_view);
+//		clickShowContent(R.id.features_query_btn_text);
 
 		lastClick = R.id.features_query_btn;
 		feature_query_view.setVisibility(View.VISIBLE);
 		feature_control_view.setVisibility(View.GONE);
 		feature_communication_view.setVisibility(View.GONE);
+		feature_developer_view.setVisibility(View.GONE);
 	}
 
 	/**
@@ -103,6 +108,8 @@ public class FeaturesRightFragment extends Fragment {
 			feature_control_view.setVisibility(View.GONE);
 		} else if (lastClick == R.id.features_communication_btn) {
 			feature_communication_view.setVisibility(View.GONE);
+		} else if (lastClick == R.id.features_developer_btn) {
+			feature_developer_view.setVisibility(View.GONE);
 		}
 
 		if (clickBtnId == R.id.features_query_btn) {
@@ -111,6 +118,8 @@ public class FeaturesRightFragment extends Fragment {
 			feature_control_view.setVisibility(View.VISIBLE);
 		} else if (clickBtnId == R.id.features_communication_btn) {
 			feature_communication_view.setVisibility(View.VISIBLE);
+		} else if (clickBtnId == R.id.features_developer_btn) {
+			feature_developer_view.setVisibility(View.VISIBLE);
 		}
 
 		lastClick = clickBtnId;
@@ -129,12 +138,19 @@ public class FeaturesRightFragment extends Fragment {
 		controlAdapter = new AdapterListView(getActivity(), PinnerListBean.getControlData());
 		feature_control_view.setAdapter(controlAdapter);
 		feature_control_view.setOnItemClickListener(getListenerForListView(controlAdapter));
+		feature_control_view.setOnItemLongClickListener(getLongClickListenerForListView(controlAdapter));
 
 		communicationAdapter = new AdapterListView(getActivity(), PinnerListBean.getCommunicationData());
 		feature_communication_view.setAdapter(communicationAdapter);
 		feature_communication_view.setOnItemClickListener(getListenerForListView(communicationAdapter));
+		feature_communication_view.setOnItemLongClickListener(getLongClickListenerForListView(communicationAdapter));
 
-		setListViewHeightBasedOnChildren(feature_query_view);
+		developerAdapter = new AdapterListView(getActivity(), PinnerListBean.getDeveloperData());
+		feature_developer_view.setAdapter(developerAdapter);
+		feature_developer_view.setOnItemClickListener(getListenerForListView(developerAdapter));
+		feature_developer_view.setOnItemLongClickListener(getLongClickListenerForListView(developerAdapter));
+
+//		setListViewHeightBasedOnChildren(feature_query_view);
 	}
 
 	/**
@@ -149,63 +165,88 @@ public class FeaturesRightFragment extends Fragment {
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 				// TODO Auto-generated method stub
 				if (position > 0) {
-					PinnerListBean bean = adapter.getItem(position);
+					final PinnerListBean bean = adapter.getItem(position);
 					if (bean.type == PinnerListBean.ITEM) {
+
 						// Toast.makeText(getActivity(), "按钮"+bean.text+"被长按",
 						// Toast.LENGTH_SHORT).show();
-
-						final CharSequence[] items = { "刷新设备", "播放歌曲", "播放视频", "文件管理", "取消" };
+						final List<PinnerListBean> homeBtnList = MainContentHomeFragment.getHomeBtnsList();
+						final CharSequence[] items = new CharSequence[(homeBtnList.size()+1)];
+						for (int i = 0; i < homeBtnList.size(); i++) {
+							items[i] = homeBtnList.get(i).text;
+						}
+						items[homeBtnList.size()] = "取消";
 						AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-						builder.setTitle("选择替换主页功能");
+						builder.setTitle("将“"+bean.text+"”替换主页:");
 						builder.setItems(items, new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int item) {
+								MainContentHomeFragment.replaceHomeBtn(homeBtnList.get(item),bean,getResources().getDrawable(bean.imgId));
 								Toast.makeText(getActivity().getApplicationContext(), items[item], Toast.LENGTH_SHORT).show();
 							}
 						});
 						AlertDialog alert = builder.create();
 						alert.show();
+						return true;
 					}
 				}
-				return true;
+				return false;
 			}
-
 		};
 	}
 
 	/**
 	 * 调用方法
 	 */
-	public void invokeMethod(String itemName, int position) {
-		ConnectionBean currentOpreateConnection = MainTopFragment.getCurrentOpreateConnection();
-		if (currentOpreateConnection == null) {
-			Toast.makeText(getActivity(), "调用“" + itemName + "”失败,当前无已连接设备", Toast.LENGTH_SHORT).show();
-		} else {
-			ConnectionThreadInterface connectionThread = currentOpreateConnection.getConnectionThread();
-			String baseMethodName = PinnerListBean.baseMethodName(itemName);
-			if (baseMethodName == null) {
-				if (itemName.equals("音乐")) {
-					Intent mainIntent = new Intent();
-					getActivity().overridePendingTransition(android.R.anim.slide_out_right, android.R.anim.slide_in_left);
-					mainIntent.setClass(getActivity(), MusicActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);// 只存在一个activity
+	@SuppressWarnings("unchecked")
+	public void invokeMethod(Activity activity, String itemName,int invokeType,String baseMethodName,Class<? extends Activity> intentActivity) {
+		if("清空日志".equals(itemName)){
+			LogActivity.clearLog();
+			Toast.makeText(activity, "日志已清空", Toast.LENGTH_SHORT).show();
+		}else if("调整日志级别为:Debug".equals(itemName)){
+			Logger.setLevel(Logger.DEBUG);
+			Toast.makeText(activity, "日志级别已经调整为Debug模式", Toast.LENGTH_SHORT).show();
+		}else if("调整日志级别为:Info".equals(itemName)){
+			Logger.setLevel(Logger.INFO);
+			Toast.makeText(activity, "日志级别已经调整为Info模式", Toast.LENGTH_SHORT).show();
+		}else if("调整日志级别为:Error".equals(itemName)){
+			Logger.setLevel(Logger.ERROR);
+			Toast.makeText(activity, "日志级别已经调整为Error模式", Toast.LENGTH_SHORT).show();
+		}else {
+			ConnectionBean currentOpreateConnection = MainTopFragment.getCurrentOpreateConnection();
+			if (invokeType == 0) {
+				Toast.makeText(activity, "对不起,“" + itemName + "”功能暂未实现", Toast.LENGTH_SHORT).show();
+			} else if (invokeType == PinnerListBean.ACTIVITY_INTENT_NOT_NEED_CLIENT) {
+				Intent mainIntent = new Intent();//
+				// getActivity().overridePendingTransition(android.R.anim.slide_out_right,
+				// android.R.anim.slide_in_left);
+				mainIntent.setClass(activity, intentActivity).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);// 只存在一个activity
+				startActivity(mainIntent);
+				// WelcomeActivity.this.finish();
+			} else if (currentOpreateConnection == null) {
+				Toast.makeText(activity, "调用“" + itemName + "”失败,当前无已连接设备", Toast.LENGTH_SHORT).show();
+			} else {
+				ConnectionThreadInterface connectionThread = currentOpreateConnection.getConnectionThread();
+				if ((Integer) invokeType== PinnerListBean.ACTIVITY_INTENT_NEED_CLIENT) {
+					Intent mainIntent = new Intent();//
+					// getActivity().overridePendingTransition(android.R.anim.slide_out_right,
+					// android.R.anim.slide_in_left);
+					mainIntent.setClass(activity,intentActivity).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);// 只存在一个activity
 					startActivity(mainIntent);
 					// WelcomeActivity.this.finish();
-				} else {
-					Toast.makeText(getActivity(), "对不起,“" + itemName + "”功能暂未实现", Toast.LENGTH_SHORT).show();
-				}
-			} else {
-				try {
-					// 如果是普通 远程方法 只是true false 返回则可以反射调用 如果有参数
-					// 需要特殊处理
-					Class<?> clazz = connectionThread.getClass();
-					Method m1 = clazz.getDeclaredMethod(baseMethodName);
-					boolean result = (Boolean) m1.invoke(connectionThread);
-					Toast.makeText(getActivity(), "调用“" + itemName + "”" + (result ? "成功" : "失败"), Toast.LENGTH_SHORT).show();
-				} catch (Exception e) {
-					logger.error("调用当前连接设备(" + currentOpreateConnection.name + ")时发生异常", e);
+				} else if ((Integer) invokeType == PinnerListBean.BASE_REMOTE_METHOD) {
+					try {
+						// 如果是普通 远程方法 只是true false 返回则可以反射调用 如果有参数
+						// 需要特殊处理
+						Class<?> clazz = connectionThread.getClass();
+						Method m1 = clazz.getDeclaredMethod(baseMethodName);
+						boolean result = (Boolean) m1.invoke(connectionThread);
+						Toast.makeText(activity, "调用“" + itemName + "”" + (result ? "成功" : "失败"), Toast.LENGTH_SHORT).show();
+					} catch (Exception e) {
+						logger.error("调用当前连接设备(" + currentOpreateConnection.name + ")时发生异常", e);
+					}
 				}
 			}
 		}
-
 	}
 
 	/**
@@ -216,13 +257,14 @@ public class FeaturesRightFragment extends Fragment {
 	private OnItemClickListener getListenerForListView(final AdapterListView adapter) {
 		// TODO Auto-generated method stub
 		return new OnItemClickListener() {
+			@SuppressWarnings("unchecked")
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// TODO Auto-generated method stub
 				if (position > 0) {
 					PinnerListBean bean = adapter.getItem(position);
 					if (bean.type == PinnerListBean.ITEM) {
-						invokeMethod(bean.text, position);
+						invokeMethod(getActivity(), bean.text,bean.invokeType,bean.baseMethodName,bean.intentAcivityClass);
 					}
 				}
 			}

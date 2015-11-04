@@ -19,7 +19,6 @@ import com.lobinary.android.platform.util.InitialUtil;
 
 public class MainContentSettingFragment extends Fragment {
 
-	Handler logHandler;
 
 
 	@Override
@@ -29,25 +28,7 @@ public class MainContentSettingFragment extends Fragment {
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-		logHandler = new Handler() {
-			public void handleMessage(Message msg) {
-				TextView logText = (TextView) getActivity().findViewById(R.id.logText);
-				logText.setText(logText.getText() + "\n" + msg.obj);
-			}
-		};
-		AndroidLogUtil.setLogHandler(logHandler);
 		super.onActivityCreated(savedInstanceState);
-	}
-
-	/**
-	 * 输出日志
-	 * 
-	 * @param message
-	 */
-	public final void outLog(final String message) {
-		Message msg = new Message();
-		msg.obj = message;
-		logHandler.sendMessage(msg);
 	}
 
 }

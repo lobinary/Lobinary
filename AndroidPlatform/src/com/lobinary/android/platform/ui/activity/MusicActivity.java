@@ -111,22 +111,7 @@ public class MusicActivity extends Activity {
 						if(currentOpreateConnection==null){
 							Toast.makeText(MusicActivity.this, "调用“"+bean.text+"”失败,当前无已连接设备", Toast.LENGTH_SHORT).show();
 						}else{
-							ConnectionThreadInterface connectionThread = currentOpreateConnection.getConnectionThread();
-							String baseMethodName = PinnerListBean.baseMethodName(bean.text);
-							if (baseMethodName == null) {
-								Toast.makeText(MusicActivity.this, "对不起,“" + bean.text + "”功能暂未实现", Toast.LENGTH_SHORT).show();
-							} else {
-								try {
-									// 如果是普通 远程方法 只是true false 返回则可以反射调用 如果有参数
-									// 需要特殊处理
-									Class<?> clazz = connectionThread.getClass();
-									Method m1 = clazz.getDeclaredMethod(baseMethodName);
-									boolean result = (Boolean) m1.invoke(connectionThread);
-									Toast.makeText(MusicActivity.this, "调用“"+bean.text+"”"+(result?"成功":"失败"), Toast.LENGTH_SHORT).show();
-								} catch (Exception e) {
-									logger.error("调用当前连接设备("+currentOpreateConnection.name+")时发生异常", e);
-								}
-							}
+							
 						}
 						
 					}

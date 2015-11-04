@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.lobinary.android.platform.R;
 import com.lobinary.android.platform.pojo.bean.PinnerListBean;
-import com.lobinary.android.platform.pojo.bean.PinnerListBean;
 import com.lobinary.android.platform.ui.listview.PinnedSectionListView.PinnedSectionListAdapter;
 
 /**
@@ -70,10 +69,10 @@ public class AdapterListView extends BaseAdapter implements PinnedSectionListAda
 		}
 		PinnerListBean bean=getItem(position);
 		vh.company_item.setText(bean.text);
+		vh.image.setImageDrawable(converView.getResources().getDrawable(bean.imgId));
 		if (bean.type == PinnerListBean.SECTION) {
 			vh.company_item.setBackgroundResource(R.drawable.features_list_title_bg);
 			vh.image.setVisibility(View.GONE);
-			
 		}else{
 			vh.company_item.setBackgroundResource(R.drawable.features_list_item_bg);
 			vh.image.setVisibility(View.VISIBLE);

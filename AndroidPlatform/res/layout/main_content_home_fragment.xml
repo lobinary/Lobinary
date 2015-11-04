@@ -13,26 +13,29 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_gravity="center" >
 
             <LinearLayout
+                android:id="@+id/maintContentHomeBtn1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:clickable="true"
                 android:orientation="vertical" >
 
                 <ImageView
-                android:id="@+id/maintContentHomeBtn1"
+                 	android:id="@+id/homeBtnImg1"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_margin="5dp"
-                    android:clickable="true"
+                    android:duplicateParentState="true"
                     android:src="@drawable/search" />
 
                 <TextView
-                    android:id="@+id/home1BtnText"
+                    android:id="@+id/homeBtnText1"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
+                    android:duplicateParentState="true"
                     android:paddingLeft="23dp"
                     android:text="扫描Windows"
                     android:textColor="@color/grey"
@@ -40,25 +43,27 @@
             </LinearLayout>
         </RelativeLayout>
 
-
         <LinearLayout
+            android:id="@+id/maintContentHomeBtn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:clickable="true"
             android:orientation="vertical" >
 
             <ImageView
-                android:id="@+id/maintContentHomeBtn2"
+                android:id="@+id/homeBtnImg2"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_margin="5dp"
-                android:clickable="true"
+                android:duplicateParentState="true"
                 android:src="@drawable/contact" />
 
             <TextView
-                android:id="@+id/home2BtnText"
+                android:id="@+id/homeBtnText2"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:duplicateParentState="true"
                 android:paddingLeft="23dp"
                 android:text="通讯录"
                 android:textColor="@color/grey"
@@ -78,23 +83,27 @@
         android:layout_weight="1" >
 
         <LinearLayout
+            android:id="@+id/maintContentHomeBtn3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:clickable="true"
             android:orientation="vertical" >
 
             <ImageView
-                android:id="@+id/maintContentHomeBtn3"
+                android:id="@+id/homeBtnImg3"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_margin="5dp"
                 android:clickable="true"
+                android:duplicateParentState="true"
                 android:src="@drawable/contact" />
 
             <TextView
-                android:id="@+id/home3BtnText"
+                android:id="@+id/homeBtnText3"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:duplicateParentState="true"
                 android:paddingLeft="23dp"
                 android:text="通讯录"
                 android:textColor="@color/grey"
@@ -102,23 +111,26 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/maintContentHomeBtn4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:clickable="true"
             android:orientation="vertical" >
 
             <ImageView
-            android:id="@+id/maintContentHomeBtn4"
+                android:id="@+id/homeBtnImg4"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_margin="5dp"
-                android:clickable="true"
+                android:duplicateParentState="true"
                 android:src="@drawable/contact" />
 
             <TextView
-                android:id="@+id/home4BtnText"
+                android:id="@+id/homeBtnText4"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:duplicateParentState="true"
                 android:paddingLeft="23dp"
                 android:text="通讯录"
                 android:textColor="@color/grey"

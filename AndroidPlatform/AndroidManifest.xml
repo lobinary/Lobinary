@@ -46,6 +46,10 @@
             android:name="com.lobinary.android.platform.ui.activity.MusicActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
              ></activity>
+        <activity
+            android:name="com.lobinary.android.platform.ui.activity.LogActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+             ></activity>
     </application>
 
 </manifest>

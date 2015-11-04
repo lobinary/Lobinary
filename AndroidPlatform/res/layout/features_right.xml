@@ -40,6 +40,15 @@
         android:listSelector="@drawable/features_list_item_selector"
         android:scrollbars="vertical" />
     
-    
+    <com.lobinary.android.platform.ui.listview.PinnedSectionListView
+        android:id="@+id/feature_developer_view"
+        android:layout_width="match_parent"
+        android:layout_height="1028dp"
+        android:cacheColorHint="#00000000"
+        android:divider="@drawable/features_list_item_line"
+        android:dividerHeight="0.1dp"
+        android:fadingEdge="vertical"
+        android:listSelector="@drawable/features_list_item_selector"
+        android:scrollbars="vertical" />
 
 </RelativeLayout>
