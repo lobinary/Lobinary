@@ -11,6 +11,7 @@ import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -53,8 +54,6 @@ public class MainContentHomeFragment extends Fragment {
 	public static List<TextView> btnTextList = new ArrayList<TextView>();
 	public static List<PinnerListBean> homeBtnList;
 
-	public static Map<Integer,ButtonListenerBean> mainHomeBtnListenerMap;
-	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -135,16 +134,23 @@ public class MainContentHomeFragment extends Fragment {
 		view.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ButtonListenerBean buttonListenerBean = mainHomeBtnListenerMap.get(v.getId());
-				String methodName = buttonListenerBean.methodName;
-				logger.info("点击了主页按钮"+v.getId()+"执行方法："+methodName);
-				CommunicationServiceInterface communicationService = CommonFactory.getCommunicationService();
-				communicationService.refreshConnectableList();
-				
-				List<String> s = AndroidNetUtil.getLocalIpAddress();
-				for (String ss : s) {
-					logger.info("安卓网络工具类捕获到ip：" + ss);
+				int id = v.getId();
+				PinnerListBean pinnerListBean = null;
+				if(v.getId()==R.id.maintContentHomeBtn1){
+					pinnerListBean = homeBtnList.get(0);
+				}else if(v.getId()==R.id.maintContentHomeBtn2){
+					pinnerListBean = homeBtnList.get(1);
+				}else if(v.getId()==R.id.maintContentHomeBtn3){
+					pinnerListBean = homeBtnList.get(2);
+				}else if(v.getId()==R.id.maintContentHomeBtn4){
+					pinnerListBean = homeBtnList.get(3);
 				}
+				Message msg = new Message();
+				List<Object> paramList = new ArrayList<Object>();
+				paramList.add(getActivity());
+				paramList.add(pinnerListBean);
+				msg.obj = paramList;
+				FeaturesRightFragment.invokeMethodHandler.sendMessage(msg);
 			}
 		});
 	}

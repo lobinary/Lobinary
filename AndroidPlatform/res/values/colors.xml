@@ -6,6 +6,8 @@
     <color name="main_bg">#EEEEEE</color>
     <color name="main_title_bg">#DDDDDD</color>
     <color name="main_bottom_bg">#DDDDDD</color>
+    <color name="lightGrey">#EEEEEE</color>
+    <color name="blackGrey">#DDDDDD</color>
     
     <color name="white">#FFFFFF</color>
     <!-- 白色 -->

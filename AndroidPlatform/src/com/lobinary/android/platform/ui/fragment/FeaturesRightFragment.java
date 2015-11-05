@@ -30,10 +30,10 @@ import com.lobinary.android.common.service.communication.ConnectionThreadInterfa
 import com.lobinary.android.platform.R;
 import com.lobinary.android.platform.pojo.bean.PinnerListBean;
 import com.lobinary.android.platform.ui.activity.LogActivity;
-import com.lobinary.android.platform.ui.activity.MusicActivity;
 import com.lobinary.android.platform.ui.listview.AdapterListView;
 import com.lobinary.android.platform.ui.listview.PinnedSectionListView;
 
+@SuppressWarnings("unchecked")
 public class FeaturesRightFragment extends Fragment {
 
 	private static Logger logger = LoggerFactory.getLogger(FeaturesRightFragment.class);
@@ -46,6 +46,7 @@ public class FeaturesRightFragment extends Fragment {
 	private PinnedSectionListView feature_developer_view;
 
 	public static Handler featureRightHandler;
+	public static Handler invokeMethodHandler;
 
 	private AdapterListView queryAdapter;
 	private AdapterListView controlAdapter;
@@ -72,6 +73,12 @@ public class FeaturesRightFragment extends Fragment {
 			public void handleMessage(Message msg) {
 				int viewId = (Integer) msg.obj;
 				clickShowContent(viewId);
+			}
+		};
+		invokeMethodHandler = new Handler() {
+			public void handleMessage(Message msg) {
+				List<Object> paramList = (List<Object>) msg.obj;
+				invokeMethod((Activity)paramList.get(0), (PinnerListBean)paramList.get(1));
 			}
 		};
 	}
@@ -197,50 +204,49 @@ public class FeaturesRightFragment extends Fragment {
 	/**
 	 * 调用方法
 	 */
-	@SuppressWarnings("unchecked")
-	public void invokeMethod(Activity activity, String itemName,int invokeType,String baseMethodName,Class<? extends Activity> intentActivity) {
-		if("清空日志".equals(itemName)){
+	public void invokeMethod(Activity activity,PinnerListBean bean) {
+		if("清空日志".equals(bean.text)){
 			LogActivity.clearLog();
 			Toast.makeText(activity, "日志已清空", Toast.LENGTH_SHORT).show();
-		}else if("调整日志级别为:Debug".equals(itemName)){
+		}else if("调整日志级别为:Debug".equals(bean.text)){
 			Logger.setLevel(Logger.DEBUG);
 			Toast.makeText(activity, "日志级别已经调整为Debug模式", Toast.LENGTH_SHORT).show();
-		}else if("调整日志级别为:Info".equals(itemName)){
+		}else if("调整日志级别为:Info".equals(bean.text)){
 			Logger.setLevel(Logger.INFO);
 			Toast.makeText(activity, "日志级别已经调整为Info模式", Toast.LENGTH_SHORT).show();
-		}else if("调整日志级别为:Error".equals(itemName)){
+		}else if("调整日志级别为:Error".equals(bean.text)){
 			Logger.setLevel(Logger.ERROR);
 			Toast.makeText(activity, "日志级别已经调整为Error模式", Toast.LENGTH_SHORT).show();
 		}else {
 			ConnectionBean currentOpreateConnection = MainTopFragment.getCurrentOpreateConnection();
-			if (invokeType == 0) {
-				Toast.makeText(activity, "对不起,“" + itemName + "”功能暂未实现", Toast.LENGTH_SHORT).show();
-			} else if (invokeType == PinnerListBean.ACTIVITY_INTENT_NOT_NEED_CLIENT) {
+			if (bean.invokeType == 0) {
+				Toast.makeText(activity, "对不起,“" + bean.text + "”功能暂未实现", Toast.LENGTH_SHORT).show();
+			} else if (bean.invokeType == PinnerListBean.ACTIVITY_INTENT_NOT_NEED_CLIENT) {
 				Intent mainIntent = new Intent();//
 				// getActivity().overridePendingTransition(android.R.anim.slide_out_right,
 				// android.R.anim.slide_in_left);
-				mainIntent.setClass(activity, intentActivity).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);// 只存在一个activity
+				mainIntent.setClass(activity, bean.intentAcivityClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);// 只存在一个activity
 				startActivity(mainIntent);
 				// WelcomeActivity.this.finish();
 			} else if (currentOpreateConnection == null) {
-				Toast.makeText(activity, "调用“" + itemName + "”失败,当前无已连接设备", Toast.LENGTH_SHORT).show();
+				Toast.makeText(activity, "调用“" + bean.text + "”失败,当前无已连接设备", Toast.LENGTH_SHORT).show();
 			} else {
 				ConnectionThreadInterface connectionThread = currentOpreateConnection.getConnectionThread();
-				if ((Integer) invokeType== PinnerListBean.ACTIVITY_INTENT_NEED_CLIENT) {
+				if (bean.invokeType== PinnerListBean.ACTIVITY_INTENT_NEED_CLIENT) {
 					Intent mainIntent = new Intent();//
 					// getActivity().overridePendingTransition(android.R.anim.slide_out_right,
 					// android.R.anim.slide_in_left);
-					mainIntent.setClass(activity,intentActivity).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);// 只存在一个activity
+					mainIntent.setClass(activity,bean.intentAcivityClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);// 只存在一个activity
 					startActivity(mainIntent);
 					// WelcomeActivity.this.finish();
-				} else if ((Integer) invokeType == PinnerListBean.BASE_REMOTE_METHOD) {
+				} else if (bean.invokeType == PinnerListBean.BASE_REMOTE_METHOD) {
 					try {
 						// 如果是普通 远程方法 只是true false 返回则可以反射调用 如果有参数
 						// 需要特殊处理
 						Class<?> clazz = connectionThread.getClass();
-						Method m1 = clazz.getDeclaredMethod(baseMethodName);
+						Method m1 = clazz.getDeclaredMethod(bean.baseMethodName);
 						boolean result = (Boolean) m1.invoke(connectionThread);
-						Toast.makeText(activity, "调用“" + itemName + "”" + (result ? "成功" : "失败"), Toast.LENGTH_SHORT).show();
+						Toast.makeText(activity, "调用“" + bean.text + "”" + (result ? "成功" : "失败"), Toast.LENGTH_SHORT).show();
 					} catch (Exception e) {
 						logger.error("调用当前连接设备(" + currentOpreateConnection.name + ")时发生异常", e);
 					}
@@ -264,7 +270,7 @@ public class FeaturesRightFragment extends Fragment {
 				if (position > 0) {
 					PinnerListBean bean = adapter.getItem(position);
 					if (bean.type == PinnerListBean.ITEM) {
-						invokeMethod(getActivity(), bean.text,bean.invokeType,bean.baseMethodName,bean.intentAcivityClass);
+						invokeMethod(getActivity(), bean);
 					}
 				}
 			}

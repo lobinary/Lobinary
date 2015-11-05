@@ -70,7 +70,7 @@ public class CommunicationSocketThread extends ConnectionThreadInterface{
 		super();
 		this.isReceiveNewConnection = isReceiveNewConnection;
 		this.clientSocket = clientSocket;
-		this.ip = clientSocket.getLocalAddress().getHostAddress();
+		this.ip = clientSocket.getInetAddress().getHostAddress();
 		initial(isReceiveNewConnection);
 	}
 

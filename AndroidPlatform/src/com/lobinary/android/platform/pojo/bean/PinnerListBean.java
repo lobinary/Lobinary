@@ -177,10 +177,10 @@ public class PinnerListBean implements Serializable{
 		list.add(new PinnerListBean(ITEM, "播放图片"));
 
 		list.add(new PinnerListBean(SECTION, "电脑"));
-		list.add(new PinnerListBean(ITEM, "关机",R.drawable.music,BASE_REMOTE_METHOD,"shutDown",null));
-		list.add(new PinnerListBean(ITEM, "取消关机",R.drawable.music,BASE_REMOTE_METHOD,"cancelShutDown",null));
-		list.add(new PinnerListBean(ITEM, "音量+",R.drawable.music,BASE_REMOTE_METHOD,"increaseVoice",null));
-		list.add(new PinnerListBean(ITEM, "音量-",R.drawable.music,BASE_REMOTE_METHOD,"decreaseVoice",null));
+		list.add(new PinnerListBean(ITEM, "关机",R.drawable.bubble,BASE_REMOTE_METHOD,"shutDown",null));
+		list.add(new PinnerListBean(ITEM, "取消关机",R.drawable.bubble,BASE_REMOTE_METHOD,"cancelShutDown",null));
+		list.add(new PinnerListBean(ITEM, "音量+",R.drawable.cloud,BASE_REMOTE_METHOD,"increaseVoice",null));
+		list.add(new PinnerListBean(ITEM, "音量-",R.drawable.world,BASE_REMOTE_METHOD,"decreaseVoice",null));
 		list.add(new PinnerListBean(ITEM, "亮度+"));
 		list.add(new PinnerListBean(ITEM, "亮度-"));
 
