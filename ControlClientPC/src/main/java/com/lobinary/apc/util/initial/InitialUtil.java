@@ -36,6 +36,7 @@ import com.lobinary.apc.util.log.WindowsLogUtil;
 public class InitialUtil {
 	
 	static{
+		
 		System.out.println("初始化工具类准备初始化相关配置");
 		CommonFactory.storeFile = new File(CommonFactory.storeFileName);
 		System.out.println("配置工具类文件初始化完成:"+CommonFactory.storeFile);
@@ -48,7 +49,7 @@ public class InitialUtil {
 		PropertiesUtil.getPropertiesValue("test");
 		LogUtil.out("初始化工具类:相关配置信息初始化完成！");
 		
-		MessageUtil.clientName = "Windows互控客户端";
+		MessageUtil.clientName = "西小小邪";
 		
 	}
 	

@@ -21,13 +21,21 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.LayoutManager;
 import java.awt.Panel;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -37,8 +45,16 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JLabel;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.lobinary.android.common.constants.Constants;
 import com.lobinary.android.common.pojo.communication.ConnectionBean;
+import com.lobinary.android.common.pojo.communication.Message;
+import com.lobinary.android.common.service.communication.CommunicationServiceInterface;
 import com.lobinary.android.common.service.communication.socket.CommunicationSocketService;
+import com.lobinary.android.common.util.communication.MessageUtil;
+import com.lobinary.apc.service.communication.WindowsCommunicationSocketService;
 
 /**
  * <pre>
@@ -55,14 +71,28 @@ public class RefreshConnectableClients {
 	private JFrame frame;
 	private Image logo;
 	private static int i = 0;
+	private static Logger logger = LoggerFactory.getLogger(CommunicationSocketService.class);
+	WindowsCommunicationSocketService winConSocketSer = new WindowsCommunicationSocketService();
 	
 	RefreshConnectableClients(){
+		winConSocketSer.refreshConnectableList();
+		ConnectionBean hahahaha = new ConnectionBean();
+		hahahaha.setClientId("1111111");
+		hahahaha.setName("ljljljljlk");
+		ConnectionBean wawawa = new ConnectionBean();
+		wawawa.setClientId("23333");
+		wawawa.setName("23333333");
+		CommunicationServiceInterface.connectionMap.put("ljr", hahahaha);
+		CommunicationServiceInterface.connectionMap.put("gua", wawawa);
+		System.out.println(CommunicationServiceInterface.connectionMap.size());
 		initialize();
 	}
 	
-	public static void main(String[] args) {
-		new RefreshConnectableClients();
-	}
+//	public static void main(String[] args) {
+//		WindowsCommunicationSocketService test = new WindowsCommunicationSocketService();
+//		test.refreshConnectableList();
+//		new RefreshConnectableClients();
+//	}
 	
 	private void initialize(){
 		frame = new JFrame();
@@ -77,6 +107,19 @@ public class RefreshConnectableClients {
 		}
 		frame.setIconImage(logo);
 		
+		JMenuBar menuBar = new JMenuBar();
+		frame.setJMenuBar(menuBar);
+		JMenu fileMenu = new JMenu("菜单");
+		menuBar.add(fileMenu);
+		
+		JMenuItem refreshConnectableEquipment = new JMenuItem("刷新");
+		refreshConnectableEquipment.addActionListener(new ActionListener(){	
+			public void actionPerformed(ActionEvent e){
+				winConSocketSer.refreshConnectableList();
+			}
+		});
+		fileMenu.add(refreshConnectableEquipment);
+		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		
 		JPanel tabLogPanel = new JPanel();
@@ -84,7 +127,7 @@ public class RefreshConnectableClients {
 		tabbedPane.addTab("可连接设备", null, tabLogPanel, null);
 		GridBagLayout gbl_tabLogPanel = new GridBagLayout();
 		gbl_tabLogPanel.columnWidths = new int[]{532, 104, 104, 0};
-		gbl_tabLogPanel.rowHeights = new int[]{54, 54, 54, 54, 54, 54, 54, 54, 0};
+		gbl_tabLogPanel.rowHeights = new int[]{87, 54, 54, 54, 54, 54, 54, 54, 0};
 		gbl_tabLogPanel.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_tabLogPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		tabLogPanel.setLayout(gbl_tabLogPanel);
@@ -122,31 +165,48 @@ public class RefreshConnectableClients {
 		Map<String,GridBagConstraints> labelGridBag = new HashMap<String,GridBagConstraints>();
 		Map<String,GridBagConstraints> connectButtonGridBag = new HashMap<String,GridBagConstraints>();
 		Map<String,GridBagConstraints> deleteButtonGridBag = new HashMap<String,GridBagConstraints>();
-		for (ConnectionBean conBean : CommunicationSocketService.connectionMap.values()) {
+		for (final ConnectionBean conBean : CommunicationSocketService.connectionMap.values()) {
 			String Name = "connectableEquip"+i;
-			jlabelMap.put(Name, new JLabel());
+			jlabelMap.put(Name, new JLabel(conBean.getName()));
 			connectButton.put(Name, new JButton("连接"));
-			deleteButton.put(Name, new JButton());
+			connectButton.get(Name).addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					try {
+						Socket clientSocket = new Socket(conBean.ip, Constants.CONNECTION.PARAM.SOCKET_PORT);
+						Message message = MessageUtil.getNewRequestMessage(Constants.MESSAGE.TYPE.REQUEST_CONNECT);
+						BufferedReader connectReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(),Constants.CONNECTION.PARAM.SOCKET_ENCODING));
+						PrintWriter connectWriter = new PrintWriter(clientSocket.getOutputStream(), true);
+						connectWriter.println(MessageUtil.message2String(message));
+					} catch (UnknownHostException e1) {
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
+			});
+			deleteButton.put(Name, new JButton("删除"));
 			
 			labelGridBag.put(Name, new GridBagConstraints());
 			labelGridBag.get(Name).fill = GridBagConstraints.VERTICAL;
 			labelGridBag.get(Name).insets = new Insets(0, 0, 5, 5);
 			labelGridBag.get(Name).gridx = 0;
-			labelGridBag.get(Name).gridy = 0;
+			labelGridBag.get(Name).gridy = i;
 			tabLogPanel.add(jlabelMap.get(Name), labelGridBag.get(Name));
 			
 			connectButtonGridBag.put(Name, new GridBagConstraints());
 			connectButtonGridBag.get(Name).fill = GridBagConstraints.BOTH;
 			connectButtonGridBag.get(Name).insets = new Insets(0, 0, 5, 5);
 			connectButtonGridBag.get(Name).gridx = 1;
-			connectButtonGridBag.get(Name).gridy = 0;
+			connectButtonGridBag.get(Name).gridy = i;
 			tabLogPanel.add(connectButton.get(Name), connectButtonGridBag.get(Name));
 			
 			deleteButtonGridBag.put(Name, new GridBagConstraints());
 			deleteButtonGridBag.get(Name).fill = GridBagConstraints.BOTH;
 			deleteButtonGridBag.get(Name).insets = new Insets(0, 0, 5, 0);
 			deleteButtonGridBag.get(Name).gridx = 2;
-			deleteButtonGridBag.get(Name).gridy = 0;
+			deleteButtonGridBag.get(Name).gridy = i;
 			tabLogPanel.add(deleteButton.get(Name), deleteButtonGridBag.get(Name));
 			
 			i++;
