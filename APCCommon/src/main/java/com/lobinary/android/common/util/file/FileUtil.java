@@ -16,6 +16,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.filechooser.FileSystemView;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -123,7 +125,7 @@ public class FileUtil {
 	}
 	
 	
-	public static void main(String[] args) {
+	public static void main1(String[] args) {
 		String filePath = "Data\\RequestRule\\RequestRule.data.bak初始化前备份版本[491修改规则：银企直联-建行-明细查询]";
 //		filePath = filePath.substring(0, filePath.lastIndexOf("\\"));
 //		System.out.println(filePath);
@@ -202,4 +204,5 @@ public class FileUtil {
 		bufferWritter.flush();
 		bufferWritter.close();
 	}
+	
 }

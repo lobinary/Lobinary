@@ -179,6 +179,8 @@ public class RefreshConnectableClients {
 						BufferedReader connectReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(),Constants.CONNECTION.PARAM.SOCKET_ENCODING));
 						PrintWriter connectWriter = new PrintWriter(clientSocket.getOutputStream(), true);
 						connectWriter.println(MessageUtil.message2String(message));
+						
+						
 					} catch (UnknownHostException e1) {
 						e1.printStackTrace();
 					} catch (IOException e1) {
