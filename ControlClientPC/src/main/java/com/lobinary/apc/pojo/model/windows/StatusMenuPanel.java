@@ -25,6 +25,11 @@ import javax.swing.JPanel;
  * 
  */
 public class StatusMenuPanel extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2302528139726314806L;
 	
 	private String menuText;
 
@@ -33,9 +38,5 @@ public class StatusMenuPanel extends JPanel {
 		this.menuText = menuText;
 	}
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2302528139726314806L;
 	
 }

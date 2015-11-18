@@ -47,9 +47,6 @@ public class InitialUtil {
 
 		PropertiesUtil.getPropertiesValue("test");
 		LogUtil.out("初始化工具类:相关配置信息初始化完成！");
-		
-		MessageUtil.clientName = "Windows互控客户端";
-		
 	}
 	
 	public static boolean initial(){

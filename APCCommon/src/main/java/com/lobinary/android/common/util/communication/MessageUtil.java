@@ -1,6 +1,5 @@
 package com.lobinary.android.common.util.communication;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.List;
@@ -14,11 +13,8 @@ import com.lobinary.android.common.exception.APCSysException;
 import com.lobinary.android.common.pojo.communication.Command;
 import com.lobinary.android.common.pojo.communication.Message;
 import com.lobinary.android.common.pojo.communication.MessageTitle;
-import com.lobinary.android.common.service.communication.socket.CommunicationSocketThread;
 import com.lobinary.android.common.service.control.BaseServiceInterface;
-import com.lobinary.android.common.util.NetUtil;
-import com.lobinary.android.common.util.PropertiesUtil;
-import com.lobinary.android.common.util.date.DateUtil;
+import com.lobinary.android.common.util.ClientUtil;
 import com.lobinary.android.common.util.factory.CommonFactory;
 
 /**
@@ -34,28 +30,11 @@ import com.lobinary.android.common.util.factory.CommonFactory;
  */
 public class MessageUtil {
 
+
 	private static Logger logger = LoggerFactory.getLogger(MessageUtil.class);
 	
-	public static String clientId;
-	public static String clientIp;
-	public static String clientName;
 	public static MessageTranslatorInterface messageTranlator = CommonFactory.getMessageTranslator();
 	private static BaseServiceInterface baseService = CommonFactory.getBaseService();
-	
-	static{
-		clientId = MessageUtil.generateClientId();
-//		List<String> localIpList = NetUtil.getLocalIpList();
-//		if(localIpList.size()>0){
-//			clientIp = localIpList.get(0);
-//		}
-		//XXX  因安卓有问题 暂注释
-		clientName = (String) PropertiesUtil.getFileValue("ClientName");
-		if(clientName==null){
-			clientName = clientId;
-			PropertiesUtil.saveFileValue("ClientName", clientName);
-		}
-		logger.info("报文工具类初始化完成:客户端名称"+clientName+"客户端Id:"+clientId);
-	}
 	
 	/**
 	 * 
@@ -70,21 +49,6 @@ public class MessageUtil {
 		return Constants.MESSAGE.TYPE.DISCONNECT.equals(string2Messag(messageStr).getMessageType());
 	}
 	
-	/**
-	 * <pre>
-	 * 生成客户端ID
-	 * </pre>
-	 *
-	 * @return
-	 */
-	private static String generateClientId() {
-		String clientId = (String) PropertiesUtil.getFileValue("ClientId");
-		if(clientId==null){
-			clientId = DateUtil.getCurrDateTime("yyyyMMddhh24mmssSSS");
-			PropertiesUtil.saveFileValue("ClientId", clientId);
-		}
-		return clientId;
-	}
 
 	/**
 	 * 
@@ -148,9 +112,9 @@ public class MessageUtil {
 	 */
 	public static MessageTitle getMessageTitle() {
 		MessageTitle messageTitle = new MessageTitle();
-		messageTitle.setSendClientId(clientId);
-		messageTitle.setSendClientIp(clientIp);
-		messageTitle.setSendClientName(clientName);
+		messageTitle.setSendClientId(ClientUtil.clientId);
+		messageTitle.setSendClientIp(ClientUtil.clientIp);
+		messageTitle.setSendClientName(ClientUtil.clientName);
 		messageTitle.setSendTime(new Date());
 		return messageTitle;
 	}

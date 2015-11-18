@@ -13,6 +13,21 @@ package com.lobinary.android.common.constants;
  */
 public class Constants {
 	
+	public class CLIENT{
+		
+
+		/**
+		 * 客户端id
+		 */
+		public static final String CLIENT_ID = "ClientId";
+
+		/**
+		 * 客户端名称
+		 */
+		public static final String CLIENT_NAME = "ClientName";
+		
+	}
+	
 	public class CONNECTION{
 		
 		/**
