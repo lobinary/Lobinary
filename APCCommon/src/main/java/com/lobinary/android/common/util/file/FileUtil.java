@@ -4,6 +4,8 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,6 +15,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -123,7 +126,7 @@ public class FileUtil {
 	}
 	
 	
-	public static void main(String[] args) {
+	public static void main2(String[] args) {
 		String filePath = "Data\\RequestRule\\RequestRule.data.bak初始化前备份版本[491修改规则：银企直联-建行-明细查询]";
 //		filePath = filePath.substring(0, filePath.lastIndexOf("\\"));
 //		System.out.println(filePath);
@@ -202,4 +205,43 @@ public class FileUtil {
 		bufferWritter.flush();
 		bufferWritter.close();
 	}
+	
+	/**
+	 * 向外传输文件内容
+	 */
+	public String transferFile(File file,DataOutputStream outfile){
+		FileInputStream infile = null;
+		byte[] transByte = null;
+		int fileLength = 0;
+		String str = null;
+		int length = 0;
+		double sumL = 0;
+		
+		try {
+			infile = new FileInputStream(file);
+			fileLength = (int)file.length();
+			transByte = new byte[100];
+			while ((length = infile.read(transByte, 0, transByte.length))>0){
+				sumL += length;
+				logger.info("已传输"+((sumL/fileLength)*100)+"%");
+			}
+			infile.read(transByte);
+			str = new String(transByte);
+			outfile.writeBytes(str);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return str;
+		
+		
+	}
+	
+	public static void main(String[] args) {
+		FileUtil a = new FileUtil();
+		File aa = new File("/Users/unicompay/Desktop/aaa");
+		//a.transferFile(aa);
+	}
+	
 }
