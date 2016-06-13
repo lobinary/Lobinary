@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.lobinary.platform.dao.ReceiverMessageDAO;
-import com.lobinary.platform.dao.UploadFileInfoDAO;
+import com.lobinary.platform.dao.hibernate.ReceiverMessageDAO;
+import com.lobinary.platform.dao.hibernate.UploadFileInfoDAO;
 import com.lobinary.platform.model.PageParameter;
 import com.lobinary.platform.model.db.ReceiverMessage;
 import com.lobinary.platform.model.db.UploadFileInfo;

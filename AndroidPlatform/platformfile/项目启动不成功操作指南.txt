@@ -1,0 +1,5 @@
+1.AndroidPlatform的libs下脂肪android默认jar包
+2.APCCommon项目将包含所有使用jar包
+3.清空项目，包括AndoridPlatform、APCCommon项目
+4.AnroidPlatform报错缺jar包，请使用APCCommon项目的Order and Export 项目中勾选缺少的Jar包
+5.启动成功

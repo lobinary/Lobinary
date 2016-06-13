@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.lobinary.platform.dao.BaseDAO;
+import com.lobinary.platform.dao.hibernate.BaseDAO;
 import com.lobinary.platform.model.DatabaseParameter;
 import com.lobinary.platform.util.JsonUtil;
 import com.lobinary.platform.util.LogUtil;

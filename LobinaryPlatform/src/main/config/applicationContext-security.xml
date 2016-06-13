@@ -14,7 +14,7 @@
     <http pattern="/login!register.action" security="none" ></http>
     <http pattern="/get.captcha" security="none" ></http>
     <http pattern="/resources/**" security="none" ></http>
-	<http auto-config="true" access-denied-page="/403.html" ><!-- 当访问被拒绝时，会转到403.html -->
+	<http auto-config="true"  access-denied-page="/403.html" ><!-- 当访问被拒绝时，会转到403.html -->
 		<form-login login-page="/login.html"
 			authentication-failure-handler-ref="loginAuthenticationFailureHandler"
 			authentication-success-handler-ref="loginAuthenticationSuccessHandler"

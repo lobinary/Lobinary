@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.lobinary.platform.dao.MessageDAO;
+import com.lobinary.platform.dao.hibernate.MessageDAO;
 import com.lobinary.platform.model.db.InteractionMessage;
 
 /**
