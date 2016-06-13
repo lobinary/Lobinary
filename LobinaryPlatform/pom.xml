@@ -12,6 +12,14 @@
 	<dependencies>
 
 		<!-- 其他包 -->
+		
+		<!-- Email包 -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.5.0-b01</version>
+		</dependency>
+				
 
 		<!-- 网络层 开始 -->
 		<dependency>
@@ -70,8 +78,9 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>4.1.1.RELEASE</version>
+			<version>4.2.5.RELEASE</version>
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -153,8 +162,8 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 		</plugins>

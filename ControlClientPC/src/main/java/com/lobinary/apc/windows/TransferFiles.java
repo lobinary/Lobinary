@@ -1,22 +1,25 @@
 /*
- * @(#)TransferFiles.java     V1.0.0      @下午12:11:46
+ * @(#)TransferFiles.java     V1.0.0      @下午10:41:40
  *
  * 项目名称: ControlClientPC
  *
  * 更改 信息:
  *    作者        				   日期        			描述
  *    ============  	================  =======================================
- *    lobinary       	  2015年11月22日    	创建文件
+ *    lobinary       	  2015年11月15日    	创建文件
  *
  */
-package src.main.java.com.lobinary.apc.windows;
+package com.lobinary.apc.windows;
+
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 
 /**
  * <pre>
  * 
  * </pre>
  * @author 吕斌：lvb3@chinaunicom.cn
- * @since 2015年11月22日 下午12:11:46
+ * @since 2015年11月15日 下午10:41:40
  * @version V1.0.0 描述 : 创建文件TransferFiles
  * 
  *         

@@ -33,6 +33,7 @@
 				<value>com.lobinary.platform.model.db.UploadFileInfo</value>
 				<value>com.lobinary.platform.model.db.User</value>
 				<value>com.lobinary.platform.model.db.UserDetail</value>
+				<value>com.lobinary.platform.model.db.team.Teamer</value>
 			</list>
 		</property>
 	</bean>

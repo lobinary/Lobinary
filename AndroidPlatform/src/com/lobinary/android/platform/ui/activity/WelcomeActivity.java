@@ -1,16 +1,13 @@
 package com.lobinary.android.platform.ui.activity;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -22,8 +19,6 @@ import com.lobinary.android.platform.dao.InteractionMessageDAO;
 import com.lobinary.android.platform.pojo.bean.InteractionMessage;
 import com.lobinary.android.platform.util.NetworkUtils;
 import com.lobinary.android.platform.util.SystemUiHider;
-
-import de.mindpipe.android.logging.log4j.LogConfigurator;
 
 
 /**
@@ -40,14 +35,14 @@ public class WelcomeActivity extends Activity {
 	     
     public void configLog()
     {
-        final LogConfigurator logConfigurator = new LogConfigurator();
+//        final LogConfigurator logConfigurator = new LogConfigurator();
          
-        logConfigurator.setFileName(Environment.getExternalStorageDirectory() + File.separator + "apc_log4j.log");
-        // Set the root log level
-        logConfigurator.setRootLevel(Level.DEBUG);
-        // Set log level of a specific logger
-        logConfigurator.setLevel("org.apache", Level.ERROR);
-        logConfigurator.configure();
+//        logConfigurator.setFileName(Environment.getExternalStorageDirectory() + File.separator + "apc_log4j.log");
+//        // Set the root log level
+//        logConfigurator.setRootLevel(Level.DEBUG);
+//        // Set log level of a specific logger
+//        logConfigurator.setLevel("org.apache", Level.ERROR);
+//        logConfigurator.configure();
  
         //gLogger = Logger.getLogger(this.getClass());
         gLogger = Logger.getLogger("CrifanLiLog4jTest");

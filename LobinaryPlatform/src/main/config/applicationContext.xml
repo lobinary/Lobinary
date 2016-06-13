@@ -25,7 +25,8 @@
 		</bean>
 		<import resource="dbconfig.xml" />
 		<import resource="hibernate.xml" />
-		<import resource="spring-quartz.xml"/>
+		<!-- <import resource="spring-quartz.xml"/> -->
+		<import resource="spring-mvc.xml" />
 		<!-- <import resource="applicationContext-security.xml" /> <bean id="managerAction" class="com.boce.cms.action.ManagerAction" /> -->
 		<!-- 关于spring security异常 国际化的引入 <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"> <property name="basename" 
 			value="messages_zh_CN.properties" /> </bean> -->

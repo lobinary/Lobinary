@@ -5,13 +5,16 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>MyEclipseTest</name>
 	<description>MyEclipse测试</description>
+	
 	<dependencies>
+		<!-- http://mvnrepository.com/artifact/org.springframework/spring-core -->
 		<dependency>
-			<groupId>com.unicompayment</groupId>
-			<artifactId>fapcommon</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context</artifactId>
+		    <version>4.2.6.RELEASE</version>
+		</dependency>	
 	</dependencies>
+	
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<resources>

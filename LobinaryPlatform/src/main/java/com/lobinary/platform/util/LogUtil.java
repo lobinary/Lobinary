@@ -16,9 +16,9 @@ public class LogUtil {
 
 	//Logger logger = LoggerFactory.getLogger(this.getClass());
 	static Logger logger = LoggerFactory.getLogger(LogUtil.class);
-	private static File logFolder = new File("D:/Lobinary项目/log/Platform");
-	private static File logFile = new File("D:/Lobinary项目/log/Platform/log.log");
-	private static File exceptionFile = new File("D:/Lobinary项目/log/exception-platform.log");
+	private static File logFolder = new File("/app/Lobinary/log/Platform");
+	private static File logFile = new File("/app/Lobinary/log/Platform/log.log");
+	private static File exceptionFile = new File("/app/Lobinary/log/exception-platform.log");
 	private static OutputStream logOutStream;
 	private static OutputStreamWriter logOutStreamWriter;
 	private static OutputStream exceptionOutStream;
@@ -29,16 +29,18 @@ public class LogUtil {
 		if (!logFolder.exists()) {
 			logFolder.mkdir();
 		}
+		String charsetName = "UTF-8"
+				;
 		if (!logFile.exists()) {
 			try {
 				logFile.createNewFile();
 				logOutStream = new FileOutputStream(logFile, true);
-				logOutStreamWriter = new OutputStreamWriter(logOutStream, "GB18030");
+				logOutStreamWriter = new OutputStreamWriter(logOutStream, charsetName);
 				logOutStreamWriter.write("本文件为Lobinary-platform系统运行日志文件，记录日常的执行日志，便于程序出现问题时，及时维修相关功能模块，请勿删除该文件\n");
 				logOutStreamWriter.flush();
 				exceptionFile.createNewFile();
 				exceptionOutStream = new FileOutputStream(exceptionFile, true);
-				exceptionOutStreamWriter = new OutputStreamWriter(exceptionOutStream, "GB18030");
+				exceptionOutStreamWriter = new OutputStreamWriter(exceptionOutStream, charsetName);
 				exceptionOutStreamWriter.write("本文件为Lobinary-platform系统运行异常日志文件，提供程序的异常记录，及时发现问题，请勿删除该文件\n");
 				exceptionOutStreamWriter.flush();
 			} catch (IOException e) {
@@ -48,9 +50,9 @@ public class LogUtil {
 		}
 		try {
 			logOutStream = new FileOutputStream(logFile, true);
-			logOutStreamWriter = new OutputStreamWriter(logOutStream, "GB18030");
+			logOutStreamWriter = new OutputStreamWriter(logOutStream, charsetName);
 			exceptionOutStream = new FileOutputStream(exceptionFile, true);
-			exceptionOutStreamWriter = new OutputStreamWriter(exceptionOutStream, "GB18030");
+			exceptionOutStreamWriter = new OutputStreamWriter(exceptionOutStream, charsetName);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
