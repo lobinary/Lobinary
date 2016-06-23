@@ -15,13 +15,13 @@ public class AOPDeal {
 	
 	private Logger logger = LogUtil.getLog(getClass());
 	
-    @Pointcut("execution(* com.boce.cms.service..*.*(..))")
+    @Pointcut("execution(* com.lobinary.platform.service..*.*(..))")
     public void allServiceMethod() {}
     
-    @Pointcut("execution(* com.boce.cms..*.*(..))")
+    @Pointcut("execution(* com.lobinary.platform..*.*(..))")
     public void allMethod() {}
     
-    @Pointcut("execution(* com.boce.cms.util..*.*(..))")
+    @Pointcut("execution(* com.lobinary.platform.util..*.*(..))")
     public void allUtilMethod() {}
 	
 //	@Around("execution(* com.boce.cms.service..*.*(..))")

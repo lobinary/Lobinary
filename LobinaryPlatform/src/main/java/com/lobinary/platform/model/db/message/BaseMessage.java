@@ -1,4 +1,4 @@
-package com.lobinary.platform.model.db;
+package com.lobinary.platform.model.db.message;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 /**
  * 
- * 接受信息实体类
+ * 基本信息实体类
  * 
  * @author lvbin 
  * @since 2014年11月21日 下午3:20:23
@@ -19,9 +19,7 @@ import javax.persistence.Table;
  *         
  *
  */
-@Entity
-@Table(name="RECEIVER_MESSAGE_INFO")
-public class ReceiverMessage implements Serializable{
+public class BaseMessage implements Serializable{
 
 	
 	/**

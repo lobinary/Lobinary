@@ -3,7 +3,7 @@ package com.lobinary.platform.dao.hibernate;
 import org.springframework.stereotype.Component;
 
 import com.lobinary.platform.model.DatabaseParameter;
-import com.lobinary.platform.model.db.ReceiverMessage;
+import com.lobinary.platform.model.db.message.ReceiverMessage;
 import com.lobinary.platform.util.LogUtil;
 
 

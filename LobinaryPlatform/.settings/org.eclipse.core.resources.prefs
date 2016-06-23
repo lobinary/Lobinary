@@ -1,5 +1,5 @@
 eclipse.preferences.version=1
-encoding//src/main/config/system.properties=UTF-8
+encoding//src/main/config/properties/system.properties=UTF-8
 encoding//src/main/java=UTF-8
 encoding//src/main/webapp/index.jsp=UTF-8
 encoding//src/main/webapp/views/team/home/index.jsp=UTF-8

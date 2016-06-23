@@ -8,7 +8,7 @@ import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolEncoderAdapter;
 import org.apache.mina.filter.codec.ProtocolEncoderOutput;
 
-import com.lobinary.platform.model.db.InteractionMessage;
+import com.lobinary.platform.model.db.message.InteractionMessage;
 
 public class MessageEncoder extends ProtocolEncoderAdapter {
 	

@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.lobinary.platform.dao.hibernate.MessageDAO;
-import com.lobinary.platform.model.db.InteractionMessage;
+import com.lobinary.platform.model.db.message.InteractionMessage;
 
 /**
  * 

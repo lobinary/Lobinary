@@ -17,22 +17,47 @@ import java.util.Map;
 public class HttpRequest {
 
 	public static void main(String[] args) throws InterruptedException, IOException {
-		
+		String s = null;
 
 		//NET
-		String url = "http://172.17.102.174:8005/wechat-app/gw/net";
-		String param = "trxOrderId=4000000013699&amountMin=9.000&amountMax=10.0";
-		String result = sendPost(url, param);
-		System.out.println("POST结果：["+result+"]");
+//		String url = "http://172.17.102.174:8005/wechat-app/gw/net";
+//		String param = "trxOrderId=4000000013699&amountMin=9.000&amountMax=10.0";
+//		String result = sendPost(url, param);
+//		System.out.println("NET结果：["+result+"]");
+//
+//		System.out.println("===========================================================================================================================================================================================================================");
 		
 		//EPOS
-		String url2 = "http://172.17.102.174:8005/wechat-app/gw/epos";
-		String param2 = "requestId=14635530081390";
-		String result2 = sendPost(url2, param2);
-		System.out.println("POST结果：["+result2+"]");
+//		String url2 = "http://172.17.102.174:8005/wechat-app/gw/epos";
+//		String param2 = "requestId=qijin201605300001&amountMin=0&amountMax=1000&startDate=2015-01-01&endDate=2016-06-21";
+//		String result2 = sendPost(url2, param2);
+//		System.out.println("EPOS结果：["+result2+"]");
+//
+//		System.out.println("===========================================================================================================================================================================================================================");
 		
+		//ONE KEY	调用接口返回空
+		String url3 = "http://172.17.102.174:8005/wechat-app/gw/one_key";
+		String param3 = "phoneNO=15718802778=SH1466144661701&startDate=2016-01-01&endDate=2016-06-20";
+		String result3 = sendPost(url3, param3);
+		System.out.println("ONE KEY结果：["+result3+"]");
+
+		System.out.println("===========================================================================================================================================================================================================================");
 		
+		//EXAM
+//		String url4 = "http://172.17.102.174:8005/wechat-app/gw/exam";
+//		String param4 = "requestId=SH1466144661701&amountMin=0&amountMax=1000&startDate=2016-06-06&endDate=2016-06-06";
+//		String result4 = sendPost(url4, param4);
+//		System.out.println("EXAM结果：["+result4+"]");
+//
+//		System.out.println("===========================================================================================================================================================================================================================");
 		
+		//POS
+//		String url5 = "http://172.17.102.174:8005/wechat-app/gw/pos";
+		
+//		String param5 = "posCATI=1&amountMin=0&amountMax=1000&startDate=2016-06-06&endDate=2016-06-06";
+//		String result5 = sendPost(url5, param5);
+//		
+//		System.out.println("POS结果：["+result5+"]");
 		
 //		result = sendGet(url, param );
 //		System.out.println("GET结果：["+result+"]");

@@ -8,7 +8,7 @@ import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.CumulativeProtocolDecoder;
 import org.apache.mina.filter.codec.ProtocolDecoderOutput;
 
-import com.lobinary.platform.model.db.InteractionMessage;
+import com.lobinary.platform.model.db.message.InteractionMessage;
 
 public class MessageDecoder extends CumulativeProtocolDecoder {
 	

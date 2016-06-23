@@ -1,4 +1,4 @@
-package com.lobinary.platform.model.db;
+package com.lobinary.platform.model.db.message;
 
 import java.io.Serializable;
 import java.util.Date;
