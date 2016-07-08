@@ -40,6 +40,7 @@ public class SVN目录遍历问题 {
 	 * @return
 	 */
 	private static File searchFile(String localFolder,String fileStr) {
+		System.out.println("localFolder:" + localFolder + ",fileStr:"+fileStr);
 		String fileStrTemp = fileStr;
 		while(fileStrTemp!=null){
 //			System.out.println("2准备开始寻找文件："+fileStrTemp);
@@ -61,6 +62,7 @@ public class SVN目录遍历问题 {
 		File localFile = new File(localFolderStr+"/"+fileStr);
 		File result= null;
 		if(localFile.isFile()&&localFile.exists()){
+			System.out.println("寻找到文件"+localFile.getAbsolutePath());
 			return localFile;
 		}else{
 			String[] fileList = localFolder.list();
