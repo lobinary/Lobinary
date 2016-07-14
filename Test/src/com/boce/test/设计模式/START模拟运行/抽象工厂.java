@@ -1,7 +1,6 @@
-package com.boce.test.设计模式.模拟运行;
+package com.boce.test.设计模式.START模拟运行;
 
 import com.boce.test.设计模式.工厂模式.抽象工厂.工厂创造器;
-import com.boce.test.设计模式.工厂模式.抽象工厂.抽象工厂;
 import com.boce.test.设计模式.工厂模式.抽象工厂.工厂创造器.种类;
 import com.boce.test.设计模式.工厂模式.抽象工厂.水果工厂.水果;
 
@@ -20,11 +19,11 @@ import com.boce.test.设计模式.工厂模式.抽象工厂.水果工厂.水果;
 	使用场景： 1、QQ 换皮肤，一整套一起换。 2、生成不同操作系统的程序。
 	注意事项：产品族难扩展，产品等级易扩展。
  */
-public class 抽象工厂模拟运行 {
+public class 抽象工厂 {
 	
 	public static void main(String[] args) throws Exception {
-		抽象工厂 水果工厂 = 工厂创造器.获取工厂(工厂创造器.种类.水果);
-		水果 草莓 = 水果工厂.获取水果(抽象工厂.种类.草莓);
+		com.boce.test.设计模式.工厂模式.抽象工厂.抽象工厂 水果工厂 = 工厂创造器.获取工厂(工厂创造器.种类.水果);
+		水果 草莓 = 水果工厂.获取水果(com.boce.test.设计模式.工厂模式.抽象工厂.抽象工厂.种类.草莓);
 		草莓.吃();
 	}
 

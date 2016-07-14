@@ -1,4 +1,4 @@
-package com.boce.test.设计模式.模拟运行;
+package com.boce.test.设计模式.START模拟运行;
 
 import com.boce.test.设计模式.建造者模式.套餐.套餐;
 import com.boce.test.设计模式.建造者模式.套餐.套餐生成器;
@@ -25,7 +25,7 @@ import com.boce.test.设计模式.建造者模式.套餐.套餐生成器;
 		2、需要生成的对象内部属性本身相互依赖。
 	注意事项：与工厂模式的区别是：建造者模式更加关注与零件装配的顺序。
  */
-public class 建造者模式模拟运行 {
+public class 建造者模式 {
 	
 	public static void main(String[] args) {
 		套餐生成器 生成器 = new 套餐生成器();
