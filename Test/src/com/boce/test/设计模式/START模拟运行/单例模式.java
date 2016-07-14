@@ -1,4 +1,4 @@
-package com.boce.test.设计模式.模拟运行;
+package com.boce.test.设计模式.START模拟运行;
 
 import com.boce.test.设计模式.单例模式.单例对象_双检锁_双重校验锁;
 import com.boce.test.设计模式.单例模式.单例对象_懒汉式_线程不安全;
@@ -30,7 +30,7 @@ import com.boce.test.设计模式.单例模式.单例对象_饿汗式;
 		3、创建的一个对象需要消耗的资源过多，比如 I/O 与数据库的连接等。
 	注意事项：getInstance() 方法中需要使用同步锁 synchronized (Singleton.class) 防止多线程同时进入造成 instance 被多次实例化。
  */
-public class 单例模式模拟运行 {
+public class 单例模式 {
 	
 	
 	/**
