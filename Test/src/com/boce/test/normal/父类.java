@@ -33,7 +33,11 @@ package com.boce.test.normal;
  *         
  * 
  */
-public abstract class 父类  implements 接口{
+public class 父类  implements 接口{
+	
+	public 父类(){
+		System.out.println("父类构造方法"+this);
+	}
 	
 	public String out(){
 		return "这里是父类out方法";

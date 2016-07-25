@@ -17,5 +17,9 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="resource/lib/commons-compress-1.8.jar"/>
+	<classpathentry kind="lib" path="resource/lib/commons-io-1.3.2.jar"/>
+	<classpathentry kind="lib" path="resource/lib/svn-1.1.0.jar"/>
+	<classpathentry kind="lib" path="resource/lib/svnkit-1.8.9.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

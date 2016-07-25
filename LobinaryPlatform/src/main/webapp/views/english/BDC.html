@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BDC.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+    
+    <script type="text/javascript" src="../../include/js/jquery-2.1.1.js"></script>
+    
+    <script type="text/javascript">
+    
+    	function test(){
+    		var htmlobj=$.ajax({url:"http://www.baidu.com",async:false});
+    		alert(htmlobj.responseText)
+    		//$("#myDiv").html(htmlobj.responseText);
+    	}
+    
+    </script>
+    
+  </head>  
+  <body>
+  	<button onclick="test()">测试按钮</button>
+  </body>
+</html>
