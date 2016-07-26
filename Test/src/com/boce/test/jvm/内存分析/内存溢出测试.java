@@ -1,4 +1,4 @@
-package com.boce.test.内存分析;
+package com.boce.test.jvm.内存分析;
 
 /**
  * OOMHeapTest class

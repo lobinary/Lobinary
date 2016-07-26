@@ -1,4 +1,4 @@
-package com.boce.test.排序;
+package com.lobinary.算法.排序;
 
 /**
  * 	基本思想：

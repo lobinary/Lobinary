@@ -1,4 +1,4 @@
-package com.boce.test.排序;
+package com.lobinary.算法.排序;
 
 /**
  * 数组位置 1 2 3 4 5 6 7

@@ -13,7 +13,16 @@
 		    <artifactId>spring-context</artifactId>
 		    <version>4.2.6.RELEASE</version>
 		</dependency>	
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.zookeeper/zookeeper -->
+		<dependency>
+		    <groupId>org.apache.zookeeper</groupId>
+		    <artifactId>zookeeper</artifactId>
+		    <version>3.4.8</version>
+		</dependency>
+				
 	</dependencies>
+	
 	
 	<build>
 		<sourceDirectory>src</sourceDirectory>

@@ -1,4 +1,4 @@
-package com.boce.test;
+package com.lobinary.test;
 
 
 import java.io.BufferedReader;
