@@ -1,0 +1,12 @@
+package com.lobinary.设计模式.外观模式.图形.实现类;
+
+import com.lobinary.设计模式.外观模式.图形.图形;
+
+public class 三角形  implements 图形{
+
+	@Override
+	public void 画() {
+		System.out.println("我是三角形");
+	}
+
+}
