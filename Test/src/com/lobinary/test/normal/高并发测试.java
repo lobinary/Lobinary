@@ -44,7 +44,7 @@ public class 高并发测试 {
 				public void run() {
 					super.run();
 					高并发测试对象 a = new 高并发测试对象();
-					a.out("" + j);
+//					a.out("" + j);
 				}
 				
 			}.start();
