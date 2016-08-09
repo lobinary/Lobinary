@@ -1,4 +1,4 @@
-package com.lobinary.java.多线程.线程间协作;
+package com.lobinary.java.多线程.Thread常用方法;
 
 public class Wait和Notify {
     public static Object object = new Object();

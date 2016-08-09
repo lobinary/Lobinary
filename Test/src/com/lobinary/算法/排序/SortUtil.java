@@ -1,6 +1,5 @@
 package com.lobinary.算法.排序;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -61,6 +60,7 @@ public class SortUtil {
 	 */
 	public static int[] swap(int[] a,int x,int y){
 		交换次数++;
+		@SuppressWarnings("unused")
 		String s = getString(a,x,y);
 //		System.out.print(交换次数+"准备交换数组{"+s+"}的"+x+","+y+"位置,");
 		int b = fz(a[x]);
@@ -75,6 +75,7 @@ public class SortUtil {
 	 * 输出数组
 	 * @param o
 	 */
+	@SuppressWarnings("unchecked")
 	public static void out(Object o){
 		StringBuffer sb = new StringBuffer();
 		if(List.class.isInstance(o)){
@@ -82,7 +83,11 @@ public class SortUtil {
 				sb.append(oo+",");
 			}
 		}else if(int[].class.isInstance(o)){
-			for (Object oo:(int[]) o) {
+			for (Object oo:(int[])o) {
+				sb.append(oo+",");
+			}
+		}else if(long[].class.isInstance(o)){
+			for (Object oo:(long[])o) {
 				sb.append(oo+",");
 			}
 		}
@@ -93,6 +98,7 @@ public class SortUtil {
 	 * 输出数组
 	 * @param o
 	 */
+	@SuppressWarnings("unchecked")
 	public static String getString(Object o,int x,int y){
 		StringBuffer sb = new StringBuffer();
 		if(List.class.isInstance(o)){

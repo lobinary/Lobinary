@@ -52,5 +52,5 @@ public class Volatile {
         Thread.sleep(1000);
         System.out.println("运行结果:Counter.count=" + Volatile.count);
     }
-
+    
 }
