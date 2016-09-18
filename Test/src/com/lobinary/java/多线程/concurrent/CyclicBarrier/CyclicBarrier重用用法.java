@@ -9,25 +9,23 @@ public class CyclicBarrier重用用法 {
         CyclicBarrier barrier  = new CyclicBarrier(N);
          
         for(int i=0;i<N;i++) {
-            new Writer(barrier).start();
+            new Writer(barrier,"第一批线程").start();
         }
          
-        try {
-            Thread.sleep(25000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        System.out.println("============");
          
         System.out.println("CyclicBarrier重用");
          
         for(int i=0;i<N;i++) {
-            new Writer(barrier).start();
+            new Writer(barrier,"第二批线程").start();
         }
     }
     static class Writer extends Thread{
         private CyclicBarrier cyclicBarrier;
-        public Writer(CyclicBarrier cyclicBarrier) {
+        private String threadName;
+        public Writer(CyclicBarrier cyclicBarrier,String threadName) {
             this.cyclicBarrier = cyclicBarrier;
+            this.threadName = threadName;
         }
  
         @Override

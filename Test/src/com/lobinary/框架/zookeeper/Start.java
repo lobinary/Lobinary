@@ -4,6 +4,18 @@ import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.ZooDefs.Ids;
 import org.apache.zookeeper.ZooKeeper;
 
+/**
+ * 
+ * <pre>
+ * 使用zookeeper需要现在服务器或者本地启动zookeeper服务
+ * 	
+ * </pre>
+ *
+ * @ClassName: Start
+ * @author 919515134@qq.com
+ * @date 2016年8月23日 下午2:09:05
+ * @version V1.0.0
+ */
 public class Start {
 
 

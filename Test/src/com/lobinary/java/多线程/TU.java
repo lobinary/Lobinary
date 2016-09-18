@@ -78,6 +78,23 @@ public class TU {
 	public static void l(Object log) {
 		System.out.println(Thread.currentThread().getName()+ " : " + log);
 	}
+
+	public static void outTime() {
+		Thread t = new Thread(){
+
+			@Override
+			public void run() {
+				int i = 0;
+				while(true){
+					System.out.print(":"+i++);
+					s(1000);
+				}
+			}
+			
+		};
+		t.setDaemon(true);
+		t.start();
+	}
 	
 
 }
