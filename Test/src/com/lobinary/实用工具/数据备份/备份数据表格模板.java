@@ -1,5 +1,9 @@
 package com.lobinary.实用工具.数据备份;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
 public class 备份数据表格模板 extends AbstractTableModel {
@@ -9,16 +13,23 @@ public class 备份数据表格模板 extends AbstractTableModel {
 	 */
 	private static final long serialVersionUID = 3406342210670532970L;
 	 private String[] columnNames = { "未备份文件夹位置", "本机存储文件夹位置", "外部存储文件夹位置","文件数量", "文件大小" };
-	// private Object[][] data = new Object[2][5];
-//	String[] columnNames = { "First Name", "Last Name", "Sport", "# of Years", "Vegetarian" };
-	Object[][] data = { { "c:/test", "f:/asdfasdf", "h:/sdflksdf", new Integer(845), "1.24GB" }, { "c:/test2", "f:/klefsdf", "h:/sjdkf", new Integer(542), "100M"}};
-
+	private static List<备份记录> 备份记录列表 = new ArrayList<备份记录>();
+	
+	public void setData(List<备份记录> 备份记录列表){
+		备份数据表格模板.备份记录列表 = 备份记录列表;
+		fireTableDataChanged();
+	}
+	
+	public void addData(JTable t,备份记录 bd){
+		备份记录列表.add(bd);
+	}
+	
 	public int getColumnCount() {
 		return columnNames.length;
 	}
 
 	public int getRowCount() {
-		return data.length;
+		return 50;//data.length;
 	}
 
 	public String getColumnName(int col) {
@@ -26,12 +37,19 @@ public class 备份数据表格模板 extends AbstractTableModel {
 	}
 
 	public Object getValueAt(int row, int col) {
-		return data[row][col];
+		Object object = "";
+		try {
+			object = 备份记录列表.get(row).get(col);
+		} catch (Exception e) {
+		}
+		return object;
 	}
 
 	@SuppressWarnings("unchecked")
 	public Class getColumnClass(int c) {
-		return getValueAt(0, c).getClass();
+		Object v = getValueAt(0, c);
+		if(v==null)return String.class;
+		return v.getClass();
 	}
 
 	/*
@@ -45,8 +63,12 @@ public class 备份数据表格模板 extends AbstractTableModel {
 	 * Don't need to implement this method unless your table's data can change.
 	 */
 	public void setValueAt(Object value, int row, int col) {
-		data[row][col] = value;
+		备份记录列表.get(row).set(col,value);
 		fireTableCellUpdated(row, col);
+	}
+
+	public List<备份记录> getData() {
+		return 备份记录列表;
 	}
 
 }

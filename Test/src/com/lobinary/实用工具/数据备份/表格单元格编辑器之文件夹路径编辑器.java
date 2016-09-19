@@ -8,16 +8,21 @@ import javax.swing.event.CellEditorListener;
 import javax.swing.table.TableCellEditor;
 
 public class 表格单元格编辑器之文件夹路径编辑器 implements TableCellEditor{
+	
+	private Object cellValue = "null";
+
+	public 表格单元格编辑器之文件夹路径编辑器(Object cellValue) {
+		super();
+		this.cellValue = cellValue;
+	}
 
 	@Override
 	public Object getCellEditorValue() {
-		// TODO Auto-generated method stub
-		return null;
+		return cellValue;
 	}
 
 	@Override
 	public boolean isCellEditable(EventObject anEvent) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 

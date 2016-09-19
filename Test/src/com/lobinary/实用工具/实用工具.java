@@ -68,8 +68,6 @@ public class 实用工具 {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		int framewidth = 1280;
 		int frameHight = 800;
-		System.out.println(dim.height);
-		System.out.println(dim.width);
 		frame.setBounds((dim.width-framewidth)/2, (dim.height-frameHight)/2, 1280, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
