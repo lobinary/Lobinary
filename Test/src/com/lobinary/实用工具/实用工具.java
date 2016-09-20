@@ -8,6 +8,9 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -21,12 +24,49 @@ import javax.swing.JTextArea;
 
 import com.lobinary.实用工具.主窗口.关于我们弹出窗口;
 import com.lobinary.实用工具.数据备份.数据备份工具;
-import javax.swing.JSeparator;
+import com.lobinary.工具类.实用工具标签标准类;
+import com.lobinary.工具类.file.FileUtil;
 
+@SuppressWarnings("unchecked")
 public class 实用工具 {
 
 	private JFrame frame;
 	private static JTextArea 日志TextArea = new JTextArea("欢迎使用实用工具");
+	final JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+	
+	private static File configFile = new File("c:/Lobxxx/实用工具/配置信息.xxx");
+	private static Map<String,Object> config = new HashMap<String,Object>();
+	
+	public static void log(Object log){
+		System.out.println(log);
+		String 原始内容 = 日志TextArea.getText();
+		日志TextArea.setText(原始内容+"\n"+log);
+	}
+	
+	static{
+		try {
+			log("准备加载配置信息...");
+			if(configFile.exists()){//如果有配置文件，我们就装载配置
+				config = FileUtil.getObj(configFile , config.getClass());
+			}else{
+				File configFolder = new File(configFile.getAbsolutePath().substring(0,configFile.getAbsolutePath().lastIndexOf("\\")));
+				if(!configFolder.exists())configFolder.mkdirs();
+				FileUtil.saveObj(configFile, config);
+			}
+			log("配置信息加载完毕");
+		} catch (Exception e) {
+			log("初始化异常:"+e);
+		}
+	}
+	
+	public static Object getConfig(String key){
+		return config.get(key);
+	}
+	
+	public static void saveConfig(String key ,Object value){
+		config.put(key, value);
+		FileUtil.saveObj(configFile, config);
+	}
 
 	/**
 	 * Launch the application.
@@ -42,12 +82,6 @@ public class 实用工具 {
 				}
 			}
 		});
-	}
-	
-	public static void log(String log){
-		System.out.println(log);
-		String 原始内容 = 日志TextArea.getText();
-		日志TextArea.setText(原始内容+"\n"+log);
 	}
 
 	/**
@@ -75,7 +109,6 @@ public class 实用工具 {
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		panel.add(tabbedPane);
 		
 		数据备份工具 数据备份主窗口 = new 数据备份工具();
@@ -98,6 +131,12 @@ public class 实用工具 {
 		menuBar.add(menu);
 		
 		JMenuItem menuItem_2 = new JMenuItem("保存当前配置");
+		menuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				实用工具标签标准类 实用工具标签 = (实用工具标签标准类) tabbedPane.getSelectedComponent();
+				实用工具标签.saveConfig();
+			}
+		});
 		menu.add(menuItem_2);
 		
 		JMenuItem menuItem_3 = new JMenuItem("恢复默认配置");

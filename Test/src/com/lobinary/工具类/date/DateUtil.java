@@ -652,5 +652,9 @@ public class DateUtil {
 
 	public static String getCurrentTime() {
 		return DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_SS_SSS_CN);
+	} 
+
+	public static String getCurrentTime(DateStyle ds) {
+		return DateToString(new Date(), ds);
 	}  
 } 

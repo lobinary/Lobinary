@@ -1,6 +1,29 @@
 package com.lobinary.实用工具.数据备份;
 
-public class 备份记录 {
+import java.io.Serializable;
+
+public class 备份记录 implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9165097031291570625L;
+	
+	public static int BACKUP_ONLY_FILE;
+	public static int BACKUP_ONLY_FOLDER;
+	public static int BACKUP_FILE_AND_FOLDER;
+	public static int BACKUP_OTHER;
+	
+
+	public String unBackupFolder;
+	public String localFolder;
+	public String outStoreFolder;
+	public int fileNums;
+	public String totalSize;
+	public int folderLevel;
+	public int backupType;
+	public String data;
+	public String data2;
 	
 	public 备份记录() {
 		super();
@@ -13,11 +36,6 @@ public class 备份记录 {
 		this.fileNums = fileNums;
 		this.totalSize = totalSize;
 	}
-	public String unBackupFolder;
-	public String localFolder;
-	public String outStoreFolder;
-	public int fileNums;
-	public String totalSize;
 	public Object get(int i){
 		switch (i) {
 		case 0: return unBackupFolder;
@@ -68,6 +86,30 @@ public class 备份记录 {
 	}
 	public void setTotalSize(String totalSize) {
 		this.totalSize = totalSize;
+	}
+	public int getFolderLevel() {
+		return folderLevel;
+	}
+	public void setFolderLevel(int folderLevel) {
+		this.folderLevel = folderLevel;
+	}
+	public int getBackupType() {
+		return backupType;
+	}
+	public void setBackupType(int backupType) {
+		this.backupType = backupType;
+	}
+	public String getData() {
+		return data;
+	}
+	public void setData(String data) {
+		this.data = data;
+	}
+	public String getData2() {
+		return data2;
+	}
+	public void setData2(String data2) {
+		this.data2 = data2;
 	}
 
 }

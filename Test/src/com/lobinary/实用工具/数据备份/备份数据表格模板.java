@@ -45,8 +45,7 @@ public class 备份数据表格模板 extends AbstractTableModel {
 		return object;
 	}
 
-	@SuppressWarnings("unchecked")
-	public Class getColumnClass(int c) {
+	public Class<?> getColumnClass(int c) {
 		Object v = getValueAt(0, c);
 		if(v==null)return String.class;
 		return v.getClass();
