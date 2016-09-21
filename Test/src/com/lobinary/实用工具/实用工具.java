@@ -24,6 +24,7 @@ import javax.swing.JTextArea;
 
 import com.lobinary.实用工具.主窗口.关于我们弹出窗口;
 import com.lobinary.实用工具.数据备份.数据备份工具;
+import com.lobinary.实用工具.文件批量替换工具.文件批量替换工具;
 import com.lobinary.工具类.实用工具标签标准类;
 import com.lobinary.工具类.file.FileUtil;
 
@@ -110,9 +111,12 @@ public class 实用工具 {
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		panel.add(tabbedPane);
-		
+
 		数据备份工具 数据备份主窗口 = new 数据备份工具();
 		tabbedPane.addTab("数据备份", null, 数据备份主窗口, null);
+
+		文件批量替换工具 文件批量替换工具 = new 文件批量替换工具();
+		tabbedPane.addTab("文件批量替换工具", null, 文件批量替换工具, null);
 		
 		JPanel 日志主窗口 = new JPanel();
 		tabbedPane.addTab("日志", null, 日志主窗口, null);
@@ -130,26 +134,41 @@ public class 实用工具 {
 		JMenu menu = new JMenu("菜单");
 		menuBar.add(menu);
 		
-		JMenuItem menuItem_2 = new JMenuItem("保存当前配置");
-		menuItem_2.addActionListener(new ActionListener() {
+		JMenuItem 保存当前配置菜单按钮 = new JMenuItem("保存配置信息");
+		保存当前配置菜单按钮.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				实用工具标签标准类 实用工具标签 = (实用工具标签标准类) tabbedPane.getSelectedComponent();
 				实用工具标签.saveConfig();
 			}
 		});
+		menu.add(保存当前配置菜单按钮);
+		
+		JMenuItem 恢复默认配置菜单按钮 = new JMenuItem("恢复默认配置(不保存，仅本次有效)");
+		恢复默认配置菜单按钮.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				实用工具标签标准类 实用工具标签 = (实用工具标签标准类) tabbedPane.getSelectedComponent();
+				实用工具标签.loadDefaultConfig();
+			}
+		});
+		
+		JMenuItem menuItem_2 = new JMenuItem("加载配置信息");
+		menuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				实用工具标签标准类 实用工具标签 = (实用工具标签标准类) tabbedPane.getSelectedComponent();
+				实用工具标签.loadConfig();
+			}
+		});
 		menu.add(menuItem_2);
+		menu.add(恢复默认配置菜单按钮);
 		
-		JMenuItem menuItem_3 = new JMenuItem("恢复默认配置");
-		menu.add(menuItem_3);
-		
-		JMenuItem menuItem_4 = new JMenuItem("安全退出");
-		menuItem_4.addActionListener(new ActionListener() {
+		JMenuItem 安全退出菜单按钮 = new JMenuItem("安全退出");
+		安全退出菜单按钮.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("系统准备安全退出！");
 				System.exit(1);
 			}
 		});
-		menu.add(menuItem_4);
+		menu.add(安全退出菜单按钮);
 		
 		JMenu menu_1 = new JMenu("工具");
 		menuBar.add(menu_1);
