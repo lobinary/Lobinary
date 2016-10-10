@@ -29,7 +29,7 @@ import org.apache.commons.io.FileUtils;
 
 import com.lobinary.java.多线程.TU;
 import com.lobinary.实用工具.实用工具;
-import com.lobinary.工具类.实用工具标签标准类;
+import com.lobinary.实用工具.主窗口.实用工具标签标准类;
 import com.lobinary.工具类.常用工具;
 import com.lobinary.工具类.date.DateUtil;
 

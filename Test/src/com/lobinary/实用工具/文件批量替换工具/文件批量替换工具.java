@@ -1,9 +1,12 @@
 package com.lobinary.实用工具.文件批量替换工具;
 
-import com.lobinary.工具类.实用工具标签标准类;
+import com.lobinary.实用工具.主窗口.实用工具标签标准类;
+
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JTextField;
 
 public class 文件批量替换工具 extends 实用工具标签标准类 {

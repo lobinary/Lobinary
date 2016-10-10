@@ -1,4 +1,4 @@
-package com.lobinary.java.jdk;
+package com.lobinary.java.jdk.jdk16;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;

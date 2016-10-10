@@ -1,4 +1,4 @@
-package com.lobinary.工具类;
+package com.lobinary.实用工具.主窗口;
 
 import javax.swing.JPanel;
 

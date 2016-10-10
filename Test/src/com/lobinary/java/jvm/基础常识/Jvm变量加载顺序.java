@@ -45,8 +45,7 @@ public class Jvm变量加载顺序 {
 			    counter1 = 0，
 			    counter2 = 0    
 			
-			singleton = new
-			Singleton()，会触发构造函数，执行：
+			singleton = new Singleton()，会触发构造函数，执行：
 			counter1 ++;
 			counter2 ++;
 			

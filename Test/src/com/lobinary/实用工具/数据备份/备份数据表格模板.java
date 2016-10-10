@@ -125,7 +125,7 @@ public class 备份数据表格模板 extends AbstractTableModel {
 				备份记录.setSize(fileSize);
 				备份记录.setFileNums(fileNums);
 				备份记录.setFormetFileSize(formetFileSize);
-				实用工具.log(备份记录.getAddType());
+//				实用工具.log(备份记录.getAddType());
 				备份记录列表.set(i,备份记录);
 			}
 			fireTableDataChanged();

@@ -23,9 +23,10 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 
 import com.lobinary.实用工具.主窗口.关于我们弹出窗口;
+import com.lobinary.实用工具.主窗口.实用工具标签标准类;
 import com.lobinary.实用工具.数据备份.数据备份工具;
 import com.lobinary.实用工具.文件批量替换工具.文件批量替换工具;
-import com.lobinary.工具类.实用工具标签标准类;
+import com.lobinary.工具类.date.DateUtil;
 import com.lobinary.工具类.file.FileUtil;
 
 @SuppressWarnings("unchecked")
@@ -39,7 +40,7 @@ public class 实用工具 {
 	private static Map<String,Object> config = new HashMap<String,Object>();
 	
 	public static void log(Object log){
-		System.out.println(log);
+		System.out.println(DateUtil.getCurrentTime()+" : "+log);
 		String 原始内容 = 日志TextArea.getText();
 		日志TextArea.setText(原始内容+"\n"+log);
 	}
