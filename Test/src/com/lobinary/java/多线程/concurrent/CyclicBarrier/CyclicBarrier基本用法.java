@@ -39,7 +39,7 @@ public class CyclicBarrier基本用法 {
 　　　　	另外，CountDownLatch是不能够重用的，而CyclicBarrier是可以重用的。
 	 */
 	 public static void main(String[] args) {
-	        int N = 4;
+	        int N = 2;
 	        CyclicBarrier barrier  = new CyclicBarrier(N);
 	        for(int i=0;i<N;i++)
 	            new Writer(barrier).start();

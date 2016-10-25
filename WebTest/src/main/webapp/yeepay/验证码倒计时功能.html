@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<head>
+<title>修改绑定手机</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<script type="text/javascript" src="../js/base.js"></script>
+
+</head>
+<body>
+	<div>
+		<p>原手机号：</p>
+		<span>${merchantInfo.mobile}</span>
+	</div>
+	<div>
+		<p>验证码：</p>
+		<span> <input width="100">
+		</span> <span><button id="btnSendCode" onclick="sendCode()" >请再60秒内输入验证码</button> </span>
+	</div>
+	<script type="text/javascript">
+		var count = 5;
+		var curCount;
+		function startCD(){
+			curCount = count;
+			$("#btnSendCode").attr("disabled", "true");
+			$("#btnSendCode").text("请在" + curCount + "秒内输入验证码");
+			cdObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+		}
+		
+		startCD();//开局就已经在服务器发送了验证码，所以直接开始倒计时
+		
+		function stopCD(){
+			window.clearInterval(cdObj);//停止计时器
+			$("#btnSendCode").removeAttr("disabled");//启用按钮
+			$("#btnSendCode").text("重新发送验证码");
+		}
+		
+		function SetRemainTime() {
+			l(curCount);
+			if (curCount == 1) {
+				stopCD();
+			} else {
+				curCount--;
+				$("#btnSendCode").text("请在" + curCount + "秒内输入验证码");
+			}
+		}
+		
+		function sendCode() {
+			startCD();
+			$.ajax({
+				url : 'http://192.168.1.1',// 跳转到 action  
+				type : 'post',
+				cache : false,
+				timeout : 2000, //超时时间设置，单位毫秒
+				dataType : 'json',
+				success : function(data) {
+					if (data == null) {
+						l('发送异常,请稍后再试~');
+					}
+					if (data.status == '000000') {
+						
+					} else {
+						showInfo(data.msg);
+					}
+				},
+				error : function() {
+					l('发送异常,请稍后再试~');
+					stopCD();
+				}
+			});
+		}
+	</script>
+
+</body>
+</html>
