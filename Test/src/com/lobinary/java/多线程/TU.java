@@ -2,6 +2,7 @@ package com.lobinary.java.多线程;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -76,7 +77,12 @@ public class TU {
 	}
 	
 	public static void l(Object log) {
-		System.out.println(Thread.currentThread().getName()+ " : " + log);
+		String name = Thread.currentThread().getName();
+		if(name.equals("main")){
+			name = "线程["+System.currentTimeMillis()+"]";
+			Thread.currentThread().setName(name);
+		}
+		System.out.println(name+ " : " + log);
 	}
 
 	public static void outTime() {
