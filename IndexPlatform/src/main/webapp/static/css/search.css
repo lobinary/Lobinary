@@ -30,6 +30,12 @@
 	outline: none
 }
 
+.itt:focus, .itt:hover {
+	background: #F1F1F1 !important;
+	color: #222;
+	text-shadow: 0 1px 0 #fff
+}
+
 .sbb {
 	float: left;
 	width: 83px;
@@ -147,16 +153,43 @@
 	*clear: both
 }
 
-.sa .sa-tray {
-	background: #fff;
-	z-index: 2;
-	border: 1px solid #aaa;
-	border-top-color: #ccc;
-	-webkit-box-shadow: 0 1px 2px 0 #cdcdcd;
-	-moz-box-shadow: 0 1px 2px 0 #cdcdcd;
-	-ms-box-shadow: 0 1px 2px 0 #cdcdcd;
-	box-shadow: 0 1px 2px 0 #cdcdcd;
-	border-radius: 0 0 2px 2px
+.sa-trayt {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: #fff;
+    background-image: none;
+    background-origin: padding-box;
+    background-position-x: 0;
+    background-position-y: 0;
+    background-repeat: repeat;
+    background-size: auto auto;
+    border-bottom-color: #aaa;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-image-outset: 0 0 0 0;
+    border-image-repeat: stretch stretch;
+    border-image-slice: 100% 100% 100% 100%;
+    border-image-source: none;
+    border-image-width: 1 1 1 1;
+    border-left-color: #aaa;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-right-color: #aaa;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-top-color: #ccc;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top-style: solid;
+    border-top-width: 1px;
+    box-shadow: 0 1px 2px 0 #cdcdcd;
+    z-index: 2;
 }
 
 .sa .sa-tray {
@@ -206,27 +239,69 @@
 }
 
 
+
 html {
-	color: #000;
-	background: #FFF
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: #fff;
+    background-image: none;
+    background-origin: padding-box;
+    background-position-x: 0;
+    background-position-y: 0;
+    background-repeat: repeat;
+    background-size: auto auto;
+    color: #000;
+}
+body {
+    -x-system-font: none;
+    font-family: arial,helvetica,clean,sans-serif;
+    font-feature-settings: normal;
+    font-kerning: auto;
+    font-language-override: normal;
+    font-size: 13px;
+    font-size-adjust: none;
+    font-stretch: normal;
+    font-style: normal;
+    font-synthesis: weight style;
+    font-variant-alternates: normal;
+    font-variant-caps: normal;
+    font-variant-east-asian: normal;
+    font-variant-ligatures: normal;
+    font-variant-numeric: normal;
+    font-variant-position: normal;
+    font-weight: normal;
+    line-height: 1.231;
 }
 
-body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code,
-	form, fieldset, legend, input, textarea, p, blockquote, th, td {
-	margin: 0;
-	padding: 0
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
 }
 
-table {
-	border-collapse: collapse;
-	border-spacing: 0
-}
-
-fieldset, img {
-	border: 0
-}
-
-address, caption, cite, code, dfn, em, strong, th, var {
-	font-style: normal;
-	font-weight: normal
+select, input, button, textarea, body {
+    -x-system-font: none;
+    color: #000;
+    font-family: helvetica neue,helvetica,arial,sans-serif;
+    font-feature-settings: normal;
+    font-kerning: auto;
+    font-language-override: normal;
+    font-size: 13px;
+    font-size-adjust: none;
+    font-stretch: normal;
+    font-style: normal;
+    font-synthesis: weight style;
+    font-variant-alternates: normal;
+    font-variant-caps: normal;
+    font-variant-east-asian: normal;
+    font-variant-ligatures: normal;
+    font-variant-numeric: normal;
+    font-variant-position: normal;
+    font-weight: normal;
+    line-height: 1.25;
 }

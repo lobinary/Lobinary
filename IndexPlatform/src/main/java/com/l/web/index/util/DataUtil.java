@@ -31,10 +31,12 @@ public class DataUtil {
 				STORE_FILE.createNewFile();
 				dataStore = new Hashtable<>();
 				FileUtil.saveObj(STORE_FILE, dataStore);
+				logger.info("创建配置文件成功,配置文件位置：{}",STORE_FILE.getAbsoluteFile());
 			} catch (Exception e) {
 				logger.error("加载搜索存储文件异常",e);
 			}
 		}else{
+			logger.info("读取配置文件成功,配置文件位置：{}",STORE_FILE.getAbsoluteFile());
 			dataStore = FileUtil.getObj(STORE_FILE, Map.class);
 		}
 	}
@@ -45,7 +47,7 @@ public class DataUtil {
 			list = new ArrayList<>();
 			SubSearchResultDto initialSubSearchResultDto = new SubSearchResultDto();
 			initialSubSearchResultDto.setDisplayStr("增加数据记录");
-			initialSubSearchResultDto.setValueStr("/static/views/search/add.html");
+			initialSubSearchResultDto.setValueStr("static/views/search/add.html");
 			list.add(initialSubSearchResultDto);
 			addData(SEARCH_STORE,list);
 		}

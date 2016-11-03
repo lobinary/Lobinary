@@ -591,17 +591,43 @@ pre, code, kbd, samp, tt {
 .sa {
 	border-radius: 0 0 4px 4px
 }
-
 .sa .sa-tray {
-	background: #fff;
-	z-index: 2;
-	border: 1px solid #aaa;
-	border-top-color: #ccc;
-	-webkit-box-shadow: 0 1px 2px 0 #cdcdcd;
-	-moz-box-shadow: 0 1px 2px 0 #cdcdcd;
-	-ms-box-shadow: 0 1px 2px 0 #cdcdcd;
-	box-shadow: 0 1px 2px 0 #cdcdcd;
-	border-radius: 0 0 2px 2px
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: #fff;
+    background-image: none;
+    background-origin: padding-box;
+    background-position-x: 0;
+    background-position-y: 0;
+    background-repeat: repeat;
+    background-size: auto auto;
+    border-bottom-color: #aaa;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-image-outset: 0 0 0 0;
+    border-image-repeat: stretch stretch;
+    border-image-slice: 100% 100% 100% 100%;
+    border-image-source: none;
+    border-image-width: 1 1 1 1;
+    border-left-color: #aaa;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-right-color: #aaa;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-top-color: #ccc;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top-style: solid;
+    border-top-width: 1px;
+    box-shadow: 0 1px 2px 0 #cdcdcd;
+    z-index: 2;
 }
 
 .sa .sa-tray-list-container {
