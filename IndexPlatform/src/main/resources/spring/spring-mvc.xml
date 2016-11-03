@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 自动扫描且只扫描@Controller -->
+    <context:component-scan base-package="com.l.web.index.web.controller" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+    </context:component-scan>
+
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg value="UTF-8"/>
+            </bean>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="prettyPrint" value="true"/>
+                <property name="objectMapper">
+                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                        <property name="dateFormat">
+                            <bean class="java.text.SimpleDateFormat">
+                                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss"/>
+                            </bean>
+                        </property>
+                    </bean>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <!-- 根据URL后缀自动判定Content-Type及相应的View -->
+    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <property name="ignoreAcceptHeader" value="true"/>
+        <property name="defaultContentType" value="application/json"/>
+        <property name="mediaTypes">
+            <value>
+                json=application/json
+                xml=application/xml
+            </value>
+        </property>
+    </bean>
+
+    <mvc:default-servlet-handler/>
+
+    <!-- JSP ViewResolver -->
+    <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/"/>
+        <property name="suffix" value=".jsp"/>
+        <property name="order" value="0"/>
+        <property name="viewNames" value="*"/>
+    </bean>
+
+    <!--<mvc:view-controller path="/" view-name="redirect:/"/>-->
+    <mvc:resources mapping="/static/**" location="/static/"/>
+
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.apache.shiro.authz.UnauthorizedException">redirect:error/403</prop>
+                <prop key="java.lang.Throwable">../500.html</prop>
+                <!--<prop key="java.lang.Throwable">redirect:error/500</prop>-->
+            </props>
+        </property>
+    </bean>
+
+</beans>
