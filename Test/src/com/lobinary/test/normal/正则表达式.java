@@ -12,6 +12,10 @@ public class 正则表达式 {
 	
 	public static void main(String[] args) {
 		System.out.println("123".replaceAll(".", "*"));
+		
+		String s = "/^(TS4).+$/";
+		String string = "TS4LMRWsdfasdfasdf";
+		System.out.println(string.matches(s));
 	}
 	
 }

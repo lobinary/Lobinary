@@ -55,7 +55,7 @@ public class 生产者消费者BlockingQueue {
 	 */
 	public static void main(String[] args) {
 		BlockingQueue<Long> 阻塞队列 = new ArrayBlockingQueue<Long>(10);
-		for (int i = 0; i <50; i++) {
+		for (int i = 0; i <5; i++) {
 			new 生产者(阻塞队列).start();
 			new 消费者(阻塞队列).start();
 		}
@@ -81,7 +81,7 @@ class 生产者 extends Thread{
 		while(true){
 			try {
 				Thread.sleep(2000);
-				Long e = System.currentTimeMillis();
+				Long e = (long) (Math.random()*10);
 				阻塞队列.put(e);
 				System.out.println(Thread.currentThread().getName()+"生产者插入数据:"+e);
 			} catch (InterruptedException e) {

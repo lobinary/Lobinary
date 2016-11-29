@@ -1,0 +1,105 @@
+[
+    {
+        "name": "Germany",
+        "value": "99",
+        "type": "country",
+        "itemStyle": {
+            "normal": {
+                "color": "#D40404"
+            }
+        },
+        "label": {
+            "normal": {
+                "position": "left"
+            }
+        }
+    },
+    {
+        "name": "Austria",
+        "value": "90",
+        "type": "country",
+        "itemStyle": {
+            "normal": {
+                "color": "#D40404"
+            }
+        },
+        "label": {
+            "normal": {
+                "position": "left"
+            }
+        }
+    },
+    {
+        "name": "United Kingdom",
+        "value": "43",
+        "type": "country",
+        "itemStyle": {
+            "normal": {
+                "color": "#D40404"
+            }
+        },
+        "label": {
+            "normal": {
+                "position": "left"
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+,
+
+
+
+
+
+    {
+        "source": "Financial Services",
+        "target": "Switzerland",
+        "value": "4",
+        "lineStyle": {
+            "normal": {
+                "color": null,
+                "opacity": 0.05
+            }
+        }
+    },
+    {
+        "source": "Financial Services",
+        "target": "Germany",
+        "value": "16",
+        "lineStyle": {
+            "normal": {
+                "color": "#DEE551",
+                "opacity": 0.4
+            }
+        }
+    },
+    {
+        "source": "Financial Services",
+        "target": "Italy",
+        "value": "3",
+        "lineStyle": {
+            "normal": {
+                "color": null,
+                "opacity": 0.05
+            }
+        }
+    },
+    {
+        "source": "Financial Services",
+        "target": "Netherlands",
+        "value": "4",
+        "lineStyle": {
+            "normal": {
+                "color": null,
+                "opacity": 0.05
+            }
+        }
+    }
+]

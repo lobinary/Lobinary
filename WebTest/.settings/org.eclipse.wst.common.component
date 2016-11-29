@@ -4,7 +4,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
         <property name="java-output-path" value="/web test project/target/classes"/>
+        <property name="context-root" value="/WebTest"/>
         <property name="me-merge-utility-modules" value="true"/>
-        <property name="context-root" value="/ltest"/>
     </wb-module>
 </project-modules>

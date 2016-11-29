@@ -24,6 +24,12 @@ public class SearchService {
 		searchResultDto.setSearchObj(s);
 		
 		List<SubSearchResultDto> searchStore = DataUtil.getSearchStore();
+		
+		if(s.equals("全部数据")){
+			searchResultDto.setSubSearchResultList(searchStore);
+			return searchResultDto;
+		}
+		
 		for (SubSearchResultDto subSearchResultDto : searchStore) {
 			if(subSearchResultDto.match(s)){
 				searchResultDto.addSubSearchResultDto(subSearchResultDto);

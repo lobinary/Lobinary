@@ -1,17 +1,105 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>增加搜索记录</title>
-	
-    <meta name="keywords" content="keyword1,keyword2,keyword3">
-    <meta name="description" content="this is my page">
-    <meta name="content-type" content="text/html; charset=UTF-8">
-    
-    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
 
-  </head>
-  
-  <body>
-    
-  </body>
+<head>
+
+<meta charset="UTF-8">
+
+<title>HTML5/CSS3简易联系表单DEMO演示</title>
+
+<link rel="stylesheet" href="../../css/search-add.css" media="screen" type="text/css" />
+<script type="text/javascript" src="../../js/jquery/jquery-3.1.1.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<div class="addDiv">
+			<form id="contact" action="" method="post">
+				<h3>增加搜索规则</h3>
+				<h4>在这里增加自动搜索跳转页面，方便对应功能的页面跳转</h4>
+				<fieldset>
+					<input placeholder="搜索匹配字符串" type="text" tabindex="1" required autofocus>
+				</fieldset>
+				<fieldset>
+					<input placeholder="页面跳转地址" type="url" tabindex="2" required>
+				</fieldset>
+				<fieldset>
+					<input placeholder="页面参数(可空)" type="tel" tabindex="3">
+				</fieldset>
+				<fieldset>
+					<textarea placeholder="备注(可空)" tabindex="4"></textarea>
+				</fieldset>
+				<fieldset>
+					<button name="submit" type="submit" id="contact-submit" data-submit="...Sending">提交规则</button>
+				</fieldset>
+			</form>
+
+		</div>
+		<div class="tableDiv">
+			<table class="bordered" id="ruleTable">
+				<tr>
+					<td>1</td>
+					<td>压力测试</td>
+					<td>http://localhost:8080/WebTest/yaliceshi/index.html</td>
+					<td>test=abc;test2=xyz</td>
+					<td>暂无</td>
+					<td>删 改</td>
+				</tr>
+				<tr>
+					<td>7</td>
+					<td>Schindler's List</td>
+					<td>Schindler's List</td>
+					<td>Schindler's List</td>
+					<td>1993</td>
+					<td>删 改</td>
+				</tr>
+				<tr>
+					<td>8</td>
+					<td>One Flew Over the Cuckoo's Nest</td>
+					<td>One Flew Over the Cuckoo's Nest</td>
+					<td>One Flew Over the Cuckoo's Nest</td>
+					<td>1975</td>
+					<td>删 改</td>
+				</tr>
+			</table>
+
+		</div>
+	</div>
+	<div style="clear:both"></div>
+</body>
+<script type="text/javascript">
+console.info("what");
+	$(document).ready(function() {
+		$.ajax({
+			type : "GET",
+			url : "/index/search",
+			data : {
+				s : '全部数据'
+			},
+			dataType : "json",
+			success : function(data) {
+				console.info(data);
+				$('#ruleTable').empty();
+				var list = data.subSearchResultList;
+				console.info("准备展示数据");
+				var resultHtml = "<thead>"+
+						"<tr>"+
+						"<th>#</th>"+
+						"<th>搜索匹配字符串</th>"+
+						"<th>页面跳转地址</th>"+
+						"<th>页面参数</th>"+
+						"<th>备注</th>"+
+						"<th style='min-width: 45px;'>功能</th>"+
+					"</tr></thead>";
+				$.each(list, function(index, subSearchResult) {
+					console.info('准备添加' + subSearchResult);
+					resultHtml += "<li pos='1' data='ssafcon%20sampler' id='yui_3_10_0_1_1478155195774_439' class='itt'><b class='yui3-highlight' >" + subSearchResult.displayStr + "</b></li>";
+				});
+
+				resultHtml += "</ul> </div>";
+				$('#ruleTable').append(resultHtml);
+			}
+		});
+	});
+</script>
 </html>

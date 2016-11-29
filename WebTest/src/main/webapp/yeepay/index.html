@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>dfsd</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<script type="text/javascript" src="../js/echars/echarts.js"></script>
+<script type="text/javascript" src="../js/jquery.js"></script>
+</head>
+<body>
+	<div id="main" style="width: 100%;height:400px;"></div>	
+	<div>
+		最小处理时间<input id="minDealTime" value="1" class="loadDataInput" width="10px">
+		最大处理时间<input id="maxDealTime" value="3600">
+		最小停留时间<input id="minStayTime" value="1">
+		最大停留时间<input id="maxStayTime" value="3600">
+		<button onclick="loadData()">加载数据112</button>
+	</div>
+</body>
+<script type="text/javascript">
+	// 基于准备好的dom，初始化echarts实例
+	var myChart = echarts.init(document.getElementById('main'));
+
+	option = {
+		title : {
+			text : '请求处理时间与停留时间图（单位：秒）',
+			left : 'center',
+		},
+		tooltip : {
+			trigger : 'axis',
+			axisPointer : { // 坐标轴指示器，坐标轴触发有效
+				type : 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+			}
+		},
+		legend : {
+			top : '7%',
+			data : [ '请求处理时间', '页面停留时间' ]
+		},
+		grid : {
+			left : '3%',
+			right : '4%',
+			bottom : '7%',
+			containLabel : true
+		},
+		xAxis : {
+			type : 'value'
+		},
+    	yAxis: {},
+		series : []
+	};
+	// 使用刚指定的配置项和数据显示图表。
+	myChart.setOption(option);
+	function loadData() {
+		myChart.showLoading();
+		$.ajax({
+			url : 'data.json',
+			type : 'POST', //GET
+			async : true, //或false,是否异步
+			data : {
+				name : 'yang',
+				age : 25
+			},
+			timeout : 5000, //超时时间
+			dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+			beforeSend : function(xhr) {
+				console.log(xhr);
+				console.log('发送前');
+			},
+			success : function(data, textStatus, jqXHR) {
+				myChart.hideLoading();
+				console.log(data);
+				console.log(textStatus);
+				console.log(jqXHR);
+				myChart.setOption({
+					yAxis : data.yAxis,
+					series : data.series
+				});
+			},
+			error : function(xhr, textStatus) {
+				console.log('错误');
+				console.log(xhr);
+				console.log(textStatus);
+			},
+			complete : function() {
+				console.log('结束');
+			}
+		});
+		myChart.hideLoading();
+	}
+</script>
+</html>
