@@ -551,7 +551,7 @@ public class 数据备份工具 extends 实用工具标签标准类 {
 						updateProgressInfo("从:" + 源文件路径 + "移动文件到:" + 目的文件路径 + ",状态：备份文件已经存在", length);
 					}
 				}
-				boolean df = 源文件.delete();
+				/*boolean df = */源文件.delete();
 				源文件路径 = "null";
 				目的文件路径 = "null";// 防止报错之后输出的是原始数据
 			}

@@ -11,7 +11,9 @@ public abstract class 实用工具标签标准类 extends JPanel {
 	private String tabName = this.getClass().getSimpleName();
 	
 	public 实用工具标签标准类(){
+		实用工具.log("========================================      准备加载"+tabName+"配置信息\t========================================");
 		loadConfig();
+		实用工具.log("========================================      "+tabName+"配置信息加载结束\t========================================");
 	}
 	
 	public void loadConfig(){

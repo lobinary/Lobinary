@@ -9,7 +9,9 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JDialog;
@@ -25,9 +27,11 @@ import javax.swing.JTextArea;
 import com.lobinary.实用工具.主窗口.关于我们弹出窗口;
 import com.lobinary.实用工具.主窗口.实用工具标签标准类;
 import com.lobinary.实用工具.数据备份.数据备份工具;
+import com.lobinary.实用工具.文件夹工具.文件夹扫描工具;
 import com.lobinary.实用工具.文件批量替换工具.文件批量替换工具;
 import com.lobinary.工具类.date.DateUtil;
 import com.lobinary.工具类.file.FileUtil;
+import javax.swing.JTextField;
 
 @SuppressWarnings("unchecked")
 public class 实用工具 {
@@ -38,11 +42,25 @@ public class 实用工具 {
 	
 	private static File configFile = new File("c:/Lobxxx/实用工具/配置信息.xxx");
 	private static Map<String,Object> config = new HashMap<String,Object>();
+	private static JTextField menuLog = new JTextField("系统最后一条日志");
 	
 	public static void log(Object log){
 		System.out.println(DateUtil.getCurrentTime()+" : "+log);
 		String 原始内容 = 日志TextArea.getText();
 		日志TextArea.setText(原始内容+"\n"+log);
+		menuLog.setText(""+log);
+	}
+	
+	/**
+	 * 如需添加新Tab，请在这里添加，便会自动加载tab信息
+	 * @return
+	 */
+	public List<实用工具标签标准类> loadTabInfo(){
+		List<实用工具标签标准类> list = new ArrayList<实用工具标签标准类>();
+		list.add(new 数据备份工具());
+		list.add(new 文件批量替换工具());
+		list.add(new 文件夹扫描工具());
+		return list;
 	}
 	
 	static{
@@ -113,11 +131,9 @@ public class 实用工具 {
 		
 		panel.add(tabbedPane);
 
-		数据备份工具 数据备份主窗口 = new 数据备份工具();
-		tabbedPane.addTab("数据备份", null, 数据备份主窗口, null);
-
-		文件批量替换工具 文件批量替换工具 = new 文件批量替换工具();
-		tabbedPane.addTab("文件批量替换工具", null, 文件批量替换工具, null);
+		for (实用工具标签标准类 实用工具标签标准类 : loadTabInfo()) {
+			tabbedPane.addTab(实用工具标签标准类.getClass().getSimpleName(), null, 实用工具标签标准类, null);
+		}
 		
 		JPanel 日志主窗口 = new JPanel();
 		tabbedPane.addTab("日志", null, 日志主窗口, null);
@@ -192,5 +208,12 @@ public class 实用工具 {
 			}
 		});
 		menu_3.add(menuItem);
+		
+		
+		menuLog.setSize(80, 30);
+		menuLog.setLocation(300, 0);
+		menuLog.setEnabled(false);
+		menuBar.add(menuLog);
+		menuLog.setColumns(10);
 	}
 }

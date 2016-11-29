@@ -15,6 +15,7 @@
 		<log4j.version>1.2.12</log4j.version>
 		<!-- junit版本号 -->
 		<junit.version>4.10</junit.version>
+		<apache.http.version>4.5.2</apache.http.version>
 	</properties>
 
 	<dependencies>
@@ -132,6 +133,28 @@
 			<artifactId>derbyclient</artifactId>
 			<version>10.11.1.1</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpclient</artifactId>
+		    <version>${apache.http.version}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpmime -->
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpmime</artifactId>
+		    <version>${apache.http.version}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient-osgi -->
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpclient-osgi</artifactId>
+		    <version>${apache.http.version}</version>
+		</dependency>
+						
 
 		<!-- https://mvnrepository.com/artifact/com.rabbitmq/amqp-client -->
 		<dependency>
