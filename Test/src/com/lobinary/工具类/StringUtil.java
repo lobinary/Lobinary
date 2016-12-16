@@ -64,5 +64,9 @@ public class StringUtil {
 		}
 		return result;
 	}
+
+	public static boolean isEmpty(String 名称) {
+		return 名称==null||名称.length()==0;
+	}
 	
 }

@@ -14,7 +14,7 @@ public class 备份记录 implements Serializable{
 	
 	public final static int 手动添加 = 0;
 	public final static int 扫描添加 = 1;
-	public final static int 其他添加 = 1;
+	public final static int 其他添加 = 2;
 	
 	public final static int BACKUP_ONLY_FILE = 0;
 	public final static int BACKUP_ONLY_FOLDER = 1;

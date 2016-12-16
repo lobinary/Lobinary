@@ -16,7 +16,7 @@ public class 备份数据表格模板 extends AbstractTableModel {
 	 * 
 	 */
 	private static final long serialVersionUID = 3406342210670532970L;
-	 private String[] columnNames = { "未备份文件夹位置", "本机存储文件夹位置", "外部存储文件夹位置","文件数量", "文件大小" };
+	private String[] columnNames = { "未备份文件夹位置", "本机存储文件夹位置", "外部存储文件夹位置","文件数量", "文件大小" };
 	public static List<备份记录> 备份记录列表 = new ArrayList<备份记录>();
 	
 	public synchronized void 清除数据(int addType){
@@ -131,6 +131,5 @@ public class 备份数据表格模板 extends AbstractTableModel {
 			fireTableDataChanged();
 		}
 	}
-	
 
 }

@@ -17,6 +17,7 @@
 		<junit.version>4.10</junit.version>
 	</properties>
 	<dependencies>
+			
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
 		<dependency>
 			<groupId>org.springframework</groupId>
