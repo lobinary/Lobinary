@@ -1,5 +1,7 @@
 package com.l.test.web.controller;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -12,13 +14,14 @@ import com.l.test.web.service.UserService;
 
 @Controller
 @RequestMapping("/test")
-public class TestController {
+public class TestController{
 
 	private final static Logger logger = LoggerFactory.getLogger(TestController.class);
 	
+	@Resource(name="userService")
 	private UserService userService;
 
-	@RequestMapping(value = "getPage", method = RequestMethod.GET)
+	@RequestMapping(value = "/getPage", method = RequestMethod.GET)
 	public String getPage(Model model){
 		logger.info("准备获取普通页面页面");
 		model.addAttribute("id", "1");
@@ -26,10 +29,10 @@ public class TestController {
 		model.addAttribute("age", "24");
 		model.addAttribute("sex", "女");
 		model.addAttribute("hobby", "游泳、台球、羽毛球、旅游、写代码");
-		return "/views/get_page";
+		return "/get_page";
 	}
 	
-	@RequestMapping(value = "getDBPage", method = RequestMethod.GET)
+	@RequestMapping(value = "/getDBPage", method = RequestMethod.GET)
 	public String getDBPage(Model model){
 		logger.info("准备获取数据库页面页面");
 		UserInfo user = userService.getUserInfoById(1);
@@ -38,13 +41,13 @@ public class TestController {
 		model.addAttribute("age", user.getAge());
 		model.addAttribute("sex", user.getSex());
 		model.addAttribute("hobby", user.getHobby());
-		return "/views/get_page";
+		return "/get_page";
 	}
 	
-	@RequestMapping(value = "getCachePage", method = RequestMethod.GET)
+	@RequestMapping(value = "/getCachePage", method = RequestMethod.GET)
 	public String getCachePage(){
 		logger.info("准备获取缓存页面页面");
-		return "/views/get_page";
+		return "/get_page";
 	}
 	
 }

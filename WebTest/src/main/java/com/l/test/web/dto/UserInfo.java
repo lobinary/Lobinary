@@ -38,5 +38,9 @@ public class UserInfo {
 	public void setHobby(String hobby) {
 		this.hobby = hobby;
 	}
+	@Override
+	public String toString() {
+		return "UserInfo [id=" + id + ", name=" + name + ", age=" + age + ", sex=" + sex + ", hobby=" + hobby + "]";
+	}
 	
 }

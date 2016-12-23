@@ -7,40 +7,23 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- 自动扫描且只扫描@Controller -->
-	<context:component-scan base-package="com.l.web.index.web.controller"
-		use-default-filters="false">
+	<context:component-scan base-package="com.l.test.web.controller" use-default-filters="false">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 		<context:include-filter type="annotation"
 			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 	</context:component-scan>
 
-
+	<mvc:annotation-driven />
 	<mvc:default-servlet-handler />
 
 	<!-- JSP ViewResolver -->
-	<bean id="jspViewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="viewClass"
-			value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/WEB-INF/" />
+	<bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 		<property name="order" value="0" />
 		<property name="viewNames" value="*" />
-	</bean>
-
-	<!--<mvc:view-controller path="/" view-name="redirect:/"/> <mvc:resources 
-		mapping="/static/**" location="/static/"/> -->
-
-	<bean
-		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-		<property name="exceptionMappings">
-			<props>
-				<prop key="org.apache.shiro.authz.UnauthorizedException">redirect:error/403</prop>
-				<prop key="java.lang.Throwable">../500.html</prop>
-				<!--<prop key="java.lang.Throwable">redirect:error/500</prop> -->
-			</props>
-		</property>
 	</bean>
 
 </beans>
