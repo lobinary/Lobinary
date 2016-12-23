@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>强制删除.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+  <form action="https://boss3g.yeepay.com/wechat-boss/mongodb/remove" method="POST">
+   	<input type="text" name="collection" value="message_route">
+   	<input type="text" name="query" value='{description:"default",system_id:"yeepay007"}'>
+   	<button type="submit">执行强制删除</button>
+   </form>
+  </body>
+</html>

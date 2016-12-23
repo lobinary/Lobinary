@@ -1,0 +1,24 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>ForeverNotExpires.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Cache-Control" content="max-age=7200" />
+	<meta http-equiv="Expires" content="Mon, 20 Jul 2017 23:00:00 GMT" />
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+  Squid 反向代理一般只缓存可缓冲的数据（比如 html 网页和图片等），而一些 CGI 脚本程序或者 ASP、JSP 之类的动态程序默认不缓存。  <br>
+	  它根据从 WEB 服务器返回的 HTTP 头标记来缓冲静态页面。有四个最重要 HTTP 头标记：  <br>
+	Last-Modified: 告诉反向代理页面什么时间被修改  <br>
+	Expires: 告诉反向代理页面什么时间应该从缓冲区中删除  <br>
+	Cache-Control: 告诉反向代理页面是否应该被缓冲  <br>
+	Pragma: 用来包含实现特定的指令，最常用的是 Pragma:no-cache  <br>
+  </body>
+</html>

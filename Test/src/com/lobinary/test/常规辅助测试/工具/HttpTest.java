@@ -13,15 +13,17 @@ public class HttpTest {
 	private final static Logger logger = LoggerFactory.getLogger(HttpTest.class);
 	
 	public static void main(String[] args) {
-//		循环访问网址();
-		定时间隔循环访问();
+		循环访问网址();
+//		定时间隔循环访问();
 	}
 
 	private static void 循环访问网址() {
-		String 循环访问的网址 = "http://172.17.102.174:8005/wechat-app/";
+		String 循环访问的网址 = "http://172.19.42.80:8080/WebTest/index.html";
 		int 循环访问的次数 = 300;
 		for (int i = 0; i < 循环访问的次数; i++) {
-			HttpUtils.doGet(循环访问的网址+i);
+			long start = System.currentTimeMillis();
+			HttpUtils.doGet(循环访问的网址);
+			System.out.println("请求完毕，耗时:"+(System.currentTimeMillis()-start)+"毫秒");
 		}
 		logger.info("{}次循环访问{}结束",循环访问的网址,循环访问的次数);
 	}
