@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.l.test.web.cache.redis.RedisClientAllTemplate;
 import com.l.test.web.dto.UserInfo;
 import com.l.test.web.service.UserService;
 
@@ -20,6 +21,9 @@ public class TestController{
 	
 	@Resource(name="userService")
 	private UserService userService;
+	
+	@Resource
+	RedisClientAllTemplate redisClientTemplate;
 
 	@RequestMapping(value = "/getPage", method = RequestMethod.GET)
 	public String getPage(Model model){
@@ -45,8 +49,15 @@ public class TestController{
 	}
 	
 	@RequestMapping(value = "/getCachePage", method = RequestMethod.GET)
-	public String getCachePage(){
+	public String getCachePage(Model model){
 		logger.info("准备获取缓存页面页面");
+		redisClientTemplate.get("testCache");
+		UserInfo user = userService.getUserInfoById(1);
+		model.addAttribute("id", user.getId());
+		model.addAttribute("name", user.getName());
+		model.addAttribute("age", user.getAge());
+		model.addAttribute("sex", user.getSex());
+		model.addAttribute("hobby", user.getHobby());
 		return "/get_page";
 	}
 	
