@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.l.test.web.cache.redis.datasource.RedisDataSource;
+import com.l.test.web.util.SerializeUtils;
 
 import redis.clients.jedis.BinaryClient.LIST_POSITION;
 import redis.clients.jedis.Jedis;
@@ -31,6 +32,41 @@ public class RedisClientAllTemplate {
 	public void disconnect() {
 		ShardedJedis shardedJedis = redisDataSource.getRedisClient();
 		shardedJedis.disconnect();
+	}
+	
+	public String setex(String key,int seconds,Object value){
+		String result = null;
+		ShardedJedis shardedJedis = redisDataSource.getRedisClient();
+		if (shardedJedis == null) {
+			return result;
+		}
+		try {
+			result = shardedJedis.setex(key.getBytes(), seconds,SerializeUtils.serialize(value));
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+
+		} finally {
+			redisDataSource.returnResource(shardedJedis);
+		}
+		return result;
+	}
+	
+	public Object getObj(String key){
+		byte[] result = null;
+		ShardedJedis shardedJedis = redisDataSource.getRedisClient();
+		if (shardedJedis == null) {
+			return result;
+		}
+		try {
+			result = shardedJedis.get(key.getBytes());
+			if(result==null)return null;
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+
+		} finally {
+			redisDataSource.returnResource(shardedJedis);
+		}
+		return SerializeUtils.deserialize(result);
 	}
 
 	/**
@@ -54,7 +90,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -79,7 +115,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -97,7 +133,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -116,7 +152,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -142,7 +178,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -168,7 +204,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -187,7 +223,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -206,7 +242,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -224,7 +260,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -242,7 +278,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -261,7 +297,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -279,7 +315,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -297,7 +333,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -316,7 +352,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -335,7 +371,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -354,7 +390,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -373,7 +409,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -392,7 +428,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -411,7 +447,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -430,7 +466,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -449,7 +485,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -468,7 +504,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -487,7 +523,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -506,7 +542,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -525,7 +561,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -544,7 +580,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -563,7 +599,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -582,7 +618,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -601,7 +637,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -620,7 +656,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -639,7 +675,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -658,7 +694,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -677,7 +713,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -697,7 +733,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -716,7 +752,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -735,7 +771,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -754,7 +790,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -773,7 +809,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -792,7 +828,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -811,7 +847,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -830,7 +866,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -849,7 +885,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -868,7 +904,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -889,7 +925,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -908,7 +944,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -927,7 +963,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -945,7 +981,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -964,7 +1000,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -982,7 +1018,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1000,7 +1036,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1018,7 +1054,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1036,7 +1072,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1054,7 +1090,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1074,7 +1110,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1094,7 +1130,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1114,7 +1150,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1134,7 +1170,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1154,7 +1190,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1174,7 +1210,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1194,7 +1230,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1214,7 +1250,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1234,7 +1270,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1254,7 +1290,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1274,7 +1310,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1294,7 +1330,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1314,7 +1350,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1334,7 +1370,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1354,7 +1390,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1374,7 +1410,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1394,7 +1430,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1414,7 +1450,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1434,7 +1470,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1454,7 +1490,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1474,7 +1510,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1494,7 +1530,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1514,7 +1550,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1534,7 +1570,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1554,7 +1590,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1574,7 +1610,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1594,7 +1630,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1614,7 +1650,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1634,7 +1670,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1654,7 +1690,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1674,7 +1710,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1694,7 +1730,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1714,7 +1750,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1734,7 +1770,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1754,7 +1790,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1774,7 +1810,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1794,7 +1830,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1814,7 +1850,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1834,7 +1870,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1854,7 +1890,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1875,7 +1911,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1896,7 +1932,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1917,7 +1953,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1938,7 +1974,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1959,7 +1995,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -1980,7 +2016,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2001,7 +2037,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2022,7 +2058,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2043,7 +2079,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2064,7 +2100,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2085,7 +2121,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2106,7 +2142,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2127,7 +2163,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2148,7 +2184,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2168,7 +2204,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2189,7 +2225,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2210,7 +2246,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2231,7 +2267,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2252,7 +2288,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2273,7 +2309,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2294,7 +2330,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2315,7 +2351,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2336,7 +2372,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2357,7 +2393,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2378,7 +2414,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2399,7 +2435,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2420,7 +2456,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2441,7 +2477,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2462,7 +2498,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2483,7 +2519,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2504,7 +2540,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2525,7 +2561,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2546,7 +2582,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2567,7 +2603,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2588,7 +2624,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2609,7 +2645,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2630,7 +2666,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2651,7 +2687,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2672,7 +2708,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2693,7 +2729,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2714,7 +2750,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2735,7 +2771,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2756,7 +2792,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2777,7 +2813,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2798,7 +2834,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2819,7 +2855,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2840,7 +2876,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2861,7 +2897,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2882,7 +2918,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2903,7 +2939,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2923,7 +2959,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2943,7 +2979,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2961,7 +2997,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2979,7 +3015,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -2997,7 +3033,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -3015,7 +3051,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -3033,7 +3069,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -3051,7 +3087,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -3070,7 +3106,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -3089,7 +3125,7 @@ public class RedisClientAllTemplate {
 			log.error(e.getMessage(), e);
 
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}

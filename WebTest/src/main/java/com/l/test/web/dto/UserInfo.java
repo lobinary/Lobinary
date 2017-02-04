@@ -1,6 +1,8 @@
 package com.l.test.web.dto;
 
-public class UserInfo {
+import java.io.Serializable;
+
+public class UserInfo implements Serializable{
 
 	private long id;
 	private String name;

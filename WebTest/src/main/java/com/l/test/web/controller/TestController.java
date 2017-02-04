@@ -51,8 +51,12 @@ public class TestController{
 	@RequestMapping(value = "/getCachePage", method = RequestMethod.GET)
 	public String getCachePage(Model model){
 		logger.info("准备获取缓存页面页面");
-		redisClientTemplate.get("testCache");
-		UserInfo user = userService.getUserInfoById(1);
+		UserInfo user = (UserInfo) redisClientTemplate.getObj("testCache");
+		if(user==null){
+			logger.info("缓存未命中数据");
+			user = userService.getUserInfoById(1);
+			redisClientTemplate.setex("testCache", 30, user);
+		}
 		model.addAttribute("id", user.getId());
 		model.addAttribute("name", user.getName());
 		model.addAttribute("age", user.getAge());

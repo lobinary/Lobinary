@@ -28,8 +28,8 @@ public class RedisDataSourceImpl implements RedisDataSource {
 		return null;
 	}
 
-	public void returnResource() {
-		shardedJedisPool.close();
+	public void returnResource(ShardedJedis resource) {
+		resource.close();
 	}
 
 }

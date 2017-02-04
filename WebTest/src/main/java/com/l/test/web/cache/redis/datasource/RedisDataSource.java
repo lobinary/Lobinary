@@ -13,5 +13,5 @@ public interface RedisDataSource {
      * 将资源返还给pool
      * @param shardedJedis
      */
-    public void returnResource();
+    public void returnResource(ShardedJedis resource);
 }

@@ -41,7 +41,7 @@ public class RedisClientTemplate {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
@@ -65,7 +65,7 @@ public class RedisClientTemplate {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		} finally {
-			redisDataSource.returnResource();
+			redisDataSource.returnResource(shardedJedis);
 		}
 		return result;
 	}
