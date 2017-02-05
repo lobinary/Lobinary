@@ -48,7 +48,7 @@ public class 房屋基本信息 {
 	public String 电梯;
 	public String 用电类型;
 	public String 用水类型;
-	public String 燃气价格;
+	public double 燃气价格;
 	
 	public Date 建房时间;
 	public Date 挂牌时间;
@@ -222,10 +222,10 @@ public class 房屋基本信息 {
 	public void set用水类型(String 用水类型) {
 		this.用水类型 = 用水类型;
 	}
-	public String get燃气价格() {
+	public double get燃气价格() {
 		return 燃气价格;
 	}
-	public void set燃气价格(String 燃气价格) {
+	public void set燃气价格(double 燃气价格) {
 		this.燃气价格 = 燃气价格;
 	}
 	public Date get挂牌时间() {
