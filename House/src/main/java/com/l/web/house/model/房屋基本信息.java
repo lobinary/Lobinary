@@ -10,12 +10,27 @@ public class 房屋基本信息 {
 	public String 房屋类型;//一手房、二手房
 	public String 名称;//自命名
 	public String 标题;
+	public String 子标题;
 	public String 网址;
+	public String get子标题() {
+		return 子标题;
+	}
+	public void set子标题(String 子标题) {
+		this.子标题 = 子标题;
+	}
+	public String get所在小区编号() {
+		return 所在小区编号;
+	}
+	public void set所在小区编号(String 所在小区编号) {
+		this.所在小区编号 = 所在小区编号;
+	}
 	public String 坐标;
 	public String 所在城市;
 	public String 所在区县;// 如 丰台区  
+	public String 所在环数;
 	public String 所在地点;// 如 首经贸地铁站 或 花乡 等类似地点
 	public String 所在小区;
+	public String 所在小区编号;
 	public String 所在楼号;
 	public String 户型;//1室1厅1厨1卫
 	public Double 建筑面积;
@@ -44,6 +59,26 @@ public class 房屋基本信息 {
 	public String 交易权属;
 	public String 房屋用途;
 	public String 产权所属;
+	public String 是否唯一;
+	public String 当前状态;//概要信息 0 详细信息1
+	public String get当前状态() {
+		return 当前状态;
+	}
+	public void set当前状态(String 当前状态) {
+		this.当前状态 = 当前状态;
+	}
+	public String get所在环数() {
+		return 所在环数;
+	}
+	public void set所在环数(String 所在环数) {
+		this.所在环数 = 所在环数;
+	}
+	public String get是否唯一() {
+		return 是否唯一;
+	}
+	public void set是否唯一(String 是否唯一) {
+		this.是否唯一 = 是否唯一;
+	}
 	public String 房本备注;
 	public String 联系人;
 	public String 联系信息;

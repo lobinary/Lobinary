@@ -5,8 +5,8 @@ public class 房屋户型信息 {
 	public String id;
 	public String 房屋基本信息id;
 	public String 房间类型;
-	public String 房间面积;
-	public String 房间朝向;
+	public Double 房间面积;
+	public String 窗户朝向;
 	public String 窗户类型;
 	public String getId() {
 		return id;
@@ -26,17 +26,17 @@ public class 房屋户型信息 {
 	public void set房间类型(String 房间类型) {
 		this.房间类型 = 房间类型;
 	}
-	public String get房间面积() {
+	public Double get房间面积() {
 		return 房间面积;
 	}
-	public void set房间面积(String 房间面积) {
+	public void set房间面积(Double 房间面积) {
 		this.房间面积 = 房间面积;
 	}
-	public String get房间朝向() {
-		return 房间朝向;
+	public String get窗户朝向() {
+		return 窗户朝向;
 	}
-	public void set房间朝向(String 房间朝向) {
-		this.房间朝向 = 房间朝向;
+	public void set窗户朝向(String 窗户朝向) {
+		this.窗户朝向 = 窗户朝向;
 	}
 	public String get窗户类型() {
 		return 窗户类型;
