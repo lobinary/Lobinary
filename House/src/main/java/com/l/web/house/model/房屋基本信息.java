@@ -60,7 +60,7 @@ public class 房屋基本信息 {
 	public String 房屋用途;
 	public String 产权所属;
 	public String 是否唯一;
-	public String 当前状态;//概要信息 0 详细信息1
+	public String 当前状态 = "0";//概要信息 0 详细信息1
 	public String get当前状态() {
 		return 当前状态;
 	}

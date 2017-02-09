@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 
@@ -22,12 +23,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.l.web.house.mapper.房屋信息数据库;
+import com.l.web.house.model.小区基本信息;
 import com.l.web.house.model.房屋交易信息;
 import com.l.web.house.model.房屋基本信息;
 import com.l.web.house.model.房屋户型信息;
 import com.l.web.house.model.房屋照片信息;
 import com.l.web.house.service.catchsystem.房屋信息捕获基类;
+import com.l.web.house.util.DU;
 import com.l.web.house.util.HttpUtil;
+
+import net.sf.json.JSONObject;
 
 @Service
 public class 链家房屋信息捕获 extends 房屋信息捕获基类{
@@ -48,7 +53,12 @@ public class 链家房屋信息捕获 extends 房屋信息捕获基类{
 	
 	@Override
 	public void 捕获房屋信息() throws Exception {
-		//		捕获房屋概要信息();
+//		捕获房屋概要信息();
+		从数据库捕获房屋详细信息();
+		获取小区信息();
+	}
+
+	private void 从数据库捕获房屋详细信息() throws Exception, InterruptedException {
 		List<房屋基本信息 > 房屋基本信息List = 房屋信息数据库.查找基本信息根据当前状态(房屋信息来源,"0",2000);
 		for (房屋基本信息 房屋基本信息 : 房屋基本信息List) {
 			System.out.println(房屋基本信息.getId());
@@ -338,7 +348,7 @@ public class 链家房屋信息捕获 extends 房屋信息捕获基类{
 				}
 				logger.info("==========================================================================子数据结束==============================================");
 				System.out.println("共有"+ 最大页数 +"页数据，当前为第"+i+"页数据");
-				Thread.sleep(1000);
+				Thread.sleep(1);
 			}
 			logger.info("总数据获取完毕，共计：20条数据，准备依次解析单个数据");
 			logger.info("单个数据解析完毕，解析结果：成功19条，失败1条");
@@ -394,8 +404,91 @@ public class 链家房屋信息捕获 extends 房屋信息捕获基类{
 		房屋基本信息.房本备注 = "房本备注";
 		房屋基本信息.联系人 = "联系人";
 		房屋基本信息.联系信息 = "联系信息";
+		房屋基本信息.当前状态 = "0";
 //		房屋信息数据库.添加房屋基本信息(房屋基本信息);
 		return 房屋基本信息;
+	}
+	
+	public void 获取小区信息() throws Exception {
+		List<String> list = 房屋信息数据库.查找未抓取过的小区编号根据房屋来源(房屋信息来源);
+		for (String 小区编号 : list) {
+			获取小区信息(小区编号);
+			TimeUnit.SECONDS.sleep(1l);
+		}
+	}
+	
+	
+	public void 获取小区信息(String 小区编号) throws Exception{
+		String 小区信息获取URL = "http://bj.lianjia.com/xiaoqu/"+小区编号+"/";
+		String rs = HttpUtil.doGet(小区信息获取URL);
+//		System.out.println(rs);
+		Parser parser = new Parser(rs);  
+        // TextExtractingVisitor visitor = new TextExtractingVisitor();  
+        // parser.visitAllNodesWith(visitor);  
+        // String textInPage = visitor.getExtractedText();  
+        // System.out.println(textInPage);  
+        //查找含有filter-strip__list样式的元素  
+		//parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "areaName")).elementAt(0).getChildren().elementAt(6).getChildren().elementAt(2).toPlainTextString()
+		NodeList ens = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "xiaoquInfo")).elementAt(0).getChildren();
+		Map<String,String> 小区信息Map = new HashMap<String,String>();
+		for (int i = 0; i < ens.size(); i++) {
+			小区信息Map.put(ens.elementAt(i).getChildren().elementAt(0).toPlainTextString(), ens.elementAt(i).getChildren().elementAt(1).toPlainTextString());
+		}
+		
+//        String 标题 = 捕获数据(parser, new HasAttributeFilter("class", "xiaoquInfo"));  
+//        System.out.println("标题:"+标题);
+		小区基本信息 小区基本信息 = new 小区基本信息();
+		小区基本信息.id = 房屋信息来源+小区编号;
+		小区基本信息.信息来源 = 房屋信息来源;
+		小区基本信息.编号 = 小区编号;
+		String 名称S = rs.substring(rs.indexOf("resblockName")+14);
+		小区基本信息.名称 = 名称S.substring(0,名称S.indexOf("'"));
+		String 坐标S = rs.substring(rs.indexOf("resblockPosition")+18);
+		小区基本信息.坐标 = 坐标S.substring(0,坐标S.indexOf("'"));
+		小区基本信息.总楼数 = Integer.parseInt(小区信息Map.remove("楼栋总数").replace("栋", ""));
+		小区基本信息.总房屋数 = Integer.parseInt(小区信息Map.remove("房屋总数").replace("户", ""));
+		小区基本信息.楼盘均价 = 0;
+		String 建筑日期S = 小区信息Map.remove("建筑年代").replace("年建成", "");
+		if(!建筑日期S.contains("暂无信息")) {
+			小区基本信息.建筑日期 = DU.getDate(建筑日期S);
+		}
+		小区基本信息.建筑类型 = 小区信息Map.remove("建筑类型");
+		String 物业费用S = 小区信息Map.remove("物业费用");
+		if(!物业费用S.contains("暂无信息")){
+			if(物业费用S.contains("至")){
+				String[] 物业费用数组 = 物业费用S.split("至");
+				double d = Double.parseDouble(物业费用数组[0].replace("元/平米/月", ""))+Double.parseDouble(物业费用数组[1].replace("元/平米/月", ""));
+				小区基本信息.物业费用 = d/2;
+			}else{
+				小区基本信息.物业费用 = Double.parseDouble(物业费用S.replace("元/平米/月", ""));	
+			}
+		}
+		小区基本信息.物业公司 = 小区信息Map.remove("物业公司");
+		小区基本信息.开发商 = 小区信息Map.remove("开发商");
+//		小区基本信息. = 小区信息Map.get("");
+		String 描述字段 = rs.substring(rs.indexOf("description")+22,rs.indexOf("keywords")-17);
+//		System.out.println(描述字段);
+		for(String ss:描述字段.split(",")){
+			System.out.println(ss);
+			if(ss.contains("本月参考均价")){
+				小区基本信息.楼盘均价 = Integer.parseInt(ss.replace("本月参考均价", "").replace("元", ""));
+			}else if(ss.contains("在售房源")){
+				小区基本信息.挂牌房源数量 = Integer.parseInt(ss.replace("在售房源", "").replace("套", ""));
+			}else if(ss.contains("人关注本小区")){
+				小区基本信息.关注人数 = Integer.parseInt(ss.replace("已有", "").replace("人关注本小区", ""));
+			}
+		}
+		小区信息Map.remove("附近门店");
+		if(小区信息Map.size()>0){
+			System.out.println("=========未识别属性=============");
+			for (String  k : 小区信息Map.keySet()) {
+				System.out.println(k+":"+小区信息Map.get(k));
+			}
+			System.out.println("=========未识别属性=============");
+			throw new Exception("发现未识别小区基本属性");
+		}
+		System.out.println(小区基本信息);
+		房屋信息数据库.添加小区基本信息(小区基本信息);
 	}
 	
 	public void test2(){
@@ -537,14 +630,7 @@ public class 链家房屋信息捕获 extends 房屋信息捕获基类{
 			System.out.println("所在楼层："+ 所在楼层);
 			if(楼层.contains("年")){
 				String 建房年份S = 楼层.substring(楼层.indexOf(")")+1,楼层.indexOf("年"));
-				Calendar c = Calendar.getInstance();
-				c.set(Calendar.YEAR, Integer.parseInt(建房年份S));
-				c.set(Calendar.MONTH,0);
-				c.set(Calendar.DAY_OF_MONTH, 1);
-				c.set(Calendar.HOUR_OF_DAY, 0);
-				c.set(Calendar.MINUTE, 0);
-				c.set(Calendar.SECOND, 0);
-				建房时间 = c.getTime();
+				建房时间 = DU.getDate(建房年份S);
 				System.out.println("建房时间:" + sdf.format(建房时间));
 				建筑类型 = 楼层.substring(楼层.indexOf("年建")+2, 楼层.indexOf("-")-2);
 			}else{
@@ -570,14 +656,7 @@ public class 链家房屋信息捕获 extends 房屋信息捕获基类{
 			
 			if(楼层.contains("年")){
 				String 建房年份S = 楼层.substring(楼层.indexOf("层")+1,楼层.indexOf("年"));
-				Calendar c = Calendar.getInstance();
-				c.set(Calendar.YEAR, Integer.parseInt(建房年份S));
-				c.set(Calendar.MONTH,0);
-				c.set(Calendar.DAY_OF_MONTH, 1);
-				c.set(Calendar.HOUR_OF_DAY, 0);
-				c.set(Calendar.MINUTE, 0);
-				c.set(Calendar.SECOND, 0);
-				建房时间 = c.getTime();
+				建房时间 = DU.getDate(建房年份S);
 				System.out.println("建房时间:" + sdf.format(建房时间));
 				建筑类型 = 楼层.substring(楼层.indexOf("年")+1,楼层.indexOf("-")-1);
 			}else{
@@ -590,14 +669,7 @@ public class 链家房屋信息捕获 extends 房屋信息捕获基类{
 		}else{//2002年建板塔结合 - 木樨园
 			if(楼层.contains("年")){
 				String 建房年份S = 楼层.substring(楼层.indexOf("年")-4,楼层.indexOf("年"));
-				Calendar c = Calendar.getInstance();
-				c.set(Calendar.YEAR, Integer.parseInt(建房年份S));
-				c.set(Calendar.MONTH,0);
-				c.set(Calendar.DAY_OF_MONTH, 1);
-				c.set(Calendar.HOUR_OF_DAY, 0);
-				c.set(Calendar.MINUTE, 0);
-				c.set(Calendar.SECOND, 0);
-				建房时间 = c.getTime();
+				建房时间 = DU.getDate(建房年份S);
 				System.out.println("建房时间:" + sdf.format(建房时间));
 				建筑类型 = 楼层.substring(楼层.indexOf("年")+1,楼层.indexOf("-")-1);
 			}
@@ -617,24 +689,12 @@ public class 链家房屋信息捕获 extends 房屋信息捕获基类{
 		Date 发布时间 = null;
 		if(发布时间S.contains("月")){
 			String 月份 = 发布时间S.substring(0, 发布时间S.indexOf("个"));
-			Calendar c1 = Calendar.getInstance();
-			c1.set(Calendar.HOUR_OF_DAY, 0);
-			c1.set(Calendar.MINUTE, 0);
-			c1.set(Calendar.SECOND, 0);
-			int m1 = Integer.parseInt(月份.trim());
-			c1.add(Calendar.MONTH, (-1*m1));
-			发布时间 = c1.getTime();
+			发布时间 = DU.获取几月前的时间(月份);
 			System.out.println("发布时间："+发布时间);
 		}else if(发布时间S.contains("天")){
 			String 天数 = 发布时间S.substring(0, 发布时间S.indexOf("天"));
-			Calendar c1 = Calendar.getInstance();
-			c1.set(Calendar.HOUR_OF_DAY, 0);
-			c1.set(Calendar.MINUTE, 0);
-			c1.set(Calendar.SECOND, 0);
-			int m1 = Integer.parseInt(天数.trim());
-			c1.add(Calendar.DAY_OF_MONTH, (-1*m1));
-			发布时间 = c1.getTime();
-			System.out.println("发布时间："+sdf.format(c1.getTime()));
+			发布时间 = DU.获取几天前的时间(天数);
+			System.out.println("发布时间："+sdf.format(发布时间));
 		}else if(发布时间S.contains("一年")){
 			Calendar c1 = Calendar.getInstance();
 			c1.set(Calendar.HOUR_OF_DAY, 0);

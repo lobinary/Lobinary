@@ -21,12 +21,14 @@ import com.rabbitmq.client.Channel;
  * @date 2016年10月26日 上午9:45:51
  * @version V1.0.0
  */
-public class RabbitMQ发送器 {
-	
-	 private final static String QUEUE_NAME = "hello";
-	
+public class RabbitMQSender {
+
+	static String routingKey = "routingKey1.#";//绑定的id
+    static String exchange = "topic-exchange";//绑定Exchange名
+    static String queue = "queue2";//绑定的queue名
+    
+    
 	public static void main(String[] args) throws IOException, TimeoutException {
-		System.out.println("hello world");
 		//1.3、消息队列的使用过程
 		
 		//1. 客户端连接到消息队列服务器，打开一个channel。
@@ -39,14 +41,24 @@ public class RabbitMQ发送器 {
 	    ConnectionFactory factory = RabbitMQConfig.getFactory();
 	    Connection connection = factory.newConnection();
 	    Channel channel = connection.createChannel();
-
-	    channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-	    String message = "Hello World!";
-	    channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
-	    System.out.println(" [x] Sent '" + message + "'");
 	    
-	    channel.close();
-	    connection.close();
+	    //声明绑定关系，一次即可
+//	   	 声明绑定关系(channel);
+		
+	    String message = "message1";
+	    channel.basicPublish(exchange, routingKey, null, message.getBytes());
+	    System.out.println(" 消息发送器： 发送消息 '" + message + "' 完毕");
+	    
+	    if(channel.isOpen())channel.close();
+	    if(connection.isOpen())connection.close();
+	}
+
+	private static void 声明绑定关系(Channel channel) throws IOException {
+	    channel.exchangeDelete(exchange);//如果有就删除 重新建立
+		channel.exchangeDeclare(exchange, "direct", true, false, false, null);
+		channel.queueDeclare(queue, false, false, false, null);
+		channel.queueBind(queue, exchange, routingKey);
+		System.out.println("绑定完成");
 	}
 
 }

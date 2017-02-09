@@ -4,7 +4,7 @@ import com.rabbitmq.client.ConnectionFactory;
 
 public class RabbitMQConfig {
 
-	public final static String HOST = "172.19.42.237";
+	public final static String HOST = "127.0.0.1";
 
 	public static ConnectionFactory getFactory() {
 		ConnectionFactory factory = new ConnectionFactory();

@@ -14,8 +14,8 @@
 	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener> 
-	
+	</listener>
+
 	<!-- Filter 定义 -->
 	<!-- Character Encoding filter -->
 	<filter>
@@ -36,7 +36,7 @@
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
-	
+
 	<filter>
 		<filter-name>accessFilter</filter-name>
 		<filter-class>com.l.test.web.filter.AccessStatisticsFilter</filter-class>
@@ -57,9 +57,18 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	<servlet>
+		<servlet-name>DemoServlet</servlet-name>
+		<servlet-class>com.l.test.web.servlet.DemoServlet</servlet-class>
+	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>springServlet</servlet-name>
 		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DemoServlet</servlet-name>
+		<url-pattern>/servlet/registServlet</url-pattern>
 	</servlet-mapping>
 
 	<session-config>

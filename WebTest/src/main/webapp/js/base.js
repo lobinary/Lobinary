@@ -1,7 +1,7 @@
 
 //jquery core 
-document.write("<script language=javascript src='../js/xxx/util.js'></script>");
+document.write("<script language=javascript src='/WebTest/js/xxx/util.js'></script>");
 
 //jquery core 
-document.write("<script language=javascript src='../js/jquery.js'></script>");
+document.write("<script language=javascript src='/WebTest/js/jquery.js'></script>");
 

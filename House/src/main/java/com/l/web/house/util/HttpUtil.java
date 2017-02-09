@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.CookieManager;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -289,6 +290,7 @@ public class HttpUtil {
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("accept", "*/*");
 			conn.setRequestProperty("connection", "Keep-Alive");
+        	conn.setRequestProperty("Cookie", "lianjia_uuid=892b69b6-0556-42ac-9e52-ac71449f3312");  
 			if (conn.getResponseCode() == 200) {
 				is = conn.getInputStream();
 				baos = new ByteArrayOutputStream();
