@@ -32,8 +32,6 @@ import com.l.web.house.service.catchsystem.房屋信息捕获基类;
 import com.l.web.house.util.DU;
 import com.l.web.house.util.HttpUtil;
 
-import net.sf.json.JSONObject;
-
 @Service
 public class 链家房屋信息捕获 extends 房屋信息捕获基类{
 
@@ -54,7 +52,7 @@ public class 链家房屋信息捕获 extends 房屋信息捕获基类{
 	@Override
 	public void 捕获房屋信息() throws Exception {
 //		捕获房屋概要信息();
-		从数据库捕获房屋详细信息();
+//		从数据库捕获房屋详细信息();
 		获取小区信息();
 	}
 
@@ -170,7 +168,10 @@ public class 链家房屋信息捕获 extends 房屋信息捕获基类{
     		SimpleDateFormat sdf挂牌时间 = new SimpleDateFormat("YYYY-MM-dd");
     		f.挂牌时间 = sdf挂牌时间.parse(属性Map.remove("挂牌时间"));
     		f.交易权属 = 属性Map.remove("交易权属");
-    		f.上次交易时间 = sdf挂牌时间.parse(属性Map.remove("上次交易"));
+    		String 上次交易时间 = 属性Map.remove("上次交易");
+    		if(!上次交易时间.equals("暂无数据")){
+    			f.上次交易时间 = sdf挂牌时间.parse(上次交易时间);
+    		}
     		f.房屋用途 = 属性Map.remove("房屋用途");
     		String 房本年限S = 属性Map.remove("房本年限");//满五年 满两年 不满两年
     		if(房本年限S.equals("满五年")){
@@ -179,6 +180,8 @@ public class 链家房屋信息捕获 extends 房屋信息捕获基类{
     			f.房本年限 = 2;
     		}else if(房本年限S.equals("未满两年")){
     			f.房本年限 = 1;
+    		}else if(房本年限S.equals("暂无数据")){
+    			f.房本年限 = 0;
     		}else{
     			throw new Exception("未知房本年限："+房本年限S);
     		}
@@ -317,10 +320,6 @@ public class 链家房屋信息捕获 extends 房屋信息捕获基类{
 		return null;
 	}
 	
-	public void 捕获房屋坐标(){
-		String 捕获坐标接口网址 = "http://bj.lianjia.com/ershoufang/housestat?hid=101101049486&rid=1111027379370";
-	}
-
 	private void 捕获房屋概要信息() throws Exception {
 		String 二手房筛选网址 = null;
 		try {
@@ -328,7 +327,7 @@ public class 链家房屋信息捕获 extends 房屋信息捕获基类{
 			logger.info("准备获取总数据");
 			int 最大页数 = 100;
 			for (int i = 1; i <= 最大页数; i++) {
-				二手房筛选网址 = "http://bj.lianjia.com/ershoufang/pg"+i+"l1l2p1p2/";//l1一室  l2两室  p1 200w内 p2 200~250w
+				二手房筛选网址 = "http://bj.lianjia.com/ershoufang/pg"+i+"l1l2l3l4p1p2/";//l1一室  l2两室  p1 200w内 p2 200~250w
 				String rs = HttpUtil.doGet(二手房筛选网址);
 				//h2 class="total fl">共找到<span> 1688 </span>套北京二手房<
 //			System.out.println(rs);
@@ -776,6 +775,8 @@ public class 链家房屋信息捕获 extends 房屋信息捕获基类{
 				System.out.println("######################发现价格变动信息##############################################################################################");
 				房屋信息数据库.添加房屋交易信息(j);
 			}
+			f2.最后更新日期 = new Date();
+			房屋信息数据库.更新房屋基本信息(f2);
 		}
 		return f;
 	}

@@ -290,7 +290,8 @@ public class HttpUtil {
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("accept", "*/*");
 			conn.setRequestProperty("connection", "Keep-Alive");
-        	conn.setRequestProperty("Cookie", "lianjia_uuid=892b69b6-0556-42ac-9e52-ac71449f3312");  
+			String uuid = "892b69b6-0556-42ac-9e52-ac71449f3312";
+        	conn.setRequestProperty("Cookie", "lianjia_uuid="+uuid);  
 			if (conn.getResponseCode() == 200) {
 				is = conn.getInputStream();
 				baos = new ByteArrayOutputStream();

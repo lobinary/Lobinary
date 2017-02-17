@@ -12,18 +12,6 @@ public class 房屋基本信息 {
 	public String 标题;
 	public String 子标题;
 	public String 网址;
-	public String get子标题() {
-		return 子标题;
-	}
-	public void set子标题(String 子标题) {
-		this.子标题 = 子标题;
-	}
-	public String get所在小区编号() {
-		return 所在小区编号;
-	}
-	public void set所在小区编号(String 所在小区编号) {
-		this.所在小区编号 = 所在小区编号;
-	}
 	public String 坐标;
 	public String 所在城市;
 	public String 所在区县;// 如 丰台区  
@@ -61,11 +49,24 @@ public class 房屋基本信息 {
 	public String 产权所属;
 	public String 是否唯一;
 	public String 当前状态 = "0";//概要信息 0 详细信息1
+	public Date 最后更新日期;
 	public String get当前状态() {
 		return 当前状态;
 	}
 	public void set当前状态(String 当前状态) {
 		this.当前状态 = 当前状态;
+	}
+	public String get子标题() {
+		return 子标题;
+	}
+	public void set子标题(String 子标题) {
+		this.子标题 = 子标题;
+	}
+	public String get所在小区编号() {
+		return 所在小区编号;
+	}
+	public void set所在小区编号(String 所在小区编号) {
+		this.所在小区编号 = 所在小区编号;
 	}
 	public String get所在环数() {
 		return 所在环数;
@@ -355,6 +356,12 @@ public class 房屋基本信息 {
 				+ ", 所在楼层=" + 所在楼层 + ", 总楼层=" + 总楼层 + ", 户型结构=" + 户型结构 + ", 建筑类型=" + 建筑类型 + ", 建筑结构=" + 建筑结构 + ", 梯户比例=" + 梯户比例 + ", 电梯=" + 电梯 + ", 用电类型=" + 用电类型 + ", 用水类型=" + 用水类型 + ", 燃气价格=" + 燃气价格
 				+ ", 建房时间=" + 建房时间 + ", 挂牌时间=" + 挂牌时间 + ", 发布时间=" + 发布时间 + ", 上次交易时间=" + 上次交易时间 + ", 房本年限=" + 房本年限 + ", 抵押信息=" + 抵押信息 + ", 交易权属=" + 交易权属 + ", 房屋用途=" + 房屋用途 + ", 产权所属=" + 产权所属
 				+ ", 房本备注=" + 房本备注 + ", 联系人=" + 联系人 + ", 联系信息=" + 联系信息 + ", 备注=" + 备注 + ", 创建时间=" + 创建时间 + "]";
+	}
+	public Date get最后更新日期() {
+		return 最后更新日期;
+	}
+	public void set最后更新日期(Date 最后更新日期) {
+		this.最后更新日期 = 最后更新日期;
 	}
 
 }
