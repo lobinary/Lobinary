@@ -1,9 +1,12 @@
 package com.lobinary.test;
 
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import com.lobinary.工具类.http.HttpUtil;
 
 public class Test {
 	
@@ -61,6 +64,19 @@ public class Test {
 		String 偏移量测试字符串 = "abcdefg";
 //		System.out.println(偏移量测试字符串.substring(1, -2));
 		
+		System.out.println(" a b c ".trim());
+		
+		String q = URLEncoder.encode("abc字符串");
+		System.out.println(q);
+//		String resp = HttpUtil.sendGetRequest("http://translate.google.cn/translate_a/single?client=t&sl=auto&tl=zh-CN&hl=zh-CN&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&source=btn&ssel=0&tsel=0&kc=1&tk=419886.9854&q="+q);
+//		System.out.println( resp);
+		
+		String u = "http://translate.google.cn/#auto/zh-CN/pathname%201234";
+		String resp = HttpUtil.doGet(u);
+		System.out.println(resp);
+		
+		
+		//97=bSBCozyfHzYdHtZ9PdSRPugOtBdLWVbhbQyXHKBVVHwuq7DrTrAhsPhXCXDOZRRN1A3_lhhlzqugEwVe8QPpm4Mb3JjaEteNXETm_xoiYNcF61JqMfthHAFDF3HBLl8P
 	}
 	
 	

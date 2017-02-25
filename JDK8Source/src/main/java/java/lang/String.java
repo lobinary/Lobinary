@@ -202,6 +202,7 @@ public final class String
     }
 
     /**
+     * <pre>
      * Allocates a new {@code String} that contains characters from a subarray
      * of the <a href="Character.html#unicode">Unicode code point</a> array
      * argument.  The {@code offset} argument is the index of the first code

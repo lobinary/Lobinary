@@ -41,7 +41,7 @@ public class 数据备份工具 extends 实用工具标签标准类 {
 	private static final long serialVersionUID = -8854133778693907627L;
 	private static boolean isLoading = false;
 	private JLabel 提示信息 = new JLabel("提示信息：");
-	JLabel 提示信息内容 = new JLabel("欢迎使用备份工具,如需备份数据,请先点击\"扫描数据\"进行 未备份数据 扫描");
+	private final static JLabel 提示信息内容 = new JLabel("欢迎使用备份工具,如需备份数据,请先点击\"扫描数据\"进行 未备份数据 扫描");
 	private final JButton 备份数据到外部存储按钮 = new JButton("备份数据到外部存储");
 	private final JButton 从未备份迁移到备份文件夹按钮 = new JButton("从未备份迁移到备份文件夹");
 	private final static 备份数据表格模板 表格模板 = new 备份数据表格模板();

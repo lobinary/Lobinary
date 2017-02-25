@@ -23,7 +23,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
+import com.lobinary.实用工具.Java源码注释翻译工具.Java源码注释翻译工具;
 import com.lobinary.实用工具.主窗口.关于我们弹出窗口;
 import com.lobinary.实用工具.主窗口.实用工具标签标准类;
 import com.lobinary.实用工具.数据备份.数据备份工具;
@@ -31,12 +33,11 @@ import com.lobinary.实用工具.文件夹工具.文件夹扫描工具;
 import com.lobinary.实用工具.文件批量替换工具.文件批量替换工具;
 import com.lobinary.工具类.date.DateUtil;
 import com.lobinary.工具类.file.FileUtil;
-import javax.swing.JTextField;
 
 @SuppressWarnings("unchecked")
 public class 实用工具 {
 
-	private JFrame frame;
+	public static JFrame 主窗口框架;
 	private static JTextArea 日志TextArea = new JTextArea("欢迎使用实用工具");
 	final JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 	
@@ -57,6 +58,7 @@ public class 实用工具 {
 	 */
 	public List<实用工具标签标准类> loadTabInfo(){
 		List<实用工具标签标准类> list = new ArrayList<实用工具标签标准类>();
+		list.add(new Java源码注释翻译工具());
 		list.add(new 数据备份工具());
 		list.add(new 文件批量替换工具());
 		list.add(new 文件夹扫描工具());
@@ -96,7 +98,7 @@ public class 实用工具 {
 			public void run() {
 				try {
 					实用工具 window = new 实用工具();
-					window.frame.setVisible(true);
+					window.主窗口框架.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -115,18 +117,18 @@ public class 实用工具 {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		主窗口框架 = new JFrame();
 //		frame.setResizable(false);
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(实用工具.class.getResource("/image/L-logo.jpg")));
-		frame.setTitle("实用工具1.0——————By Lobxxx");
+		主窗口框架.setIconImage(Toolkit.getDefaultToolkit().getImage(实用工具.class.getResource("/image/L-logo.jpg")));
+		主窗口框架.setTitle("实用工具1.0——————By Lobxxx");
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		int framewidth = 1280;
 		int frameHight = 800;
-		frame.setBounds((dim.width-framewidth)/2, (dim.height-frameHight)/2, 1280, 800);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		主窗口框架.setBounds((dim.width-framewidth)/2, (dim.height-frameHight)/2, 1280, 800);
+		主窗口框架.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.CENTER);
+		主窗口框架.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		panel.add(tabbedPane);
@@ -146,7 +148,7 @@ public class 实用工具 {
 		日志主窗口.add(日志ScrollPaneTextArea);
 		
 		JMenuBar menuBar = new JMenuBar();
-		frame.setJMenuBar(menuBar);
+		主窗口框架.setJMenuBar(menuBar);
 		
 		JMenu menu = new JMenu("菜单");
 		menuBar.add(menu);
@@ -202,7 +204,7 @@ public class 实用工具 {
 		JMenuItem menuItem = new JMenuItem("关于我们");
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JDialog 关于我们弹出窗口 = new 关于我们弹出窗口(frame,true);
+				JDialog 关于我们弹出窗口 = new 关于我们弹出窗口(主窗口框架,true);
 				关于我们弹出窗口.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				关于我们弹出窗口.setVisible(true);
 			}
