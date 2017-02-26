@@ -1,6 +1,7 @@
 package com.lobinary.test;
 
 import java.math.BigDecimal;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -10,9 +11,6 @@ import com.lobinary.工具类.http.HttpUtil;
 
 public class Test {
 	
-	private String a;
-	private String b;
-
 	public static void main(String[] args) throws Exception {
 		
 //		String r = "^(?!.*(\\.js|\\.css|receive|access3|\\.png|\\.ico|\\.jpg|\\.img)).*$";
@@ -71,19 +69,26 @@ public class Test {
 		c.setTime(new Date());
 		Calendar c1 = Calendar.getInstance();
 		System.out.println(c==c1);
+	
+		
+		System.out.println("==============");
+		
+		
+		System.out.println(URLEncoder.encode("i love you"));
+		
+		long a = 3397762296L;
+		long b = -253483058L;
+		long t = (a+b);
+		System.out.println();
+		System.out.println(t);
+		System.out.println(a^=t);
+		System.out.println("a+b="+(a+b));
+		
+		long aa = -1834548137;
+		long bb = 3144279238L;
+		System.out.println("xx:"+(int)(aa^bb));
 	}
-	
-	
 
-	@Override
-	public String toString() {
-		return ga(a,b);
-	}
-
-	private static String ga(String c ,String d) {
-		return c + d;
-	}	
 	
 	
-
 }

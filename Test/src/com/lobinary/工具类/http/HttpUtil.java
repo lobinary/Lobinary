@@ -1,14 +1,18 @@
 package com.lobinary.工具类.http;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.Map;
+
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -51,8 +55,8 @@ public class HttpUtil {
 			conn.setConnectTimeout(TIMEOUT_IN_MILLIONS);
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("accept", "*/*");
-			conn.setRequestProperty("connection", "Keep-Alive");
-        	conn.setRequestProperty("Cookie", "NID=97=bSBCozyfHzYdHtZ9PdSRPugOtBdLWVbhbQyXHKBVVHwuq7DrTrAhsPhXCXDOZRRN1A3_lhhlzqugEwVe8QPpm4Mb3JjaEteNXETm_xoiYNcF61JqMfthHAFDF3HBLl8P; _ga=GA1.3.840429089.1476179852");  
+//			conn.setRequestProperty("connection", "Keep-Alive");
+//        	conn.setRequestProperty("Cookie", "NID=97=bSBCozyfHzYdHtZ9PdSRPugOtBdLWVbhbQyXHKBVVHwuq7DrTrAhsPhXCXDOZRRN1A3_lhhlzqugEwVe8QPpm4Mb3JjaEteNXETm_xoiYNcF61JqMfthHAFDF3HBLl8P; _ga=GA1.3.840429089.1476179852");  
 			if (conn.getResponseCode() == 200) {
 				is = conn.getInputStream();
 				baos = new ByteArrayOutputStream();
@@ -108,16 +112,52 @@ public class HttpUtil {
         String content = "";
         try {
             String url = URLDecoder.decode(requestUrl, "utf-8");
-            
             HttpResponse response = Request.Get(url).connectTimeout(timeout).socketTimeout(timeout).execute().returnResponse();
             content = decode(response);
-
         } catch (Exception ex) {
             logger.error(requestUrl, ex);
         } finally {
             return content;
         }
     }
+	
+	 public static String sendGet(String url, String charset) {  
+	        String result = "";  
+	        BufferedReader in = null;  
+	        try {  
+	            URL realUrl = new URL(url);  
+	            // 打开和URL之间的连接  
+	            URLConnection connection = realUrl.openConnection();  
+	            // 设置通用的请求属性  
+	            connection.setRequestProperty("accept", "*/*");  
+	            connection.setRequestProperty("connection", "Keep-Alive");  
+	            connection.setRequestProperty("user-agent",  
+	                    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");  
+	            // 建立实际的连接  
+	            connection.connect();  
+	            // 定义 BufferedReader输入流来读取URL的响应  
+	            in = new BufferedReader(new InputStreamReader(  
+	                    connection.getInputStream(), charset));  
+	            String line;  
+	            while ((line = in.readLine()) != null) {  
+	                result += line;  
+	            }  
+	        } catch (Exception e) {  
+	            System.out.println("发送GET请求出现异常！" + e);  
+	            e.printStackTrace();  
+	        }  
+	        // 使用finally块来关闭输入流  
+	        finally {  
+	            try {  
+	                if (in != null) {  
+	                    in.close();  
+	                }  
+	            } catch (Exception e2) {  
+	                e2.printStackTrace();  
+	            }  
+	        }  
+	        return result;  
+	    }  
 
     /**
      * 发送Post请求

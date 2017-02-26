@@ -1,32 +1,43 @@
 package com.lobinary.test;
 
 import java.net.URLEncoder;
+import java.util.Arrays;
+
+import javax.script.ScriptEngineManager;
 
 import com.lobinary.工具类.http.HttpUtil;
 
 public class TranslateUtil {
 
 	private static boolean 秘钥加载完毕 = true;
-	private static long a = 2090155966L;
-	private static long b = -2085086943L;
-	private static long r = 413312L;
+	private static long a = 3397762296L;
+	private static long b = -253483058L;
+	private static int r = 413359;
 	
 	public static void main(String[] args) throws Exception {
 
-		String q = "file";
+		String q = "fuck you";
 		System.out.println("q:"+q);
 
 //		String tk = "419886.9854";
 		String tkk = getTKK();
 		String tk = getTK(q);
 		System.out.println(tk);
+		q = URLEncoder.encode(q);
+		System.out.println(q);
 		String url = "http://translate.google.cn/translate_a/single?client=t&sl=auto&tl=zh-CN&hl=zh-CN&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&source=btn&ssel=0&tsel=0&kc=1&tk="
 				+ tk + "&q=" + q;
-//		String resp = HttpUtil.sendGetRequest(url);
+//		System.out.println(url);
+//		String resp = HttpUtil.doGet(url);
+//		String resp = HttpUtil.sendGet(url,"UTF-8");
 //		System.out.println(resp);
 //		System.out.println(tkk);
 //		System.out.println(tk);
 //		System.out.println("694560.841561");
+		
+		System.out.println(423749350>>>6);
+		int x = 'a';
+		System.out.println(413414<<10);
 	}
 	
 	/**
@@ -61,7 +72,7 @@ public class TranslateUtil {
 						if(sss.contains("b")){
 							b = Long.parseLong(sss.trim().replace("b\\x3d", "").replace(";", ""));
 						}else{
-							r = Long.parseLong(sss.trim());
+							r = Integer.parseInt(sss.trim());
 						}
 					}
 					
@@ -88,6 +99,7 @@ public class TranslateUtil {
 	 * @throws Exception
 	 */
 	private static String getTK(String q) throws Exception{
+		System.out.println("加签数据为："+q);
 		/*
 		for (var e = getTKK().split("."), h = Number(e[0]) || 0, g = [], d = 0, f = 0; f < a.length; f++) {  
 	        var c = a.charCodeAt(f);  
@@ -116,7 +128,7 @@ public class TranslateUtil {
 	    a %= 1E6;  
 	    return a.toString() + "." + (a ^ h);
 	    */
-		long h = r;
+		int h = r;
 		long[] g = new long[1000];
 		int d = 0;
 		int f = 0;
@@ -159,18 +171,28 @@ public class TranslateUtil {
 	    a %= 1E6;  
 	    return a.toString() + "." + (a ^ h);
 		 */
-		long ah = h;
+		System.out.println("a:"+a);
+		System.out.println("b:"+b);
+		System.out.println("r:"+r);
+		int ah = h;
+		System.out.println(Arrays.toString(g));
 //		System.out.println(g.length);
 		for(d=0;d<g.length;d++){
 			if(g[d]==0)break;
 			ah += g[d];
-			ah = b(ah, "+-a^+6");
+			ah = 二级加密(ah, "+-a^+6");
 		}
-		ah = b(ah, "+-3^+b+-f");  
-	    ah ^= (a + b);  
-//	    0 > ah && (ah = (a & 2147483647) + 2147483648);  
+		ah = 二级加密(ah, "+-3^+b+-f");  
+		long t =  (a+b);
+	    ah = (int) (ah^t);  
+	    if(0 > ah ){
+	    	//a= -807236644
+	    	//3487730652
+	    	long ll = (ah & 2147483647) ;
+	    	ah = (int) (ll+ 2147483648L);
+	    }
 	    ah %= 1E6;  
-		return ah + "." + (a ^ h);
+		return ah + "." + (ah ^ h);
 	}
 
 	/*
@@ -183,13 +205,29 @@ public class TranslateUtil {
 	  return a  
 	} 
 	*/ 
-	private static long b(long a ,String b){
+	private static int 二级加密(long al ,String b){
+		int a = (int) al;
+		System.out.println("入参：["+a+"],["+b+"]");
 		for(int d=0;d<b.length()-2;d+=3){
-			long c = b.charAt(d+2);
-			c = 'a' <= c ? c - 87 : c;  
-			a = '+' == b.charAt(d) ? a + c & 4294967295L : a ^ c;  
+			int c = b.charAt(d+2);
+//			System.out.println("1c:"+(char)c);
+			if('a' <= c ){
+				c = c - 87;
+			}else{
+				c = Integer.parseInt(""+(char)c);
+			}
+//			System.out.println("2c:"+c);
+//			c = 'a' <= c ? c - 87 : c;  
+			//c = 10 , '6'
+//			System.out.println("2b:"+b.charAt(d+1));
+//			System.out.println("2a:"+a);
+//			System.out.println("bv:"+( '+' == b.charAt(d + 1) ));
+			c = '+' == b.charAt(d + 1) ? a >>> c : a << c;
+//			System.out.println("3c:"+c);
+			a = (int) ('+' == b.charAt(d) ? a + c & 4294967295L : a ^ c);
+//			System.out.println("4c:"+c);  
 		}
-		System.out.println(a);
+		System.out.println("出参："+a);
 		return a;
 	}
 }
