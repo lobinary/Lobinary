@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.lobinary.工具类.http.HttpUtil;
+
 public class Test {
 	
 	private String a;

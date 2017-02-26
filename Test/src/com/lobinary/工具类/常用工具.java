@@ -40,6 +40,7 @@ public class 常用工具 {
 	public static long getFileSize(File f) throws Exception{
 		long size = 0;
 		File flist[] = f.listFiles();
+		if(flist==null)return 0;
 		for (int i = 0; i < flist.length; i++) {
 			if (flist[i].isDirectory()) {
 				size = size + getFileSize(flist[i]);
@@ -58,6 +59,7 @@ public class 常用工具 {
 	public static int getFileNums(File f) throws Exception{
 		int nums = 0;
 		File flist[] = f.listFiles();
+		if(flist==null)return 0;
 		for (int i = 0; i < flist.length; i++) {
 			if (flist[i].isDirectory()) {
 				nums = nums + getFileNums(flist[i]);

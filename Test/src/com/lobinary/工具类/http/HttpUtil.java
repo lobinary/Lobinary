@@ -1,7 +1,11 @@
 package com.lobinary.工具类.http;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.util.Map;
@@ -24,10 +28,75 @@ public class HttpUtil {
 
     private static final Logger logger = Logger.getLogger(HttpUtil.class);
     private static final Integer timeout = 60000;
+    private static final Integer TIMEOUT_IN_MILLIONS = 60000;
 
     private HttpUtil() {
     }
+	/**
+	 * Get请求，获得返回数据
+	 * 
+	 * @param urlStr
+	 * @return
+	 * @throws Exception
+	 */
+	public static String doGet(String urlStr) {
+		URL url = null;
+		HttpURLConnection conn = null;
+		InputStream is = null;
+		ByteArrayOutputStream baos = null;
+		try {
+			url = new URL(urlStr);
+			conn = (HttpURLConnection) url.openConnection();
+			conn.setReadTimeout(TIMEOUT_IN_MILLIONS);
+			conn.setConnectTimeout(TIMEOUT_IN_MILLIONS);
+			conn.setRequestMethod("GET");
+			conn.setRequestProperty("accept", "*/*");
+			conn.setRequestProperty("connection", "Keep-Alive");
+        	conn.setRequestProperty("Cookie", "NID=97=bSBCozyfHzYdHtZ9PdSRPugOtBdLWVbhbQyXHKBVVHwuq7DrTrAhsPhXCXDOZRRN1A3_lhhlzqugEwVe8QPpm4Mb3JjaEteNXETm_xoiYNcF61JqMfthHAFDF3HBLl8P; _ga=GA1.3.840429089.1476179852");  
+			if (conn.getResponseCode() == 200) {
+				is = conn.getInputStream();
+				baos = new ByteArrayOutputStream();
+				int len = -1;
+				byte[] buf = new byte[128];
 
+				while ((len = is.read(buf)) != -1) {
+					baos.write(buf, 0, len);
+				}
+				baos.flush();
+				return baos.toString();
+			} else {
+				is = conn.getInputStream();
+				baos = new ByteArrayOutputStream();
+				int len = -1;
+				byte[] buf = new byte[128];
+
+				while ((len = is.read(buf)) != -1) {
+					baos.write(buf, 0, len);
+				}
+				baos.flush();
+				return baos.toString();
+//				throw new RuntimeException(" responseCode is not 200 ... ");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (is != null)
+					is.close();
+			} catch (IOException e) {
+			}
+			try {
+				if (baos != null)
+					baos.close();
+			} catch (IOException e) {
+			}
+			conn.disconnect();
+		}
+
+		return null;
+
+	}
     /**
      * 发送Get请求
      *

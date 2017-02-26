@@ -8,10 +8,11 @@ public class Executor用法 {
 	
 	public static void main(String[] args) {
 		for (int i = 0; i <100; i++) {
-			//两个方法都可以向线程池提交任务，execute()方法的返回类型是void，
-			//它定义在Executor接口中, 而submit()方法可以返回持有计算结果的Future对象，
-			//它定义在ExecutorService接口中，它扩展了Executor接口，
-			//其它线程池类像ThreadPoolExecutor和ScheduledThreadPoolExecutor都有这些方法。
+			/*	两个方法都可以向线程池提交任务，
+				 *	execute()方法的返回类型是void，它定义在Executor接口中, 
+				 *	submit()方法可以返回持有计算结果的Future对象，它定义在ExecutorService接口中，它扩展了Executor接口，
+				 *	其它线程池类像ThreadPoolExecutor和ScheduledThreadPoolExecutor都有这些方法。
+			*/	
 			threadPool.execute(new Executor用法_线程());
 			threadPool.submit(new Executor用法_线程());
 		}

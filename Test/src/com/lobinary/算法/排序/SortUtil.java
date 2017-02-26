@@ -91,7 +91,7 @@ public class SortUtil {
 				sb.append(oo+",");
 			}
 		}
-		System.out.println(sb.toString().substring(0,sb.length()-1));
+		System.out.println("["+sb.toString().substring(0,sb.length()-1)+"]");
 	}
 	
 	/**
