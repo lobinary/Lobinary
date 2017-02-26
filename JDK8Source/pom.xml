@@ -1,0 +1,60 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.l.source</groupId>
+	<artifactId>jdk</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>JDK8Source</name>
+
+	<properties>
+		<!-- spring版本号 -->
+		<spring.version>4.2.6.RELEASE</spring.version>
+		<!-- log4j日志文件管理包版本 -->
+		<slf4j.version>1.6.1</slf4j.version>
+		<log4j.version>1.2.12</log4j.version>
+		<!-- junit版本号 -->
+		<junit.version>4.10</junit.version>
+		<apache.http.version>4.5.2</apache.http.version>
+	</properties>
+
+	<description>JDK8源码解读</description>
+
+
+
+	<dependencies>
+		<!-- log start -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<!-- log end -->
+	</dependencies>
+
+
+
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
