@@ -1,5 +1,6 @@
 package com.lobinary.test;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -60,7 +61,14 @@ public class Test {
 		 */
 		String 偏移量测试字符串 = "abcdefg";
 //		System.out.println(偏移量测试字符串.substring(1, -2));
+	
 		
+		System.out.println(new BigDecimal("123456").toString());
+		
+		Calendar c = Calendar.getInstance();
+		c.setTime(new Date());
+		Calendar c1 = Calendar.getInstance();
+		System.out.println(c==c1);
 	}
 	
 	

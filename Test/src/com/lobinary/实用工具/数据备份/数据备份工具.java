@@ -8,7 +8,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -26,6 +29,7 @@ import javax.swing.JTable;
 import javax.swing.table.TableColumn;
 
 import org.apache.commons.io.FileUtils;
+import org.springframework.util.DigestUtils;
 
 import com.lobinary.java.多线程.TU;
 import com.lobinary.实用工具.实用工具;
@@ -54,6 +58,8 @@ public class 数据备份工具 extends 实用工具标签标准类 {
 
 	private static Map<String, 备份记录> 备份记录保存路径配置 = new HashMap<String, 备份记录>();
 
+	DecimalFormat df = new DecimalFormat("######0.00");
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void loadConfig() {
@@ -126,11 +132,11 @@ public class 数据备份工具 extends 实用工具标签标准类 {
 								未备份文件夹 = ft;
 								l("扫描到未备份文件夹:" + 未备份文件夹);
 							}
-							if (ft.getName().equals("备份文件夹")) {
+							if (ft.getName().equals("本地备份文件夹")) {
 								本地备份文件夹 = ft;
 								l("扫描到本地备份文件夹:" + 本地备份文件夹);
 							}
-							if (ft.getName().equals("外部备份文件夹")) {
+							if (ft.getName().equals("外部存储备份文件夹")) {
 								外部存储备份文件夹 = ft;
 								l("扫描到外部存储备份文件夹:" + 外部存储备份文件夹);
 							}
@@ -152,20 +158,22 @@ public class 数据备份工具 extends 实用工具标签标准类 {
 					log("扫描数据正常");
 
 					表格模板.清除数据(备份记录.扫描添加);
+					表格模板.清除数据(备份记录.手动添加);
 					
 					loging("开始扫描未备份文件夹数据");
 					String[] 未备份文件夹目录数组 = 未备份文件夹.list();
 					
-					for (String 未备份文件夹子目录路径 : 未备份文件夹目录数组) {
+					for (String 未备份文件夹子目录路径 : 未备份文件夹目录数组) {//遍历未备份目录
 						File 未备份文件夹子目录 = new File(未备份文件夹 + "/" + 未备份文件夹子目录路径);
-						int fileNums = 常用工具.getFileNums(未备份文件夹子目录);
-						long fileSize = 常用工具.getFileSize(未备份文件夹子目录);
+						int fileNums = 常用工具.getFileNums(未备份文件夹子目录);//未备份子目录文件数量
+						long fileSize = 常用工具.getFileSize(未备份文件夹子目录);//未备份子目录文件大小
 						String formetFileSize = 常用工具.formetFileSize(fileSize);
 						if (fileNums == 0 || formetFileSize.equals("0.00B")) {
 							l("发现空备份目录    [" + 未备份文件夹子目录.getAbsolutePath() + "]   文件数量：" + fileNums + ",文件大小：" + formetFileSize);
 							continue;
+						}else{
+							l("发现非空备份目录    [" + 未备份文件夹子目录.getAbsolutePath() + "]   文件数量：" + fileNums + ",文件大小：" + formetFileSize);
 						}
-						totalSize += fileSize;
 						备份记录 b = new 备份记录();
 						b.setUnBackupFolder(未备份文件夹子目录.getAbsolutePath());
 						备份记录 配置备份记录 = 备份记录保存路径配置.get(b.getUnBackupFolder());
@@ -186,10 +194,10 @@ public class 数据备份工具 extends 实用工具标签标准类 {
 						}
 						表格模板.addData(备份文件夹列表, b);
 					}
-					
+					表格模板.refreshTotalSize();
 					log("扫描数据完毕.");
-					l("========================================================================扫描数据完毕====" + DateUtil.getCurrentTime()
-							+ "=====================================================================");
+					l("============================================扫描数据完毕====" + DateUtil.getCurrentTime()
+							+ "========文件总大小："+常用工具.formetFileSize(totalSize)+"=============================================================");
 				} catch (Exception e1) {
 					e1.printStackTrace();
 					error("扫描数据异常：" + e1);
@@ -259,6 +267,7 @@ public class 数据备份工具 extends 实用工具标签标准类 {
 					public void run() {
 						super.run();
 						try {
+							表格模板.refreshTotalSize();
 							loging("从未备份迁移到备份文件夹中");
 							List<备份记录> 备份数据 = 表格模板.getData();
 							for (备份记录 备份记录 : 备份数据) {// 目录检查
@@ -364,6 +373,8 @@ public class 数据备份工具 extends 实用工具标签标准类 {
 						String sd = getSelectData();
 						if(sd!=null&&new File(sd).isDirectory()){
 							右键菜单菜单.add(打开选中目录);
+						}else{
+							log("sd"+sd);
 						}
 					}
 					JPopupMenu  b=new JPopupMenu(); 
@@ -449,14 +460,38 @@ public class 数据备份工具 extends 实用工具标签标准类 {
 	}
 
 	/**
+	 * 通过md5教研文件一致性
+	 * @param f1
+	 * @param f2
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	public boolean isSameFile(File f1,File f2) throws FileNotFoundException, IOException{
+		String md5 = DigestUtils.md5DigestAsHex(new FileInputStream(f1));
+		String md52 = DigestUtils.md5DigestAsHex(new FileInputStream(f2));
+		return md5.equals(md52);
+	}
+	
+	
+	
+	/**
 	 * 更新进度信息
 	 * 
 	 * @param fs
 	 */
 	private void updateProgressInfo(String info, long fs) {
 		finishSize = finishSize + fs;
-		double pi = finishSize * 100 / totalSize;
-		log("备份完成进度:" + pi + "% ," + info);
+		System.out.println(finishSize + ":" + totalSize);
+		double pi;
+		try {
+			pi = ((double)(finishSize * 100)) / ((double)totalSize);
+		} catch (Exception e) {
+			表格模板.refreshTotalSize();
+			pi = ((double)(finishSize * 100)) / ((double)totalSize);
+		}
+		
+		log("备份完成进度:" + df.format(pi) + "% ," + info);
 	}
 
 	@Override
@@ -515,12 +550,12 @@ public class 数据备份工具 extends 实用工具标签标准类 {
 				if (!tf.exists()) {
 					FileUtils.copyFile(flist[i], tf);
 					updateProgressInfo("从:" + flist[i].getAbsolutePath() + "备份文件到:" + tf.getAbsolutePath() + "状态：完成", length);
-				} else if (tf.exists() && tf.length() != flist[i].length()) {
+				} else if (isSameFile(tf,flist[i])) {
+					updateProgressInfo("从:" + flist[i].getAbsolutePath() + "备份文件到:" + tf.getAbsolutePath() + ",状态：备份文件已经存在", length);
+				} else {
 					tf = new File(toFile.getAbsolutePath() + "/" + flist[i].getName().replace(".", DateUtil.DateToString(new Date(), "_yyyy年MM月dd日HHmmss_SSS") + "."));
 					FileUtils.copyFile(flist[i], tf);
 					updateProgressInfo("从:" + flist[i].getAbsolutePath() + "备份文件到:" + tf.getAbsolutePath() + "状态：存在同名不同数据文件", length);
-				} else {
-					updateProgressInfo("从:" + flist[i].getAbsolutePath() + "备份文件到:" + tf.getAbsolutePath() + ",状态：备份文件已经存在", length);
 				}
 
 			}
@@ -541,17 +576,17 @@ public class 数据备份工具 extends 实用工具标签标准类 {
 				} else {
 					long length = 源文件.length();
 					if (!目的文件.exists()) {
-						FileUtils.copyFile(源文件, 目的文件);
+						源文件.renameTo(目的文件);
 						updateProgressInfo("从:" + 源文件路径 + "移动文件到:" + 目的文件路径 + "状态：完成", length);
-					} else if (目的文件.exists() && 目的文件.length() != 源文件.length()) {
-						目的文件 = new File(toFile.getAbsolutePath() + "/" + 源文件.getName().replace(".", DateUtil.DateToString(new Date(), "_yyyy年MM月dd日HHmmss_SSS") + "."));
-						FileUtils.copyFile(源文件, 目的文件);
-						updateProgressInfo("从:" + 源文件路径 + "移动文件到:" + 目的文件路径 + "状态：存在同名不同数据文件", length);
-					} else {
+					} else if (isSameFile(目的文件,源文件)) {
 						updateProgressInfo("从:" + 源文件路径 + "移动文件到:" + 目的文件路径 + ",状态：备份文件已经存在", length);
+						boolean df = 源文件.exists();
+					} else {
+						目的文件 = new File(toFile.getAbsolutePath() + "/" + 源文件.getName().replace(".", DateUtil.DateToString(new Date(), "_yyyy年MM月dd日HHmmss_SSS") + "."));
+						源文件.renameTo(目的文件);
+						updateProgressInfo("从:" + 源文件路径 + "移动文件到:" + 目的文件路径 + "状态：存在同名不同数据文件", length);
 					}
 				}
-				/*boolean df = */源文件.delete();
 				源文件路径 = "null";
 				目的文件路径 = "null";// 防止报错之后输出的是原始数据
 			}

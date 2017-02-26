@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,com.l.test.web.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -19,6 +19,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+	<style type="text/css">
+	
+		.amountTypeLableClass {
+			color: red;
+			font-size: 20;
+		}
+		.formElementClass {
+			color: red;
+			font-size: 20;
+		}
+		
+	</style>
 
   </head>
   
@@ -26,16 +38,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<script type="text/javascript">
   
   	function 加载数据(){
-  		l($('#资金类型ID'));
+  		var x = $('.r');
+  		x.each(
+  				function(){
+  		    	     l($(this).id)	;
+  		    	}
+  		 );
+  		 l("===============================");
+  		var v = $('#资金类型ID')		;//			$('.123')
+  		l(v);
   		加载资金类型数据();
   	}
   	
   	function 加载资金类型数据(){
-  		$.ajax({//Jquery中的ajax请求方法
+  		$.ajax({	//Jquery中的ajax请求方法
   		    url: "/WebTest/servlet/registServlet", //请求的url地址
   		    dataType: "json",   			//返回格式为json
   		    async: true, 					//请求是否异步，默认为异步，这也是ajax重要特性
-  		    data: { "id": "value" },    	//参数值
+  		    data: { "type": $('#资金类型ID')},    	//参数值
   		    type: "post",   				//请求方式
   		    beforeSend: function() {		//请求前的处理
   		    	l("发送前");
@@ -70,23 +90,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </script>
   
   <body onload="加载数据()">
+  
+  
     <form action="/servlet/registServlet" >
     	<div align="center">添加账户资金</div>
     	<table border="1" align="center">
 	    	<tr>
 	    		<td>姓名：</td>
-	    		<td><input name="userName" value="" ></td>
+	    		<td><input name="userName" value="" ></td><!-- request.getParameter("userName") -->
 	    	</tr>
 	    	<tr>
 	    		<td>密码：</td>
 	    		<td><input name="password" type="password" value="" ></td>
 	    	</tr>
 	    	<tr>
-	    		<td>资金类型：</td>
+	    		<td class="amountTypeLableClass formElementClass" >资金类型：</td>
 	    		<td>
-					<select id="资金类型ID" >
-						<option value="0" > 资金类型加载失败...... </option>
+					<select id="资金类型ID" name="amountType" class="amountTypeClass selectClass" >
+							<option value="0" > 资金类型加载失败...... </option>
 					</select>
+					<select name="amountType2" class="amountTypeClass selectClass" >
+					
+						<%
+							//这里边可以随意写java代码，如果发现找不到类，请在上放代码处import增加如下类似com.l.test.web.util.*
+							//*<%@ page language="java" import="java.util.*,com.l.test.web.util.*" pageEncoding="UTF-8"
+							for(int i=0;i<5;i++){
+						 %>
+							<option value="0" > 资金类型加载失败...... </option>
+						<%
+							}
+						 %>
+						
+					</select>
+					<input type="radio" class="r" id="boyRadioId" name="sex" value="boy">男	<!-- request.getParameter("sex") -->
+					<input type="radio" class="r" id="girlRadioId" name="sex" value="gfir">女
+					
 				</td>
 	    	</tr>
 	    	<tr>
@@ -95,5 +133,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	</tr>
     	</table>
     </form>
+    
+    
   </body>
 </html>

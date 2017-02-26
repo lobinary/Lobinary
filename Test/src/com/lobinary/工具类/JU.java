@@ -39,7 +39,6 @@ public class JU
     public static String toJSONString(Object object)
     {
         JSONArray jsonArray = JSONArray.fromObject(object);
-
         return jsonArray.toString();
     }
 

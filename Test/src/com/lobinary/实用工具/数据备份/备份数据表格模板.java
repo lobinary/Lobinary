@@ -40,8 +40,13 @@ public class 备份数据表格模板 extends AbstractTableModel {
 		bd.setSize(fileSize);
 		bd.setFileNums(fileNums);
 		bd.setFormetFileSize(formetFileSize);
-		备份记录列表.add(bd);
-		数据备份工具.totalSize = 0l;
+		if(备份记录列表.contains(bd)){
+			实用工具.log("已存在："+bd);
+			备份记录列表.set(备份记录列表.indexOf(bd), bd);
+		}else{
+			备份记录列表.add(bd);
+			实用工具.log("未存在："+bd);
+		}
 		fireTableDataChanged();
 	}
 
@@ -124,6 +129,7 @@ public class 备份数据表格模板 extends AbstractTableModel {
 				String formetFileSize = 常用工具.formetFileSize(fileSize);
 				备份记录.setSize(fileSize);
 				备份记录.setFileNums(fileNums);
+				备份记录.setAddType(备份记录.配置添加);
 				备份记录.setFormetFileSize(formetFileSize);
 //				实用工具.log(备份记录.getAddType());
 				备份记录列表.set(i,备份记录);

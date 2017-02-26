@@ -23,6 +23,7 @@
 	<classpathentry kind="var" path="M2_REPO/io/netty/netty/3.7.0.Final/netty-3.7.0.Final.jar" sourcepath="M2_REPO/io/netty/netty/3.7.0.Final/netty-3.7.0.Final-sources.jar"/>
 	<classpathentry kind="lib" path="resource/lib/commons-compress-1.8.jar"/>
 	<classpathentry kind="lib" path="resource/lib/commons-io-1.3.2.jar"/>
+	<classpathentry kind="lib" path="resource/lib/json-lib-2.4-jdk15.jar"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
