@@ -27,7 +27,6 @@ public class JU
     public static <T> String toJSONString(List<T> list)
     {
         JSONArray jsonArray = JSONArray.fromObject(list);
-
         return jsonArray.toString();
     }
     

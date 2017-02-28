@@ -4,7 +4,6 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +13,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 
 import com.lobinary.实用工具.主窗口.实用工具标签标准类;
+import com.lobinary.工具类.GTU;
 import com.lobinary.工具类.file.FileUtil;
 import com.lobinary.工具类.http.HttpUtil;
 
@@ -23,7 +23,7 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 	 * 
 	 */
 	private static final long serialVersionUID = 3767156681875412565L;
-	private JTextField 源码文件夹路径 = new JTextField("C:/test/javasource");
+	private JTextField 源码文件夹路径 = new JTextField("C:/test");
 	private JFileChooser fileFolderChooser = new JFileChooser("");
 	
 	/**
@@ -46,6 +46,7 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 					源码路径 = 源码文件夹路径.getText();
 					翻译路径下的所有Java文件注释(源码路径);
 				} catch (Exception e1) {
+					e1.printStackTrace();
 					out(e1);
 					alert("扫描文件报错："+e1);
 				}
@@ -110,18 +111,32 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 
 	private void 翻译当前Java文件的注释(File f) throws Exception {
 		List<String> list = FileUtil.readLine2List(f);
+		String 翻译完成标志 = "/***** Lobxxx Translate Finished ******/";
+//		if(list.get(0).equals(翻译完成标志)){
+//			out("发现已经翻译完成的java文件:"+f.getAbsolutePath());
+//			return ;//如果是已经翻译的文件，将会被跳过
+//		}
 		boolean 注释开始 = false;
 		List<String> 注释数据 = new ArrayList<String>();
 		for (int i=0;i<list.size();i++) {
 			String l = list.get(i);
 			if(l.contains("*/")||l.contains("@ClassName")||
 					l.contains("@author")||l.contains("@date")||
-					l.contains("@version")||l.contains("@param")){
+					l.contains("@version")||l.contains("@param")||
+					l.contains("@see")||l.contains("@since")){
 				if(注释开始){
 					注释开始 = false;
 					String 注释数据完整字符串 = 解析注释数据(注释数据);
+					System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+					System.out.println(注释数据完整字符串);
+					注释数据.clear();
 					String 翻译后的注释数据 = 翻译数据(注释数据完整字符串);
+					System.out.println(翻译后的注释数据);
+					System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 					List<String> 调整翻译后的注释数据 = 装配注释数据(翻译后的注释数据);
+					list.add(i,"");
+					list.addAll(i, 调整翻译后的注释数据);
+					list.add(i,"");
 //				}else{
 //					out("===================报错文件内容如下================================");
 //					out(f);
@@ -133,8 +148,12 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 				注释数据.add(l);
 				out(i+":"+l);
 			}
-			if(l.contains("/**")||l.contains("/*"))注释开始 = true;
+			if(l.contains("/**")||l.contains("/*")){
+				if(!l.endsWith("*/"))注释开始 = true;
+			}
 		}
+		list.add(0,翻译完成标志);
+		FileUtil.insertList2File(list, f);
 	}
 	
 	/**
@@ -145,9 +164,10 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 	 */
 	private List<String> 装配注释数据(String 翻译后的注释数据) {
 		List<String> 注释数据 = new ArrayList<String>();
-		for (int i = 0; i < 翻译后的注释数据.length()/20; i++) {
-			String sb = 翻译后的注释数据.substring(i*20,(i+1)*20);
-			注释数据.add("	 * "+sb);
+		int 每行的长度 = 40;
+		for (int i = 1; i < 翻译后的注释数据.length()/每行的长度 + 2; i++) {
+			String s = 翻译后的注释数据.substring(每行的长度*(i-1),Math.min(每行的长度*i, 翻译后的注释数据.length()));
+			注释数据.add("	 * "+s);
 		}
 		return 注释数据;
 	}
@@ -156,11 +176,11 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 	 * 将字符串进行翻译
 	 * @param 注释数据完整字符串
 	 * @return
+	 * @throws Exception 
 	 */
-	private String 翻译数据(String 注释数据完整字符串) {
-		String q = URLEncoder.encode(注释数据完整字符串);
-		String resp = HttpUtil.sendGetRequest("http://translate.google.cn/translate_a/single?client=t&sl=auto&tl=zh-CN&hl=zh-CN&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&source=btn&ssel=0&tsel=0&kc=1&tk=419886.9854&q="+q);
-		return resp;
+	private String 翻译数据(String 注释数据完整字符串) throws Exception {
+		String 翻译后数据 = GTU.t(注释数据完整字符串);
+		return 翻译后数据;
 	}
 
 	/**
@@ -170,13 +190,18 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 	 */
 	private String 解析注释数据(List<String> 注释数据) {
 		StringBuilder sb = new StringBuilder();
+		System.out.println("##########################################################");
 		for (int i = 0; i < 注释数据.size(); i++) {
 			String s = 注释数据.get(i).trim();
 			if(s.startsWith("*")){
-				s = s.replaceFirst("*", "");
+				s = s.substring(1).trim();
 			}
-			sb.append(s);
+			if(s.length()>0){
+				sb.append(" ").append(s);
+				System.out.println(s);
+			}
 		}
+		System.out.println("##########################################################");
 		return sb.toString();
 	}
 

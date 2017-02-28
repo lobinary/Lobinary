@@ -240,5 +240,15 @@ public class FileUtil {
         cal.setTimeInMillis(time);     
         System.out.println("修改时间[2] " + formatter.format(cal.getTime()));      
         //输出：修改时间[2]    2009-08-17 10:32:38   
-    }   
+    }
+
+	public static void insertList2File(List<String> list, File file) throws IOException {
+		FileWriter fileWritter = new FileWriter(file.getAbsolutePath(),false);
+		BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+		for (String s : list) {
+			bufferWritter.write(s+"\n");
+		}
+		bufferWritter.flush();
+		bufferWritter.close();
+	}   
 }

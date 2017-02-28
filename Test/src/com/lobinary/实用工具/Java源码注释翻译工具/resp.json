@@ -1,0 +1,355 @@
+ * <p>A {@code String} represents a string in the UTF-16 format
+ * in which <em>supplementary characters</em> are represented by <em>surrogate
+ * pairs</em> (see the section <a href="Character.html#unicode">Unicode
+ * Character Representations</a> in the {@code Character} class for
+ * more information).
+ * Index values refer to {@code char} code units, so a supplementary
+ * character uses two positions in a {@code String}.
+ * <p>The {@code String} class provides methods for dealing with
+ * Unicode code points (i.e., characters), in addition to those for
+ * dealing with Unicode code units (i.e., {@code char} values).
+ 
+ * <p> {@code String}表示UTF-16格式的字符串
+  *，其中<em>补充字符</ em>由<em>代理表示
+  *对</ em>（请参阅<a href="Character.html#unicode"> Unicode
+  * {@code Character}类中的字符表示</a>
+  * 更多信息）。
+  *索引值指的是{@code char}代码单位，因此补充
+  *字符在{@code String}中使用两个位置。
+  * <p> {@code String}类提供了处理方法
+  * Unicode代码点（即字符），除了
+  *处理Unicode代码单元（即{@code char}值）。
+
+
+  <p>A {@code String} represents a string in the UTF-16 format in which <em>supplementary characters</em> are represented by <em>surrogate
+  pairs</em> (see the section <a href="Character.html#unicode">Unicode
+  Character Representations</a> in the {@code Character} class for
+  more information). Index values refer to {@code char} code units, so a supplementary character uses two positions in a {@code String}. <p>The {@code String} class provides methods for dealing with
+  Unicode code points (i.e., characters), in addition to those for dealing with Unicode code units (i.e., {@code char} values).
+  
+<p> {@code String}表示UTF-16格式的字符串，其中<em>补充字符</ em>由<em> surrogate
+   对</ em>（请参阅<a href="Character.html#unicode"> Unicode
+   {@code Character}类中的字符表示</a>
+   更多信息）。 索引值是指{@code char}代码单位，因此补充字符在{@code String}中使用两个位置。 <p> {@code String}类提供了处理方法
+   Unicode代码点（即，字符），以及用于处理Unicode代码单元（即，{@code char}）值的代码。
+
+[[["\u003cp\u003e {@code String}表示UTF-16格式的字符串，其中\u003cem\u003e补充字符\u003c/ em\u003e由\u003cem\u003e surrogate\n  ","\u003cp\u003eA {@code String} represents a string in the UTF-16 format in which \u003cem\u003esupplementary characters\u003c/em\u003e are represented by \u003cem\u003esurrogate\n  ",,,3],["对\u003c/ em\u003e（请参阅\u003ca href=\"Character.html#unicode\"\u003e Unicode\n  ","pairs\u003c/em\u003e (see the section \u003ca href=\"Character.html#unicode\"\u003eUnicode\n  ",,,3],["{@code Character}类中的字符表示\u003c/a\u003e\n  ","Character Representations\u003c/a\u003e in the {@code Character} class for\n  ",,,3],["更多信息）。","more information).",,,1],["索引值是指{@code char}代码单位，因此补充字符在{@code String}中使用两个位置。 ","Index values refer to {@code char} code units, so a supplementary character uses two positions in a {@code String}.",,,3],["\u003cp\u003e {@code String}类提供了处理方法\n  ","\u003cp\u003eThe {@code String} class provides methods for dealing with\n  ",,,3],["Unicode代码点（即，字符），以及用于处理Unicode代码单元（即，{@code char}）值的代码。","Unicode code points (i.e., characters), in addition to those for dealing with Unicode code units (i.e., {@code char} values).",,,3],[,,"\u003cP\u003e {@code String} biǎoshì UTF-16 géshì de zìfú chuàn, qízhōng \u003cem\u003ebǔchōng zìfú \u003c/ em\u003eyóu \u003cem\u003e surrogate\n  duì \u003c/ em\u003e(qǐng cānyuè \u003ca href=\"Character.Html#unicode\"\u003e Unicode\n  {@code Character} lèi zhōng de zìfú biǎoshì \u003c/a\u003e\n  gèng duō xìnxī). Suǒyǐn zhí shì zhǐ {@code char} dàimǎ dānwèi, yīncǐ bǔchōng zìfú zài {@code String} zhōng shǐyòng liǎng gè wèizhì. \u003cP\u003e {@code String} lèi tígōngle chǔlǐ fāngfǎ\n  Unicode dàimǎ diǎn (jí, zìfú), yǐjí yòng yú chǔlǐ Unicode dàimǎ dānyuán (jí,{@code char}) zhí de dàimǎ."]],,"en",,,[["\u003cp\u003eA {@code String} represents a string in the UTF-16 format in which \u003cem\u003esupplementary characters\u003c/em\u003e are represented by \u003cem\u003esurrogate",,[["\u003cp\u003e {@code String}表示UTF-16格式的字符串，其中\u003cem\u003e补充字符\u003c/ em\u003e由\u003cem\u003e surrogate",0,true,false],["\u003cP\u003e A {@code字符串}表示UTF-16格式的字符串，其中的\u003cem\u003e增补字符\u003c/ em\u003e的通过的\u003cem\u003e代理代表",0,true,false]],[[0,136]],"\u003cp\u003eA {@code String} represents a string in the UTF-16 format in which \u003cem\u003esupplementary characters\u003c/em\u003e are represented by \u003cem\u003esurrogate",0,0],["\n  ",,,[[0,5]],"\n  ",0,0],["pairs\u003c/em\u003e (see the section \u003ca href=\"Character.html#unicode\"\u003eUnicode",,[["对\u003c/ em\u003e（请参阅\u003ca href=\"Character.html#unicode\"\u003e Unicode",0,true,false],["对\u003c/ em\u003e的（请参见\u003ca href=\"Character.html#unicode\"\u003e的Unicode",0,true,false]],[[0,68]],"pairs\u003c/em\u003e (see the section \u003ca href=\"Character.html#unicode\"\u003eUnicode",0,0],["\n  ",,,[[0,5]],"\n  ",0,0],["Character Representations\u003c/a\u003e in the {@code Character} class for",,[["{@code Character}类中的字符表示\u003c/a\u003e",0,true,false],["字符表示在{@code字}类\u003c/a\u003e了解",0,true,false]],[[0,64]],"Character Representations\u003c/a\u003e in the {@code Character} class for",0,0],["\n  ",,,[[0,5]],"\n  ",0,0],["more information).",,[["更多信息）。",1000,true,false]],[[0,18]],"more information).",0,0],["Index values refer to {@code char} code units, so a supplementary character uses two positions in a {@code String}.",,[["索引值是指{@code char}代码单位，因此补充字符在{@code String}中使用两个位置。",0,true,false],["指数值是指{@code字符}代码单元，因此增补字符在@code {}字符串使用两个位置。",0,true,false]],[[0,115]],"Index values refer to {@code char} code units, so a supplementary character uses two positions in a {@code String}.",0,0],["\u003cp\u003eThe {@code String} class provides methods for dealing with",,[["\u003cp\u003e {@code String}类提供了处理方法",0,true,false],["\u003cP\u003e {将字符串@code}类提供处理方法",0,true,false]],[[0,61]],"\u003cp\u003eThe {@code String} class provides methods for dealing with",0,0],["\n  ",,,[[0,5]],"\n  ",0,0],["Unicode code points (i.e., characters), in addition to those for dealing with Unicode code units (i.e., {@code char} values).",,[["Unicode代码点（即，字符），以及用于处理Unicode代码单元（即，{@code char}）值的代码。",0,true,false],["Unicode码点（即，字符），除了那些用于处理Unicode代码单元（即，{@code炭}值）。",0,true,false]],[[0,125]],"Unicode code points (i.e., characters), in addition to those for dealing with Unicode code units (i.e., {@code char} values).",0,0]],0.98705256,,[["en"],,[0.98705256],["en"]]]
+
+
+[
+    [
+        [
+            "\u003cp\u003e {@code String}表示UTF-16格式的字符串，其中\u003cem\u003e补充字符\u003c/ em\u003e由\u003cem\u003e surrogate\n  ",
+            "\u003cp\u003eA {@code String} represents a string in the UTF-16 format in which \u003cem\u003esupplementary characters\u003c/em\u003e are represented by \u003cem\u003esurrogate\n  ",
+            ,
+            ,
+            3
+        ],
+        [
+            "对\u003c/ em\u003e（请参阅\u003ca href=\"Character.html#unicode\"\u003e Unicode\n  ",
+            "pairs\u003c/em\u003e (see the section \u003ca href=\"Character.html#unicode\"\u003eUnicode\n  ",
+            ,
+            ,
+            3
+        ],
+        [
+            "{@code Character}类中的字符表示\u003c/a\u003e\n  ",
+            "Character Representations\u003c/a\u003e in the {@code Character} class for\n  ",
+            ,
+            ,
+            3
+        ],
+        [
+            "更多信息）。",
+            "more information).",
+            ,
+            ,
+            1
+        ],
+        [
+            "索引值是指{@code char}代码单位，因此补充字符在{@code String}中使用两个位置。 ",
+            "Index values refer to {@code char} code units, so a supplementary character uses two positions in a {@code String}.",
+            ,
+            ,
+            3
+        ],
+        [
+            "\u003cp\u003e {@code String}类提供了处理方法\n  ",
+            "\u003cp\u003eThe {@code String} class provides methods for dealing with\n  ",
+            ,
+            ,
+            3
+        ],
+        [
+            "Unicode代码点（即，字符），以及用于处理Unicode代码单元（即，{@code char}）值的代码。",
+            "Unicode code points (i.e., characters), in addition to those for dealing with Unicode code units (i.e., {@code char} values).",
+            ,
+            ,
+            3
+        ],
+        [
+            ,
+            ,
+            "\u003cP\u003e {@code String} biǎoshì UTF-16 géshì de zìfú chuàn, qízhōng \u003cem\u003ebǔchōng zìfú \u003c/ em\u003eyóu \u003cem\u003e surrogate\n  duì \u003c/ em\u003e(qǐng cānyuè \u003ca href=\"Character.Html#unicode\"\u003e Unicode\n  {@code Character} lèi zhōng de zìfú biǎoshì \u003c/a\u003e\n  gèng duō xìnxī). Suǒyǐn zhí shì zhǐ {@code char} dàimǎ dānwèi, yīncǐ bǔchōng zìfú zài {@code String} zhōng shǐyòng liǎng gè wèizhì. \u003cP\u003e {@code String} lèi tígōngle chǔlǐ fāngfǎ\n  Unicode dàimǎ diǎn (jí, zìfú), yǐjí yòng yú chǔlǐ Unicode dàimǎ dānyuán (jí,{@code char}) zhí de dàimǎ."
+        ]
+    ],
+    ,
+    "en",
+    ,
+    ,
+    [
+        [
+            "\u003cp\u003eA {@code String} represents a string in the UTF-16 format in which \u003cem\u003esupplementary characters\u003c/em\u003e are represented by \u003cem\u003esurrogate",
+            ,
+            [
+                [
+                    "\u003cp\u003e {@code String}表示UTF-16格式的字符串，其中\u003cem\u003e补充字符\u003c/ em\u003e由\u003cem\u003e surrogate",
+                    0,
+                    true,
+                    false
+                ],
+                [
+                    "\u003cP\u003e A {@code字符串}表示UTF-16格式的字符串，其中的\u003cem\u003e增补字符\u003c/ em\u003e的通过的\u003cem\u003e代理代表",
+                    0,
+                    true,
+                    false
+                ]
+            ],
+            [
+                [
+                    0,
+                    136
+                ]
+            ],
+            "\u003cp\u003eA {@code String} represents a string in the UTF-16 format in which \u003cem\u003esupplementary characters\u003c/em\u003e are represented by \u003cem\u003esurrogate",
+            0,
+            0
+        ],
+        [
+            "\n  ",
+            ,
+            ,
+            [
+                [
+                    0,
+                    5
+                ]
+            ],
+            "\n  ",
+            0,
+            0
+        ],
+        [
+            "pairs\u003c/em\u003e (see the section \u003ca href=\"Character.html#unicode\"\u003eUnicode",
+            ,
+            [
+                [
+                    "对\u003c/ em\u003e（请参阅\u003ca href=\"Character.html#unicode\"\u003e Unicode",
+                    0,
+                    true,
+                    false
+                ],
+                [
+                    "对\u003c/ em\u003e的（请参见\u003ca href=\"Character.html#unicode\"\u003e的Unicode",
+                    0,
+                    true,
+                    false
+                ]
+            ],
+            [
+                [
+                    0,
+                    68
+                ]
+            ],
+            "pairs\u003c/em\u003e (see the section \u003ca href=\"Character.html#unicode\"\u003eUnicode",
+            0,
+            0
+        ],
+        [
+            "\n  ",
+            ,
+            ,
+            [
+                [
+                    0,
+                    5
+                ]
+            ],
+            "\n  ",
+            0,
+            0
+        ],
+        [
+            "Character Representations\u003c/a\u003e in the {@code Character} class for",
+            ,
+            [
+                [
+                    "{@code Character}类中的字符表示\u003c/a\u003e",
+                    0,
+                    true,
+                    false
+                ],
+                [
+                    "字符表示在{@code字}类\u003c/a\u003e了解",
+                    0,
+                    true,
+                    false
+                ]
+            ],
+            [
+                [
+                    0,
+                    64
+                ]
+            ],
+            "Character Representations\u003c/a\u003e in the {@code Character} class for",
+            0,
+            0
+        ],
+        [
+            "\n  ",
+            ,
+            ,
+            [
+                [
+                    0,
+                    5
+                ]
+            ],
+            "\n  ",
+            0,
+            0
+        ],
+        [
+            "more information).",
+            ,
+            [
+                [
+                    "更多信息）。",
+                    1000,
+                    true,
+                    false
+                ]
+            ],
+            [
+                [
+                    0,
+                    18
+                ]
+            ],
+            "more information).",
+            0,
+            0
+        ],
+        [
+            "Index values refer to {@code char} code units, so a supplementary character uses two positions in a {@code String}.",
+            ,
+            [
+                [
+                    "索引值是指{@code char}代码单位，因此补充字符在{@code String}中使用两个位置。",
+                    0,
+                    true,
+                    false
+                ],
+                [
+                    "指数值是指{@code字符}代码单元，因此增补字符在@code {}字符串使用两个位置。",
+                    0,
+                    true,
+                    false
+                ]
+            ],
+            [
+                [
+                    0,
+                    115
+                ]
+            ],
+            "Index values refer to {@code char} code units, so a supplementary character uses two positions in a {@code String}.",
+            0,
+            0
+        ],
+        [
+            "\u003cp\u003eThe {@code String} class provides methods for dealing with",
+            ,
+            [
+                [
+                    "\u003cp\u003e {@code String}类提供了处理方法",
+                    0,
+                    true,
+                    false
+                ],
+                [
+                    "\u003cP\u003e {将字符串@code}类提供处理方法",
+                    0,
+                    true,
+                    false
+                ]
+            ],
+            [
+                [
+                    0,
+                    61
+                ]
+            ],
+            "\u003cp\u003eThe {@code String} class provides methods for dealing with",
+            0,
+            0
+        ],
+        [
+            "\n  ",
+            ,
+            ,
+            [
+                [
+                    0,
+                    5
+                ]
+            ],
+            "\n  ",
+            0,
+            0
+        ],
+        [
+            "Unicode code points (i.e., characters), in addition to those for dealing with Unicode code units (i.e., {@code char} values).",
+            ,
+            [
+                [
+                    "Unicode代码点（即，字符），以及用于处理Unicode代码单元（即，{@code char}）值的代码。",
+                    0,
+                    true,
+                    false
+                ],
+                [
+                    "Unicode码点（即，字符），除了那些用于处理Unicode代码单元（即，{@code炭}值）。",
+                    0,
+                    true,
+                    false
+                ]
+            ],
+            [
+                [
+                    0,
+                    125
+                ]
+            ],
+            "Unicode code points (i.e., characters), in addition to those for dealing with Unicode code units (i.e., {@code char} values).",
+            0,
+            0
+        ]
+    ],
+    0.98705256,
+    ,
+    [
+        [
+            "en"
+        ],
+        ,
+        [
+            0.98705256
+        ],
+        [
+            "en"
+        ]
+    ]
+]
