@@ -162,7 +162,13 @@ public class Test {
 		System.out.println(整合后翻译数据.toString());
 		
 		
-		
+		StringBuilder sbb = new StringBuilder();
+		sbb.append("test");
+		System.out.println("test".equals(sbb));
+		System.out.println(sbb.equals("test"));
+		System.out.println("sbb:"+sbb);
+		sbb.delete(0, sbb.length());
+		System.out.println(sbb.length());
 	}
 	
 }

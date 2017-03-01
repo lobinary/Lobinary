@@ -29,45 +29,31 @@ public class GTU {
 
 	public static String t(String q) throws Exception {
 		StringBuilder 最终翻译数据 = new StringBuilder();
-		int 每次翻译的长度 = 250;
+		int 每次翻译的长度 = 1000;
 		String 本次翻译数据 = null;
-		int 上一个点的位置 = 0;
-		int 当前点的位置 = 0;
-		List<Integer> 整句位置点 = new ArrayList<Integer>();
+		int 上一个点的位置 = 0;//用于记录上一个点的位置
+		int 上次截取的最后位置 = 0;//用于记录上次截取后的最后位置
+		log.info("q:"+q);
 		for (int i = 0; i < q.length(); i++) {
 			String s = q.substring(i,i+1);
 			if(s.equals(".")){
-				整句位置点.add(i);
+				i++;
+				if(i - 上次截取的最后位置  > 每次翻译的长度){
+					if(上一个点的位置==上次截取的最后位置){
+						本次翻译数据 = q.substring(上次截取的最后位置,上次截取的最后位置+每次翻译的长度);
+						上次截取的最后位置 = 上次截取的最后位置+每次翻译的长度;
+						上一个点的位置 = 上次截取的最后位置;
+					}else{
+						本次翻译数据 = q.substring(上次截取的最后位置,上一个点的位置);
+						上次截取的最后位置 = 上一个点的位置;
+					}
+					log.info("本次翻译数据:"+本次翻译数据);
+					最终翻译数据.append(translate(本次翻译数据));
+					i = 上次截取的最后位置;
+				}
+				上一个点的位置 = i;
 			}
 		}
-		int 当前第几个点 = 1;
-		for (int j = 0; j < 整句位置点.size(); j++) {
-			Integer 起始位置 = 整句位置点.get(0);
-			if(当前第几个点<整句位置点.size()-1&&(整句位置点.get(当前第几个点)-起始位置<每次翻译的长度)){
-				当前第几个点++;
-			}else{
-				Integer 结束位置 = 0;
-				if(当前第几个点==1){//代表单句话已经大于最大翻译长度，需要强行截取，现行方案为截取最大长度
-					结束位置 = 起始位置+每次翻译的长度;
-				}else if(当前第几个点==整句位置点.size()-1){//已经超过点数据长度
-					结束位置 = 整句位置点.get(当前第几个点);
-				}else{
-					结束位置 = 整句位置点.get(当前第几个点-1);
-				}
-				log.info(起始位置+","+结束位置);
-				本次翻译数据 = q.substring(起始位置,结束位置);
-				log.info(起始位置+","+结束位置+","+本次翻译数据);
-//				最终翻译数据.append(translate(本次翻译数据));
-				最终翻译数据.append("");
-				while(整句位置点.get(0)<=结束位置){
-					整句位置点.remove(0);
-				}
-				整句位置点.add(0,结束位置);
-				当前第几个点 = 1;
-			}
-			
-		}
-		
 		return 最终翻译数据.toString();
 	}
 	
@@ -77,7 +63,12 @@ public class GTU {
 //		//log.info(q);
 		String url = "http://translate.google.cn/translate_a/single?client=t&sl=auto&tl=zh-CN&hl=zh-CN&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&source=btn&ssel=0&tsel=0&kc=1&tk="
 				+ tk + "&q=" + q;
-		String resp = HttpUtil.sendGet(url, "UTF-8");
+		String resp;
+		try {
+			resp = HttpUtil.sendGet(url, "UTF-8");
+		} catch (Exception e) {
+			throw new Exception("连接谷歌翻译服务器失败");
+		}
 		return 解析返回数据(resp);
 	}
 

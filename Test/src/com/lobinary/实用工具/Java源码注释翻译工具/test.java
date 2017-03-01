@@ -1,3 +1,7 @@
+/***** Lobxxx Translate Finished ******/
+/***** Lobxxx Translate Finished ******/
+package com.lobinary.实用工具.Java源码注释翻译工具;
+/***** Lobxxx Translate Finished ******/
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.spi.CalendarDataProvider;
@@ -136,15 +140,24 @@ import java.util.spi.TimeZoneNameProvider;
  *
  * <p>Time zone names are supported by {@link TimeZoneNameProvider}.
  *
+
+ * 用于提供{@code Calendar}字段值的本地化字符串表示（显示名称）的服务提供程序的抽象类。 <p> <a name="calendartypes"> <b>日历类型</ b> </a> <p>日历类型用于指定{@link #getDisplayName（String，int，int， int，Locale）getDisplayName}和{@link #getDisplayNames（String，int，int，Locale）getDisplayNames}方法提供日历字段值名称。有关详情，请参阅{@link Calendar＃getCalendarType（）}。 <p> <b>日历字段</ b> <p>日历字段是使用{@link Calendar}中定义的常量指定的。以下是日历常用字段及其为每个日历系统支持的值。<table style =“border-bottom：1px 
+ * solid”border =“1”cellpadding =“3”cellspacing =“0”summary =“Field values”> <tr> <th> Field </ th> <th> Value < / th> <th>说明</ t> </ tr> <tr> <td valign =“top”> {@ link Calendar＃MONTH} </ td> <td valign =“top”> {@ link Calendar＃ JANUARY}到{@link Calendar＃UNDECIMBER} </ td> <td>月份编号为0（例如，0  -  1月，...，11  -  12月）。一些日历系统有13个月。如果受支持的语言环境需要，则需要在格式化和独立表单中支持月份名称。 </ td> </ tr> <tr> <td valign =“top”> {@ link Calendar＃DAY_OF_WEEK} </ td </ td>如果两种形式没有区别，则应以两种形式返回相同的名称。 > <td valign =“top”> {@ link日历＃SUNDAY}到{@link日历＃SATURDAY} </ td> <td>星期几编号从1开始， ，...，7  - 星期六）。</ td> </ tr> <tr> <td valign =“top”> {@ link Calendar＃AM_PM} </ td> <td valign =“top”> {@ link Calendar＃AM} to {@link Calendar #PM} </ td> <td> 0  -  AM，1  -  PM </ td> </ tr> </ table> <p style =“margin-top：20px”>以下是日历特定字段要支持的值。 <table style =“border-bottom：1px solid”border =“1”cellpadding =“3”cellspacing =“0”summary =“日历类型和字段值”> <tr> <th>日历类型</ th> th>字段</ th> <th>值</ th> <th>描述</ th> </ tr> <tr> <td rowspan =“2”valign =“top”> {@ code“gregory”} </ td> <td> <td> <td> <td> {@ link java.util.GregorianCalendar＃BC} </ td> <td rowspan =“2”valign =“top”> {@ link calendar＃ （BCE）</ td> </ tr> <tr> <td> 1 </ td> <td> {@ link java.util.GregorianCalendar＃AD} <td rowspan =“2”valign =“top”> {@ code“buddhist”} </ td> <td rowspan =“2”valign =“top”> {@ link Calendar＃ERA} </ td> <td > 0 </ td> <td> BC（BCE）</ td> </ tr> <tr> <td> 1 </ td> <td>（Buddhist Era）</ td> </ tr> <tr> <td rowspan 
+
  * @author Masayoshi Okutsu
  * @since 1.8
  * @see CalendarDataProvider
  * @see Locale#getUnicodeLocaleType(String)
  */
-public abstract class CalendarNameProvider extends LocaleServiceProvider {
+public abstract class test extends LocaleServiceProvider {
     /**
      * Sole constructor. (For invocation by subclass constructors, typically
      * implicit.)
+	 
+	 * 
+	 
+
+
      */
-    protected CalendarNameProvider() {
+    protected test() {
     }

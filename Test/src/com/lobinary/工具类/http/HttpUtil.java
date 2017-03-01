@@ -121,7 +121,7 @@ public class HttpUtil {
         }
     }
 	
-	 public static String sendGet(String url, String charset) {  
+	 public static String sendGet(String url, String charset) throws Exception {  
 	        String result = "";  
 	        BufferedReader in = null;  
 	        try {  
@@ -144,7 +144,7 @@ public class HttpUtil {
 	            }  
 	        } catch (Exception e) {  
 	            System.out.println("发送GET请求出现异常！" + e);  
-	            e.printStackTrace();  
+	            throw e;
 	        }  
 	        // 使用finally块来关闭输入流  
 	        finally {  

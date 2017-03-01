@@ -133,10 +133,22 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 					String 翻译后的注释数据 = 翻译数据(注释数据完整字符串);
 					System.out.println(翻译后的注释数据);
 					System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-					List<String> 调整翻译后的注释数据 = 装配注释数据(翻译后的注释数据);
-					list.add(i,"");
+					String 前缀数据Str;
+					String 前缀数据 ;
+					int 向上计数器 = 1;
+					while(true){
+						try {
+							前缀数据Str = list.get(i-向上计数器);
+							前缀数据 = 前缀数据Str.substring(0,前缀数据Str.indexOf("*"))+"* ";
+							break;
+						} catch (Exception e) {
+							向上计数器++;
+						}
+					}
+					List<String> 调整翻译后的注释数据 = 装配注释数据(前缀数据,翻译后的注释数据);
+					list.add(i,前缀数据);
 					list.addAll(i, 调整翻译后的注释数据);
-					list.add(i,"");
+					list.add(i,前缀数据);
 //				}else{
 //					out("===================报错文件内容如下================================");
 //					out(f);
@@ -160,14 +172,139 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 	 * 将普通数据装配成前边带*的注释数据
 	 * @param 翻译后的注释数据
 	 * @return
+	 * @throws Exception 
 	 * 
 	 */
-	private List<String> 装配注释数据(String 翻译后的注释数据) {
+	private List<String> 装配注释数据(String 前缀,String 翻译后的注释数据) throws Exception {
 		List<String> 注释数据 = new ArrayList<String>();
-		int 每行的长度 = 40;
-		for (int i = 1; i < 翻译后的注释数据.length()/每行的长度 + 2; i++) {
-			String s = 翻译后的注释数据.substring(每行的长度*(i-1),Math.min(每行的长度*i, 翻译后的注释数据.length()));
-			注释数据.add("	 * "+s);
+		int 每行的长度 = 80;
+		int 上次截取位置 = 0;
+		boolean 标签记录标志 = false;
+		String 已经记录的数据 = "";
+		int 当前缩进长度 = 0;
+		for (int i = 1; i <= 翻译后的注释数据.length(); i++) {
+			
+			String 本次字符 = 翻译后的注释数据.substring(i-1, i);
+			
+			if("<".equals(本次字符)||"{".equals(本次字符)){//存储特殊数据
+				标签记录标志 = true;
+			}
+			
+			
+			if(标签记录标志){
+				
+				已经记录的数据 += 本次字符;
+				
+				switch (已经记录的数据) {
+
+				case "<b":
+				case "<a":
+					break;
+					
+				case "<p":
+				case "<table":
+				case "</table":
+				case "<tr":
+				case "</tr":
+				case "<td":
+				case "</td":
+				case "</ td":
+				case "<th":
+				case "</th":
+				case "<pre":
+				case "</pre":
+				
+				/**
+				 * 
+				 * 对于该类标志 <p class="cls" > test </p>
+				 * 转换成 <p class="cls" >
+				 * 		   very important
+				 * 		   <b>
+				 * 		     test
+				 * 		   </b>
+				 *         case
+				 * 		 </p>
+				 * 规则如下：
+				 * 	查看标签是否需要换行：
+				 * 		否：则继续输入，但是需要注意不应该将标签分割成两行，宁愿长度较长
+				 * 		是：终止当前记录的数据，查看是缩进标签还是不缩进标签，并根据换行标签缩进规则，对标签进行换行
+				 */
+					if("<p".equals(已经记录的数据)){
+						String 下一位字符 = 翻译后的注释数据.length()>=i?翻译后的注释数据.substring(i-1, i):null;
+						if(下一位字符!=null&&"r".equals(下一位字符)){//如果是pre，则继续往下执行
+							break;
+						}
+					}
+					
+					
+					
+//					System.out.println("发现特殊数据:"+已经记录的数据);
+					String s = null;
+//					System.out.println("截取数据："+上次截取位置+","+(i-已经记录的数据.length()));//481 482 <tr>
+					try {
+						s = 翻译后的注释数据.substring(上次截取位置, i-已经记录的数据.length());
+					} catch (Exception e) {
+						System.out.println("发现截取异常数据："+翻译后的注释数据);
+						throw e;
+					}
+					注释数据.add(前缀+s);
+					System.out.println(前缀+s);
+					s = 翻译后的注释数据.substring(i-已经记录的数据.length(), i);
+					注释数据.add(前缀+s);
+					System.out.println(前缀+s);
+					上次截取位置 = i;
+					标签记录标志 = false;
+					已经记录的数据 = "";
+					break;
+
+				default:
+					
+					if(已经记录的数据.length()>50){
+						throw new Exception("发现未识别标签：["+已经记录的数据+"]");
+//						标签记录标志 = false;
+//						已经记录的数据 = "";
+					}
+					
+					/**
+					 * 下方的注释表明，java中的注释都是闭环的，也就是<a 后边都会跟随</a>,所以以此作为准则
+					 * 如果我们设定<a为不换行标签的话，那么就一定要等到</a>后在换行，否则就抛出异常
+				     * <a href="{@docRoot}/../platform/serialization/spec/output.html">
+				     * Object Serialization Specification, Section 6.2, "Stream Elements"</a>
+					 */
+					if(">".equals(本次字符)||"}".equals(本次字符)){
+						if(i-上次截取位置>每行的长度){
+							s = 翻译后的注释数据.substring(上次截取位置, i);
+							上次截取位置 = i;
+							注释数据.add(前缀+s);
+						}else{
+							标签记录标志 = false;
+						}
+					}
+					break;
+				}
+			}else{
+				if(i%每行的长度==0){
+					try {
+						while( i < 翻译后的注释数据.length()&&!本次字符.equals(" ")){
+							i++;
+						}
+					} catch (Exception e) {
+						System.out.println("错误数据："+翻译后的注释数据);
+						System.out.println("错误数据："+i);
+						e.printStackTrace();
+						throw e;
+					}
+					String s = 翻译后的注释数据.substring(上次截取位置, i);
+					上次截取位置 = i;
+					注释数据.add(前缀+s);
+				}
+			}
+
+
+			if(">".equals(本次字符)){//存储特殊数据
+				标签记录标志 = false;
+			}
+			
 		}
 		return 注释数据;
 	}
@@ -190,7 +327,7 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 	 */
 	private String 解析注释数据(List<String> 注释数据) {
 		StringBuilder sb = new StringBuilder();
-		System.out.println("##########################################################");
+		System.out.println("##########################解析后的数据每个字符串VVVV################################");
 		for (int i = 0; i < 注释数据.size(); i++) {
 			String s = 注释数据.get(i).trim();
 			if(s.startsWith("*")){
@@ -199,9 +336,15 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 			if(s.length()>0){
 				sb.append(" ").append(s);
 				System.out.println(s);
+			}else{
+				sb.append(" \\n ").append(s);
+				System.out.println(" \n ");
 			}
 		}
-		System.out.println("##########################################################");
+		
+		System.out.println("##########################解析后的数据完整字符串VVV################################");
+		System.out.println("解析后的数据完整字符串:"+sb.toString());
+		System.out.println("##########################解析后的数据完整字符串AAA################################");
 		return sb.toString();
 	}
 

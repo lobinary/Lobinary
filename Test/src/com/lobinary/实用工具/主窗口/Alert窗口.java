@@ -22,18 +22,18 @@ public class Alert窗口 extends JDialog {
 	public Alert窗口(Frame owner, boolean modal) {
 		super(owner, modal);
 		setName("Alert窗口");
-		setSize(252, 104);
+		setSize(400, 104);
 		getContentPane().setLayout(null);
 		int px = getParent().getX();
 		int py = getParent().getY();
 		int pw = getParent().getWidth();
 		int ph = getParent().getHeight();
 		setLocation(px+(pw-this.getWidth())/2, py+(ph-this.getHeight())/2); 
-		infoLable.setBounds(10, 10, 284, 23);
+		infoLable.setBounds(10, 10, 400, 23);
 		getContentPane().add(infoLable);
 		
 		JButton 关闭按钮 = new JButton("朕知道了");
-		关闭按钮.setBounds(69, 33, 93, 23);
+		关闭按钮.setBounds(120, 33, 93, 23);
 		关闭按钮.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Container parent = 关闭按钮.getParent().getParent().getParent().getParent();
