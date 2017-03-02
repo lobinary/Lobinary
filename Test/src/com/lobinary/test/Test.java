@@ -192,6 +192,55 @@ public class Test {
 			System.out.println(key);
 		}
 		
+		
+		
+		System.out.println("=======================翻译出现空指针问题=========================================================");
+		String 翻译出现空指针问题 = "Locale sensitive  service provider interfaces are interfaces that correspond to locale sensitive classes in the <code>java.text</code> and <code>java.util</code> packages. The interfaces enable the construction of locale sensitive objects and the retrieval of localized names for these packages. Locale sensitive factory methods and methods for name retrieval in the <code>java.text</code> and <code>java.util</code> packages use implementations of the provider interfaces to offer support for locales beyond the set of locales supported by the Java runtime environment itself.";
+		System.out.println("packages. The int "+翻译出现空指针问题);
+		StringBuilder 最终翻译数据 = new StringBuilder();
+		String 本次翻译数据 = null;
+		int 上一个点的位置 = 0;//用于记录上一个点的位置
+		int 上次截取的最后位置 = 0;//用于记录上次截取后的最后位置
+		for (int i = 0; i < 翻译出现空指针问题.length(); i++) {
+			String 翻译出现空指针问题s = 翻译出现空指针问题.substring(i,i+1);
+			int 每次翻译的长度 = 500;
+			
+			if(翻译出现空指针问题s.equals(".")){
+				if(i - 上次截取的最后位置  > 每次翻译的长度 ){
+					if(上一个点的位置==上次截取的最后位置){
+						本次翻译数据 = 翻译出现空指针问题.substring(上次截取的最后位置,上次截取的最后位置+每次翻译的长度);
+						上次截取的最后位置 = 上次截取的最后位置+每次翻译的长度;
+						上一个点的位置 = 上次截取的最后位置;
+					}else{
+						本次翻译数据 = 翻译出现空指针问题.substring(上次截取的最后位置,上一个点的位置);
+						上次截取的最后位置 = 上一个点的位置;
+					}
+					System.out.println("本次翻译数据："+本次翻译数据);
+				}
+				上一个点的位置 = i;
+				System.out.println("上一个点的位置是:"+上一个点的位置);
+			}else{
+				if(每次翻译的长度<(i-上次截取的最后位置)){
+					System.out.println(上次截取的最后位置+":"+上一个点的位置);
+					本次翻译数据 = 翻译出现空指针问题.substring(上次截取的最后位置,上一个点的位置);
+					System.out.println(i+"本次翻译数据II:"+本次翻译数据);
+					上次截取的最后位置 = 上一个点的位置;
+				}
+			}
+			
+			if(i == 翻译出现空指针问题.length()-1){
+				if(上次截取的最后位置!=i){
+					本次翻译数据 = 翻译出现空指针问题.substring(上次截取的最后位置,i);
+					System.out.println(i+"本次翻译数据III:"+本次翻译数据);
+				}
+			}
+			
+		}
+		if(上次截取的最后位置==0){
+			System.out.println("本次翻译数据IV:"+翻译出现空指针问题);
+		}
+		System.out.println( 最终翻译数据.toString());
+	
 	}
 	
 }

@@ -20,17 +20,43 @@ import com.lobinary.工具类.http.HttpUtil;
 // http://www.cnblogs.com/charlexu/p/3424963.html
 public class GTU {
 
-	private static boolean 秘钥加载完毕 = true;
+	private final static Logger log = LoggerFactory.getLogger(GTU.class);
+	
+	private static boolean 秘钥加载完毕 = false;
 	private static long a = 3397762296L;
 	private static long b = -253483058L;
 	private static int r = 413359;
+	private static int 每次翻译的长度 = 500;
+	private static Invocable invocable;
+	static {
+		try {
+			// 得到一个ScriptEngine对象
+					ScriptEngineManager maneger = new ScriptEngineManager();
+					ScriptEngine engine = maneger.getEngineByName("JavaScript");
+					// 读js文件
+					String jsFile = "D:/Tool/Git/Lobinary/Test/src/com/lobinary/实用工具/Java源码注释翻译工具/GTU.js";
+					FileInputStream fileInputStream = new FileInputStream(new File(jsFile));
+					Reader scriptReader = new InputStreamReader(fileInputStream, "utf-8");
+					// console.info(tk('fuck you'));
+					try {
+						engine.eval(scriptReader);
+						if (engine instanceof Invocable) {
+							// 调用JS方法
+							invocable = (Invocable) engine;
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					log.info("翻译工具加密JS加载完毕");
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
-	private final static Logger log = LoggerFactory.getLogger(GTU.class);
 
 	public static String t(String q) throws Exception {
 		if(q.length()==0) return "";
 		StringBuilder 最终翻译数据 = new StringBuilder();
-		int 每次翻译的长度 = 1000;
 		String 本次翻译数据 = null;
 		int 上一个点的位置 = 0;//用于记录上一个点的位置
 		int 上次截取的最后位置 = 0;//用于记录上次截取后的最后位置
@@ -39,24 +65,33 @@ public class GTU {
 			String s = q.substring(i,i+1);
 			if(s.equals(".")){
 				i++;
-				if(i - 上次截取的最后位置  > 每次翻译的长度){
-					if(上一个点的位置==上次截取的最后位置){
+				if(i - 上次截取的最后位置  > 每次翻译的长度){//当前点到上一个点的长度是不是超长了
+					if(上一个点的位置==上次截取的最后位置){//如果超长了，并且上次截取的位置等于上一个点
+						//这个时候只能强制截取，因为单句已经超长，并且更新上一个点的位置
 						本次翻译数据 = q.substring(上次截取的最后位置,上次截取的最后位置+每次翻译的长度);
 						上次截取的最后位置 = 上次截取的最后位置+每次翻译的长度;
 						上一个点的位置 = 上次截取的最后位置;
-					}else{
+					}else{//如果超长了，但是上一个点和最后截取的点不相等，那么就证明我们这个点已经是第二句或者更多句的话，
+						//那么我们就截取上到一句话，上一个点的位置不需要动，只需要更改最后截取位置就行
 						本次翻译数据 = q.substring(上次截取的最后位置,上一个点的位置);
 						上次截取的最后位置 = 上一个点的位置;
 					}
-					log.info("本次翻译数据:"+本次翻译数据);
 					最终翻译数据.append(translate(本次翻译数据));
 					i = 上次截取的最后位置;
 				}
 				上一个点的位置 = i;
 			}else{
 				if(每次翻译的长度<(i-上次截取的最后位置)){
+					本次翻译数据 = q.substring(上次截取的最后位置,上一个点的位置);
 					最终翻译数据.append(translate(本次翻译数据));
-					上次截取的最后位置 = i;
+					上次截取的最后位置 = 上一个点的位置;
+				}
+			}
+			
+			if(i == q.length()-1){
+				if(上次截取的最后位置!=i){
+					本次翻译数据 = q.substring(上次截取的最后位置,i);
+					最终翻译数据.append(translate(本次翻译数据));
 				}
 			}
 		}
@@ -76,11 +111,12 @@ public class GTU {
 		try {
 //			resp = HttpUtil.doGet(url);
 //			resp = HttpUtil.sendGetRequest(url);
+			System.out.println(url);
 			resp = HttpUtil.sendGet(url,"UTF-8");
 		} catch (Exception e) {
 			throw new Exception("连接谷歌翻译服务器失败,请求网址为:"+url);
 		}
-		System.out.println(resp);
+		System.out.println("谷歌服务器返回的数据为:"+resp);
 		return 解析返回数据(resp);
 	}
 
@@ -206,28 +242,8 @@ public class GTU {
 
 	public static String 加签(String query) throws Exception {
 		getTKK();
-		// 得到一个ScriptEngine对象
-		ScriptEngineManager maneger = new ScriptEngineManager();
-		ScriptEngine engine = maneger.getEngineByName("JavaScript");
-		// 读js文件
-		String jsFile = "D:/Tool/Git/Lobinary/Test/src/com/lobinary/实用工具/Java源码注释翻译工具/GTU.js";
-		FileInputStream fileInputStream = new FileInputStream(new File(jsFile));
-		Reader scriptReader = new InputStreamReader(fileInputStream, "utf-8");
-		// console.info(tk('fuck you'));
-		Object result = null;
-		try {
-			engine.eval(scriptReader);
-			if (engine instanceof Invocable) {
-				// 调用JS方法
-				Invocable invocable = (Invocable) engine;
-				result = invocable.invokeFunction("getKey", a, b, r, query);
-				//log.info(result);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			scriptReader.close();
-		}
+		System.out.println("准备对数据进行加签"+a+","+b+","+ r+","+ query);
+		Object result = invocable.invokeFunction("getKey", a, b, r, query);
 		return result.toString();
 	}
 
@@ -240,10 +256,12 @@ public class GTU {
 	 */
 	private static String getTKK() throws Exception {
 
+		String 秘钥 = "" + r + "." + (a + b);
 		if (秘钥加载完毕)
-			return "" + r + "." + (a + b); // 如果秘钥加载完成，就不需要二次加载秘钥
+			return 秘钥; // 如果秘钥加载完成，就不需要二次加载秘钥
 
 		String resp = HttpUtil.sendGetRequest("http://translate.google.cn");
+		System.out.println("从Google获取TKK返回数据为:"+resp);
 		resp = resp.substring(resp.indexOf("TKK=eval"));
 		resp = resp.substring(0, resp.indexOf("+\\x27"));
 		//log.info(resp);
@@ -274,9 +292,9 @@ public class GTU {
 		//log.info("b:" + b);
 		//log.info("r:" + r);
 		if (a != 0 && b != 0 && r != 0) {
-			//log.info("获取TKK成功，秘钥信息如下：");
+			log.info("获取TKK成功，秘钥信息为："+秘钥);
 			秘钥加载完毕 = true;
-			return "" + r + "." + (a + b);
+			return 秘钥;
 		} else {
 			throw new Exception("获取TKK失败");
 		}
