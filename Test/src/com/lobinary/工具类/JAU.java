@@ -33,7 +33,7 @@ public class JAU {
 	}
 
 	public static void main(String[] args) throws Exception {
-		File f = new File("c:/test/test2.java");
+		File f = new File("C:/test/javasource/test.java");
 		翻译(f);
 	}
 	
@@ -48,7 +48,7 @@ public class JAU {
 		for (String l : 翻译后的数据) {
 			实用工具.log(l);
 		}
-		FileUtil.insertList2File(翻译后的数据, f);
+//		FileUtil.insertList2File(翻译后的数据, f);
 	}
 
 	private static List<String> 抓取注释数据(List<String> java文件数据List) throws Exception {
@@ -82,13 +82,15 @@ public class JAU {
 							向上计数器++;
 						}
 					}
-					java文件数据List.add(i,前缀数据+"<p>");
+					
+					String 下一行数据 = 解析本行数据(java文件数据List.get(i));
+					if(下一行数据.length()!=0)java文件数据List.add(i,前缀数据);
 					List<String> 增加前缀后的翻译数据List  = new ArrayList<String>();
 					for (String 每行的原始翻译数据 : 翻译后注释数据) {//增加前缀
 						增加前缀后的翻译数据List.add(前缀数据+每行的原始翻译数据);
 					}
 					java文件数据List.addAll(i, 增加前缀后的翻译数据List);
-					java文件数据List.add(i,前缀数据);
+					java文件数据List.add(i,前缀数据+"<p>");
 				}
 			}
 			if(注释开始){
@@ -116,17 +118,15 @@ public class JAU {
 	 * @throws Exception 
 	 */
 	private static List<String> 解析并翻译注释(List<String> 注释数据) throws Exception {
-		int Map空行计数器 = 0;//因为Map中存相同值不行，必须是不同的key，所以我们将要存计数器的数字
 		List<注释数据对象> 组注释 = new ArrayList<注释数据对象>();
 		for (int i = 0; i < 注释数据.size(); i++) {
 			String 每行数据 = 注释数据.get(i);
 			每行数据 = 解析本行数据(每行数据);
-			if(每行数据.length()==0){
-				if(组注释.get(组注释.size()-1).get本行属性()!=注释数据对象.空行){
+			if(每行数据.trim().length()==0){
+				if(组注释.size()>0&&组注释.get(组注释.size()-1).get本行属性()!=注释数据对象.空行){
 					组注释.add(new 注释数据对象(注释数据对象.空行," "));
 				}
-			}
-			if(本行仅一个标签(每行数据)){
+			}else if(本行仅一个标签(每行数据)){
 				组注释.add(new 注释数据对象(注释数据对象.标签,每行数据));
 			}else{
 				String 临时数据 = "";
@@ -140,7 +140,9 @@ public class JAU {
 							if(本行仅一个标签(每行数据)){
 								组注释.add(new 注释数据对象(注释数据对象.标签,每行数据));
 							}else{
-								组注释.add(new 注释数据对象(注释数据对象.空行," "));
+								if(组注释.size()>0&&组注释.get(组注释.size()-1).get本行属性()!=注释数据对象.空行){
+									组注释.add(new 注释数据对象(注释数据对象.空行,""));
+								}
 							}
 							实用工具.log(临时数据);
 							实用工具.log(每行数据);
@@ -150,8 +152,10 @@ public class JAU {
 							i++;
 						}
 					}else{
-						组注释.add(new 注释数据对象(注释数据对象.文本,临时数据));
-						组注释.add(new 注释数据对象(注释数据对象.空行," "));
+						if(临时数据.trim().length()>0){
+							组注释.add(new 注释数据对象(注释数据对象.文本,临时数据));
+							组注释.add(new 注释数据对象(注释数据对象.空行," "));
+						}
 						i++;
 						break;
 					}
@@ -164,7 +168,9 @@ public class JAU {
 		for (注释数据对象 每行临时数据 : 组注释) {
 			实用工具.log("数据："+每行临时数据.get本行内容());
 			if(每行临时数据.get本行属性()==注释数据对象.空行){
-				结果数据.add("");
+				if(结果数据.size()>0&&结果数据.get(结果数据.size()-1).length()!=0){
+					结果数据.add("");
+				}
 			}else if(每行临时数据.get本行属性()==注释数据对象.标签){
 				结果数据.add(每行临时数据.get本行内容());
 			}else{
@@ -177,6 +183,11 @@ public class JAU {
 				}
 			}
 		}
+		System.out.println("**************************************************");
+		for (String texst : 结果数据) {
+			System.out.println(texst);
+		}
+		System.out.println("**************************************************");
 		return 结果数据;
 	}
 

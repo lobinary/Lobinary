@@ -26,5 +26,9 @@ public class 注释数据对象 {
 	public void set本行属性(int 本行属性) {
 		this.本行属性 = 本行属性;
 	}
+	@Override
+	public String toString() {
+		return "注释数据对象 [本行内容=" + 本行内容 + ", 本行属性=" + 本行属性 + "]";
+	}
 
 }
