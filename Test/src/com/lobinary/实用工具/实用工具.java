@@ -40,6 +40,7 @@ public class 实用工具 {
 	public static JFrame 主窗口框架;
 	private static JTextArea 日志TextArea = new JTextArea("欢迎使用实用工具");
 	final JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+	private static long 日志最大长度 = 20000;
 	
 	private static File configFile = new File("c:/Lobxxx/实用工具/配置信息.xxx");
 	private static Map<String,Object> config = new HashMap<String,Object>();
@@ -48,7 +49,11 @@ public class 实用工具 {
 	public static void log(Object log){
 		System.out.println(DateUtil.getCurrentTime()+" : "+log);
 		String 原始内容 = 日志TextArea.getText();
+		if(原始内容.length()>日志最大长度){
+			原始内容 = 原始内容.substring(log.toString().length());
+		}
 		日志TextArea.setText(原始内容+"\n"+log);
+		日志TextArea.setCaretPosition(日志TextArea.getDocument().getLength());
 		menuLog.setText(""+log);
 	}
 	

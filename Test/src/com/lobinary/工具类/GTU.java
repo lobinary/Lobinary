@@ -28,6 +28,7 @@ public class GTU {
 	private final static Logger log = LoggerFactory.getLogger(GTU.class);
 
 	public static String t(String q) throws Exception {
+		if(q.length()==0) return "";
 		StringBuilder 最终翻译数据 = new StringBuilder();
 		int 每次翻译的长度 = 1000;
 		String 本次翻译数据 = null;
@@ -52,7 +53,15 @@ public class GTU {
 					i = 上次截取的最后位置;
 				}
 				上一个点的位置 = i;
+			}else{
+				if(每次翻译的长度<(i-上次截取的最后位置)){
+					最终翻译数据.append(translate(本次翻译数据));
+					上次截取的最后位置 = i;
+				}
 			}
+		}
+		if(上次截取的最后位置==0){
+			最终翻译数据.append(translate(q));
 		}
 		return 最终翻译数据.toString();
 	}
@@ -65,10 +74,13 @@ public class GTU {
 				+ tk + "&q=" + q;
 		String resp;
 		try {
-			resp = HttpUtil.sendGet(url, "UTF-8");
+//			resp = HttpUtil.doGet(url);
+//			resp = HttpUtil.sendGetRequest(url);
+			resp = HttpUtil.sendGet(url,"UTF-8");
 		} catch (Exception e) {
-			throw new Exception("连接谷歌翻译服务器失败");
+			throw new Exception("连接谷歌翻译服务器失败,请求网址为:"+url);
 		}
+		System.out.println(resp);
 		return 解析返回数据(resp);
 	}
 
@@ -145,7 +157,12 @@ public class GTU {
 		}
 //		//log.info("========================================================================================");
 //		//log.info(整合后翻译数据.toString());
-		return 整合后翻译数据.toString();
+		return 整合后翻译数据.toString().replaceAll("“", "\"")
+				.replaceAll("”", "\"")
+				.replaceAll("</ ", "</")
+				.replaceAll("＃", "#")
+				.replaceAll("，", ",")
+				.replaceAll("</ ", "</");
 	}
 
 	/**
@@ -174,6 +191,7 @@ public class GTU {
 				+ tk + "&q=" + q;
 		//log.info(url);
 		String resp = HttpUtil.sendGet(url, "UTF-8");
+		System.out.println(resp);
 		/*
 		 * 
 		 * [[["我想吃东西","i want to eat something",,,1],[,,"Wǒ xiǎng chī dōngxi"

@@ -6,7 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Test {
 	
@@ -169,6 +171,27 @@ public class Test {
 		System.out.println("sbb:"+sbb);
 		sbb.delete(0, sbb.length());
 		System.out.println(sbb.length());
+		
+		
+		String 每行数据 = "     * ";
+		System.out.println(每行数据.trim());
+		System.out.println(每行数据.trim().substring(0,1));
+		if(每行数据.length()>=1&&每行数据.substring(0,1).equals("*")){
+			System.out.println( 每行数据.substring(2,每行数据.length()).trim());
+		}else{
+			System.out.println(每行数据.substring(0,每行数据.length()).trim());
+		}
+		
+		
+		Map<String,String> map = new LinkedHashMap<String,String>();
+		map.put("1", "A");
+		map.put("3", "B");
+		map.put("2", "C");
+		map.put("4", "C");
+		for (String key : map.keySet()) {
+			System.out.println(key);
+		}
+		
 	}
 	
 }

@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 
 import com.lobinary.实用工具.主窗口.实用工具标签标准类;
 import com.lobinary.工具类.GTU;
+import com.lobinary.工具类.JAU;
 import com.lobinary.工具类.file.FileUtil;
 import com.lobinary.工具类.http.HttpUtil;
 
@@ -25,6 +26,7 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 	private static final long serialVersionUID = 3767156681875412565L;
 	private JTextField 源码文件夹路径 = new JTextField("C:/test");
 	private JFileChooser fileFolderChooser = new JFileChooser("");
+	private boolean 正在执行 = false;
 	
 	/**
 	 * Create the panel.
@@ -37,19 +39,28 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 		JButton 翻译按钮 = new JButton("开始翻译");
 		翻译按钮.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String 源码路径 = 源码文件夹路径.getText();
-				if(源码路径.length()==0){
-					alert("温馨提示","请选择源码路径");
-					选择源码路径(父窗口);
-				}
-				try {
-					源码路径 = 源码文件夹路径.getText();
-					翻译路径下的所有Java文件注释(源码路径);
-				} catch (Exception e1) {
-					e1.printStackTrace();
-					out(e1);
-					alert("扫描文件报错："+e1);
-				}
+				if(正在执行)alert("程序正在执行中，请等待执行完毕");
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						正在执行 = true;
+						String 源码路径 = 源码文件夹路径.getText();
+						if(源码路径.length()==0){
+							alert("温馨提示","请选择源码路径");
+							选择源码路径(父窗口);
+						}
+						try {
+							源码路径 = 源码文件夹路径.getText();
+							翻译路径下的所有Java文件注释(源码路径);
+						} catch (Exception e1) {
+							e1.printStackTrace();
+							out(e1);
+							alert("扫描文件报错："+e1);
+						}
+						正在执行 = false;
+					}
+				}).start();
+				
 			}
 		});
 		翻译按钮.setBounds(0, 0, 93, 23);
@@ -95,7 +106,8 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 				for(File f:该目录下所有文件列表){
 					if(f.getName().endsWith(".java")||f.getName().endsWith(".Java")||f.getName().endsWith(".JAVA")){
 						Java文件个数++;
-						翻译当前Java文件的注释(f);
+//						翻译当前Java文件的注释(f);
+						JAU.翻译(f);
 					}
 				}
 				if(Java文件个数>0){
