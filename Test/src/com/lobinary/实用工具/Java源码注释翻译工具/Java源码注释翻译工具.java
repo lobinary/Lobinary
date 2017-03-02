@@ -111,7 +111,7 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 					}
 				}
 				if(Java文件个数>0){
-//					alert("共"+Java文件个数+"个Java文件的注释被更改");
+					alert("翻译完成，共"+Java文件个数+"个Java文件的注释被更改");
 				}else{
 					alert("该目录下没有Java文件");
 				}
@@ -158,7 +158,7 @@ public class Java源码注释翻译工具 extends 实用工具标签标准类 {
 						}
 					}
 					List<String> 调整翻译后的注释数据 = 装配注释数据(前缀数据,翻译后的注释数据);
-					list.add(i,前缀数据);
+					list.add(i,前缀数据+"<p>");
 					list.addAll(i, 调整翻译后的注释数据);
 					list.add(i,前缀数据);
 //				}else{

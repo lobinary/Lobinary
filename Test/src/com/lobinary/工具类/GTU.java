@@ -92,6 +92,7 @@ public class GTU {
 				if(上次截取的最后位置!=i){
 					本次翻译数据 = q.substring(上次截取的最后位置,i);
 					最终翻译数据.append(translate(本次翻译数据));
+					上次截取的最后位置 = i;
 				}
 			}
 		}
