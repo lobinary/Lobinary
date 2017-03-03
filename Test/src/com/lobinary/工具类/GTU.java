@@ -56,6 +56,8 @@ public class GTU {
 
 	public static String t(String q) throws Exception {
 		if(q.length()==0) return "";
+		//XXX 分割翻译丢数据
+		//			   ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms
 		if(q.contains("ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms."))return "";
 		StringBuilder 最终翻译数据 = new StringBuilder();
 		String 本次翻译数据 = null;

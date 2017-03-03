@@ -30,6 +30,12 @@ public class JAU {
 		注释终止符号.add("@param");
 		注释终止符号.add("@see");
 		注释终止符号.add("@since");
+		注释终止符号.add("@return");
+		注释终止符号.add("@throws");
+		注释终止符号.add("@serial");
+		注释终止符号.add("@exception");
+		 
+		
 	}
 
 	public static void main(String[] args) throws Exception {
