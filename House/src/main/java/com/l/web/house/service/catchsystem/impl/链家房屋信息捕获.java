@@ -52,7 +52,7 @@ public class 链家房屋信息捕获 extends 房屋信息捕获基类{
 	@Override
 	public void 捕获房屋信息() throws Exception {
 //		捕获房屋概要信息();
-//		从数据库捕获房屋详细信息();
+		从数据库捕获房屋详细信息();
 		获取小区信息();
 	}
 
@@ -84,35 +84,37 @@ public class 链家房屋信息捕获 extends 房屋信息捕获基类{
             f.子标题 = 子标题;
             System.out.println("子标题"+子标题);
     		parser.reset();
-    		String 首付S = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "tax")).elementAt(0).getChildren().elementAt(1).toPlainTextString().replace("首付", "").replace("万", "");
+//    		System.out.println(parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "tax")).elementAt(0).getChildren().elementAt(0).toPlainTextString());
+    		String 首付S = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "tax")).elementAt(0).getChildren().elementAt(0).toPlainTextString().replace("首付", "").replace("万", "");
+    		System.out.println(首付S);
     		double 首付 = (Double.parseDouble(首付S))*10000;
 			房屋交易信息 j = 房屋信息数据库.查找最新交易信息根据来源和唯一标识(房屋信息来源, f.房屋唯一标识);
 			j.id = idsdf.format(new Date()) + f.id;
     		j.首付 = 首付;
     		System.out.println("首付："+首付);
     		parser.reset();
-    		String 税费S = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "tax")).elementAt(0).getChildren().elementAt(3).toPlainTextString().replace("税费", "").replace("万", "").replace("(仅供参考)", "");
+    		String 税费S = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "tax")).elementAt(0).getChildren().elementAt(2).toPlainTextString().replace("税费", "").replace("万", "").replace("(仅供参考)", "");
     		double 税费 = (Double.parseDouble(税费S))*10000;
     		j.税费 = 税费;
     		System.out.println("税费："+税费);
     		parser.reset();
-    		String 所在小区编号 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "communityName")).elementAt(0).getChildren().elementAt(6).getText().replace("a href=\"/xiaoqu/", "").replace("/\" target=\"_blank\" class=\"info\"", "");
+    		String 所在小区编号 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "communityName")).elementAt(0).getChildren().elementAt(3).getText().replace("a href=\"/xiaoqu/", "").replace("/\" target=\"_blank\" class=\"info\"", "");
     		f.所在小区编号 = 所在小区编号;
     		System.out.println("小区编号:"+所在小区编号);
     		parser.reset();
-    		String 所在区县 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "areaName")).elementAt(0).getChildren().elementAt(6).getChildren().elementAt(0).toPlainTextString();
+    		String 所在区县 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "areaName")).elementAt(0).getChildren().elementAt(3).getChildren().elementAt(0).toPlainTextString();
     		f.所在区县 = 所在区县;
     		System.out.println("所在区县:"+所在区县);
     		parser.reset();
-    		String 所在地点 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "areaName")).elementAt(0).getChildren().elementAt(6).getChildren().elementAt(2).toPlainTextString();
+    		String 所在地点 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "areaName")).elementAt(0).getChildren().elementAt(3).getChildren().elementAt(2).toPlainTextString();
     		f.所在地点 = 所在地点;
     		System.out.println("所在位置："+所在地点);
     		parser.reset();
-    		String 所在环数 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "areaName")).elementAt(0).getChildren().elementAt(6).getChildren().elementAt(3).toPlainTextString().replace("&nbsp;", "");
+    		String 所在环数 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "areaName")).elementAt(0).getChildren().elementAt(3).getChildren().elementAt(3).toPlainTextString().replace("&nbsp;", "");
     		f.所在环数 = 所在环数;
     		System.out.println("所在环数:"+所在环数);
     		parser.reset();
-    		String 联系人 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "brokerName")).elementAt(0).getChildren().elementAt(1).toPlainTextString();
+    		String 联系人 = parser.extractAllNodesThatMatch( new HasAttributeFilter("class", "brokerName")).elementAt(0).getChildren().elementAt(0).toPlainTextString();
     		f.联系人 = 联系人;
     		System.out.println("联系人:"+联系人);
     		parser.reset();
@@ -326,7 +328,7 @@ public class 链家房屋信息捕获 extends 房屋信息捕获基类{
 			logger.info("准备捕获链家房屋信息");
 			logger.info("准备获取总数据");
 			int 最大页数 = 100;
-			for (int i = 1; i <= 最大页数; i++) {
+			for (int i = 84; i <= 最大页数; i++) {
 				二手房筛选网址 = "http://bj.lianjia.com/ershoufang/pg"+i+"l1l2l3l4p1p2/";//l1一室  l2两室  p1 200w内 p2 200~250w
 				String rs = HttpUtil.doGet(二手房筛选网址);
 				//h2 class="total fl">共找到<span> 1688 </span>套北京二手房<
@@ -563,39 +565,48 @@ public class 链家房屋信息捕获 extends 房屋信息捕获基类{
 			xx = xx.replace(" | 独栋别墅", "");
 		}
 		String[] sp = xx.split("\\|");
-
-		String 所在小区 = sp[0].substring(0,sp[0].length()-5).trim();
-		System.out.println("小区:"+所在小区);
-		String 户型 = sp[1].trim();
-		System.out.println("户型:"+户型);
-		String 建筑面积S = sp[2].trim().replace("平米", "");
-		double 建筑面积 = Double.parseDouble(建筑面积S);
-		System.out.println("总面积:"+建筑面积);
-		String 朝向 = sp[3].trim().replace(" ", "");
-		System.out.println("朝向:"+朝向);
+		String 所在小区 = null;
+		String 户型 = null;
+		double 建筑面积 = 0;
+		String 朝向 = null;
 		String 装修 = null;
-		if(sp.length>4){
-			String zx = sp[4].trim();
-			装修 = zx.contains("<")?zx.substring(0, sp[4].indexOf("<")).replace("<", ""):zx;
-			boolean b = 装修.contains("其他")||装修.contains("毛坯")||装修.contains("简装")||装修.contains("精装");
-			if(!b){
-				throw new Exception("位置装修类型："+装修);
+		String 电梯 = null;
+		try {
+			所在小区 = sp[0].substring(0,sp[0].length()-5).trim();
+			System.out.println("小区:"+所在小区);
+			户型 = sp[1].trim();
+			System.out.println("户型:"+户型);
+			String 建筑面积S = sp[2].trim().replace("平米", "");
+			建筑面积 = Double.parseDouble(建筑面积S);
+			System.out.println("总面积:"+建筑面积);
+			朝向 = sp[3].trim().replace(" ", "");
+			System.out.println("朝向:"+朝向);
+			装修 = null;
+			if(sp.length>4){
+				String zx = sp[4].trim();
+				装修 = zx.contains("<")?zx.substring(0, sp[4].indexOf("<")).replace("<", ""):zx;
+				boolean b = 装修.contains("其他")||装修.contains("毛坯")||装修.contains("简装")||装修.contains("精装");
+				if(!b){
+					throw new Exception("位置装修类型："+装修);
+				}
 			}
-		}
-		System.out.println("装修:"+装修);
-		String 电梯 = "无电梯";
-		if(sp.length>5){
-			if(sp[5].contains("有电梯")){
-				电梯 = "有电梯";
-				System.out.println("电梯:"+电梯);
-			}else if(sp[5].contains("无电梯")){
-				电梯 = "无电梯";
-				System.out.println("电梯:"+电梯);
-			} else{
-				System.out.println("未知属性："+sp[5]);
-				throw new Exception();
+			System.out.println("装修:"+装修);
+			电梯 = "无电梯";
+			if(sp.length>5){
+				if(sp[5].contains("有电梯")){
+					电梯 = "有电梯";
+					System.out.println("电梯:"+电梯);
+				}else if(sp[5].contains("无电梯")){
+					电梯 = "无电梯";
+					System.out.println("电梯:"+电梯);
+				} else{
+					System.out.println("未知属性："+sp[5]);
+					throw new Exception();
+				}
+				
 			}
-			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		String 楼层 = ss.substring(ss.indexOf("positionIcon")+21, ss.indexOf("followInfo")-28);
 		/**
@@ -611,36 +622,44 @@ public class 链家房屋信息捕获 extends 房屋信息捕获基类{
 		if(楼层.contains("(")){//中楼层(共16层)2008年建板楼 - 燕郊城区
 			String 总楼层Str = 楼层.substring(楼层.indexOf("(")+2,楼层.indexOf(")")-1);
 			System.out.println("总楼层:"+总楼层Str);
-			总楼层 = Integer.parseInt(总楼层Str);
-			if(楼层.contains("低楼层")){
-				 所在楼层 = 总楼层/3/2;
-			}else if(楼层.contains("中楼层")){
-				 所在楼层 = 总楼层/2;
-			}else if(楼层.contains("高楼层")){
-				 所在楼层 = 总楼层-(总楼层/3/2);
-			}else if(楼层.contains("地下室")){
-				 所在楼层 = -1;
-			}else if(楼层.contains("未知楼层")){
-				 所在楼层 = 0;
-			}else {
-				System.out.println("未知楼层："+楼层);
-				throw new Exception();
-			}
-			System.out.println("所在楼层："+ 所在楼层);
-			if(楼层.contains("年")){
-				String 建房年份S = 楼层.substring(楼层.indexOf(")")+1,楼层.indexOf("年"));
-				建房时间 = DU.getDate(建房年份S);
-				System.out.println("建房时间:" + sdf.format(建房时间));
-				建筑类型 = 楼层.substring(楼层.indexOf("年建")+2, 楼层.indexOf("-")-2);
-			}else{
-				建筑类型 = 楼层.substring(楼层.indexOf(")")+1, 楼层.indexOf("-")-2);
-				if(建筑类型.contains("楼")||建筑类型.contains("板塔")){
-					boolean b = 建筑类型.contains("楼")||建筑类型.contains("板塔");
-					if(!b){
-						建筑类型 = "";
-						throw new Exception("未知建筑类型:"+建筑类型);
+			try {
+				总楼层 = Integer.parseInt(总楼层Str);
+				if(楼层.contains("低楼层")){
+					 所在楼层 = 总楼层/3/2;
+				}else if(楼层.contains("中楼层")){
+					 所在楼层 = 总楼层/2;
+				}else if(楼层.contains("高楼层")){
+					 所在楼层 = 总楼层-(总楼层/3/2);
+				}else if(楼层.contains("地下室")){
+					 所在楼层 = -1;
+				}else if(楼层.contains("底层")){
+					 所在楼层 = 1;
+				}else if(楼层.contains("顶层")){
+					 所在楼层 = 总楼层;
+				}else if(楼层.contains("未知楼层")){
+					 所在楼层 = 0;
+				}else {
+					System.out.println("未知楼层："+楼层);
+					throw new Exception("未知楼层："+楼层);
+				}
+				System.out.println("所在楼层："+ 所在楼层);
+				if(楼层.contains("年")){
+					String 建房年份S = 楼层.substring(楼层.indexOf(")")+1,楼层.indexOf("年"));
+					建房时间 = DU.getDate(建房年份S);
+					System.out.println("建房时间:" + sdf.format(建房时间));
+					建筑类型 = 楼层.substring(楼层.indexOf("年建")+2, 楼层.indexOf("-")-2);
+				}else{
+					建筑类型 = 楼层.substring(楼层.indexOf(")")+1, 楼层.indexOf("-")-2);
+					if(建筑类型.contains("楼")||建筑类型.contains("板塔")){
+						boolean b = 建筑类型.contains("楼")||建筑类型.contains("板塔");
+						if(!b){
+							建筑类型 = "";
+							throw new Exception("未知建筑类型:"+建筑类型);
+						}
 					}
 				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 			System.out.println("建筑类型："+建筑类型);
 			System.out.println("建房时间"+建房时间);

@@ -56,6 +56,7 @@ public class GTU {
 
 	public static String t(String q) throws Exception {
 		if(q.length()==0) return "";
+		if(q.contains("ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms."))return "";
 		StringBuilder 最终翻译数据 = new StringBuilder();
 		String 本次翻译数据 = null;
 		int 上一个点的位置 = 0;//用于记录上一个点的位置
@@ -194,12 +195,16 @@ public class GTU {
 		}
 //		//log.info("========================================================================================");
 //		//log.info(整合后翻译数据.toString());
-		return 整合后翻译数据.toString().replaceAll("“", "\"")
+		return 整合后翻译数据.toString()
+				.replaceAll("“", "\"")
 				.replaceAll("”", "\"")
 				.replaceAll("</ ", "</")
 				.replaceAll("＃", "#")
 				.replaceAll("，", ",")
-				.replaceAll("</ ", "</");
+				.replaceAll("（", "(")
+				.replaceAll("）", ")")
+				.replaceAll("＆", "&")
+				.replaceAll("？", "?");
 	}
 
 	/**

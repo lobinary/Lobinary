@@ -48,7 +48,7 @@ public class JAU {
 		for (String l : 翻译后的数据) {
 			实用工具.log(l);
 		}
-//		FileUtil.insertList2File(翻译后的数据, f);
+		FileUtil.insertList2File(翻译后的数据, f);
 	}
 
 	private static List<String> 抓取注释数据(List<String> java文件数据List) throws Exception {

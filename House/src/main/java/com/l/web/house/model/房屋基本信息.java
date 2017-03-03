@@ -50,6 +50,9 @@ public class 房屋基本信息 {
 	public String 是否唯一;
 	public String 当前状态 = "0";//概要信息 0 详细信息1
 	public Date 最后更新日期;
+	public String 有效状态;
+	
+	
 	public String get当前状态() {
 		return 当前状态;
 	}
@@ -362,6 +365,12 @@ public class 房屋基本信息 {
 	}
 	public void set最后更新日期(Date 最后更新日期) {
 		this.最后更新日期 = 最后更新日期;
+	}
+	public String get有效状态() {
+		return 有效状态;
+	}
+	public void set有效状态(String 有效状态) {
+		this.有效状态 = 有效状态;
 	}
 
 }
