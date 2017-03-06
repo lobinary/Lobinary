@@ -6,16 +6,12 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.lobinary.实用工具.实用工具;
 import com.lobinary.实用工具.Java源码注释翻译工具.注释数据对象;
 import com.lobinary.工具类.file.FileUtil;
 
 public class JAU {
 
-	private final static Logger log = LoggerFactory.getLogger(JAU.class);
+//	private final static Logger log = LoggerFactory.getLogger(JAU.class);
 	
 	private static List<String> 注释终止符号 = new ArrayList<String>();
 	private final static int 每行翻译后的注释的推荐长度 = 100;
@@ -39,22 +35,29 @@ public class JAU {
 	}
 
 	public static void main(String[] args) throws Exception {
-		File f = new File("C:/test/javasource/test.java");
+		File f = new File("C:/test/CheckboxMenuItem.java");
 		翻译(f);
 	}
 	
 	public static void 翻译(File f) throws Exception{
 		List<String> list = FileUtil.readLine2List(f);
 		if(list.get(0).equals(翻译完成标志)){
-			实用工具.log("发现翻译完成Java文件:"+f.getAbsolutePath());
+			System.out.println("发现翻译完成Java文件:"+f.getAbsolutePath());
 			return ;
 		}
+		long startTime=System.currentTimeMillis();
 		List<String> 翻译后的数据 = 抓取注释数据(list);
-		实用工具.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%最后的数据%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%最后的数据%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+		long endTime = System.currentTimeMillis();
 		for (String l : 翻译后的数据) {
-			实用工具.log(l);
+			System.out.println(l);
 		}
 		FileUtil.insertList2File(翻译后的数据, f);
+		System.out.println("翻译耗时："+(endTime-startTime));
+		System.out.println("写入文件耗时："+(System.currentTimeMillis()-endTime));
+		System.out.println("翻译总耗时:"+GTU.总耗时时间);
+		System.out.println("加签总耗时:"+GTU.加签总耗时);
+		System.out.println("请求总耗时:"+GTU.请求总耗时);
 	}
 
 	private static List<String> 抓取注释数据(List<String> java文件数据List) throws Exception {
@@ -64,16 +67,16 @@ public class JAU {
 			String 每行数据 = java文件数据List.get(i);
 			if(包含注释终止符号(每行数据)){
 				if(注释开始){
-					实用工具.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@华丽的分割线@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-					实用工具.log("#########  V V V V V V V V V V V V 原始单个注释数据 V V V V V V V V V V V V V V  ###############");
+					System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@华丽的分割线@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+					System.out.println("#########  V V V V V V V V V V V V 原始单个注释数据 V V V V V V V V V V V V V V  ###############");
 					for (String 注释数据的每行 : 注释数据) {
-						实用工具.log(注释数据的每行);
+						System.out.println(注释数据的每行);
 					}
-					实用工具.log("#########  A A A A A A A A A A A A 原始单个注释数据 A A A A A A A A A A A A A A  ###############");
-					实用工具.log("#########  V V V V V V V V V V V V 解析注释数据 V V V V V V V V V V V V V V  ###############");
+					System.out.println("#########  A A A A A A A A A A A A 原始单个注释数据 A A A A A A A A A A A A A A  ###############");
+					System.out.println("#########  V V V V V V V V V V V V 解析注释数据 V V V V V V V V V V V V V V  ###############");
 					List<String> 翻译后注释数据 = 解析并翻译注释(注释数据);
-					实用工具.log("#########  A A A A A A A A A A A A 解析注释数据 A A A A A A A A A A A A A A  ###############");
-					实用工具.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@华丽的分割线@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+					System.out.println("#########  A A A A A A A A A A A A 解析注释数据 A A A A A A A A A A A A A A  ###############");
+					System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@华丽的分割线@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 					注释开始 = false;
 					注释数据.clear();
 					String 前缀数据Str;
@@ -141,7 +144,7 @@ public class JAU {
 						每行数据 = 解析本行数据(注释数据.get(i));
 						if(每行数据.trim().length()==0||本行仅一个标签(每行数据)){
 							//如果下一行是空行或者是纯标签，代表这行以上的数据是一个数据块，所以需要分割
-//							实用工具.log("发现下一行是空行数据，准备将临时数据写入到组注释中");
+//							System.out.println("发现下一行是空行数据，准备将临时数据写入到组注释中");
 							组注释.add(new 注释数据对象(注释数据对象.文本,临时数据));
 							if(本行仅一个标签(每行数据)){
 								组注释.add(new 注释数据对象(注释数据对象.标签,每行数据));
@@ -150,8 +153,8 @@ public class JAU {
 									组注释.add(new 注释数据对象(注释数据对象.空行,""));
 								}
 							}
-							实用工具.log(临时数据);
-							实用工具.log(每行数据);
+							System.out.println(临时数据);
+							System.out.println(每行数据);
 							break;
 						}else{
 							临时数据 = 临时数据 + " " + 每行数据;
@@ -172,7 +175,7 @@ public class JAU {
 		}
 		List<String> 结果数据 = new ArrayList<String>();
 		for (注释数据对象 每行临时数据 : 组注释) {
-			实用工具.log("数据："+每行临时数据.get本行内容());
+			System.out.println("准备对注释进行翻译，原始注释数据为："+每行临时数据.get本行内容());
 			if(每行临时数据.get本行属性()==注释数据对象.空行){
 				if(结果数据.size()>0&&结果数据.get(结果数据.size()-1).length()!=0){
 					结果数据.add(""); 
@@ -182,7 +185,7 @@ public class JAU {
 			}else{
 				String 翻译后的数据 = 翻译数据(每行临时数据.get本行内容());
 				if(每行翻译后的注释的推荐长度>翻译后的数据.length()){
-					实用工具.log("翻译后的数据:"+翻译后的数据);
+					System.out.println("翻译后的数据:"+翻译后的数据);
 					结果数据.add(翻译后的数据);
 				}else{
 					结果数据.addAll(超长数据格式化(翻译后的数据));
@@ -224,7 +227,7 @@ public class JAU {
 					if(临时字符.equals("<"))尖括号II标志 = true;
 					if(临时字符.equals(">"))尖括号II标志 = false;
 					分割缓冲池.append(临时字符);
-					if(!尖括号标志){
+					if(!(尖括号标志||尖括号II标志)){
 						if(分割缓冲池.length()>每行翻译后的注释的推荐长度){
 							list.add(分割缓冲池.toString());
 							分割缓冲池.delete(0, 分割缓冲池.length());
@@ -250,10 +253,18 @@ public class JAU {
 				}
 			}
 		}
+		if(每行数据缓存池.length()>0){//证明缓冲池还有数据，需要写入到list中
+			list.add(每行数据缓存池.toString());
+		}
 		return list;
 	}
 
 	private static String 翻译数据(String 每组数据) throws Exception {
+//		return 每组数据;
+		return GTU.t(每组数据);
+	}
+
+	private static List<String> 翻译数据(List<String> 每组数据) throws Exception {
 //		return 每组数据;
 		return GTU.t(每组数据);
 	}
@@ -273,11 +284,11 @@ public class JAU {
 	 * @return
 	 */
 	private static String 解析本行数据(String 每行数据) {
-//		实用工具.log("解析前数据："+每行数据);
+//		System.out.println("解析前数据："+每行数据);
 		每行数据 = 每行数据.trim();
 		if(每行数据.equals("*")){
 			每行数据 = "";
-//			实用工具.log("解析后数据："+每行数据);
+//			System.out.println("解析后数据："+每行数据);
 			return 每行数据;
 		}
 		if(每行数据.length()>1&&每行数据.substring(0,1).equals("*")){
@@ -285,7 +296,7 @@ public class JAU {
 		}else{
 			每行数据 = 每行数据.substring(0,每行数据.length()).trim();
 		}
-//		实用工具.log("解析后数据："+每行数据);
+//		System.out.println("解析后数据："+每行数据);
 		return 每行数据;
 	}
 

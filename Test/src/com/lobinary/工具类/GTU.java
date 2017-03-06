@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.script.Invocable;
@@ -22,11 +23,11 @@ public class GTU {
 
 	private final static Logger log = LoggerFactory.getLogger(GTU.class);
 	
-	private static boolean 秘钥加载完毕 = false;
-	private static long a = 3397762296L;
-	private static long b = -253483058L;
-	private static int r = 413359;
-	private static int 每次翻译的长度 = 500;
+	private static boolean 秘钥加载完毕 = true;
+	private static long a = 4217964721L;
+	private static long b = -3320670651L;
+	private static int r = 413550;
+	private static int 每次翻译的长度 = 1850;
 	private static Invocable invocable;
 	static {
 		try {
@@ -53,8 +54,65 @@ public class GTU {
 		}
 	}
 	
-
+	public static long 总耗时时间 = 0;
+	public static long 加签总耗时 = 0;
+	public static long 请求总耗时 = 0;
+	
+	/**
+	 * 当使用单个字符串翻译 t(String q) 的时候
+	 * 经常会简单的几个单词也翻译一次
+	 * 这样反反复复的http请求，占用了大量的时间
+	 * 
+		写入文件耗时：13
+		翻译耗时：7660
+		翻译总耗时:6707
+		加签总耗时:1783
+		请求总耗时:4844
+		
+		根据以上报告显示，请求耗时占用了一半的时间
+		因此我们增加此方法，通过合并list中的请求，以此来缩减时间优化效率
+		
+		我们通过特殊分隔符，来分割翻译语句，这样就能达到合并翻译的目的
+	 * @param q
+	 * @return
+	 * @throws Exception 
+	 */
+	public static List<String> t(List<String> q) throws Exception{
+		List<String> result = new ArrayList<String>();
+		StringBuilder 翻译缓冲池 = new StringBuilder();
+		/**
+		 * 0xAAAA 为Tai系列字符
+		 * Tai Viet is a Unicode block containing characters for writing the Tai languages Tai Dam, Tai Dón, and Thai Song.
+		 * 
+		 * 因此应该不会出现在java的注释中，所以我们根据此来分割,避免了注释中数据出现，被意外分割的可能性
+		 */
+		String 分割标识符 = " #"+(char)0xAAAA+"# ";
+		boolean 第一个元素 = true;
+		for (String 每条翻译数据 : q) {
+			if(第一个元素){
+				翻译缓冲池.append(每条翻译数据);
+				第一个元素 = false;
+			}else{
+				翻译缓冲池.append(分割标识符).append(每条翻译数据);
+			}
+		}
+		String 翻译后的数据 = t(翻译缓冲池.toString());//#ꪪ#
+		String[] 翻译后的分组数据 = 翻译后的数据.split(分割标识符.trim());
+		if(翻译后的分组数据.length==q.size()){
+			for (String 分割后的数据 : 翻译后的分组数据) {
+				result.add(分割后的数据);
+			}
+		}else{
+			log.info("原始数据:"+Arrays.toString(q.toArray()));
+			log.info("翻译后数据:"+翻译后的数据);
+			log.info("分割后长度为:"+翻译后的分组数据.length);
+			throw new Exception("翻译异常，分割后数据长度和原数据长度不一致");
+		}
+		return result;
+	}
+	
 	public static String t(String q) throws Exception {
+		long st = System.currentTimeMillis();
 		if(q.length()==0) return "";
 		//XXX 分割翻译丢数据
 		//			   ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms
@@ -63,7 +121,7 @@ public class GTU {
 		String 本次翻译数据 = null;
 		int 上一个点的位置 = 0;//用于记录上一个点的位置
 		int 上次截取的最后位置 = 0;//用于记录上次截取后的最后位置
-		log.info("q:"+q);
+		log.info("接收到原始翻译数据为:"+q);
 		for (int i = 0; i < q.length(); i++) {
 			String s = q.substring(i,i+1);
 			if(s.equals(".")){
@@ -93,7 +151,7 @@ public class GTU {
 			
 			if(i == q.length()-1){
 				if(上次截取的最后位置!=i){
-					本次翻译数据 = q.substring(上次截取的最后位置,i);
+					本次翻译数据 = q.substring(上次截取的最后位置,i+1);
 					最终翻译数据.append(translate(本次翻译数据));
 					上次截取的最后位置 = i;
 				}
@@ -102,7 +160,10 @@ public class GTU {
 		if(上次截取的最后位置==0){
 			最终翻译数据.append(translate(q));
 		}
-		return 最终翻译数据.toString();
+		String 翻译最终数据 = 最终翻译数据.toString();
+		log.info("最后翻译结果为:"+翻译最终数据);
+		总耗时时间 = 总耗时时间 + (System.currentTimeMillis()-st);
+		return 翻译最终数据;
 	}
 	
 	public static String translate(String q) throws Exception {
@@ -116,12 +177,17 @@ public class GTU {
 //			resp = HttpUtil.doGet(url);
 //			resp = HttpUtil.sendGetRequest(url);
 			System.out.println(url);
+			long st = System.currentTimeMillis();
 			resp = HttpUtil.sendGet(url,"UTF-8");
+			请求总耗时 = 请求总耗时 + (System.currentTimeMillis()-st);
 		} catch (Exception e) {
 			throw new Exception("连接谷歌翻译服务器失败,请求网址为:"+url);
 		}
 		System.out.println("谷歌服务器返回的数据为:"+resp);
-		return 解析返回数据(resp);
+		log.info("单次翻译前数据为："+q);
+		String 解析返回数据 = 解析返回数据(resp);
+		log.info("单次翻译后数据为："+解析返回数据);
+		return 解析返回数据;
 	}
 
 	private static String 解析返回数据(String j) throws Exception {
@@ -223,19 +289,43 @@ public class GTU {
 	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
+/**
+ * 翻译总长度1896
+准备对数据进行加签2814908780,1382763536,413547,i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.
+[[["我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。","i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want",,,3],["吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。 ","to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat",,,3],["something.i想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。","something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.",,,3],["我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。","i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want",,,3],["吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。 ","to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat",,,3],["something.i想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。","something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.",,,3],["我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。","i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want",,,3],["吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。 ","to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat",,,3],["something.i想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。我想吃东西。","something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.",,,3],["我想吃东西。我想吃东西。我想吃东西。我想吃东西。","i want to eat something.i want to eat something.i want to eat something.i want to eat something.",,,3],[,,"Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Something.I xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Something.I xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Something.I xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi. Wǒ xiǎng chī dōngxi."]],,"en",,,,0.9998613,,[["en"],,[0.9998613],["en"]]]
+翻译总长度1920
+准备对数据进行加签2814908780,1382763536,413547,i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.i want to eat something.
+发送GET请求出现异常！java.io.IOException: Server returned HTTP response code: 400 for URL: http://translate.google.cn/translate_a/single?client=t&sl=auto&tl=zh-CN&hl=zh-CN&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&source=btn&ssel=0&tsel=0&kc=1&tk=453924.41551&q=i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.
+Exception in thread "main" java.io.IOException: Server returned HTTP response code: 400 for URL: http://translate.google.cn/translate_a/single?client=t&sl=auto&tl=zh-CN&hl=zh-CN&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&source=btn&ssel=0&tsel=0&kc=1&tk=453924.41551&q=i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.i+want+to+eat+something.
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1839)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1440)
+	at com.lobinary.工具类.http.HttpUtil.sendGet(HttpUtil.java:140)
+	at com.lobinary.工具类.GTU.main(GTU.java:253)
 
-		String q = "i <want> to eat something";
-		//log.info("q:" + q);
-
-		String tk = 加签(q);
-		//log.info(tk);
-		q = URLEncoder.encode(q, "UTF-8");
-		//log.info(q);
-		String url = "http://translate.google.cn/translate_a/single?client=t&sl=auto&tl=zh-CN&hl=zh-CN&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&source=btn&ssel=0&tsel=0&kc=1&tk="
-				+ tk + "&q=" + q;
-		//log.info(url);
-		String resp = HttpUtil.sendGet(url, "UTF-8");
-		System.out.println(resp);
+以上测试结果表明，翻译长度达到1900后，就会出现错误，所以我们将翻译长度限定在1850，以此来优化翻译速度
+ */
+//		String o = "i want to eat something.";
+//		String qq = "";
+//		for (int i = 0; i < 100; i++) {
+//			qq += o;
+//			if(i>70){//
+//				//log.info("q:" + q);
+//				System.out.println("翻译总长度"+qq.length());
+//				String tk = 加签(qq);
+//				//log.info(tk);
+//				String q = URLEncoder.encode(qq, "UTF-8");
+//				//log.info(q);
+//				String url = "http://translate.google.cn/translate_a/single?client=t&sl=auto&tl=zh-CN&hl=zh-CN&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&source=btn&ssel=0&tsel=0&kc=1&tk="
+//						+ tk + "&q=" + q;
+//				//log.info(url);
+//				String resp = HttpUtil.sendGet(url, "UTF-8");
+//				System.out.println(resp);
+//			}
+//			
+//		}
+		
+		
+		
 		/*
 		 * 
 		 * [[["我想吃东西","i want to eat something",,,1],[,,"Wǒ xiǎng chī dōngxi"
@@ -246,12 +336,26 @@ public class GTU {
 		 * "eat","something","want to","to eat","want to eat"]]]
 		 */
 		//log.info(resp);
+		
+		/**
+		 * 测试list翻译效果
+		 */
+		List<String> l = new ArrayList<String>();
+		l.add("i");
+		l.add("love");
+		l.add("you");
+		List<String> t = t(l);
+		for (int i = 0; i < t.size(); i++) {
+			System.out.println(t.get(i));
+		}
 	}
 
 	public static String 加签(String query) throws Exception {
+		long st = System.currentTimeMillis();
 		getTKK();
 		System.out.println("准备对数据进行加签"+a+","+b+","+ r+","+ query);
 		Object result = invocable.invokeFunction("getKey", a, b, r, query);
+		加签总耗时 = 加签总耗时 + (System.currentTimeMillis()-st);
 		return result.toString();
 	}
 

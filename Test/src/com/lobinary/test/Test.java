@@ -241,6 +241,9 @@ public class Test {
 		}
 		System.out.println( 最终翻译数据.toString());
 	
+		
+		System.out.println("["+(char)0xaaaa+"]");
+		System.out.println((int)'ꪪ');
 	}
 	
 }
