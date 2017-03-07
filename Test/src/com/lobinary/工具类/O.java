@@ -1,5 +1,8 @@
 package com.lobinary.工具类;
 
+import java.util.List;
+import java.util.Map;
+
 public class O {
 	
 	private static String 上方名称;
@@ -19,6 +22,22 @@ public class O {
 
 	public static void show(String ss, Object o) {
 		System.out.println(ss + "\t ===> \t "+ o);
+	}
+	
+	public static void o(List<?> list,String title){
+		System.out.println("******************************************"+title+"************************************************");
+		for (Object o : list) {
+			System.out.println(o);
+		}
+		System.out.println("******************************************"+title+"************************************************");
+	}
+	
+	public static void o(Map<?,?> map,String title){
+		System.out.println("******************************************"+title+"************************************************");
+		for (Object k : map.keySet()) {
+			System.out.println(""+k+":"+map.get(k));
+		}
+		System.out.println("******************************************"+title+"************************************************");
 	}
 	
 	

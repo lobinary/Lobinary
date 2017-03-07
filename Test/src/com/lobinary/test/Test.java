@@ -244,6 +244,24 @@ public class Test {
 		
 		System.out.println("["+(char)0xaaaa+"]");
 		System.out.println((int)'ꪪ');
+		
+		/**
+		 * 换行分割技术  \n split
+		 */
+		String 换行分割 = "一世\\n爱\\n您";
+		System.out.println(换行分割);
+		String[] 分割后 = 换行分割.split("\\\\n");
+		for (String string : 分割后) {
+			System.out.println(string);
+		}
+		
+		/**
+		 * \n匹配
+		 */
+		for (int k = 0; k < 换行分割.length()-1; k++) {
+			String kk = 换行分割.substring(k,k+2);
+			if(kk.equals("\\n"))System.out.println("碰到了");
+		}
 	}
 	
 }

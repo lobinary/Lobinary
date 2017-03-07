@@ -27,7 +27,7 @@ public class GTU {
 	private static long a = 4217964721L;
 	private static long b = -3320670651L;
 	private static int r = 413550;
-	private static int 每次翻译的长度 = 1850;
+	private static int 每次翻译的长度 = 1600;
 	private static Invocable invocable;
 	static {
 		try {
@@ -78,6 +78,11 @@ public class GTU {
 	 * @throws Exception 
 	 */
 	public static List<String> t(List<String> q) throws Exception{
+		log.info("**************************************准备翻译数据**************************************************");
+		for (String 每个数据 : q) {
+			log.info(每个数据);
+		}
+		log.info("**************************************准备翻译数据**************************************************");
 		List<String> result = new ArrayList<String>();
 		StringBuilder 翻译缓冲池 = new StringBuilder();
 		/**
@@ -86,29 +91,67 @@ public class GTU {
 		 * 
 		 * 因此应该不会出现在java的注释中，所以我们根据此来分割,避免了注释中数据出现，被意外分割的可能性
 		 */
-		String 分割标识符 = " #"+(char)0xAAAA+"# ";
-		boolean 第一个元素 = true;
+//		String 分割标识符 = " .#"+(char)0xAAAA+"#. ";
+		
+		String 分割标识符 = "\n";
 		for (String 每条翻译数据 : q) {
-			if(第一个元素){
-				翻译缓冲池.append(每条翻译数据);
-				第一个元素 = false;
-			}else{
-				翻译缓冲池.append(分割标识符).append(每条翻译数据);
-			}
+			if(翻译缓冲池.length()!=0)翻译缓冲池.append(分割标识符);
+			翻译缓冲池.append(每条翻译数据);
 		}
-		String 翻译后的数据 = t(翻译缓冲池.toString());//#ꪪ#
-		String[] 翻译后的分组数据 = 翻译后的数据.split(分割标识符.trim());
+		String 翻译后的数据 = 换行符翻译(翻译缓冲池.toString());//#ꪪ#
+		String[] 翻译后的分组数据 = 翻译后的数据.split("\\\\n".trim());
 		if(翻译后的分组数据.length==q.size()){
 			for (String 分割后的数据 : 翻译后的分组数据) {
 				result.add(分割后的数据);
 			}
 		}else{
-			log.info("原始数据:"+Arrays.toString(q.toArray()));
-			log.info("翻译后数据:"+翻译后的数据);
-			log.info("分割后长度为:"+翻译后的分组数据.length);
-			throw new Exception("翻译异常，分割后数据长度和原数据长度不一致");
+			log.info("*****************************原始/分割后数据***********************************************************************************************************");
+			for (int i = 0; i < q.size(); i++) {
+				log.info(q.get(i));
+				if(i<翻译后的分组数据.length)log.info(翻译后的分组数据[i]);
+			}
+			log.info("*****************************原始/分割后数据***********************************************************************************************************");
+			throw new Exception("翻译异常，分割后数据长度和原数据长度不一致(原"+q.size()+":译"+翻译后的分组数据.length+")");
 		}
 		return result;
+	}
+
+	
+	/**
+	 * 单独针对换行符翻译形式的数据进行翻译
+	 * 以换行符为分割接线
+	 * @param q
+	 * @return
+	 * @throws Exception
+	 */
+	public static String 换行符翻译(String q) throws Exception {
+		long st = System.currentTimeMillis();
+		if(q.length()==0) return "";
+		log.info("准备翻译数据:"+q);
+		String[] 分割后 = q.split("\\n");
+		StringBuilder 最终翻译数据 = new StringBuilder();
+		StringBuilder 本次翻译数据 = new StringBuilder();
+		for (String 每段文字 : 分割后) {
+			if(本次翻译数据.length()+每段文字.length()<每次翻译的长度){
+				if(本次翻译数据.length()>0)本次翻译数据.append("\n");
+				本次翻译数据.append(每段文字);
+			}else{
+				String 翻译后数据 = translate(本次翻译数据.toString());
+				本次翻译数据.delete(0, 本次翻译数据.length());
+				本次翻译数据.append(每段文字);
+				if(最终翻译数据.length()>0)最终翻译数据.append("\\n");
+				最终翻译数据.append(翻译后数据);
+			}
+		}
+		if(本次翻译数据.length()>0){
+			String 翻译后数据 = translate(本次翻译数据.toString());
+			本次翻译数据.delete(0, 本次翻译数据.length());
+			if(最终翻译数据.length()>0)最终翻译数据.append("\\n");
+			最终翻译数据.append(翻译后数据);
+		}
+		log.info("最后翻译结果为:"+最终翻译数据.toString());
+		总耗时时间 = 总耗时时间 + (System.currentTimeMillis()-st);
+		return 最终翻译数据.toString();
 	}
 	
 	public static String t(String q) throws Exception {
@@ -116,7 +159,7 @@ public class GTU {
 		if(q.length()==0) return "";
 		//XXX 分割翻译丢数据
 		//			   ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms
-		if(q.contains("ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms."))return "";
+//		if(q.contains("ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms."))return "";
 		StringBuilder 最终翻译数据 = new StringBuilder();
 		String 本次翻译数据 = null;
 		int 上一个点的位置 = 0;//用于记录上一个点的位置
